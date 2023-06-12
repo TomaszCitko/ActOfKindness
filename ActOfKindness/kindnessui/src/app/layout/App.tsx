@@ -8,13 +8,14 @@ function App() {
     const {eventStore} = useStore()
 
 
-
-  return (
+    return (
       <>
         <Navbar/>
         <Container style={{marginTop: '7em'}}>
-            <Button content={'add !'} onClick={()=>eventStore.populateEvents}/>
-            <h2>{}</h2>
+            <Button content={'add !'} onClick={eventStore.populateUser} />
+            <h2>{eventStore.users.map(user=> (
+                <p key={user.id}>{user.first_name}</p>
+            ))}</h2>
             <Outlet/>
         </Container>
       </>
