@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from "../../images/handshake.png";
+import {observer} from "mobx-react-lite";
 
 function Homepage() {
     return (
@@ -15,4 +16,4 @@ function Homepage() {
     );
 }
 
-export default Homepage;
+export default observer(Homepage);
