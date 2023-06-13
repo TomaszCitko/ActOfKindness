@@ -7,7 +7,6 @@ import {observer} from "mobx-react-lite";
 function App() {
     const {eventStore} = useStore()
 
-
     return (
       <>
         <Navbar/>

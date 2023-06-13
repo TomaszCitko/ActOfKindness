@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from "../../images/handshake.png";
 import {observer} from "mobx-react-lite";
+import {Button, Modal} from "semantic-ui-react";
 
 function Homepage() {
     return (

@@ -5,7 +5,7 @@ import logo from "../../images/handshake.png"
 
 function Navbar() {
     return (
-        <Menu  inverted fixed={'top'}>
+        <Menu inverted fixed={'top'}>
             <Menu.Item as={NavLink} to={'/'}>
                 <img src={logo} alt="logo" width={50}/>Act Of Kindness
             </Menu.Item >

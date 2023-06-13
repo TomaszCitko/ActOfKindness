@@ -6,7 +6,6 @@ export default class EventStore {
     eventRegistry =  new Map<string, Event>();
     userRegistry = new Map<string, User>();
 
-
     constructor() {
         makeAutoObservable(this)
     }
@@ -29,5 +28,4 @@ export default class EventStore {
     get users(){
         return Array.from(this.userRegistry.values())
     }
-
 }
