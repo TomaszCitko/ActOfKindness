@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Persistence.Repositories;
 
 namespace Persistence.Extensions
 {
@@ -10,6 +12,7 @@ namespace Persistence.Extensions
         {
             service.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("ActOfKindness")));
+            service.AddScoped<IEventRepository, EventRepository>();
         }
     }
 }
