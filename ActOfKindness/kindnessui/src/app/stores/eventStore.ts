@@ -1,14 +1,31 @@
 import {makeAutoObservable} from "mobx";
 import {User} from "../models/user";
+import {MyEvent} from "../models/myEvent";
 import agent from "../api/agent";
 
 export default class EventStore {
-    eventRegistry =  new Map<string, Event>();
+    eventRegistry =  new Map<string, MyEvent>();
     userRegistry = new Map<string, User>();
 
     constructor() {
         makeAutoObservable(this)
     }
+
+    get myEvents(){
+        return Array.from(this.eventRegistry.values())
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     populateUser=()=>{
         agent.Events.randomUser().then(response => {

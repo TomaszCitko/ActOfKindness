@@ -1,8 +1,21 @@
 import React from 'react';
+import {MyEvent} from "../../../app/models/myEvent";
+import {Segment} from "semantic-ui-react";
 
-function EventListItem() {
+
+interface Props {
+    event: MyEvent
+}
+
+function EventListItem({event}: Props) {
     return (
-        <h1>Event List Item</h1>
+        <>
+            <h1>{event.Title}</h1>
+            <Segment>
+
+
+            </Segment>
+        </>
         );
 }
 
