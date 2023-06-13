@@ -15,34 +15,19 @@ export default class EventStore {
         return Array.from(this.eventRegistry.values())
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-    populateUser=()=>{
-        agent.Events.randomUser().then(response => {
-            const ourUser = {
-                id: response.id,
-                first_name:  response.first_name,
-                avatar: response.avatar
-            }
-            this.userRegistry.set(ourUser.id,ourUser)
-
-            this.users.map(user=>(
-                console.log(user)
-            ))
-        })
+    loadEvents = async ()=>{
+        try {
+            const allEventsResponse = await agent.Events.list()
+            allEventsResponse.forEach(event=>{
+                this.saveEvent(event)
+            })
+        }
+        catch (error) {
+            console.log(error)
+        }
     }
 
-    get users(){
-        return Array.from(this.userRegistry.values())
+    saveEvent = async (newEvent: MyEvent)=>{
+        this.eventRegistry.set(newEvent.id,newEvent)
     }
 }

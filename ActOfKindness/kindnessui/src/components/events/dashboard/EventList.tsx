@@ -1,6 +1,7 @@
 import React from 'react';
 import {useStore} from "../../../app/stores/store";
 import EventListItem from "./EventListItem";
+import {observer} from "mobx-react-lite";
 
 function EventList() {
     const {eventStore} = useStore()
@@ -15,4 +16,4 @@ function EventList() {
     );
 }
 
-export default EventList;
+export default observer(EventList);

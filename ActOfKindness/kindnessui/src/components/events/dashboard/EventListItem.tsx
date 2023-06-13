@@ -1,7 +1,8 @@
 import React from 'react';
 import {MyEvent} from "../../../app/models/myEvent";
-import {Segment} from "semantic-ui-react";
-
+import {Button, Header, Icon, Item, Segment} from "semantic-ui-react";
+import {observer} from "mobx-react-lite";
+import avatar from "../../../images/user.png"
 
 interface Props {
     event: MyEvent
@@ -10,13 +11,23 @@ interface Props {
 function EventListItem({event}: Props) {
     return (
         <>
-            <h1>{event.Title}</h1>
-            <Segment>
-
-
+            <Segment >
+                <Item.Group relaxed divided>
+                    <Item>
+                        <Item.Image size='medium' src={event.image} />
+                        <Item.Content>
+                            <Item.Header as='a'>{event.title}</Item.Header>
+                            <Item.Meta>Description</Item.Meta>
+                            <Item.Description>
+                                {event.description}
+                            </Item.Description>
+                            <Item.Extra>{event.localization}</Item.Extra>
+                        </Item.Content>
+                    </Item>
+                </Item.Group>
             </Segment>
         </>
         );
 }
 
-export default EventListItem;
+export default observer(EventListItem);

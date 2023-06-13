@@ -9,10 +9,6 @@ function Homepage() {
 
     return (
         <div className="App">
-            <Button content={'add !'} onClick={eventStore.populateUser} />
-            <h2>{eventStore.users.map(user=> (
-                <p key={user.id}>{user.first_name}</p>
-            ))}</h2>
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
                 <p>Act-Of-Kindness</p>
