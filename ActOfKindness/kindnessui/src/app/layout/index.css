@@ -58,41 +58,56 @@ code {
   }
 }
 
-.ui.input > input {
+.ui.form input,textarea,select  {
   font-size: 1.2rem;
-  background-color: #0c0909 !important;
-  color: rgb(255, 255, 255) !important;
-
-}
-
-.ui.form  textarea {
-  font-size: 1.2rem;
-  background-color: #0c0909 !important;
-  color: rgb(255, 255, 255) !important;
-
+  background-color: dimgray !important;
+  color: rgb(12, 9, 9) !important;
 }
 
 
-.ui.input > input:focus {
+.ui.form textarea {
+  font-size: 1.2rem;
+  min-height: 1em !important;
+  max-height: 100em !important;
+}
+
+
+.ui.form input:focus,textarea:focus,select:focus {
   color: rgb(255, 255, 255) !important;
+  background-color: rgb(61, 62, 63) !important;
   opacity: .85;
   transition: all .1s ease-in;
 }
 
 
-.ui.form > form:focus {
-  color: rgb(255, 255, 255) !important;
-  opacity: .15;
-  transition: all .1s ease-in;
+.ui.form input::placeholder,textarea::placeholder {
+  font-size: 1.2rem;
+  color: #c0bdbd !important;
+}
+
+.optionPlaceholder {
+  color: #656565 !important;
+}
+
+.optionPlaceholder select:focus {
+  color: #cb0303 !important;
 }
 
 
-.ui.input > input::placeholder {
-  font-size: 1.2rem;
-  color: #fda700;
+/* filters */
+.ui.segment {
+  background-color: #474c5d;
+  border: 1px solid black;
 }
 
-.ui.form  textarea::placeholder {
-  font-size: 1.2rem;
-  color: #fda700;
+.ui.vertical.menu  {
+  background-color: #474c5d;
+  border: 1px solid black;
+
+}
+
+.ui.attached.header {
+  background-color: #474c5d;
+  border: 1px solid black;
+
 }

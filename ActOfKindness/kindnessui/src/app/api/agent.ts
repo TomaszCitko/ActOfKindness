@@ -16,7 +16,7 @@ const requests = {
 // creating object to store our requests
 
 const Events = {
-    list: ()=> requests.get<MyEvent[]>('/event')
+    list: ()=> requests.get<MyEvent[]>('/event'),
 }
 
 
