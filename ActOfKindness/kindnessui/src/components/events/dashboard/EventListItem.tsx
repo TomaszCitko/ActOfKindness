@@ -11,21 +11,21 @@ interface Props {
 function EventListItem({event}: Props) {
     return (
         <>
-            <Segment >
-                <Item.Group relaxed divided>
-                    <Item>
-                        <Item.Image size='medium' src={event.image} />
-                        <Item.Content>
-                            <Item.Header as='a'>{event.title}</Item.Header>
-                            <Item.Meta>Description</Item.Meta>
-                            <Item.Description>
-                                {event.description}
-                            </Item.Description>
-                            <Item.Extra>{event.localization}</Item.Extra>
-                        </Item.Content>
-                    </Item>
-                </Item.Group>
-            </Segment>
+                <Segment >
+                    <Item.Group relaxed divided>
+                        <Item>
+                            <Item.Image size='medium' src={event.image} />
+                            <Item.Content>
+                                <Item.Header as='a'>{event.title}</Item.Header>
+                                <Item.Meta>Description</Item.Meta>
+                                <Item.Description>
+                                    {event.description}
+                                </Item.Description>
+                                <Item.Extra>{event.localization}</Item.Extra>
+                            </Item.Content>
+                        </Item>
+                    </Item.Group>
+                </Segment>
         </>
         );
 }
