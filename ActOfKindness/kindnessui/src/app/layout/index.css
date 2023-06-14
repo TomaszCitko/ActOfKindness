@@ -57,3 +57,42 @@ code {
     transform: rotate(360deg);
   }
 }
+
+.ui.input > input {
+  font-size: 1.2rem;
+  background-color: #0c0909 !important;
+  color: rgb(255, 255, 255) !important;
+
+}
+
+.ui.form  textarea {
+  font-size: 1.2rem;
+  background-color: #0c0909 !important;
+  color: rgb(255, 255, 255) !important;
+
+}
+
+
+.ui.input > input:focus {
+  color: rgb(255, 255, 255) !important;
+  opacity: .85;
+  transition: all .1s ease-in;
+}
+
+
+.ui.form > form:focus {
+  color: rgb(255, 255, 255) !important;
+  opacity: .15;
+  transition: all .1s ease-in;
+}
+
+
+.ui.input > input::placeholder {
+  font-size: 1.2rem;
+  color: #fda700;
+}
+
+.ui.form  textarea::placeholder {
+  font-size: 1.2rem;
+  color: #fda700;
+}
