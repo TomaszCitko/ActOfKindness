@@ -15,11 +15,11 @@ function EventDashboard() {
 
     return (
         <Grid>
-            <Grid.Column width={10}>
+            <Grid.Column width={11}>
                 <EventList/>
             </Grid.Column>
 
-            <Grid.Column width={6}>
+            <Grid.Column style={{marginLeft: 50}} width={4}>
                 <EventFilters/>
             </Grid.Column>
         </Grid>

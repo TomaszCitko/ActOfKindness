@@ -4,7 +4,6 @@ import {Formik, Form, Field, ErrorMessage} from "formik";
 import {Link, NavLink} from "react-router-dom";
 import * as Yup from "yup"
 import logo from "../../../images/handshake.png";
-import {MyEvent} from "../../../app/models/myEvent";
 import {v4 as uuid} from "uuid";
 import {MyEventCreate} from "../../../app/models/myEventCreate";
 
@@ -102,19 +101,16 @@ function EventForm() {
                         </FormField>
 
                         <FormField>
-                            <Field name="starting_Date" placeholder="Starting Date dd/mm/yyyy" />
+                            <Field name="starting_Date" placeholder="Starting Date   dd/mm/yyyy" />
                             <ErrorMessage name={'starting_Date'} render={error=>
                                 <Label basic color={'red'} content={error}/>}/>
                         </FormField>
 
-
                         <FormField>
-                            <Field name="ending_Date" placeholder="Ending Datedd/mm/yyyy" />
+                            <Field name="ending_Date" placeholder="Ending Date    dd/mm/yyyy" />
                             <ErrorMessage name={'ending_Date'} render={error=>
                                 <Label basic color={'red'} content={error}/>}/>
                         </FormField>
-
-
 
                         <FormField>
                             <Field as={"textarea"}  placeholder='Description' name='description' />
