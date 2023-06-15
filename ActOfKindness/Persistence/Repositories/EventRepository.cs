@@ -1,10 +1,6 @@
-﻿using System.Diagnostics;
-using System.Security.Cryptography.X509Certificates;
-using Azure.Core;
-using Domain.Interfaces;
+﻿using Domain.Interfaces;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace Persistence.Repositories;
 
@@ -40,7 +36,19 @@ public class EventRepository : IEventRepository
 
     public async Task UpdateEvent(int id, Event entity)
     {
-        _context.Events.Update(entity);
+        await _context.Events.Where(e => e.Id == id)
+            .ExecuteUpdateAsync(prop => prop.SetProperty(e => e.Title, entity.Title)
+                .SetProperty(e => e.Description, entity.Description)
+                .SetProperty(e => e.Localization, entity.Localization)
+                .SetProperty(e => e.IsOnline, entity.IsOnline)
+                .SetProperty(e => e.StartingDate, entity.StartingDate)
+                .SetProperty(e => e.EndingDate, entity.EndingDate)
+                .SetProperty(e => e.IsDone, entity.IsDone)
+                .SetProperty(e => e.Latitude, entity.Latitude)
+                .SetProperty(e => e.Longitude, entity.Longitude)
+                .SetProperty(e => e.Type, entity.Type)
+                .SetProperty(e => e.Image, entity.Image)
+            );
     }
 
     public async Task Save()

@@ -1,3 +1,4 @@
+using Application.Extensions;
 using Persistence.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddPersistence(builder.Configuration);
+builder.Services.AddApplication();
 
 builder.Services.AddCors(options =>
 {
