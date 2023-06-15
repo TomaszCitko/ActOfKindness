@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {MyEvent} from "../../../app/models/myEvent";
-import {Segment, Grid, Header, Icon} from "semantic-ui-react";
+import {Segment, Grid, Header, Item, Icon} from "semantic-ui-react";
 import EventList from "../dashboard/EventList";
 import EventFilters from "../dashboard/EventFilters";
 //import {observer} from "mobx-react-lite";
@@ -35,44 +35,86 @@ function EventDetails() {
             <Grid>
                 <Grid.Column width={12}>
                     <Segment.Group>
-                        <Segment>Top</Segment>
+                        <Segment>
+                            <Item><Header textAlign='center' size='large'>{event.title}</Header></Item>
+                        </Segment>
                         <Segment.Group>
-                            <Segment>Nested Top</Segment>
-                            <Segment>Nested Middle</Segment>
-                            <Segment>Nested Bottom</Segment>
+                            <Segment>{event.done ? <h5>This help event has been completed</h5> : <h5>This help event is still ongoing</h5>}</Segment>
+                            <Segment>{event.description}</Segment>
+                            <Segment>
+                                <Segment>
+                                <Grid verticalAlign={'middle'}>
+                                        <Grid.Column width={4}>
+                                            <span>
+                                            <Icon name='calendar' style={{marginBottom: 10}} size='large' color='teal'/>
+                                            Start date: {event.from_Date} 
+                                            </span>
+                                        </Grid.Column>
+                                        <Grid.Column width={7}>
+                                        <Icon name='calendar' style={{marginBottom: 10}} size='large' color='teal'/>
+                                            <span>
+                                            End date: {event.to_Date} 
+                                            </span>
+                                        </Grid.Column>
+                                    </Grid>
+                                </Segment>
+                                <Segment>
+                                <Grid verticalAlign={'middle'}>
+                                        <Grid.Column width={15}>
+                                            <span>
+                                            <Icon name='address card' style={{marginBottom: 6}} size='large' color='teal'/>
+                                            Localization: {event.localization}
+                                            </span>
+                                        </Grid.Column>
+                                    </Grid>
+                                </Segment>
+                                <Segment>
+                                <Grid verticalAlign={'middle'}>
+                                        <Grid.Column width={15}>
+                                            <span>
+                                            <Icon style={{marginBottom: 10}} name='user' size='large' color='teal'/>
+                                            Created by: {event.user_Id}
+                                            </span>
+                                        </Grid.Column>
+                                    </Grid>
+                                </Segment>
+                                <Segment>
+                                <Grid verticalAlign={'middle'}>
+                                        <Grid.Column width={15}>
+                                            <span>
+                                            <Icon name='calendar' style={{marginBottom: 10}} size='large' color='teal'/>
+                                            Created on: {event.created_Time}
+                                            </span>
+                                        </Grid.Column>
+                                    </Grid>
+                                </Segment>
+                                <Segment attached>
+                                    <Grid verticalAlign={'middle'}>
+                                        <Grid.Column width={15}>
+                                            <span>
+                                            <Icon name='calendar' style={{marginBottom: 10}} size='large' color='teal'/>
+                                            Calendar
+                                            </span>
+                                        </Grid.Column>
+                                    </Grid>
+                                </Segment>
+                            </Segment>
                         </Segment.Group>
+
                         <Segment.Group horizontal>
-                            <Segment>Top</Segment>
-                            <Segment>Middle</Segment>
-                            <Segment>Bottom</Segment>
+                            {/* <Segment><img src={event.image}></Segment> */}
                         </Segment.Group>
-                        <Segment>Bottom</Segment>
+
                     </Segment.Group>
 
-
-                        {/*<Card.Group>*/}
-                        {/*    <Card.Header>{event.title}</Card.Header>*/}
-
-                        {/*    <Card.Meta>Description</Card.Meta>*/}
-                        {/*    <Card.Description>*/}
-                        {/*        {event.description}*/}
-                        {/*    </Card.Description>*/}
-
-                        {/*    */}
-                        {/*    <br/>Localization: {event.localization}*/}
-                        {/*    <br/>Start date: {event.from_Date} End date: {event.to_Date}*/}
-                        {/*    <br/>Localization: {event.localization}*/}
-                        {/*    <br/>Created by: {event.user_Id}*/}
-                        {/*    <br/>Created on: {event.created_Time}*/}
-
-                        {/*    {event.done ? <h5>This help event has been completed</h5> : <h5>This help event is still ongoing</h5>}*/}
-
-                        {/*</Card.Group>*/}
-                        {/*<Card.Content size='large' src={event.image} />*/}
                 </Grid.Column>
 
                 <Grid.Column width={4}>
                     <Header>PARTICIPANTS</Header>
+                    <br/> Marcin
+                    <br/> Maciej
+                    <br/> Aneta
+                    <br/> Tomek
                 </Grid.Column>
             </Grid>
 
