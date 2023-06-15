@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import {MyEvent} from "../../../app/models/myEvent";
-import {Card} from "semantic-ui-react";
+import {Segment, Grid, Header, Icon} from "semantic-ui-react";
+import EventList from "../dashboard/EventList";
+import EventFilters from "../dashboard/EventFilters";
 //import {observer} from "mobx-react-lite";
 //import avatar from "../../../images/user.png"
 
@@ -30,25 +32,50 @@ function EventDetails() {
 
     return (
         <>
-            <Card>
-                <Card.Content>
-                    <Card.Header>{event.title}</Card.Header>
-                    <Card.Meta>Description</Card.Meta>
-                    <Card.Description>
-                        {event.description}
-                    </Card.Description>
-                    <br/>Localization: {event.localization}
-                    <br/>Start date: {event.from_Date} End date: {event.to_Date}
-                    <br/>Localization: {event.localization}
-                    <br/>Created by: {event.user_Id}
-                    <br/>Created on: {event.created_Time}
+            <Grid>
+                <Grid.Column width={12}>
+                    <Segment.Group>
+                        <Segment>Top</Segment>
+                        <Segment.Group>
+                            <Segment>Nested Top</Segment>
+                            <Segment>Nested Middle</Segment>
+                            <Segment>Nested Bottom</Segment>
+                        </Segment.Group>
+                        <Segment.Group horizontal>
+                            <Segment>Top</Segment>
+                            <Segment>Middle</Segment>
+                            <Segment>Bottom</Segment>
+                        </Segment.Group>
+                        <Segment>Bottom</Segment>
+                    </Segment.Group>
 
-                    {event.done ? <h5>This help event has been completed</h5> : <h5>This help event is still ongoing</h5>}
 
+                        {/*<Card.Group>*/}
+                        {/*    <Card.Header>{event.title}</Card.Header>*/}
 
-                </Card.Content>
-                <Card.Content size='large' src={event.image} />
-            </Card>
+                        {/*    <Card.Meta>Description</Card.Meta>*/}
+                        {/*    <Card.Description>*/}
+                        {/*        {event.description}*/}
+                        {/*    </Card.Description>*/}
+
+                        {/*    */}
+                        {/*    <br/>Localization: {event.localization}*/}
+                        {/*    <br/>Start date: {event.from_Date} End date: {event.to_Date}*/}
+                        {/*    <br/>Localization: {event.localization}*/}
+                        {/*    <br/>Created by: {event.user_Id}*/}
+                        {/*    <br/>Created on: {event.created_Time}*/}
+
+                        {/*    {event.done ? <h5>This help event has been completed</h5> : <h5>This help event is still ongoing</h5>}*/}
+
+                        {/*</Card.Group>*/}
+                        {/*<Card.Content size='large' src={event.image} />*/}
+                </Grid.Column>
+
+                <Grid.Column width={4}>
+                    <Header>PARTICIPANTS</Header>
+                </Grid.Column>
+            </Grid>
+
         </>
     );
 }
