@@ -7,10 +7,7 @@ import logo from "../../../images/handshake.png";
 import {MyEvent} from "../../../app/models/myEvent";
 import {v4 as uuid} from "uuid";
 
-
-
 function EventForm() {
-
     const [myEvent, setMyEvent] = useState({
         id: '',
         user_Id: '',
