@@ -32,18 +32,18 @@ namespace Application.Services
             await _eventRepository.Save();
         }
 
-        public async Task DeleteEvent(int id)
+        public async Task DeleteEvent(Guid id)
         {
             await _eventRepository.DeleteEvent(id);
             await _eventRepository.Save();
         }
 
-        public async Task<Event> GetEventById(int id)
+        public async Task<Event> GetEventById(Guid id)
         {
             return await _eventRepository.GetEventById(id);
         }
 
-        public async Task UpdateEvent(int id, Event updatedEvent)
+        public async Task UpdateEvent(Guid id, Event updatedEvent)
         {
             await _eventRepository.UpdateEvent(id, updatedEvent);
         }

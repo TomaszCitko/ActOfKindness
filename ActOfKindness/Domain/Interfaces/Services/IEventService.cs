@@ -7,8 +7,8 @@ namespace Domain.Interfaces.Services
     {
         Task<List<DetailsEventDto>> GetEvents();
         Task CreateEvent(Event newEvent);
-        Task DeleteEvent(int id);
-        Task<Event> GetEventById(int id);
-        Task UpdateEvent(int id, Event updatedEvent);
+        Task DeleteEvent(Guid id);
+        Task<Event> GetEventById(Guid id);
+        Task UpdateEvent(Guid id, Event updatedEvent);
     }
 }

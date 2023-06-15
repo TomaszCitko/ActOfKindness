@@ -30,22 +30,22 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteEvent(int id)
+        [HttpDelete("{Guid}")]
+        public async Task<ActionResult> DeleteEvent(Guid id)
         {
             await _eventService.DeleteEvent(id);
 
             return Ok();
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Event>> GetEventById(int id)
+        [HttpGet("{Guid}")]
+        public async Task<ActionResult<Event>> GetEventById(Guid id)
         {
             return await _eventService.GetEventById(id);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateEvent([FromRoute]int id, [FromBody]Event entity)
+        [HttpPut("{Guid}")]
+        public async Task<ActionResult> UpdateEvent([FromRoute]Guid id, [FromBody]Event entity)
         {
             await _eventService.UpdateEvent(id, entity);
 
