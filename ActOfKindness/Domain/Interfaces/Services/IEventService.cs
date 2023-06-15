@@ -1,10 +1,11 @@
-﻿using Domain.Models;
+﻿using Domain.Dtos.Event;
+using Domain.Models;
 
 namespace Domain.Interfaces.Services
 {
     public interface IEventService
     {
-        Task<List<Event>> GetEvents();
+        Task<List<DetailsEventDto>> GetEvents();
         Task CreateEvent(Event newEvent);
         Task DeleteEvent(int id);
         Task<Event> GetEventById(int id);

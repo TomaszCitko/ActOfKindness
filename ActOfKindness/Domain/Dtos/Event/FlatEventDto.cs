@@ -2,6 +2,7 @@
 {
     public class FlatEventDto
     {
+        public Guid Id { get; set; }
         public string Localization { get; set; }
         public bool IsOnline { get; set; }
         public string Title { get; set; }

@@ -1,4 +1,6 @@
-﻿using Domain.Interfaces;
+﻿using AutoMapper;
+using Domain.Dtos.Event;
+using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Models;
 
@@ -7,17 +9,21 @@ namespace Application.Services
     public class EventService : IEventService
     {
         private readonly IEventRepository _eventRepository;
+        private readonly IMapper _mapper;
 
-        public EventService(IEventRepository eventRepository)
+        public EventService(IEventRepository eventRepository, IMapper mapper)
         {
             _eventRepository = eventRepository;
+            _mapper = mapper;
         }
 
-        public async Task<List<Event>> GetEvents()
+        public async Task<List<DetailsEventDto>> GetEvents()
         {
             var events = await _eventRepository.GetEvents();
 
-            return events;
+            var eventsDto = _mapper.Map<List<DetailsEventDto>>(events);
+
+            return eventsDto;
         }
 
         public async Task CreateEvent(Event newEvent)

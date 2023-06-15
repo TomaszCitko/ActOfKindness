@@ -1,10 +1,7 @@
-﻿using Domain.Interfaces;
+﻿using Domain.Dtos.Event;
 using Domain.Interfaces.Services;
 using Domain.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Persistence;
 
 namespace API.Controllers
 {
@@ -12,17 +9,15 @@ namespace API.Controllers
     [ApiController]
     public class EventController : ControllerBase
     {
-        private readonly IEventRepository _eventRepository;
         private readonly IEventService _eventService;
 
-        public EventController(IEventRepository iEventRepository, IEventService eventService)
+        public EventController(IEventService eventService)
         {
-            _eventRepository = iEventRepository;
             _eventService = eventService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Event>>> GetEvents()
+        public async Task<ActionResult<List<DetailsEventDto>>> GetEvents()
         {
             return await _eventService.GetEvents();
         }

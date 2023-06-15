@@ -2,8 +2,6 @@
 {
     public class DetailsEventDto
     {
-        public Guid UserId { get; set; }
-        public string UserName { get; set; }
         public DateTime CreatedTime { get; set; }
         public string Localization { get; set; }
         public bool IsOnline { get; set; }
