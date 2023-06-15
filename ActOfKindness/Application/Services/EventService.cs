@@ -26,8 +26,15 @@ namespace Application.Services
             return eventsDto;
         }
 
-        public async Task CreateEvent(Event newEvent)
+        public async Task CreateEvent(CreateEventDto newEventDto)
         {
+            var temporaryImagePlaceHolder =
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Vue_de_nuit_de_la_Place_Stanislas_%C3%A0_Nancy.jpg/1920px-Vue_de_nuit_de_la_Place_Stanislas_%C3%A0_Nancy.jpg";
+
+            newEventDto.Image ??= temporaryImagePlaceHolder;
+
+            var newEvent = _mapper.Map<Event>(newEventDto);
+
             await _eventRepository.CreateEvent(newEvent);
             await _eventRepository.Save();
         }

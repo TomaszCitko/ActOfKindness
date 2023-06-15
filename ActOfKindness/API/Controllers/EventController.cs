@@ -23,7 +23,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateEvent(Event newEvent)
+        public async Task<ActionResult> CreateEvent(CreateEventDto newEvent)
         {
             await _eventService.CreateEvent(newEvent);
 

@@ -9,6 +9,8 @@ namespace Application.Mappings
         public EventMappingProfile()
         {
             CreateMap<Event, DetailsEventDto>();
+
+            CreateMap<CreateEventDto, Event>();
         }
     }
 }
