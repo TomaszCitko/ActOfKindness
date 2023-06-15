@@ -6,21 +6,20 @@ import * as Yup from "yup"
 import logo from "../../../images/handshake.png";
 import {MyEvent} from "../../../app/models/myEvent";
 import {v4 as uuid} from "uuid";
+import {MyEventCreate} from "../../../app/models/myEventCreate";
 
 function EventForm() {
-    const [myEvent, setMyEvent] = useState({
+    const [myEventCreate, setMyEvent] = useState({
         id: '',
-        user_Id: '',
-        created_Time: '',
+        userId: '',
         localization: '',
+        isOnline:'',
         title:	'',
         description: '',
-        from_Date: '',
-        to_Date: '',
-        done: '',
+        starting_Date: '',
+        ending_Date: '',
         latitude: '',
         longitude: '',
-        moderated: '',
         type: '',
         image: '',
     })
@@ -29,7 +28,7 @@ function EventForm() {
         title: Yup.string().required('Title is required Sir'),
         description: Yup.string().required('Please tell something'),
         localization: Yup.string().required('We need to know where help is needed!'),
-        date: Yup.string().matches(
+        starting_Date: Yup.string().matches(
             /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
             'Invalid date format. Use dd/mm/yyyy.'
         ).test('is-future-date', 'Date must not be in the past', function (value) {
@@ -43,10 +42,26 @@ function EventForm() {
             const [day, month, year] = value.split('/').map(Number);
             const inputDate = new Date(year, month - 1, day);
             return inputDate >= currentDate;
+        }),
+        ending_Date: Yup.string().matches(
+            /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
+            'Invalid date format. Use dd/mm/yyyy.'
+        ).test('is-future-date', 'Ending date cannot be before starting date', function (value) {
+            if (!value) {
+                return this.createError({
+                    message: "Date is required",
+                    path: this.path,
+                });
+            }
+            const startDate = new Date(this.parent.starting_Date);
+            const [day, month, year] = value.split('/').map(Number);
+            const endDate = new Date(year, month, day);
+            console.log(endDate, startDate)
+            return endDate >= startDate;
         })
     })
 
-    const handleFormSubmit = (event: MyEvent)=>{
+    const handleFormSubmit = (event: MyEventCreate)=>{
         if (event.id.length === 0){
             event.id = uuid()
         }
@@ -61,7 +76,7 @@ function EventForm() {
 
             <Formik
                 validationSchema={formValidation}
-                initialValues={myEvent}
+                initialValues={myEventCreate}
                 enableReinitialize
                 onSubmit={values=> handleFormSubmit(values)}>
                 {({handleSubmit, isValid, isSubmitting,dirty })=>(
@@ -72,8 +87,6 @@ function EventForm() {
                                 <option value="HelpNeeded">I need help</option>
                                 <option value="HelpOffer">I want to help someone!</option>
                             </Field>
-                            <ErrorMessage name={'localization'} render={error=>
-                                <Label basic color={'red'} content={error}/>}/>
                         </FormField>
 
                         <FormField>
@@ -89,10 +102,19 @@ function EventForm() {
                         </FormField>
 
                         <FormField>
-                            <Field name="date" placeholder="dd/mm/yyyy" />
-                            <ErrorMessage name={'date'} render={error=>
+                            <Field name="starting_Date" placeholder="Starting Date dd/mm/yyyy" />
+                            <ErrorMessage name={'starting_Date'} render={error=>
                                 <Label basic color={'red'} content={error}/>}/>
                         </FormField>
+
+
+                        <FormField>
+                            <Field name="ending_Date" placeholder="Ending Datedd/mm/yyyy" />
+                            <ErrorMessage name={'ending_Date'} render={error=>
+                                <Label basic color={'red'} content={error}/>}/>
+                        </FormField>
+
+
 
                         <FormField>
                             <Field as={"textarea"}  placeholder='Description' name='description' />

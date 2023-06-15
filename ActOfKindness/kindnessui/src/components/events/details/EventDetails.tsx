@@ -27,28 +27,29 @@ function EventDetails() {
         type: '',
         image: '',
     })
+
     return (
         <>
-    
-                <Card>
-                    <Card.Content>
-                        <Card.Header>{event.title}</Card.Header>
-                        <Card.Description>
-                        <br>Localization: {event.localization}</br>
-                        <br>Start date: {event.from_Date} End date: {event.to_Date} </br>
-                        <br>Localization: {event.localization} </br>
-                        <br>Created by: {event.user_Id}</br>
-                        <br>Created on: {event.created_Time}</br>
-                        {event.done && <h2>This help event has been completed</h2>}
-                        </Card.Description>
-                        <Card.Meta>Description</Card.Meta>
-                        <Card.Description>
-                            {event.description}
-                        </Card.Description>
-                    </Card.Content>
-                    <Card.Content size='large' src={event.image} />
-                </Card>
-</>
+            <Card>
+                <Card.Content>
+                    <Card.Header>{event.title}</Card.Header>
+                    <Card.Description>
+                    <br/>Localization: {event.localization}
+                    <br/>Start date: {event.from_Date} End date: {event.to_Date}
+                    <br/>Localization: {event.localization}
+                    <br/>Created by: {event.user_Id}
+                    <br/>Created on: {event.created_Time}
+
+                    {event.done ? <h2>This help event has been completed</h2> : <h2>This help event is still ongoing</h2>}
+                    </Card.Description>
+                    <Card.Meta>Description</Card.Meta>
+                    <Card.Description>
+                        {event.description}
+                    </Card.Description>
+                </Card.Content>
+                <Card.Content size='large' src={event.image} />
+            </Card>
+        </>
     );
 }
 
