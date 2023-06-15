@@ -15,7 +15,7 @@ function EventDashboard() {
 
     return (
         <Grid>
-            <Grid.Column width={12}>
+            <Grid.Column width={10}>
                 <EventList/>
             </Grid.Column>
 
