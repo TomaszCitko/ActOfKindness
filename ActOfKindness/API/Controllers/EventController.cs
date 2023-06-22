@@ -1,6 +1,5 @@
-﻿using Domain.Dtos.Event;
-using Domain.Interfaces.Services;
-using Domain.Models;
+﻿using Application.Dtos.Event;
+using Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -23,31 +22,31 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateEvent(CreateEventDto newEvent)
+        public async Task<ActionResult> CreateEvent([FromBody]CreateEventDto newEvent)
         {
             await _eventService.CreateEvent(newEvent);
 
             return Ok();
         }
 
-        [HttpDelete("{Guid}")]
-        public async Task<ActionResult> DeleteEvent(Guid id)
+        [HttpDelete("{id:guid}")]
+        public async Task<ActionResult> DeleteEvent([FromRoute]Guid id)
         {
             await _eventService.DeleteEvent(id);
 
             return Ok();
         }
 
-        [HttpGet("{Guid}")]
-        public async Task<ActionResult<Event>> GetEventById(Guid id)
+        [HttpGet("{id:guid}")]
+        public async Task<ActionResult<DetailsEventDto>> GetEventById([FromRoute]Guid id)
         {
             return await _eventService.GetEventById(id);
         }
 
-        [HttpPut("{Guid}")]
-        public async Task<ActionResult> UpdateEvent([FromRoute]Guid id, [FromBody]Event entity)
+        [HttpPut("{id:guid}")]
+        public async Task<ActionResult> UpdateEvent([FromRoute]Guid id, [FromBody]EditEventDto eventDto)
         {
-            await _eventService.UpdateEvent(id, entity);
+            await _eventService.UpdateEvent(id, eventDto);
 
             return Ok();
         }

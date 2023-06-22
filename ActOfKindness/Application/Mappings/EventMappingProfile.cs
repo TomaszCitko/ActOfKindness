@@ -1,5 +1,5 @@
-﻿using AutoMapper;
-using Domain.Dtos.Event;
+﻿using Application.Dtos.Event;
+using AutoMapper;
 using Domain.Models;
 
 namespace Application.Mappings
@@ -11,6 +11,7 @@ namespace Application.Mappings
             CreateMap<Event, DetailsEventDto>();
 
             CreateMap<CreateEventDto, Event>();
+            CreateMap<EditEventDto, Event>();
         }
     }
 }

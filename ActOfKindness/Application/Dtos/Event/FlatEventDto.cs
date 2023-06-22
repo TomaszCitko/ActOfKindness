@@ -1,4 +1,4 @@
-﻿namespace Domain.Dtos.Event
+﻿namespace Application.Dtos.Event
 {
     public class FlatEventDto
     {

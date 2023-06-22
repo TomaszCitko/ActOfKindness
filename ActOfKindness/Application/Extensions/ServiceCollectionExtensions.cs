@@ -1,7 +1,7 @@
-﻿using System.Reflection;
-using Application.Services;
-using Domain.Interfaces.Services;
+﻿using Application.Services;
+using Application.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Application.Extensions
 {

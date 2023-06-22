@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using Domain.Dtos.Event;
-using Domain.Interfaces.Repositories;
-using Domain.Interfaces.Services;
+﻿using Application.Dtos.Event;
+using Application.Services.Interfaces;
+using AutoMapper;
 using Domain.Models;
+using Persistence.Repositories.Interfaces;
 
 namespace Application.Services
 {
@@ -42,16 +42,21 @@ namespace Application.Services
         public async Task DeleteEvent(Guid id)
         {
             await _eventRepository.DeleteEvent(id);
-            await _eventRepository.Save();
         }
 
-        public async Task<Event> GetEventById(Guid id)
+        public async Task<DetailsEventDto> GetEventById(Guid id)
         {
-            return await _eventRepository.GetEventById(id);
+            var eventDetails = await _eventRepository.GetEventById(id);
+
+            var eventDetailsDto = _mapper.Map<DetailsEventDto>(eventDetails);
+
+            return eventDetailsDto;
         }
 
-        public async Task UpdateEvent(Guid id, Event updatedEvent)
+        public async Task UpdateEvent(Guid id, EditEventDto updatedEventDto)
         {
+            var updatedEvent = _mapper.Map<Event>(updatedEventDto);
+
             await _eventRepository.UpdateEvent(id, updatedEvent);
         }
     }

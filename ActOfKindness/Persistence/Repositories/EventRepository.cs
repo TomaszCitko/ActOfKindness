@@ -1,6 +1,6 @@
-﻿using Domain.Interfaces.Repositories;
-using Domain.Models;
+﻿using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Persistence.Repositories.Interfaces;
 
 namespace Persistence.Repositories;
 
@@ -25,8 +25,8 @@ public class EventRepository : IEventRepository
 
     public async Task DeleteEvent(Guid id)
     {
-        var eventToRemove = await _context.Events.FirstOrDefaultAsync(e => e.Id == id);
-        _context.Events.Remove(eventToRemove);
+        await _context.Events.Where(e => e.Id == id)
+            .ExecuteDeleteAsync();
     }
 
     public async Task CreateEvent(Event newEvent)
@@ -37,16 +37,15 @@ public class EventRepository : IEventRepository
     public async Task UpdateEvent(Guid id, Event entity)
     {
         await _context.Events.Where(e => e.Id == id)
-            .ExecuteUpdateAsync(prop => prop.SetProperty(e => e.Title, entity.Title)
+            .ExecuteUpdateAsync(prop => 
+                prop.SetProperty(e => e.Title, entity.Title)
                 .SetProperty(e => e.Description, entity.Description)
                 .SetProperty(e => e.Localization, entity.Localization)
                 .SetProperty(e => e.IsOnline, entity.IsOnline)
                 .SetProperty(e => e.StartingDate, entity.StartingDate)
                 .SetProperty(e => e.EndingDate, entity.EndingDate)
-                .SetProperty(e => e.IsDone, entity.IsDone)
                 .SetProperty(e => e.Latitude, entity.Latitude)
                 .SetProperty(e => e.Longitude, entity.Longitude)
-                .SetProperty(e => e.Type, entity.Type)
                 .SetProperty(e => e.Image, entity.Image)
             );
     }
