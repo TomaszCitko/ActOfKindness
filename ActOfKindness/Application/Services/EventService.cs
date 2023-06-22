@@ -54,9 +54,7 @@ namespace Application.Services
 
         public async Task UpdateEvent(Guid id, EditEventDto updatedEventDto)
         {
-            var updatedEvent = _mapper.Map<Event>(updatedEventDto);
-
-            await _eventRepository.UpdateEvent(id, updatedEvent);
+            var rowsChanged = await _eventRepository.UpdateEvent(id, updatedEventDto);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using Application.Dtos.Event;
+using Application.Interfaces;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,19 +35,19 @@ public class EventRepository : IEventRepository
         await _context.Events.AddAsync(newEvent);
     }
 
-    public async Task UpdateEvent(Guid id, Event entity)
+    public async Task<int> UpdateEvent(Guid id, EditEventDto eventDto)
     {
-        await _context.Events.Where(e => e.Id == id)
+        return await _context.Events.Where(e => e.Id == id)
             .ExecuteUpdateAsync(prop => 
-                prop.SetProperty(e => e.Title, entity.Title)
-                .SetProperty(e => e.Description, entity.Description)
-                .SetProperty(e => e.Localization, entity.Localization)
-                .SetProperty(e => e.IsOnline, entity.IsOnline)
-                .SetProperty(e => e.StartingDate, entity.StartingDate)
-                .SetProperty(e => e.EndingDate, entity.EndingDate)
-                .SetProperty(e => e.Latitude, entity.Latitude)
-                .SetProperty(e => e.Longitude, entity.Longitude)
-                .SetProperty(e => e.Image, entity.Image)
+                prop.SetProperty(e => e.Title, eventDto.Title)
+                .SetProperty(e => e.Description, eventDto.Description)
+                .SetProperty(e => e.Localization, eventDto.Localization)
+                .SetProperty(e => e.IsOnline, eventDto.IsOnline)
+                .SetProperty(e => e.StartingDate, eventDto.StartingDate)
+                .SetProperty(e => e.EndingDate, eventDto.EndingDate)
+                .SetProperty(e => e.Latitude, eventDto.Latitude)
+                .SetProperty(e => e.Longitude, eventDto.Longitude)
+                .SetProperty(e => e.Image, eventDto.Image)
             );
     }
 

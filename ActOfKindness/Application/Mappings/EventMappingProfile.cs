@@ -11,7 +11,6 @@ namespace Application.Mappings
             CreateMap<Event, DetailsEventDto>();
 
             CreateMap<CreateEventDto, Event>();
-            CreateMap<EditEventDto, Event>();
         }
     }
 }
