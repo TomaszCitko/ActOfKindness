@@ -16,11 +16,27 @@ public class EventRepository : IEventRepository
     {
         _context = context;
     }
-
     public async Task<List<Event>> GetEvents()
     { 
         return await _context.Events.ToListAsync();
     }
+
+    public Task<List<Event>> FilterEventsBy(string filterBy)
+    {
+        throw new NotImplementedException();
+    }
+
+    //public Task<List<Event>> FilterEventsBy(string filterBy)
+    //{
+    //    switch (filterBy)
+    //    {
+    //        case "helpOthers":
+    //        //return _context.Events.
+    //        case "receiveHelp":
+    //            //blablabla
+    //    }
+    //    //return  _context.Events.Where()
+    //}
 
     public async Task<Event> GetEventById(int id)
     {
