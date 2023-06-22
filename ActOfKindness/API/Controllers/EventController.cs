@@ -1,9 +1,6 @@
-﻿using Domain.Interfaces;
-using Domain.Models;
-using Microsoft.AspNetCore.Http;
+﻿using Application.Dtos.Event;
+using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Persistence;
 
 namespace API.Controllers
 {
@@ -11,46 +8,46 @@ namespace API.Controllers
     [ApiController]
     public class EventController : ControllerBase
     {
-        private readonly IEventRepository _eventRepository;
+        private readonly IEventService _eventService;
 
-        public EventController(IEventRepository iEventRepository)    
+        public EventController(IEventService eventService)
         {
-            _eventRepository = iEventRepository;
+            _eventService = eventService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Event>>> GetEvents()
+        public async Task<ActionResult<List<DetailsEventDto>>> GetEvents()
         {
-            return await _eventRepository.GetEvents();
+            return await _eventService.GetEvents();
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateEvent(Event newEvent)
+        public async Task<ActionResult> CreateEvent([FromBody]CreateEventDto newEvent)
         {
-            await _eventRepository.CreateEvent(newEvent);
-            await _eventRepository.Save();
+            await _eventService.CreateEvent(newEvent);
+
             return Ok();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteEvent(int id)
+        [HttpDelete("{id:guid}")]
+        public async Task<ActionResult> DeleteEvent([FromRoute]Guid id)
         {
-            await _eventRepository.DeleteEvent(id);
-            await _eventRepository.Save();
+            await _eventService.DeleteEvent(id);
+
             return Ok();
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Event>> GetEventById(int id)
+        [HttpGet("{id:guid}")]
+        public async Task<ActionResult<DetailsEventDto>> GetEventById([FromRoute]Guid id)
         {
-            return await _eventRepository.GetEventById(id);
+            return await _eventService.GetEventById(id);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateEvent(int id, Event entity)
+        [HttpPut("{id:guid}")]
+        public async Task<ActionResult> UpdateEvent([FromRoute]Guid id, [FromBody]EditEventDto eventDto)
         {
-            await _eventRepository.UpdateEvent(id, entity);
-            await _eventRepository.Save();
+            await _eventService.UpdateEvent(id, eventDto);
+
             return Ok();
         }
     }

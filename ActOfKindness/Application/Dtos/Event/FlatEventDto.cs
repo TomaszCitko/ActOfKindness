@@ -1,18 +1,14 @@
-﻿namespace Domain.Dtos.Event
+﻿namespace Application.Dtos.Event
 {
-    public class DetailsEventDto
+    public class FlatEventDto
     {
-        public Guid UserId { get; set; }
-        public string UserName { get; set; }
-        public DateTime CreatedTime { get; set; }
+        public Guid Id { get; set; }
         public string Localization { get; set; }
         public bool IsOnline { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime StartingDate { get; set; }
         public DateTime EndingDate { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
         public string Image { get; set; }
     }
 }

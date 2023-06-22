@@ -1,5 +1,5 @@
-﻿using Domain;
-using Domain.Dtos.User;
+﻿using Application.Dtos.User;
+using Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 

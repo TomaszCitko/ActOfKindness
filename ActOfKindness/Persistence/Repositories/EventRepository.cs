@@ -1,10 +1,7 @@
-﻿using System.Diagnostics;
-using System.Security.Cryptography.X509Certificates;
-using Azure.Core;
-using Domain.Interfaces;
+﻿using Application.Dtos.Event;
+using Application.Interfaces;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace Persistence.Repositories;
 
@@ -22,15 +19,15 @@ public class EventRepository : IEventRepository
         return await _context.Events.ToListAsync();
     }
 
-    public async Task<Event> GetEventById(int id)
+    public async Task<Event> GetEventById(Guid id)
     {
         return await _context.Events.FindAsync(id);
     }
 
-    public async Task DeleteEvent(int id)
+    public async Task DeleteEvent(Guid id)
     {
-        var eventToRemove = await _context.Events.FirstOrDefaultAsync(e => e.Id == id);
-        _context.Events.Remove(eventToRemove);
+        await _context.Events.Where(e => e.Id == id)
+            .ExecuteDeleteAsync();
     }
 
     public async Task CreateEvent(Event newEvent)
@@ -38,9 +35,20 @@ public class EventRepository : IEventRepository
         await _context.Events.AddAsync(newEvent);
     }
 
-    public async Task UpdateEvent(int id, Event entity)
+    public async Task<int> UpdateEvent(Guid id, EditEventDto eventDto)
     {
-        _context.Events.Update(entity);
+        return await _context.Events.Where(e => e.Id == id)
+            .ExecuteUpdateAsync(prop => 
+                prop.SetProperty(e => e.Title, eventDto.Title)
+                .SetProperty(e => e.Description, eventDto.Description)
+                .SetProperty(e => e.Localization, eventDto.Localization)
+                .SetProperty(e => e.IsOnline, eventDto.IsOnline)
+                .SetProperty(e => e.StartingDate, eventDto.StartingDate)
+                .SetProperty(e => e.EndingDate, eventDto.EndingDate)
+                .SetProperty(e => e.Latitude, eventDto.Latitude)
+                .SetProperty(e => e.Longitude, eventDto.Longitude)
+                .SetProperty(e => e.Image, eventDto.Image)
+            );
     }
 
     public async Task Save()

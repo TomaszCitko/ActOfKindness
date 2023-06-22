@@ -1,7 +1,7 @@
 using API.Extensions;
-using Domain;
+using Application.Extensions;
+using Domain.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Persistence.Extensions;
 
@@ -19,7 +19,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddPersistence(builder.Configuration);
-builder.Services.AddIdentityServices(builder.Configuration);
+builder.Services.AddApplication();
+builder.Services.AddIdentityServices();
 
 builder.Services.AddCors(options =>
 {
