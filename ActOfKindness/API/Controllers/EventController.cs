@@ -1,5 +1,5 @@
 ﻿using Application.Dtos.Event;
-using Application.Services.Interfaces;
+using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers

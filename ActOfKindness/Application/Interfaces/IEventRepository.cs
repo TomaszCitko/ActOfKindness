@@ -1,6 +1,6 @@
 ﻿using Domain.Models;
 
-namespace Persistence.Repositories.Interfaces;
+namespace Application.Interfaces;
 
 public interface IEventRepository
 {

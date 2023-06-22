@@ -1,7 +1,6 @@
 ﻿using Application.Dtos.Event;
-using Domain.Models;
 
-namespace Application.Services.Interfaces
+namespace Application.Interfaces
 {
     public interface IEventService
     {

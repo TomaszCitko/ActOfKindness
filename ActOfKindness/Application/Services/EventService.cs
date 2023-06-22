@@ -1,8 +1,7 @@
 ﻿using Application.Dtos.Event;
-using Application.Services.Interfaces;
+using Application.Interfaces;
 using AutoMapper;
 using Domain.Models;
-using Persistence.Repositories.Interfaces;
 
 namespace Application.Services
 {

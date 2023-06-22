@@ -1,6 +1,6 @@
-﻿using Domain.Models;
+﻿using Application.Interfaces;
+using Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Persistence.Repositories.Interfaces;
 
 namespace Persistence.Repositories;
 
