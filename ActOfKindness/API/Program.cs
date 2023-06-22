@@ -1,4 +1,8 @@
+using API.Extensions;
 using Application.Extensions;
+using Domain.Models;
+using Microsoft.AspNetCore.Identity;
+using Persistence;
 using Persistence.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddApplication();
+builder.Services.AddIdentityServices();
 
 builder.Services.AddCors(options =>
 {
@@ -40,5 +45,22 @@ app.UseCors("FrontEndClient");
 app.UseAuthorization();
 
 app.MapControllers();
+
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+
+try
+{
+    var context = services.GetRequiredService<ApplicationDbContext>();
+    var userManager = services.GetRequiredService<UserManager<AppUser>>();
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    await Seed.SeedUsers(userManager, roleManager);
+
+}
+catch (Exception e)
+{
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    logger.LogError(e,"Error while creating DB");
+}
 
 app.Run();

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
@@ -11,9 +12,11 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230620215542_IdentityFrameworkAdded")]
+    partial class IdentityFrameworkAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,13 +44,14 @@ namespace Persistence.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("Hearts")
+                    b.Property<int>("Hearts")
                         .HasColumnType("int");
 
-                    b.Property<double?>("Latitude")
+                    b.Property<double>("Latitude")
                         .HasColumnType("float");
 
                     b.Property<string>("Location")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -56,10 +60,11 @@ namespace Persistence.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<double?>("Longitude")
+                    b.Property<double>("Longitude")
                         .HasColumnType("float");
 
                     b.Property<string>("Nickname")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
@@ -83,6 +88,7 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Skills")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -107,9 +113,11 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Models.Event", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
@@ -156,8 +164,9 @@ namespace Persistence.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -167,7 +176,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedTime = new DateTime(2023, 6, 21, 0, 28, 55, 522, DateTimeKind.Local).AddTicks(6361),
+                            CreatedTime = new DateTime(2023, 6, 20, 23, 55, 42, 472, DateTimeKind.Local).AddTicks(6357),
                             Description = "Assum vulputate rebum ea et. Autem aliquip erat luptatum labore dolores feugait amet amet molestie duis rebum assum delenit eum nonumy aliquyam diam. Nonummy duis sanctus justo.Elitr ut amet volutpat minim stet duo duo esse. Est vel amet nonumy est dolores sanctus sit gubergren. Vulputate nulla sed et ea veniam invidunt at magna. In sed iriure aliquyam et duis rebum eum lorem dignissim consequat. Lorem amet nonumy diam. Esse ut te sanctus gubergren sed ea. Clita et placerat duo est diam voluptua tempor vero aliquyam sed vero magna consequat invidunt lorem gubergren. Nonumy ipsum mazim nonummy et dolore clita sea et diam. Est et diam nibh dolor stet sea sed at. Feugait ut no erat ea ipsum aliquyam ",
                             EndingDate = new DateTime(2023, 7, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Image = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Vue_de_nuit_de_la_Place_Stanislas_%C3%A0_Nancy.jpg/1920px-Vue_de_nuit_de_la_Place_Stanislas_%C3%A0_Nancy.jpg",
@@ -182,7 +191,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedTime = new DateTime(2023, 6, 21, 0, 28, 55, 522, DateTimeKind.Local).AddTicks(6437),
+                            CreatedTime = new DateTime(2023, 6, 20, 23, 55, 42, 472, DateTimeKind.Local).AddTicks(6431),
                             Description = "Assum vulputate rebum ea et. Autem aliquip erat luptatum labore dolores feugait amet amet molestie duis rebum assum delenit eum nonumy aliquyam diam. Nonummy duis sanctus justo.Elitr ut amet volutpat minim stet duo duo esse. Est vel amet nonumy est dolores sanctus sit gubergren. Vulputate nulla sed et ea veniam invidunt at magna. In sed iriure aliquyam et duis rebum eum lorem dignissim consequat. Lorem amet nonumy diam. Esse ut te sanctus gubergren sed ea. Clita et placerat duo est diam voluptua tempor vero aliquyam sed vero magna consequat invidunt lorem gubergren. Nonumy ipsum mazim nonummy et dolore clita sea et diam. Est et diam nibh dolor stet sea sed at. Feugait ut no erat ea ipsum aliquyam ",
                             EndingDate = new DateTime(2023, 8, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Image = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Vue_de_nuit_de_la_Place_Stanislas_%C3%A0_Nancy.jpg/1920px-Vue_de_nuit_de_la_Place_Stanislas_%C3%A0_Nancy.jpg",

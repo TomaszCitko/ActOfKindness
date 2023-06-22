@@ -1,11 +1,9 @@
 import React from 'react';
 import {MyEvent} from "../../../app/models/myEvent";
-import {Button, Header, Icon, Item, Segment} from "semantic-ui-react";
+import {Button, Grid, Icon, Item, Label, Segment} from "semantic-ui-react";
 import {observer} from "mobx-react-lite";
-import avatar from "../../../images/user.png"
-import { Link, NavLink } from 'react-router-dom';
-import EventDetails from '../details/EventDetails';
-import { router } from '../../../app/router/Routes';
+import { Link } from 'react-router-dom';
+
 
 interface Props {
     event: MyEvent
@@ -14,21 +12,74 @@ interface Props {
 function EventListItem({event}: Props) {
     return (
         <>
-                <Segment >
-                    <Item.Group relaxed divided>
-                        <Item>
-                            <Item.Image size='medium' src={event.image} />
-                            <Item.Content>
-                                <Item.Header as={Link} to={`/eventDetails/${event.id}`}>{event.title}</Item.Header>
-                                <Item.Meta>Description</Item.Meta>
-                                <Item.Description>
-                                    {event.description}
-                                </Item.Description>
-                                <Item.Extra>{event.localization}</Item.Extra>
-                            </Item.Content>
-                        </Item>
-                    </Item.Group>
-                </Segment>
+        <Segment.Group style={{marginBottom:40}}  >
+
+            <Segment className={"eventDashboard"} >
+
+                <Item.Group relaxed divided>
+
+                    <Item>
+                        <Item.Image size='medium' src={event.image} />
+                        <Item.Content>
+                            <Label style={{margin:4,padding:6}} as='a' color='red' ribbon={"right"}>
+                                {event.type === "helpNeeded" ? "Help Ask" : "Help Offer"}
+                            </Label>
+                            <Item.Header as={Link} to={`/eventDetails/${event.id}`}>{event.title}</Item.Header>
+                            <Item.Description>
+                                {event.description.length > 450 ? event.description.substring(0,450) + "...." : event.description}
+                            </Item.Description>
+                            <Item.Extra>{event.localization}</Item.Extra>
+                        </Item.Content>
+                    </Item>
+
+                </Item.Group>
+            </Segment>
+
+            <Segment clearing className={"eventDashboard"} >
+                <Grid>
+                    <Grid.Column width={3}>
+                        <span>
+                        <Icon name='calendar' style={{marginBottom: 10}} size='large' color='teal'/>
+                            {event.from_Date}10/02/2023
+                        </span>
+                    </Grid.Column>
+
+                    <Grid.Column width={3}>
+                        <span>
+                        <Icon name='location arrow' style={{marginBottom: 10}} size='large' color='teal'/>
+                            {event.localization} Paris, France
+                        </span>
+                    </Grid.Column>
+
+                    <Grid.Column width={6}>
+                        <span>
+                        <Icon name='user' style={{marginBottom: 10}} size='large' color='teal'/>
+                            {event.user_Id}  userName
+                        </span>
+                    </Grid.Column>
+
+
+                    <Grid.Column width={4}>
+                        <Button as={Link}
+                                floated={"right"}
+                                to={`/eventDetails/${event.id}`}
+                                color={"orange"}
+                                content={"View"}
+                                style={{marginLeft: 10}}
+                        ></Button>
+
+                        <Button as={Link}
+                                floated={"right"}
+                                to={`/eventDetails/${event.id}`}
+                                color={"teal"}
+                                content={"Edit"}
+                        ></Button>
+
+                    </Grid.Column>
+                </Grid>
+
+            </Segment>
+        </Segment.Group>
         </>
         );
 }

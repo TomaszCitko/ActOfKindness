@@ -95,18 +95,18 @@ code {
 
 
 /* filters */
-.ui.segment {
+.ui.segment.eventDashboard {
   background-color: #474c5d;
   border: 1px solid black;
 }
 
-.ui.vertical.menu  {
+.ui.vertical.menu.menuDashboard  {
   background-color: #474c5d;
   border: 1px solid black;
-
+  width: 100%;
 }
 
-.ui.attached.header {
+.ui.attached.headerMenuDashboard {
   background-color: #474c5d;
   border: 1px solid black;
 
