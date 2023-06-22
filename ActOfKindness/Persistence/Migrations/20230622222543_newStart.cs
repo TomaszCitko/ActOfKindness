@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class IdentityFrameworkAdded : Migration
+    public partial class newStart : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,12 +30,12 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Hearts = table.Column<int>(type: "int", nullable: false),
-                    Skills = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Nickname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Latitude = table.Column<double>(type: "float", nullable: false),
-                    Longitude = table.Column<double>(type: "float", nullable: false),
+                    Hearts = table.Column<int>(type: "int", nullable: true),
+                    Skills = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Nickname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Latitude = table.Column<double>(type: "float", nullable: true),
+                    Longitude = table.Column<double>(type: "float", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -54,6 +54,31 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Events",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Localization = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    IsOnline = table.Column<bool>(type: "bit", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
+                    StartingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDone = table.Column<bool>(type: "bit", nullable: false),
+                    Latitude = table.Column<double>(type: "float", nullable: true),
+                    Longitude = table.Column<double>(type: "float", nullable: true),
+                    IsModerated = table.Column<bool>(type: "bit", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Events", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -162,20 +187,6 @@ namespace Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.UpdateData(
-                table: "Events",
-                keyColumn: "Id",
-                keyValue: 1,
-                column: "CreatedTime",
-                value: new DateTime(2023, 6, 20, 23, 55, 42, 472, DateTimeKind.Local).AddTicks(6357));
-
-            migrationBuilder.UpdateData(
-                table: "Events",
-                keyColumn: "Id",
-                keyValue: 2,
-                column: "CreatedTime",
-                value: new DateTime(2023, 6, 20, 23, 55, 42, 472, DateTimeKind.Local).AddTicks(6431));
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -235,24 +246,13 @@ namespace Persistence.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Events");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.UpdateData(
-                table: "Events",
-                keyColumn: "Id",
-                keyValue: 1,
-                column: "CreatedTime",
-                value: new DateTime(2023, 6, 13, 11, 47, 2, 916, DateTimeKind.Local).AddTicks(286));
-
-            migrationBuilder.UpdateData(
-                table: "Events",
-                keyColumn: "Id",
-                keyValue: 2,
-                column: "CreatedTime",
-                value: new DateTime(2023, 6, 13, 11, 47, 2, 916, DateTimeKind.Local).AddTicks(355));
         }
     }
 }

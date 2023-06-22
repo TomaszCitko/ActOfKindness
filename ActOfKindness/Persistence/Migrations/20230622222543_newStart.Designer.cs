@@ -12,8 +12,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230620215542_IdentityFrameworkAdded")]
-    partial class IdentityFrameworkAdded
+    [Migration("20230622222543_newStart")]
+    partial class newStart
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.AppUser", b =>
+            modelBuilder.Entity("Domain.Models.AppUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -44,14 +44,13 @@ namespace Persistence.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Hearts")
+                    b.Property<int?>("Hearts")
                         .HasColumnType("int");
 
-                    b.Property<double>("Latitude")
+                    b.Property<double?>("Latitude")
                         .HasColumnType("float");
 
                     b.Property<string>("Location")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -60,11 +59,10 @@ namespace Persistence.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<double>("Longitude")
+                    b.Property<double?>("Longitude")
                         .HasColumnType("float");
 
                     b.Property<string>("Nickname")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
@@ -88,7 +86,6 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Skills")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -113,11 +110,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Models.Event", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
@@ -164,45 +159,12 @@ namespace Persistence.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.ToTable("Events");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedTime = new DateTime(2023, 6, 20, 23, 55, 42, 472, DateTimeKind.Local).AddTicks(6357),
-                            Description = "Assum vulputate rebum ea et. Autem aliquip erat luptatum labore dolores feugait amet amet molestie duis rebum assum delenit eum nonumy aliquyam diam. Nonummy duis sanctus justo.Elitr ut amet volutpat minim stet duo duo esse. Est vel amet nonumy est dolores sanctus sit gubergren. Vulputate nulla sed et ea veniam invidunt at magna. In sed iriure aliquyam et duis rebum eum lorem dignissim consequat. Lorem amet nonumy diam. Esse ut te sanctus gubergren sed ea. Clita et placerat duo est diam voluptua tempor vero aliquyam sed vero magna consequat invidunt lorem gubergren. Nonumy ipsum mazim nonummy et dolore clita sea et diam. Est et diam nibh dolor stet sea sed at. Feugait ut no erat ea ipsum aliquyam ",
-                            EndingDate = new DateTime(2023, 7, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Image = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Vue_de_nuit_de_la_Place_Stanislas_%C3%A0_Nancy.jpg/1920px-Vue_de_nuit_de_la_Place_Stanislas_%C3%A0_Nancy.jpg",
-                            IsDone = false,
-                            IsModerated = true,
-                            IsOnline = false,
-                            StartingDate = new DateTime(2023, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Test Title",
-                            Type = 0,
-                            UserId = "1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedTime = new DateTime(2023, 6, 20, 23, 55, 42, 472, DateTimeKind.Local).AddTicks(6431),
-                            Description = "Assum vulputate rebum ea et. Autem aliquip erat luptatum labore dolores feugait amet amet molestie duis rebum assum delenit eum nonumy aliquyam diam. Nonummy duis sanctus justo.Elitr ut amet volutpat minim stet duo duo esse. Est vel amet nonumy est dolores sanctus sit gubergren. Vulputate nulla sed et ea veniam invidunt at magna. In sed iriure aliquyam et duis rebum eum lorem dignissim consequat. Lorem amet nonumy diam. Esse ut te sanctus gubergren sed ea. Clita et placerat duo est diam voluptua tempor vero aliquyam sed vero magna consequat invidunt lorem gubergren. Nonumy ipsum mazim nonummy et dolore clita sea et diam. Est et diam nibh dolor stet sea sed at. Feugait ut no erat ea ipsum aliquyam ",
-                            EndingDate = new DateTime(2023, 8, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Image = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Vue_de_nuit_de_la_Place_Stanislas_%C3%A0_Nancy.jpg/1920px-Vue_de_nuit_de_la_Place_Stanislas_%C3%A0_Nancy.jpg",
-                            IsDone = false,
-                            IsModerated = true,
-                            IsOnline = false,
-                            StartingDate = new DateTime(2023, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Test Title",
-                            Type = 0,
-                            UserId = "2"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -349,7 +311,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Domain.AppUser", null)
+                    b.HasOne("Domain.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -358,7 +320,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Domain.AppUser", null)
+                    b.HasOne("Domain.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -373,7 +335,7 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.AppUser", null)
+                    b.HasOne("Domain.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -382,7 +344,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Domain.AppUser", null)
+                    b.HasOne("Domain.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

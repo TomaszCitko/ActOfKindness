@@ -4,6 +4,7 @@ namespace Domain.Models
 {
     public class Event
     {
+        [Key]
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public DateTime CreatedTime { get; set; } = DateTime.Now;

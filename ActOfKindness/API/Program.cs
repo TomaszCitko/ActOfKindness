@@ -55,6 +55,7 @@ try
     var userManager = services.GetRequiredService<UserManager<AppUser>>();
     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
     await Seed.SeedUsers(userManager, roleManager);
+    await Seed.SeedEvents(context);
 
 }
 catch (Exception e)
