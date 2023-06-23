@@ -3,6 +3,11 @@ import {MyEvent} from "../../../app/models/myEvent";
 import {Segment, Grid, Header, Item, Icon} from "semantic-ui-react";
 import EventList from "../dashboard/EventList";
 import EventFilters from "../dashboard/EventFilters";
+import { observer } from 'mobx-react-lite';
+import { useParams } from 'react-router-dom';
+import { useStore } from '../../../app/stores/store';
+import { string } from 'yup';
+
 //import {observer} from "mobx-react-lite";
 //import avatar from "../../../images/user.png"
 
@@ -13,6 +18,13 @@ interface Props {
 
 
 function EventDetails() {
+    const {eventStore} = useStore()
+    const {id} = useParams()
+    if (id) {
+        const selectedEvent = eventStore.loadEventDetails(id)
+        console.log(selectedEvent)
+    }
+    
     const [event, setEvent] = useState({
         id: '',
         user_Id: '',
@@ -122,4 +134,4 @@ function EventDetails() {
     );
 }
 
-export default EventDetails;
+export default observer(EventDetails);
