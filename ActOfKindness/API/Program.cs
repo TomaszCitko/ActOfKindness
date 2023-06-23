@@ -20,7 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddApplication();
-builder.Services.AddIdentityServices();
+builder.Services.AddIdentityServices(builder.Configuration);
 
 builder.Services.AddCors(options =>
 {

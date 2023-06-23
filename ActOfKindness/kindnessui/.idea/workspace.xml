@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BnAndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1b82ed90-012b-4d75-8fa8-44e6371b2497" name="Changes" comment="styling details page &#10;logic details page" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="e792965b-93d2-4c41-bb83-0a531f4c417f" />
+        <option name="url" value="git@github.com:CodecoolGlobal/el-proyecte-grande-sprint-1-csharp-Tomek-Boomer.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2R6WiI1EBBovnAdLKDJjhT1sXnl" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/macie/source/repos/el-proyecte-grande-sprint-1-csharp-Tomek-Boomer/ActOfKindness/kindnessui&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\macie\\source\\repos\\el-proyecte-grande-sprint-1-csharp-Tomek-Boomer\\ActOfKindness\\kindnessui\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\macie\source\repos\el-proyecte-grande-sprint-1-csharp-Tomek-Boomer\ActOfKindness\kindnessui\src\images" />
+      <recent name="C:\Users\macie\source\repos\el-proyecte-grande-sprint-1-csharp-Tomek-Boomer\ActOfKindness\kindnessui\src\app\layout" />
+      <recent name="C:\Users\macie\source\repos\el-proyecte-grande-sprint-1-csharp-Tomek-Boomer\ActOfKindness\kindnessui\src\components" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1b82ed90-012b-4d75-8fa8-44e6371b2497" name="Changes" comment="" />
+      <created>1686571136926</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1686571136926</updated>
+      <workItem from="1686571139261" duration="5808000" />
+      <workItem from="1686579265020" duration="11952000" />
+      <workItem from="1686596433942" duration="1512000" />
+      <workItem from="1686600757306" duration="472000" />
+      <workItem from="1686639708084" duration="17419000" />
+      <workItem from="1686678546112" duration="144000" />
+      <workItem from="1686731740617" duration="25521000" />
+      <workItem from="1686813249794" duration="23274000" />
+      <workItem from="1686859393286" duration="407000" />
+      <workItem from="1686904423655" duration="5930000" />
+      <workItem from="1686947415239" duration="30000" />
+      <workItem from="1687016586365" duration="284000" />
+      <workItem from="1687036804298" duration="1195000" />
+      <workItem from="1687105737231" duration="593000" />
+      <workItem from="1687276746147" duration="307000" />
+      <workItem from="1687277944668" duration="1271000" />
+      <workItem from="1687288781559" duration="643000" />
+      <workItem from="1687442447874" duration="3930000" />
+      <workItem from="1687451037991" duration="2642000" />
+      <workItem from="1687465314846" duration="633000" />
+      <workItem from="1687471294312" duration="597000" />
+      <workItem from="1687522452780" duration="669000" />
+      <workItem from="1687523184176" duration="89000" />
+      <workItem from="1687523364351" duration="176000" />
+    </task>
+    <task id="LOCAL-00001" summary="creating components&#10;installing semantic UI&#10;installing router&#10;creating routes&#10;setting up navbar&#10;creating nav bar links">
+      <created>1686584876280</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1686584876280</updated>
+    </task>
+    <task id="LOCAL-00002" summary="installing mobX&#10;setting about mobX&#10;making mobX to observe changes&#10;setting hashtable for events">
+      <created>1686590136998</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1686590136998</updated>
+    </task>
+    <task id="LOCAL-00003" summary="installing axios&#10;setting up axios &#10;// testing&#10;making agent to store requests / basic url&#10;saving response in map&#10;displaying response on main page">
+      <created>1686597957895</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1686597957895</updated>
+    </task>
+    <task id="LOCAL-00004" summary="reformating">
+      <created>1686643637435</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1686643637435</updated>
+    </task>
+    <task id="LOCAL-00005" summary="slowly making event list and dashboard">
+      <created>1686656152929</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1686656152929</updated>
+    </task>
+    <task id="LOCAL-00006" summary="slowly making event list and dashboard">
+      <created>1686662139776</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1686662139776</updated>
+    </task>
+    <task id="LOCAL-00007" summary="axios get &lt;T&gt;&#10;displaying list items &#10;semantic ui for items&#10;semantic ui for dashboard&#10;CORS policy">
+      <created>1686669763617</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1686669763617</updated>
+    </task>
+    <task id="LOCAL-00008" summary="update filters">
+      <created>1686741888743</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1686741888743</updated>
+    </task>
+    <task id="LOCAL-00009" summary="install formik&#10;make create form page&#10;make css style">
+      <created>1686748619713</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1686748619713</updated>
+    </task>
+    <task id="LOCAL-00010" summary="submit form&#10;validate form&#10;prepare myEvent object for sending to backend&#10;add yup validation &#10;css styling for semantic UI">
+      <created>1686784048766</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1686784048767</updated>
+    </task>
+    <task id="LOCAL-00011" summary="submit form&#10;validate form&#10;prepare myEvent object for sending to backend&#10;add yup validation &#10;css styling for semantic UI">
+      <created>1686835805354</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1686835805355</updated>
+    </task>
+    <task id="LOCAL-00012" summary="bug fix &#10;create myEventCreate&#10;extend form">
+      <created>1686841223980</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1686841223980</updated>
+    </task>
+    <task id="LOCAL-00013" summary="bug fix &#10;create myEventCreate&#10;extend form">
+      <created>1686843572932</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1686843572932</updated>
+    </task>
+    <task id="LOCAL-00014" summary="styling details page &#10;logic details page">
+      <created>1686859793391</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1686859793391</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="creating components&#10;installing semantic UI&#10;installing router&#10;creating routes&#10;setting up navbar&#10;creating nav bar links" />
+    <MESSAGE value="installing mobX&#10;setting about mobX&#10;making mobX to observe changes&#10;setting hashtable for events" />
+    <MESSAGE value="installing axios&#10;setting up axios &#10;// testing&#10;making agent to store requests / basic url&#10;saving response in map&#10;displaying response on main page" />
+    <MESSAGE value="reformating" />
+    <MESSAGE value="slowly making event list and dashboard" />
+    <MESSAGE value="axios get &lt;T&gt;&#10;displaying list items &#10;semantic ui for items&#10;semantic ui for dashboard&#10;CORS policy" />
+    <MESSAGE value="update filters" />
+    <MESSAGE value="install formik&#10;make create form page&#10;make css style" />
+    <MESSAGE value="submit form&#10;validate form&#10;prepare myEvent object for sending to backend&#10;add yup validation &#10;css styling for semantic UI" />
+    <MESSAGE value="bug fix &#10;create myEventCreate&#10;extend form" />
+    <MESSAGE value="styling details page &#10;logic details page" />
+    <option name="LAST_COMMIT_MESSAGE" value="styling details page &#10;logic details page" />
+  </component>
+</project>

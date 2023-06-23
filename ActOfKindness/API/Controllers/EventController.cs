@@ -1,5 +1,6 @@
 ﻿using Application.Dtos.Event;
 using Application.Interfaces;
+using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -16,7 +17,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<DetailsEventDto>>> GetEvents()
+        public async Task<ActionResult<List<Event>>> GetEvents()
         {
             return await _eventService.GetEvents();
         }
