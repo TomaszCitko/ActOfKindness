@@ -1,4 +1,5 @@
 using API.Extensions;
+using API.Middleware;
 using Application.Extensions;
 using Domain.Models;
 using Microsoft.AspNetCore.Identity;
@@ -21,6 +22,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddApplication();
 builder.Services.AddIdentityServices(builder.Configuration);
+builder.Services.AddApi();
 
 builder.Services.AddCors(options =>
 {
@@ -41,6 +43,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors("FrontEndClient");
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseAuthorization();
 

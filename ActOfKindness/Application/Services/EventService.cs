@@ -1,4 +1,5 @@
 ﻿using Application.Dtos.Event;
+using Application.Exceptions;
 using Application.Interfaces;
 using AutoMapper;
 using Domain.Models;
@@ -27,6 +28,11 @@ namespace Application.Services
 
         public async Task CreateEvent(CreateEventDto newEventDto)
         {
+            if (DateTime.Compare(newEventDto.StartingDate, newEventDto.EndingDate) > 0) throw new BadRequestException("Starting date is older than ending date");
+
+            if (await _eventRepository.GetEventById(newEventDto.Id) is not null)
+                throw new BadRequestException($"Event with this ID ({newEventDto.Id}) exist");
+
             var temporaryImagePlaceHolder =
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Vue_de_nuit_de_la_Place_Stanislas_%C3%A0_Nancy.jpg/1920px-Vue_de_nuit_de_la_Place_Stanislas_%C3%A0_Nancy.jpg";
 
@@ -40,12 +46,16 @@ namespace Application.Services
 
         public async Task DeleteEvent(Guid id)
         {
-            await _eventRepository.DeleteEvent(id);
+            var rowsDeleted = await _eventRepository.DeleteEvent(id);
+
+            if (rowsDeleted == 0) throw new NotFoundException("Event not found");
         }
 
         public async Task<DetailsEventDto> GetEventById(Guid id)
         {
             var eventDetails = await _eventRepository.GetEventById(id);
+
+            if (eventDetails is null) throw new NotFoundException("Event not found");
 
             var eventDetailsDto = _mapper.Map<DetailsEventDto>(eventDetails);
 
@@ -55,6 +65,8 @@ namespace Application.Services
         public async Task UpdateEvent(Guid id, EditEventDto updatedEventDto)
         {
             var rowsChanged = await _eventRepository.UpdateEvent(id, updatedEventDto);
+
+            if (rowsChanged == 0) throw new NotFoundException("Event not found");
         }
     }
 }
