@@ -10,8 +10,10 @@ interface Props {
 }
 
 function EventListItem({event}: Props) {
+    console.log(event)
     return (
         <>
+        
         <Segment.Group style={{marginBottom:40}}  >
 
             <Segment className={"eventDashboard"} >
