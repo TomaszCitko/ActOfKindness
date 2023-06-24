@@ -4,6 +4,9 @@ import {MyEvent} from "../models/myEvent";
 import agent from "../api/agent";
 
 export default class EventStore {
+    static loadEventDetails(id: any) {
+        throw new Error('Method not implemented.');
+    }
     eventRegistry =  new Map<string, MyEvent>();
     userRegistry = new Map<string, User>();
     selectedEvent : MyEvent | undefined = undefined

@@ -7,65 +7,17 @@ import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
 import { useStore } from '../../../app/stores/store';
 import { string } from 'yup';
+import eventStore from '../../../app/stores/eventStore';
 
-//import {observer} from "mobx-react-lite";
-//import avatar from "../../../images/user.png"
 
 interface Props {
     event: MyEvent
 }
 
-// async function ExtractPromise(id:string): Promise<MyEvent> {
-//     const {eventStore} = useStore()
-//     const value = await eventStore.loadEventDetails(id) 
-//     return value
-//  }
-
-// async function PromiseMeYouWillGetTheValue(): Promise<MyEvent> {
-//     const { eventStore } = useStore();
-//     const { id } = useParams();
-//     const [sampleEvent, setEvent] = useState<MyEvent>({
-//     id: '',
-//     user_Id: '',
-//     created_Time: '',
-//     localization: '',
-//     title: 'Oooooops',
-//     description: 'Something went wrong or just loading',
-//     from_Date: '',
-//     to_Date: '',
-//     done: '',
-//     latitude: '',
-//     longitude: '',
-//     moderated: '',
-//     type: '',
-//     image: '',
-//     });
-
-//     useEffect(() => {
-//     if (!id) {
-//         console.log('Whoa, no ID!');
-//     } else {
-//         const loadEventDetails = async () => {
-//         try {
-//             const event = await eventStore.loadEventDetails(id);
-//             setEvent(event);
-//         } 
-//         catch (error) {
-//             console.error('Error loading event details:', error);
-//         }
-//         };
-//         loadEventDetails();
-//     }
-//     }, [eventStore, id]);
-
-//     return sampleEvent;
-// }
-
-
 function EventDetails() {
-    const {eventStore} = useStore()
-    const {id} = useParams()
-    const [sampleEvent, setEvent] = useState({
+    const { eventStore } = useStore();
+    const { id } = useParams();
+    const [event, setEvent] = useState<MyEvent>({
         id: '',
         user_Id: '',
         created_Time: '',
@@ -81,27 +33,23 @@ function EventDetails() {
         type: '',
         image: '',
     })
-    // if (!id) {
-    //     console.log("Whoa, no ID!")
-    //     return null
-    // } 
-
-    // const eventPromise = Promise.resolve(eventStore.loadEventDetails(id))
-    // console.log(eventPromise)
-    // eventPromise
-    // .then((value) => {
-    //     console.log(value)
-    //     const event = value || sampleEvent
-    // })
-    // let event = PromiseMeYouWillGetTheValue() || sampleEvent
-    const event = eventStore.selectedEvent
     useEffect(() => {
-        if (id) {
-            eventStore.loadEventDetails(id);
+    const loadEventDetails = async () => {
+        try {
+          if (id) {
+            const loadedEvent = await eventStore.loadEventDetails(id);
+            if (loadedEvent){
+                setEvent(loadedEvent);
+            }
         }
+        } catch (error) {
+          console.error('Error loading event details:', error);
+        }
+      };
+  
+      loadEventDetails();
     }, [eventStore, id]);
-    
-    console.log(eventStore.selectedEvent)
+
         return (
             <>
                 <Grid>
