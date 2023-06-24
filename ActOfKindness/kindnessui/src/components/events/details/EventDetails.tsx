@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {MyEvent} from "../../../app/models/myEvent";
 import {Segment, Grid, Header, Item, Icon} from "semantic-ui-react";
 import EventList from "../dashboard/EventList";
@@ -21,43 +21,50 @@ interface Props {
 //     return value
 //  }
 
-function PromiseMeYouWillGetTheValue(){
-    const {eventStore} = useStore()
-    const {id} = useParams()
-    const [sampleEvent, setEvent] = useState({
-        id: '',
-        user_Id: '',
-        created_Time: '',
-        localization: '',
-        title:	'Oooooops',
-        description: 'Something went wrong or just loading',
-        from_Date: '',
-        to_Date: '',
-        done: '',
-        latitude: '',
-        longitude: '',
-        moderated: '',
-        type: '',
-        image: '',
-    })
-    if (!id) {
-        console.log("Whoa, no ID!")
-        return sampleEvent
-    } 
-    const eventPromise = Promise.resolve(eventStore.loadEventDetails(id))
-    console.log(eventPromise)
-    eventPromise
-    .then((value) => {
-        console.log(value)
-        const event = value
-        return event
-    })
-}
+// async function PromiseMeYouWillGetTheValue(): Promise<MyEvent> {
+//     const { eventStore } = useStore();
+//     const { id } = useParams();
+//     const [sampleEvent, setEvent] = useState<MyEvent>({
+//     id: '',
+//     user_Id: '',
+//     created_Time: '',
+//     localization: '',
+//     title: 'Oooooops',
+//     description: 'Something went wrong or just loading',
+//     from_Date: '',
+//     to_Date: '',
+//     done: '',
+//     latitude: '',
+//     longitude: '',
+//     moderated: '',
+//     type: '',
+//     image: '',
+//     });
+
+//     useEffect(() => {
+//     if (!id) {
+//         console.log('Whoa, no ID!');
+//     } else {
+//         const loadEventDetails = async () => {
+//         try {
+//             const event = await eventStore.loadEventDetails(id);
+//             setEvent(event);
+//         } 
+//         catch (error) {
+//             console.error('Error loading event details:', error);
+//         }
+//         };
+//         loadEventDetails();
+//     }
+//     }, [eventStore, id]);
+
+//     return sampleEvent;
+// }
 
 
 function EventDetails() {
-    // const {eventStore} = useStore()
-    // const {id} = useParams()
+    const {eventStore} = useStore()
+    const {id} = useParams()
     const [sampleEvent, setEvent] = useState({
         id: '',
         user_Id: '',
@@ -86,7 +93,15 @@ function EventDetails() {
     //     console.log(value)
     //     const event = value || sampleEvent
     // })
-    let event = PromiseMeYouWillGetTheValue() || sampleEvent
+    // let event = PromiseMeYouWillGetTheValue() || sampleEvent
+    const event = eventStore.selectedEvent
+    useEffect(() => {
+        if (id) {
+            eventStore.loadEventDetails(id);
+        }
+    }, [eventStore, id]);
+    
+    console.log(eventStore.selectedEvent)
         return (
             <>
                 <Grid>

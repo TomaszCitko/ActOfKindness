@@ -41,6 +41,7 @@ export default class EventStore {
         // {
             try{
                 const eventDetails = await agent.Events.details(id)
+                console.log('Event details', eventDetails)
                 return eventDetails
             }
             catch (error){
