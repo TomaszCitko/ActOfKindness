@@ -1,4 +1,5 @@
-﻿using Application.Exceptions;
+﻿using System.Net;
+using Application.Exceptions;
 
 namespace API.Middleware
 {
@@ -12,17 +13,17 @@ namespace API.Middleware
             }
             catch (NotFoundException notFoundException)
             {
-                context.Response.StatusCode = 404;
+                context.Response.StatusCode = (int)HttpStatusCode.NotFound;
                 await context.Response.WriteAsync(notFoundException.Message);
             }
             catch (BadRequestException badRequestException)
             {
-                context.Response.StatusCode = 400;
+                context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 await context.Response.WriteAsync(badRequestException.Message);
             }
             catch (Exception exception)
             {
-                context.Response.StatusCode = 500;
+                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 await context.Response.WriteAsync("Something went wrong");
             }
         }
