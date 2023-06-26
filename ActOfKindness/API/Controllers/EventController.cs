@@ -1,6 +1,7 @@
 ﻿using Application.Dtos.Event;
 using Application.Interfaces;
 using Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -16,12 +17,14 @@ namespace API.Controllers
             _eventService = eventService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<List<Event>>> GetEvents()
         {
             return await _eventService.GetEvents();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult> CreateEvent([FromBody]CreateEventDto newEvent)
         {
@@ -30,6 +33,7 @@ namespace API.Controllers
             return Ok();
         }
 
+        [AllowAnonymous]
         [HttpDelete("{id:guid}")]
         public async Task<ActionResult> DeleteEvent([FromRoute]Guid id)
         {
@@ -38,12 +42,14 @@ namespace API.Controllers
             return Ok();
         }
 
+        [AllowAnonymous]
         [HttpGet("{id:guid}")]
         public async Task<ActionResult<DetailsEventDto>> GetEventById([FromRoute]Guid id)
         {
             return await _eventService.GetEventById(id);
         }
 
+        [AllowAnonymous]
         [HttpPut("{id:guid}")]
         public async Task<ActionResult> UpdateEvent([FromRoute]Guid id, [FromBody]EditEventDto eventDto)
         {

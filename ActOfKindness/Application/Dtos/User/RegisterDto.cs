@@ -1,6 +1,17 @@
-﻿namespace Application.Dtos.User;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Security.AccessControl;
+
+namespace Application.Dtos.User;
 
 public class RegisterDto
 {
-    public string S { get; set; }
+    [Required] 
+    public string Username { get; set; }
+    [Required]
+    [RegularExpression("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,40}", ErrorMessage = "Stronger password please")]
+    public string Password { get; set; }
+    [Required] [EmailAddress] 
+    public string Email { get; set; }
+    [Required]
+    public string Location { get; set; }
 }
