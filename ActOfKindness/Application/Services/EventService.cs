@@ -26,6 +26,12 @@ namespace Application.Services
             return events;
         }
 
+        public async Task<List<Event>> GetUnmoderatedEvents()
+        {
+            var unmoderatedEvents = await _eventRepository.GetUnmoderatedEvents();
+            return unmoderatedEvents;
+        }
+
         public async Task CreateEvent(CreateEventDto newEventDto)
         {
             if (await _eventRepository.GetEventById(newEventDto.Id) is not null)
