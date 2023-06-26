@@ -19,14 +19,14 @@ public class EventRepository : IEventRepository
         return await _context.Events.ToListAsync();
     }
 
-    public async Task<Event> GetEventById(Guid id)
+    public async Task<Event?> GetEventById(Guid id)
     {
         return await _context.Events.FindAsync(id);
     }
 
-    public async Task DeleteEvent(Guid id)
+    public async Task<int> DeleteEvent(Guid id)
     {
-        await _context.Events.Where(e => e.Id == id)
+        return await _context.Events.Where(e => e.Id == id)
             .ExecuteDeleteAsync();
     }
 
