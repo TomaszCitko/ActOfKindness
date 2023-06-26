@@ -25,6 +25,13 @@ namespace API.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet]
+        public async Task<ActionResult<List<Event>>> GetUnmoderatedEvents()
+        {
+            return await _eventService.GetUnmoderatedEvents();
+        }
+
+        [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult> CreateEvent([FromBody]CreateEventDto newEvent)
         {
