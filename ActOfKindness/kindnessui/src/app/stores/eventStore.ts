@@ -44,7 +44,6 @@ export default class EventStore {
         // {
             try{
                 const eventDetails = await agent.Events.details(id)
-                console.log('Event details', eventDetails)
                 return eventDetails
             }
             catch (error){
@@ -57,7 +56,18 @@ export default class EventStore {
     private getEvent = async(id:string) =>{
         return this.eventRegistry.get(id)
 
-        
+    }
+
+    getUser = async(id:string, userId:string)=>
+    {
+        try{
+            const userData = await agent.Events.userName(id, userId)
+            console.log('user details', userData)
+            return userData
+        }
+        catch (error){
+            console.log(error)
+        }
     }
 
 }

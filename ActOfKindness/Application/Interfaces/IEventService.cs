@@ -5,7 +5,7 @@ namespace Application.Interfaces
 {
     public interface IEventService
     {
-        Task<List<Event>> GetEvents();
+        Task<List<DetailsEventDto>> GetEvents();
         Task CreateEvent(CreateEventDto newEvent);
         Task DeleteEvent(Guid id);
         Task<DetailsEventDto> GetEventById(Guid id);

@@ -1,5 +1,6 @@
 import axios, {AxiosResponse} from 'axios'
 import {MyEvent} from "../models/myEvent";
+import {User} from "../models/user";
 import {MyEventCreate} from "../models/myEventCreate";
 
 axios.defaults.baseURL = "http://localhost:5092/api"
@@ -20,6 +21,7 @@ const Events = {
     list: ()=> requests.get<MyEvent[]>('/event'),
     create: (event: MyEventCreate)=> requests.post<void>('/event',event),
     details: (id:string)=> requests.get<MyEvent>(`/event/${id}`),
+    userName: (id:string, userId:string)=> requests.get<User>(`/event/${id}`)
 }
 
 const agent = {

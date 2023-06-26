@@ -17,7 +17,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Event>>> GetEvents()
+        public async Task<ActionResult<List<DetailsEventDto>>> GetEvents()
         {
             return await _eventService.GetEvents();
         }
