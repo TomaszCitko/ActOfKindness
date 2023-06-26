@@ -97,6 +97,10 @@
       <workItem from="1687522452780" duration="669000" />
       <workItem from="1687523184176" duration="89000" />
       <workItem from="1687523364351" duration="176000" />
+      <workItem from="1687523690977" duration="2007000" />
+      <workItem from="1687531618345" duration="658000" />
+      <workItem from="1687559444861" duration="2185000" />
+      <workItem from="1687769803325" duration="651000" />
     </task>
     <task id="LOCAL-00001" summary="creating components&#10;installing semantic UI&#10;installing router&#10;creating routes&#10;setting up navbar&#10;creating nav bar links">
       <created>1686584876280</created>
@@ -196,7 +200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686859793391</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="styling details page &#10;logic details page">
+      <created>1687772369751</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1687772369751</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
