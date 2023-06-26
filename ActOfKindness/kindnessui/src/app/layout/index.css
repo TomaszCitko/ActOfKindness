@@ -111,3 +111,9 @@ code {
   border: 1px solid black;
 
 }
+
+.modal {
+  background-image: url("../../images/handshake.png") !important;
+  background-size: cover !important;
+;
+}

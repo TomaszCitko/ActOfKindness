@@ -5,7 +5,7 @@ import {Link, NavLink} from "react-router-dom";
 import * as Yup from "yup"
 import logo from "../../../images/handshake.png";
 import {v4 as uuid} from "uuid";
-import {MyEventCreate} from "../../../app/models/myEventCreate";
+import {MyEventCreate} from "../../../app/models/Events/myEventCreate";
 
 function EventForm() {
     const [myEventCreate, setMyEvent] = useState({

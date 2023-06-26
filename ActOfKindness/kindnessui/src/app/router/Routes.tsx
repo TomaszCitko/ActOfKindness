@@ -4,6 +4,7 @@ import Homepage from "../../components/home/Homepage";
 import EventDashboard from "../../components/events/dashboard/EventDashboard";
 import EventForm from "../../components/events/form/EventForm";
 import EventDetails from "../../components/events/details/EventDetails";
+import LoginForm from "../../components/users/LoginForm";
 
 export const routes: RouteObject[] = [
     {
@@ -13,7 +14,8 @@ export const routes: RouteObject[] = [
             {path: '',element: <Homepage/>},
             {path: 'events',element: <EventDashboard/>},
             {path: 'createEvent',element: <EventForm/>},
-            {path: `eventDetails/:id`, element: <EventDetails/>}
+            {path: `eventDetails/:id`, element: <EventDetails/>},
+            {path: `login`, element: <LoginForm/>}
         ]
     }
 ]
