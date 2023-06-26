@@ -19,11 +19,13 @@ const requests = {
 const Events = {
     list: ()=> requests.get<MyEvent[]>('/event'),
     create: (event: MyEventCreate)=> requests.post<void>('/event',event),
-
+    details: (id:string)=> requests.get<MyEvent>(`/event/${id}`),
 }
 
 const agent = {
     Events
 }
+
+
 
 export default agent
