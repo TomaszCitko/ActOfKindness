@@ -56,6 +56,13 @@ public class EventRepository : IEventRepository
             );
     }
 
+    public async Task<int> ModerateEvent(Guid id)
+    {
+        return await _context.Events.Where(e => e.Id == id)
+            .ExecuteUpdateAsync(prop=> 
+                prop.SetProperty(e => e.IsModerated, true));
+    }
+
     public async Task Save()
     {
         await _context.SaveChangesAsync();

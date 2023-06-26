@@ -11,5 +11,6 @@ public interface IEventRepository
     Task<int> DeleteEvent(Guid id);
     Task CreateEvent(Event newEvent);
     Task<int> UpdateEvent(Guid id, EditEventDto eventDto);
+    Task<int> ModerateEvent(Guid id);
     Task Save();
 }

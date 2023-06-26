@@ -64,5 +64,14 @@ namespace API.Controllers
 
             return Ok();
         }
+
+        [AllowAnonymous]
+        [HttpPatch("{id:guid}/moderate")]
+        public async Task<ActionResult> ModerateEvent([FromRoute] Guid id)
+        {
+            await _eventService.ModerateEvent(id);
+
+            return Ok();
+        }
     }
 }

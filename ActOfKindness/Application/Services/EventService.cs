@@ -72,5 +72,12 @@ namespace Application.Services
 
             if (rowsChanged == 0) throw new NotFoundException("Event not found");
         }
+
+        public async Task ModerateEvent(Guid id)
+        {
+            var rowsChanged = await _eventRepository.ModerateEvent(id);
+
+            if (rowsChanged == 0) throw new NotFoundException("Event not found");
+        }
     }
 }
