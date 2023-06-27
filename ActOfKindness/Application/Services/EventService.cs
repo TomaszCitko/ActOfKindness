@@ -1,8 +1,10 @@
 ﻿using Application.Dtos.Event;
+using Application.Dtos.User;
 using Application.Exceptions;
 using Application.Interfaces;
 using AutoMapper;
 using Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services
 {
@@ -65,6 +67,17 @@ namespace Application.Services
             var rowsChanged = await _eventRepository.UpdateEvent(id, updatedEventDto);
 
             if (rowsChanged == 0) throw new NotFoundException("Event not found");
+        }
+
+        public async Task<UserDto> GetUserById(Guid id)
+        {
+            var userData = await _eventRepository.GetUserById(id);
+
+            if (userData is null) throw new NotFoundException("User not found");
+
+            var userDetailsDto = _mapper.Map<UserDto>(userData);
+
+            return userDetailsDto;
         }
     }
 }

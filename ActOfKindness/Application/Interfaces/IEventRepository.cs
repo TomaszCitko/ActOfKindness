@@ -1,4 +1,5 @@
 ﻿using Application.Dtos.Event;
+using Application.Dtos.User;
 using Domain.Models;
 
 namespace Application.Interfaces;
@@ -11,4 +12,6 @@ public interface IEventRepository
     Task CreateEvent(Event newEvent);
     Task<int> UpdateEvent(Guid id, EditEventDto eventDto);
     Task Save();
+    Task<AppUser?> GetUserById(Guid id);
 }
+

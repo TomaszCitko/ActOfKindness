@@ -1,4 +1,5 @@
 ﻿using Application.Dtos.Event;
+using Application.Dtos.User;
 using Application.Interfaces;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -46,7 +47,9 @@ namespace API.Controllers
         [HttpGet("{id:guid}")]
         public async Task<ActionResult<DetailsEventDto>> GetEventById([FromRoute]Guid id)
         {
-            return await _eventService.GetEventById(id);
+            var eventDto = await _eventService.GetEventById(id);
+            //var userDto = await _eventService.GetUserById(eventDto.UserId);
+            return eventDto;
         }
 
         [AllowAnonymous]
@@ -57,5 +60,6 @@ namespace API.Controllers
 
             return Ok();
         }
+
     }
 }

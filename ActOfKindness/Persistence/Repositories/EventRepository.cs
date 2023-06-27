@@ -1,4 +1,6 @@
 ﻿using Application.Dtos.Event;
+using Application.Dtos.User;
+using Application.Exceptions;
 using Application.Interfaces;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
@@ -55,4 +57,9 @@ public class EventRepository : IEventRepository
     {
         await _context.SaveChangesAsync();
     }
+    public async Task<AppUser?> GetUserById(Guid id)
+    {
+        return await _context.Users.FindAsync(id);
+    }
+
 }

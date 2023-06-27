@@ -65,7 +65,7 @@ function EventDetails() {
                             <Segment.Group>
                                 <Segment>
                                     {event.description}
-                                    <Image src={event.image} size='large' align='centre' />
+                                    <Image src={event.image} size='large' />
                                 </Segment>
                                 
                                 <Segment>
