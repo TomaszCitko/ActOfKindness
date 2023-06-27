@@ -5,15 +5,16 @@ namespace Persistence;
 
 public static class Seed
 {
-    public static async Task SeedEvents(ApplicationDbContext dbContext)
+    public static async Task SeedEvents(ApplicationDbContext dbContext, UserManager<AppUser> userManager)
     {
+        
         if (dbContext.Events.Count() < 2)
         {
             await dbContext.Events.AddAsync(
                 new Event()
                 {
                     Id = new Guid(),
-                    UserId = new Guid(),
+                    UserId = userManager.FindByNameAsync("aneta").Result.Id,
                     Title = "Lady Jadzia - be kind to check up on her.",
                     Localization = "Poland, Malbork",
                     Description =
@@ -30,7 +31,7 @@ public static class Seed
                 new Event()
                 {
                     Id = new Guid(),
-                    UserId = new Guid(),
+                    UserId = userManager.FindByNameAsync("marcin").Result.Id,
                     Title = "Cleaning Augustow forest",
                     Localization = "Poland, Augustów",
                     Description =
@@ -47,7 +48,7 @@ public static class Seed
                 new Event()
                 {
                     Id = new Guid(),
-                    UserId = new Guid(),
+                    UserId = userManager.FindByNameAsync("maciekdmd90").Result.Id,
                     Title = "English webinar - A1/A2 level",
                     Localization = "Online",
                     Description =
@@ -65,7 +66,7 @@ public static class Seed
                 new Event()
                 {
                     Id = new Guid(),
-                    UserId = new Guid(),
+                    UserId = userManager.FindByNameAsync("tomek").Result.Id,
                     Title = "Lady Lodzia tries to survive from knitting and can use your support",
                     Localization = "Szczecin",
                     Description =
@@ -82,7 +83,7 @@ public static class Seed
                 new Event()
                 {
                     Id = new Guid(),
-                    UserId = new Guid(),
+                    UserId = userManager.FindByNameAsync("romek").Result.Id,
                     Title = "Old lady needs some support",
                     Localization = "Gliwice",
                     Description =
@@ -99,7 +100,7 @@ public static class Seed
                 new Event()
                 {
                     Id = new Guid(),
-                    UserId = new Guid(),
+                    UserId = userManager.FindByNameAsync("ziomek").Result.Id,
                     Title = "Fardin cannot go back home",
                     Localization = "Częstochowa",
                     Description =
@@ -116,7 +117,7 @@ public static class Seed
                 new Event()
                 {
                     Id = new Guid(),
-                    UserId = new Guid(),
+                    UserId = userManager.FindByNameAsync("bronek").Result.Id,
                     Title = "If you're going through tough time - keep going!",
                     Localization = "Online",
                     Description =
@@ -135,7 +136,7 @@ public static class Seed
                 new Event()
                 {
                     Id = new Guid(),
-                    UserId = new Guid(),
+                    UserId = userManager.FindByNameAsync("aneta").Result.Id,
                     Title = "Free apples!",
                     Localization = "Grudziądz",
                     Description =
@@ -152,7 +153,7 @@ public static class Seed
                 new Event()
                 {
                     Id = new Guid(),
-                    UserId = new Guid(),
+                    UserId = userManager.FindByNameAsync("marcin").Result.Id,
                     Title = "First aid course for everyone",
                     Localization = "Warszawa",
                     Description =
@@ -168,7 +169,7 @@ public static class Seed
             await dbContext.Events.AddAsync(new Event()
             {
                 Id = new Guid(),
-                UserId = new Guid(),
+                UserId = userManager.FindByNameAsync("maciekdmd90").Result.Id,
                 Title = "Need a second pair of hands",
                 Localization = "Poland, Oświęcim",
                 Description =

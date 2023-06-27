@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Models
 {
     public class Event
     {
         public Guid Id { get; set; }
-        public Guid UserId { get; set; }
+        
+        public string UserId { get; set; }
         public DateTime CreatedTime { get; set; } = DateTime.Now;
         public string? Localization { get; set; }
         public bool IsOnline { get; set; }

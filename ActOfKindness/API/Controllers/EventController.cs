@@ -48,7 +48,6 @@ namespace API.Controllers
         public async Task<ActionResult<DetailsEventDto>> GetEventById([FromRoute]Guid id)
         {
             var eventDto = await _eventService.GetEventById(id);
-            //var userDto = await _eventService.GetUserById(eventDto.UserId);
             return eventDto;
         }
 

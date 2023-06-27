@@ -18,7 +18,8 @@ public class EventRepository : IEventRepository
 
     public async Task<List<Event>> GetEvents()
     { 
-        return await _context.Events.ToListAsync();
+        var testAwait = await _context.Events.ToListAsync();
+        return testAwait;
     }
 
     public async Task<Event?> GetEventById(Guid id)
