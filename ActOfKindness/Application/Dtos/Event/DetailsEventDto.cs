@@ -6,6 +6,7 @@ namespace Application.Dtos.Event
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
+
         public DateTime CreatedTime { get; set; }
         public string Localization { get; set; }
         public bool IsOnline { get; set; }
