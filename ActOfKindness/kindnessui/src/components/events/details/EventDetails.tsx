@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {MyEvent} from "../../../app/models/myEvent";
+import {MyEvent} from "../../../app/models/Events/myEvent";
 import {Segment, Grid, Header, Item, Icon} from "semantic-ui-react";
 import EventList from "../dashboard/EventList";
 import EventFilters from "../dashboard/EventFilters";
@@ -8,24 +8,26 @@ import { useParams } from 'react-router-dom';
 import { useStore } from '../../../app/stores/store';
 import { string } from 'yup';
 import eventStore from '../../../app/stores/eventStore';
-
+import dayjs from "dayjs";
 
 interface Props {
     event: MyEvent
 }
+
+
 
 function EventDetails() {
     const { eventStore } = useStore();
     const { id } = useParams();
     const [event, setEvent] = useState<MyEvent>({
         id: '',
-        user_Id: '',
-        created_Time: '',
+        userId: '',
+        createdTime: '',
         localization: '',
         title:	'Oooooops',
         description: 'Something went wrong or just loading',
-        from_Date: '',
-        to_Date: '',
+        startingDate: '',
+        endingDate: '',
         done: '',
         latitude: '',
         longitude: '',
@@ -36,18 +38,20 @@ function EventDetails() {
     useEffect(() => {
     const loadEventDetails = async () => {
         try {
-          if (id) {
-            const loadedEvent = await eventStore.loadEventDetails(id);
-            if (loadedEvent){
-                setEvent(loadedEvent);
+            if (id) 
+            {
+                const loadedEvent = await eventStore.loadEventDetails(id);
+                const userName = await eventStore.getUser(id, event.userId)
+                if (loadedEvent){
+                    setEvent(loadedEvent);
+                
             }
         }
         } catch (error) {
-          console.error('Error loading event details:', error);
+            console.error('Error loading event details:', error);
         }
-      };
-  
-      loadEventDetails();
+    };
+    loadEventDetails();
     }, [eventStore, id]);
 
         return (
@@ -59,21 +63,21 @@ function EventDetails() {
                                 <Item><Header textAlign='center' size='large'>{event.title}</Header></Item>
                             </Segment>
                             <Segment.Group>
-                                <Segment>{event.done ? <h5>This help event has been completed</h5> : <h5>This help event is still ongoing</h5>}</Segment>
                                 <Segment>{event.description}</Segment>
                                 <Segment>
                                     <Segment>
                                     <Grid verticalAlign={'middle'}>
-                                            <Grid.Column width={4}>
+                                            <Grid.Column width={5}>
                                                 <span>
                                                 <Icon name='calendar' style={{marginBottom: 10}} size='large' color='teal'/>
-                                                Start date: {event.from_Date} 
+                                                Start date: {event.startingDate.slice(0,10)}
+                                                
                                                 </span>
                                             </Grid.Column>
-                                            <Grid.Column width={7}>
+                                            <Grid.Column width={6}>
                                             <Icon name='calendar' style={{marginBottom: 10}} size='large' color='teal'/>
                                                 <span>
-                                                End date: {event.to_Date} 
+                                                End date: {event.endingDate.slice(0,10)}
                                                 </span>
                                             </Grid.Column>
                                         </Grid>
@@ -83,7 +87,7 @@ function EventDetails() {
                                             <Grid.Column width={15}>
                                                 <span>
                                                 <Icon name='address card' style={{marginBottom: 6}} size='large' color='teal'/>
-                                                Localization: {event.localization}
+                                                localization: {event.localization}
                                                 </span>
                                             </Grid.Column>
                                         </Grid>
@@ -93,7 +97,7 @@ function EventDetails() {
                                             <Grid.Column width={15}>
                                                 <span>
                                                 <Icon style={{marginBottom: 10}} name='user' size='large' color='teal'/>
-                                                Created by: {event.user_Id}
+                                                Created by: {event.userId}
                                                 </span>
                                             </Grid.Column>
                                         </Grid>
@@ -103,7 +107,8 @@ function EventDetails() {
                                             <Grid.Column width={15}>
                                                 <span>
                                                 <Icon name='calendar' style={{marginBottom: 10}} size='large' color='teal'/>
-                                                Created on: {event.created_Time}
+                                                Created on: {event.createdTime.slice(0,10)}
+                                                
                                                 </span>
                                             </Grid.Column>
                                         </Grid>

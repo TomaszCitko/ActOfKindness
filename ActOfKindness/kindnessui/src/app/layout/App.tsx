@@ -1,18 +1,27 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Outlet} from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import {useStore} from "../stores/store";
 import {Container} from "semantic-ui-react";
 import {observer} from "mobx-react-lite";
+import MyLoginModal from "../../components/modals/myLoginModal";
 function App() {
-    // const {eventStore} = useStore()
+    const {accountStore}= useStore()
+
+    useEffect(() => {
+        if (accountStore.token){
+            accountStore.getUser()
+        }}
+    , [accountStore]);
+
 
     return (
       <>
-        <Navbar/>
-        <Container style={{marginTop: '7em'}}>
-            <Outlet/>
-        </Container>
+          <MyLoginModal/>
+          <Navbar/>
+          <Container style={{marginTop: '7em'}}>
+                <Outlet/>
+          </Container>
       </>
   );
 }
