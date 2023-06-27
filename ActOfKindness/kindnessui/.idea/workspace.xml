@@ -7,13 +7,43 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b82ed90-012b-4d75-8fa8-44e6371b2497" name="Changes" comment="styling details page &#10;logic details page" />
+    <list default="true" id="1b82ed90-012b-4d75-8fa8-44e6371b2497" name="Changes" comment="styling details page &#10;logic details page">
+      <change afterPath="$PROJECT_DIR$/src/app/models/Users/loginForm.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/models/Users/registerForm.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/stores/accountStore.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/stores/modalStore.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/modals/myLoginModal.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/modals/myRegisterModal.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/users/LoginForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Application/Dtos/User/RegisterDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Application/Dtos/User/RegisterDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/agent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/agent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/myEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/Events/myEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/myEventCreate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/Events/myEventCreate.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/Users/user.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/router/Routes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/router/Routes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stores/eventStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stores/eventStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stores/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stores/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/events/dashboard/EventListItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/dashboard/EventListItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/events/details/EventDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/details/EventDetails.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/events/form/EventForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/form/EventForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/home/Homepage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/home/Homepage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/navbar/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/navbar/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/users/UserLoginForm.tsx" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/../.." value="development" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -60,9 +90,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\macie\source\repos\el-proyecte-grande-sprint-1-csharp-Tomek-Boomer\ActOfKindness\kindnessui\src\components\users" />
+      <recent name="C:\Users\macie\source\repos\el-proyecte-grande-sprint-1-csharp-Tomek-Boomer\ActOfKindness\kindnessui\src\app\models\Users" />
+      <recent name="C:\Users\macie\source\repos\el-proyecte-grande-sprint-1-csharp-Tomek-Boomer\ActOfKindness\kindnessui\src\app\models\Events" />
       <recent name="C:\Users\macie\source\repos\el-proyecte-grande-sprint-1-csharp-Tomek-Boomer\ActOfKindness\kindnessui\src\images" />
       <recent name="C:\Users\macie\source\repos\el-proyecte-grande-sprint-1-csharp-Tomek-Boomer\ActOfKindness\kindnessui\src\app\layout" />
-      <recent name="C:\Users\macie\source\repos\el-proyecte-grande-sprint-1-csharp-Tomek-Boomer\ActOfKindness\kindnessui\src\components" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -100,7 +132,7 @@
       <workItem from="1687523690977" duration="2007000" />
       <workItem from="1687531618345" duration="658000" />
       <workItem from="1687559444861" duration="2185000" />
-      <workItem from="1687769803325" duration="651000" />
+      <workItem from="1687769803325" duration="19027000" />
     </task>
     <task id="LOCAL-00001" summary="creating components&#10;installing semantic UI&#10;installing router&#10;creating routes&#10;setting up navbar&#10;creating nav bar links">
       <created>1686584876280</created>
@@ -207,7 +239,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687772369751</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="styling details page &#10;logic details page">
+      <created>1687772389702</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1687772389702</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

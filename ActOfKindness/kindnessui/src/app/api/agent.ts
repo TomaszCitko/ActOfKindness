@@ -1,11 +1,24 @@
 import axios, {AxiosResponse} from 'axios'
-import {MyEvent} from "../models/myEvent";
-import {MyEventCreate} from "../models/myEventCreate";
+import {MyEvent} from "../models/Events/myEvent";
+import {MyEventCreate} from "../models/Events/myEventCreate";
+import {LoginForm} from "../models/Users/loginForm";
+import {User} from "../models/Users/user";
+import {RegisterForm} from "../models/Users/registerForm";
+import {store} from "../stores/store";
 
 axios.defaults.baseURL = "http://localhost:5092/api"
 
 // getting our body response
 const responseBody = <T>(response: AxiosResponse<T>) => response.data
+
+
+// if we have our token we gonna get user like in postman
+axios.interceptors.request.use(config=>{
+    const token = store.accountStore.token
+    if (token && config.headers) config.headers.Authorization = `Bearer ${token}`
+    return config
+})
+
 
 const requests = {
     get: <T>(url: string) =>axios.get<T>(url).then(responseBody),
@@ -22,10 +35,15 @@ const Events = {
     details: (id:string)=> requests.get<MyEvent>(`/event/${id}`),
 }
 
-const agent = {
-    Events
+const Account = {
+    login: (user: LoginForm)=> requests.post<User>('/account/login', user),
+    register: (user: RegisterForm)=> requests.post<User>('account/register', user),
+    getCurrentUser: ()=> requests.get<User>('/account'),
 }
 
-
+const agent = {
+    Events,
+    Account
+}
 
 export default agent

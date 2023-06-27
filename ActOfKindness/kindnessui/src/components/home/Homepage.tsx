@@ -1,14 +1,17 @@
 import React from 'react';
 import logo from "../../images/handshake.png";
 import {observer} from "mobx-react-lite";
-import {Button} from "semantic-ui-react";
 import {useStore} from "../../app/stores/store";
+import {Header} from "semantic-ui-react";
 
 function Homepage() {
-    const {eventStore} = useStore()
+    const {accountStore} = useStore()
 
     return (
         <div className="App">
+            <Header as={'h2'}> {accountStore.isLoggedIn ? (
+                `Welcome ${accountStore.user?.username}`
+            ):""}</Header>
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
                 <p>Act-Of-Kindness</p>
