@@ -195,7 +195,7 @@ public static class Seed
                     Type = EventType.HelpOffer,
                     IsOnline = false,
                     Image =
-                        "https://img3.dmty.pl//uploads/201406/1401744836_rkuq1w_600.jpg"
+                        "https://www.alertmedia.com/wp-content/uploads/2022/06/Blog-FirstAid-Training-v2-1024x536.jpg"
                 });
 
             await dbContext.Events.AddAsync(new Event()
