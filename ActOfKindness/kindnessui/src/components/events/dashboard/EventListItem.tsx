@@ -42,7 +42,7 @@ function EventListItem({event}: Props) {
                     <Grid.Column width={3}>
                         <span>
                         <Icon name='calendar' style={{marginBottom: 10}} size='large' color='teal'/>
-                            {event.startingDate}10/02/2023
+                            {event.startingDate.slice(0,10)}10/02/2023
                         </span>
                     </Grid.Column>
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {MyEvent} from "../../../app/models/Events/myEvent";
-import {Segment, Grid, Header, Item, Icon} from "semantic-ui-react";
+import {Segment, Grid, Header, Item, Icon, Image, ItemImage} from "semantic-ui-react";
 import EventList from "../dashboard/EventList";
 import EventFilters from "../dashboard/EventFilters";
 import { observer } from 'mobx-react-lite';
@@ -63,7 +63,11 @@ function EventDetails() {
                                 <Item><Header textAlign='center' size='large'>{event.title}</Header></Item>
                             </Segment>
                             <Segment.Group>
-                                <Segment>{event.description}</Segment>
+                                <Segment>
+                                    {event.description}
+                                    <Image src={event.image} size='large' align='centre' />
+                                </Segment>
+                                
                                 <Segment>
                                     <Segment>
                                     <Grid verticalAlign={'middle'}>
@@ -127,7 +131,7 @@ function EventDetails() {
                             </Segment.Group>
     
                             <Segment.Group horizontal>
-                                {/* <Segment><img src={event.image}></Segment> */}
+                            
                             </Segment.Group>
     
                         </Segment.Group>

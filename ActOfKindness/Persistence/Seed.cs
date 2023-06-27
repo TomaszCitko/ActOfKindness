@@ -60,22 +60,6 @@ public static class Seed
                         "https://www.aeccglobal.com.au/images/easyblog_articles/253/6c20e7aa911029bd46c6de7bc83cff7d-1.webp"
                 });
 
-            await dbContext.Events.AddAsync(
-                new Event()
-                {
-                    Id = new Guid(),
-                    UserId = new Guid(),
-                    Title = "Lady Lodzia tries to survive from knitting and can use your support",
-                    Localization = "Szczecin",
-                    Description =
-                        "She doesn't want anything for free, so maybe you can find a nice pair of socks or a cap for yourself",
-                    StartingDate = new DateTime(2023, 07, 4),
-                    EndingDate = new DateTime(2023, 08, 4),
-                    Type = EventType.HelpNeeded,
-                    IsOnline = false,
-                    Image =
-                        "https://img2.dmty.pl//uploads/202211/1667257621_asdbs4_600.jpg"
-                });
 
             await dbContext.Events.AddAsync(
                 new Event()
@@ -109,23 +93,6 @@ public static class Seed
                     IsOnline = false,
                     Image =
                         "https://img32.dmty.pl//uploads/202107/1627296241_1gbpll_600.jpg"
-                });
-
-            await dbContext.Events.AddAsync(
-                new Event()
-                {
-                    Id = new Guid(),
-                    UserId = new Guid(),
-                    Title = "Fardin cannot go back home",
-                    Localization = "Częstochowa",
-                    Description =
-                        "Fardin Kazemi's truck got completely broken and he cannot go home to Iran. We need someone with good mechanical knowledge to help us fix his vehicle and help him reunite with his family.",
-                    StartingDate = new DateTime(2023, 07, 4),
-                    EndingDate = new DateTime(2023, 08, 4),
-                    Type = EventType.HelpNeeded,
-                    IsOnline = false,
-                    Image =
-                        "https://ocdn.eu/pulscms-transforms/1/P6rk9kpTURBXy9kYzlmZmE4M2VkZjNiNDc2ZTk0MGE3NjdkNDMyNmFhMS5qcGeSlQMAzNTNCADNBICTBc0C-M0BrN4AAqEwBaExAA"
                 });
 
             await dbContext.Events.AddAsync(
@@ -210,7 +177,7 @@ public static class Seed
                 EndingDate = new DateTime(2023, 07, 20),
                 Type = EventType.HelpNeeded,
                 IsOnline = false,
-                Image = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Vue_de_nuit_de_la_Place_Stanislas_%C3%A0_Nancy.jpg/1920px-Vue_de_nuit_de_la_Place_Stanislas_%C3%A0_Nancy.jpg"
+                Image = "https://i.redd.it/s77hkdaw3h471.jpg"
             });
             await dbContext.SaveChangesAsync();
         }
