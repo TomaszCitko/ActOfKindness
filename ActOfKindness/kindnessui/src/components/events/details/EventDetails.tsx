@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {MyEvent} from "../../../app/models/myEvent";
+import {MyEvent} from "../../../app/models/Events/myEvent";
 import {Segment, Grid, Header, Item, Icon} from "semantic-ui-react";
 import EventList from "../dashboard/EventList";
 import EventFilters from "../dashboard/EventFilters";

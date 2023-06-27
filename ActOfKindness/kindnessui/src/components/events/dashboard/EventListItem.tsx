@@ -1,5 +1,5 @@
 import React from 'react';
-import {MyEvent} from "../../../app/models/myEvent";
+import {MyEvent} from "../../../app/models/Events/myEvent";
 import {Button, Grid, Icon, Item, Label, Segment} from "semantic-ui-react";
 import {observer} from "mobx-react-lite";
 import { Link } from 'react-router-dom';

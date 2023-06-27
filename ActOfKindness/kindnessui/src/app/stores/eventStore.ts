@@ -1,6 +1,6 @@
 import {makeAutoObservable} from "mobx";
-import {User} from "../models/user";
-import {MyEvent} from "../models/myEvent";
+import {User} from "../models/Users/user";
+import {MyEvent} from "../models/Events/myEvent";
 import agent from "../api/agent";
 
 export default class EventStore {

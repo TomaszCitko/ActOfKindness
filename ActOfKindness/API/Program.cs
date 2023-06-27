@@ -1,7 +1,13 @@
 using API.Extensions;
+using API.Middleware;
 using Application.Extensions;
+using Application.Validators;
 using Domain.Models;
+using FluentValidation.AspNetCore;
+using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Persistence;
 using Persistence.Extensions;
 
@@ -14,13 +20,23 @@ if (builder.Environment.IsDevelopment())
     builder.Configuration.AddUserSecrets<Program>();
 }
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(opt =>
+{
+    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+    opt.Filters.Add(new AuthorizeFilter(policy));
+});
+
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddFluentValidationClientsideAdapters();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateEventDtoValidator>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddApplication();
 builder.Services.AddIdentityServices(builder.Configuration);
+builder.Services.AddApi();
 
 builder.Services.AddCors(options =>
 {
@@ -42,6 +58,10 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseCors("FrontEndClient");
 
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
