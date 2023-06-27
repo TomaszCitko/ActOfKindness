@@ -28,8 +28,6 @@ namespace Application.Services
 
         public async Task CreateEvent(CreateEventDto newEventDto)
         {
-            if (DateTime.Compare(newEventDto.StartingDate, newEventDto.EndingDate) > 0) throw new BadRequestException("Starting date is older than ending date");
-
             if (await _eventRepository.GetEventById(newEventDto.Id) is not null)
                 throw new BadRequestException($"Event with this ID ({newEventDto.Id}) exist");
 
