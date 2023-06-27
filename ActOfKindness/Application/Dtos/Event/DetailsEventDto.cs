@@ -1,7 +1,12 @@
-﻿namespace Application.Dtos.Event
+﻿using Domain.Models;
+
+namespace Application.Dtos.Event
 {
     public class DetailsEventDto
     {
+        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
+
         public DateTime CreatedTime { get; set; }
         public string Localization { get; set; }
         public bool IsOnline { get; set; }
@@ -12,5 +17,6 @@
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public string Image { get; set; }
+        public EventType Type { get; set; }
     }
 }
