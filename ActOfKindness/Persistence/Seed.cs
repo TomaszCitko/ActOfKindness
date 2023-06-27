@@ -7,7 +7,7 @@ public static class Seed
 {
     public static async Task SeedEvents(ApplicationDbContext dbContext)
     {
-        if (dbContext.Events.Count() < 2)
+        if (dbContext.Events.Count() < 10)
         {
             await dbContext.Events.AddAsync(
                 new Event()
@@ -177,6 +177,7 @@ public static class Seed
                 EndingDate = new DateTime(2023, 07, 20),
                 Type = EventType.HelpNeeded,
                 IsOnline = false,
+                IsModerated = false,
                 Image = "https://i.redd.it/s77hkdaw3h471.jpg"
             });
             await dbContext.SaveChangesAsync();

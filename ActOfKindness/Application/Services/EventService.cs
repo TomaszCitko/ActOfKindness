@@ -26,10 +26,12 @@ namespace Application.Services
             return eventsDto;
         }
 
-        public async Task<List<Event>> GetUnmoderatedEvents()
+        public async Task<List<DetailsEventDto>> GetUnmoderatedEvents()
         {
             var unmoderatedEvents = await _eventRepository.GetUnmoderatedEvents();
-            return unmoderatedEvents;
+            var unmoderatedEventsDto = _mapper.Map<List<DetailsEventDto>>(unmoderatedEvents);
+
+            return unmoderatedEventsDto;
         }
 
         public async Task CreateEvent(CreateEventDto newEventDto)
