@@ -2,6 +2,6 @@ export interface RegisterForm {
     email: string,
     password: string,
     location: string,
-    nickName: string,
+    username: string,
     avatar?: string,
 }

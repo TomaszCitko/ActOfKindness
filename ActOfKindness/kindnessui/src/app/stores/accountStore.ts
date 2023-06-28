@@ -4,6 +4,7 @@ import {LoginForm} from "../models/Users/loginForm";
 import agent from "../api/agent";
 import {router} from "../router/Routes";
 import {store} from "./store";
+import {RegisterForm} from "../models/Users/registerForm";
 
 export default class AccountStore{
     token: string | null = localStorage.getItem('jwt')
@@ -39,6 +40,24 @@ export default class AccountStore{
             throw e
         }
     }
+
+    register = async (registerForm: RegisterForm)=>{
+        try {
+            const user = await agent.Account.register(registerForm)
+            runInAction(()=>{
+                this.setUser(user)
+                this.setToken(user.token)
+                this.isLoggedIn = true
+                console.log(user)
+            })
+            await router.navigate('/events')
+        }
+        catch (e) {
+            throw e
+        }
+    }
+
+
 
     logout = async ()=>{
         console.log("logout")
