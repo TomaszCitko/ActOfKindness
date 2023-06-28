@@ -14,7 +14,7 @@ function MyLoginModal() {
                 onClose={modalStore.closeModal}
                 size={'mini'}
             >
-                <Modal.Header>Login to help others;) </Modal.Header>
+                <Modal.Header  style={{textAlign:'center', color: 'green', fontSize:'1.5em'}}>Login </Modal.Header>
                 <Modal.Content>
                     {modalStore.modal.body}
                 </Modal.Content>
