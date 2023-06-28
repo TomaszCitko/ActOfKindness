@@ -17,19 +17,17 @@ namespace Application.Services
             _mapper = mapper;
         }
 
-        public async Task<List<Event>> GetEvents()
+        public async Task<List<DetailsEventDto>> GetEvents()
         {
             var events = await _eventRepository.GetEvents();
 
-            //var eventsDto = _mapper.Map<List<DetailsEventDto>>(events);
+            var eventsDto = _mapper.Map<List<DetailsEventDto>>(events);
 
-            return events;
+            return eventsDto;
         }
 
         public async Task CreateEvent(CreateEventDto newEventDto)
         {
-            if (DateTime.Compare(newEventDto.StartingDate, newEventDto.EndingDate) > 0) throw new BadRequestException("Starting date is older than ending date");
-
             if (await _eventRepository.GetEventById(newEventDto.Id) is not null)
                 throw new BadRequestException($"Event with this ID ({newEventDto.Id}) exist");
 

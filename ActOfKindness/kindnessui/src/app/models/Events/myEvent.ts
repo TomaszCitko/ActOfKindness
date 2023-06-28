@@ -1,12 +1,12 @@
 export interface MyEvent {
     id: string
-    user_Id: string
-    created_Time: string
+    userId: string
+    createdTime: string
     localization: string
     title:	string
     description: string
-    from_Date: string
-    to_Date: string
+    startingDate: string
+    endingDate: string
     done: string
     latitude: string
     longitude: string

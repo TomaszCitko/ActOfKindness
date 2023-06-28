@@ -6,6 +6,7 @@ import {User} from "../models/Users/user";
 import {RegisterForm} from "../models/Users/registerForm";
 import {store} from "../stores/store";
 
+
 axios.defaults.baseURL = "http://localhost:5092/api"
 
 // getting our body response
@@ -33,6 +34,7 @@ const Events = {
     list: ()=> requests.get<MyEvent[]>('/event'),
     create: (event: MyEventCreate)=> requests.post<void>('/event',event),
     details: (id:string)=> requests.get<MyEvent>(`/event/${id}`),
+    userName: (id:string, userId:string)=> requests.get<User>(`/event/${id}`)
 }
 
 const Account = {
