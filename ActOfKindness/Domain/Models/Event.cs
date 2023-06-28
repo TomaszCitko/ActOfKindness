@@ -5,7 +5,8 @@ namespace Domain.Models
     public class Event
     {
         public Guid Id { get; set; }
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
+        public AppUser CreatedBy { get; set; }
         public DateTime CreatedTime { get; set; } = DateTime.Now;
         public string? Localization { get; set; }
         public bool IsOnline { get; set; }
@@ -19,6 +20,7 @@ namespace Domain.Models
         public bool IsModerated { get; set; } = true;
         public EventType Type { get; set; }
         public string Image { get; set; }
+        public IEnumerable<EventUser> Participants { get; set; }
     }
 
     public enum EventType
