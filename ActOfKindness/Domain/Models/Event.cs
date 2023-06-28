@@ -17,7 +17,7 @@ namespace Domain.Models
         public bool IsDone { get; set; }
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
-        public bool IsModerated { get; set; } = true;
+        public bool IsModerated { get; set; }
         public EventType Type { get; set; }
         public string Image { get; set; }
         public IEnumerable<EventUser> Participants { get; set; }
