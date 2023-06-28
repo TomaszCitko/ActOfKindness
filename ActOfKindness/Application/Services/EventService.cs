@@ -17,9 +17,9 @@ namespace Application.Services
             _mapper = mapper;
         }
 
-        public async Task<List<DetailsEventDto>> GetEvents()
+        public async Task<List<DetailsEventDto>> GetModeratedEvents()
         {
-            var events = await _eventRepository.GetEvents();
+            var events = await _eventRepository.GetModeratedEvents();
 
             var eventsDto = _mapper.Map<List<DetailsEventDto>>(events);
 

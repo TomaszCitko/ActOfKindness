@@ -5,7 +5,7 @@ namespace Application.Interfaces;
 
 public interface IEventRepository
 {
-    Task<List<Event>> GetEvents();
+    Task<List<Event>> GetModeratedEvents();
     Task<List<Event>> GetUnmoderatedEvents();
     Task<Event?> GetEventById(Guid id);
     Task<int> DeleteEvent(Guid id);

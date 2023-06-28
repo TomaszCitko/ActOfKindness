@@ -18,9 +18,9 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<List<DetailsEventDto>>> GetEvents()
+        public async Task<ActionResult<List<DetailsEventDto>>> GetModeratedEvents()
         {
-            return await _eventService.GetEvents();
+            return await _eventService.GetModeratedEvents();
         }
 
         [AllowAnonymous]
