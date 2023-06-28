@@ -10,5 +10,7 @@ public class AppUser : IdentityUser
     public string? Location { get; set; }
     public double? Latitude { get; set; }
     public double? Longitude { get; set; }
+    public IEnumerable<Event> CreatedEvents { get; set; }
+    public IEnumerable<EventUser> ParticipatedEvents { get; set; }
 
 }
