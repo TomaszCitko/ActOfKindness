@@ -19,7 +19,7 @@ export const routes: RouteObject[] = [
             {path: `eventDetails/:id`, element: <EventDetails/>},
             {path: `login`, element: <LoginForm/>},
             {path: `register`, element: <RegisterForm/>},
-            {path: `unmoderated-events`, element: <UnmoderatedEventDashboard/>},
+            {path: `unmoderatedEvents`, element: <UnmoderatedEventDashboard/>},
         ]
     }
 ]
