@@ -6,11 +6,12 @@ import UnmoderatedEventListItem from './UnmoderatedEventListItem';
 
 function UnmoderatedEventDashboard() {
     const { eventStore } = useStore();
-    const { loadUnmoderatedEvents, myEvents } = eventStore;
+    const { loadUnmoderatedEvents, myEvents, clearEvents } = eventStore;
     
     useEffect(() => {
         loadUnmoderatedEvents();
-    }, [loadUnmoderatedEvents]);
+        return () => { clearEvents(); }
+    }, [loadUnmoderatedEvents, clearEvents]);
 
     return (
         <Grid>

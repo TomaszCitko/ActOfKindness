@@ -91,4 +91,8 @@ export default class EventStore {
         }
     }
 
+    clearEvents = () => {
+        this.eventRegistry.clear();
+    }
+
 }
