@@ -63,4 +63,17 @@ public class EventRepository : IEventRepository
         return await _context.Users.FindAsync(id);
     }
 
+    public async Task<List<Event>> GetFilteredEvents(string? location, string? type, string? startingDate,
+        string? endingDate)
+    {
+        string filterLocatoin = location == null ? "" : location;
+
+
+        var offerType = type == "helpNeeded" ? EventType.HelpNeeded : EventType.HelpOffer;
+
+        var result = await _context.Events
+            .Where(e => e.Localization.Contains(filterLocatoin) && e.Type == offerType)
+            .ToListAsync();
+        return result;
+    }
 }

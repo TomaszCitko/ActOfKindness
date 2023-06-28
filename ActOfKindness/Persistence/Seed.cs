@@ -32,10 +32,10 @@ public static class Seed
                 {
                     Id = new Guid(),
                     UserId = userManager.FindByNameAsync("marcin").Result.Id,
-                    Title = "Cleaning Augustow forest",
+                    Title = "Cleaning Augustów forest",
                     Localization = "Poland, Augustów",
                     Description =
-                        "We invite you to join us in cleaning Augustow forests from all the trash left by the tourists or irresponsible locals. Our last action was a big success - almost all trails were completely wiped out from non-organic matter!",
+                        "We invite you to join us in cleaning Augustów forests from all the trash left by the tourists or irresponsible locals. Our last action was a big success - almost all trails were completely wiped out from non-organic matter!",
                     StartingDate = new DateTime(2023, 07, 28),
                     EndingDate = new DateTime(2023, 07, 28),
                     Type = EventType.HelpNeeded,

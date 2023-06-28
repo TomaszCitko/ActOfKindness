@@ -12,5 +12,6 @@ namespace Application.Interfaces
         Task<DetailsEventDto> GetEventById(Guid id);
         Task UpdateEvent(Guid id, EditEventDto updatedEvent);
         Task<UserDto> GetUserById(Guid id);
+        Task<List<DetailsEventDto>> GetFilteredEvents(string? location, string? type, string? startingDate, string? endingDate);
     }
 }

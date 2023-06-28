@@ -79,5 +79,17 @@ namespace Application.Services
 
             return userDetailsDto;
         }
+
+        public async Task<List<DetailsEventDto>> GetFilteredEvents(string? location, string? type, string? startingDate,
+            string? endingDate)
+        {
+            
+            var events = await _eventRepository.GetFilteredEvents(string ? location, string ? type, string ? startingDate,
+                string ? endingDate)
+
+            var eventsDto = _mapper.Map<List<DetailsEventDto>>(events);
+
+            return eventsDto;
+        }
     }
 }

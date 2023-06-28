@@ -26,6 +26,13 @@ namespace API.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("/location={location:string}&type={type:string}&startingDate={startingDate:string}&endingDate={endingDate:string}")]
+        public async Task<ActionResult<List<DetailsEventDto>>> GetFilteredEvents()
+        {
+            return await _eventService.GetFilteredEvents();
+        }
+
+        [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult> CreateEvent([FromBody]CreateEventDto newEvent)
         {

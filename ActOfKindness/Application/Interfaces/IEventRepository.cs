@@ -13,5 +13,7 @@ public interface IEventRepository
     Task<int> UpdateEvent(Guid id, EditEventDto eventDto);
     Task Save();
     Task<AppUser?> GetUserById(Guid id);
+
+    Task<List<Event>> GetFilteredEvents(string? location, string? type, string? startingDate, string? endingDate);
 }
 
