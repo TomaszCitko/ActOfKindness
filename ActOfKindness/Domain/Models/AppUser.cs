@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace Domain.Models;
 
@@ -12,5 +12,4 @@ public class AppUser : IdentityUser
     public double? Longitude { get; set; }
     public IEnumerable<Event> CreatedEvents { get; set; }
     public IEnumerable<EventUser> ParticipatedEvents { get; set; }
-
 }
