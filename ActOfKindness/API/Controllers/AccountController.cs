@@ -5,6 +5,7 @@ using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -44,9 +45,19 @@ namespace API.Controllers
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
             // check if we already have same email
-            var temp = await _userManager.FindByEmailAsync(registerDto.Email);
-            if (temp != null) return BadRequest("email already in the system");
+            if (await _userManager.Users.AnyAsync(u=>u.Email == registerDto.Email))
+            {
+                ModelState.AddModelError("email", "Email already taken");
+                return ValidationProblem();
+            }    
             
+            if (await _userManager.Users.AnyAsync(u=>u.UserName == registerDto.Username))
+            {
+                ModelState.AddModelError("username", "Username already taken");
+                return ValidationProblem();
+            }            
+
+
             // create identity user
             var newUser = new AppUser
             {
