@@ -1,6 +1,5 @@
 ﻿using Application.Dtos.Event;
 using Application.Interfaces;
-using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,8 +24,8 @@ namespace API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet]
-        public async Task<ActionResult<List<Event>>> GetUnmoderatedEvents()
+        [HttpGet("unmoderated")]
+        public async Task<ActionResult<List<DetailsEventDto>>> GetUnmoderatedEvents()
         {
             return await _eventService.GetUnmoderatedEvents();
         }
