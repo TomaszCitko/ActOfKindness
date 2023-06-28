@@ -70,4 +70,25 @@ export default class EventStore {
         }
     }
 
+    loadUnmoderatedEvents = async ()=>{
+        try {
+            const unmoderatedEventsResponse = await agent.Events.unmoderatedList()
+            unmoderatedEventsResponse.forEach(event=>{
+                this.saveEvent(event)
+            })
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    moderateEvent = async (id: string) => {
+        try {
+            await agent.Events.moderate(id);
+            this.eventRegistry.delete(id);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 }
