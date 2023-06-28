@@ -117,3 +117,16 @@ code {
   background-size: cover !important;
 ;
 }
+
+.navDropdown {
+  background-color: #1b1c1d !important;
+  color: whitesmoke;
+}
+
+.ui.pointing.dropdown > .menu::after {
+  background-color: #1b1c1d !important;
+}
+
+.ui.menu .ui.dropdown .menu > .item {
+  color: whitesmoke !important;
+}
