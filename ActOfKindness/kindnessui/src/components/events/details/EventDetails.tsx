@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {MyEvent} from "../../../app/models/Events/myEvent";
-import {Segment, Grid, Header, Item, Icon, Image, ItemImage} from "semantic-ui-react";
+import {Segment, Grid, Header, Item, Icon, Image, ItemImage, Button} from "semantic-ui-react";
 import EventList from "../dashboard/EventList";
 import EventFilters from "../dashboard/EventFilters";
 import { observer } from 'mobx-react-lite';
-import { useParams } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useStore } from '../../../app/stores/store';
 import { string } from 'yup';
 import eventStore from '../../../app/stores/eventStore';
@@ -18,7 +18,9 @@ interface Props {
 
 function EventDetails() {
     const { eventStore } = useStore();
+    const { deleteEvent } = eventStore;
     const { id } = useParams();
+    const navigate = useNavigate();
     const [event, setEvent] = useState<MyEvent>({
         id: '',
         userId: '',
@@ -53,6 +55,13 @@ function EventDetails() {
     };
     loadEventDetails();
     }, [eventStore, id]);
+
+    const handleDelete = async () => {
+        if (event.id) {
+            await deleteEvent(event.id);
+            navigate('/events');
+        }
+    };
 
         return (
             <>
@@ -124,6 +133,18 @@ function EventDetails() {
                                                 <Icon name='calendar' style={{marginBottom: 10}} size='large' color='teal'/>
                                                 Calendar
                                                 </span>
+                                            </Grid.Column>
+                                        </Grid>
+                                    </Segment>
+                                    <Segment>
+                                        <Grid verticalAlign={'middle'}>
+                                            <Grid.Column width={15}>
+                                            <Button as={Link}
+                                                floated={"right"}
+                                                onClick={handleDelete}
+                                                color={"red"}
+                                                content={"Delete"}
+                                            ></Button>
                                             </Grid.Column>
                                         </Grid>
                                     </Segment>
