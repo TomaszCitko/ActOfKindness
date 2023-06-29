@@ -5,6 +5,7 @@ import {LoginForm} from "../models/Users/loginForm";
 import {User} from "../models/Users/user";
 import {RegisterForm} from "../models/Users/registerForm";
 import {store} from "../stores/store";
+import {Participants} from "../models/Users/participants";
 
 
 axios.defaults.baseURL = "http://localhost:5092/api"
@@ -45,6 +46,7 @@ const Account = {
     login: (user: LoginForm)=> requests.post<User>('/account/login', user),
     register: (user: RegisterForm)=> requests.post<User>('/account/register', user),
     getCurrentUser: ()=> requests.get<User>('/account'),
+    getParticipants: (id:string)=> requests.get<Participants[]>(`${id}/participants`)
 }
 
 const agent = {

@@ -2,7 +2,7 @@ export interface MyEventCreate {
     id: string
     userId: string
     localization: string
-    isOnline:string
+    isOnline:boolean
     title:	string
     description: string
     starting_Date: string

@@ -4,6 +4,7 @@ import {MyEvent} from "../models/Events/myEvent";
 import agent from "../api/agent";
 import {MyEventCreate} from "../models/Events/myEventCreate";
 import {v4 as uuid} from 'uuid'
+import {redirect} from "react-router-dom";
 
 export default class EventStore {
     static loadEventDetails(id: any) {
@@ -21,12 +22,12 @@ export default class EventStore {
     }
 
     createEvent = async(newEvent: MyEventCreate)=>{
+        newEvent.id = uuid()
         try {
-            newEvent.id = uuid()
-            console.log(newEvent)
-            const myNewEvent = await agent.Events.create(newEvent)
+            await agent.Events.create(newEvent)
             runInAction(()=>{
-                console.log(myNewEvent)
+                console.log()
+                redirect('/')
             })
         }
         catch (e) {

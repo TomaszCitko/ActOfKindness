@@ -114,5 +114,17 @@ namespace Application.Services
             return eventsDto;
         }
 
+        public async Task<List<ParticipantDto>> ReturnParticipantsDto(Guid eventId)
+        {
+            var newEvent = _eventRepository.GetEventByIdAsync(eventId);
+            var participants = new ParticipantsDto();
+            foreach (var eventUser in newEvent.Result.Participants)
+            {
+                participants.AddUser(eventUser);
+            }
+
+            return participants.participants;
+        }
+
     }
 }
