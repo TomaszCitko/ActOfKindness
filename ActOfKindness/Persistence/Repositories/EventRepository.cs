@@ -69,13 +69,13 @@ public class EventRepository : IEventRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<List<Event>> GetFilteredModeratedEvents(EventFilter filter)
+    public async Task<List<Event>> GetFilteredModeratedEventsAsync(EventFilter filter)
     {
         var filteredEvents = await _context.Events.Where(e => e.IsModerated).ToListAsync();
 
         if (!string.IsNullOrEmpty(filter.Localization))
         {
-            filteredEvents = filteredEvents.Where(e => e.Localization.Contains(filter.Localization)).ToList();
+            filteredEvents = filteredEvents.Where(e => e.Localization.ToLower().Contains(filter.Localization.ToLower())).ToList();
         }
         if (!string.IsNullOrEmpty(filter.Type.ToString()))
         {
@@ -95,11 +95,11 @@ public class EventRepository : IEventRepository
         }
         if (!string.IsNullOrEmpty(filter.Title))
         {
-            filteredEvents = filteredEvents.Where(e => e.Title.Contains(filter.Title)).ToList();
+            filteredEvents = filteredEvents.Where(e => e.Title.ToLower().Contains(filter.Title.ToLower())).ToList();
         }
         if (!string.IsNullOrEmpty(filter.Description))
         {
-            filteredEvents = filteredEvents.Where(e => e.Title.Contains(filter.Description)).ToList();
+            filteredEvents = filteredEvents.Where(e => e.Description.ToLower().Contains(filter.Description.ToLower())).ToList();
         }
 
         return filteredEvents;
