@@ -58,6 +58,15 @@ export default class EventStore {
 
     }
 
+    deleteEvent = async (id: string) => {
+        try {
+            await agent.Events.delete(id);
+            this.eventRegistry.delete(id);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     getUser = async(id:string, userId:string)=>
     {
         try{
