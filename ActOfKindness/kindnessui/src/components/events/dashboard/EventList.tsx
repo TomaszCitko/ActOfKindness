@@ -5,7 +5,8 @@ import {observer} from "mobx-react-lite";
 
 function EventList() {
     const {eventStore} = useStore()
-    const {myEvents} = eventStore
+    const {myEvents, loadFilteredEvents} = eventStore
+
 
     return (
         <>
