@@ -3,7 +3,7 @@ import {Modal, Segment} from "semantic-ui-react";
 import {store, useStore} from "../../app/stores/store";
 import {observer} from "mobx-react-lite";
 
-function MyLoginModal() {
+function MyGenericModal() {
     const { modalStore} = useStore()
 
     return (
@@ -14,7 +14,7 @@ function MyLoginModal() {
                 onClose={modalStore.closeModal}
                 size={'mini'}
             >
-                <Modal.Header  style={{textAlign:'center', color: 'green', fontSize:'1.5em'}}>Login </Modal.Header>
+                <Modal.Header  style={{textAlign:'center', color: 'green', fontSize:'1.5em'}}>{modalStore.modal.header} </Modal.Header>
                 <Modal.Content>
                     {modalStore.modal.body}
                 </Modal.Content>
@@ -23,4 +23,4 @@ function MyLoginModal() {
     );
 }
 
-export default observer(MyLoginModal)
+export default observer(MyGenericModal)

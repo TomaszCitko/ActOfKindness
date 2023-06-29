@@ -57,7 +57,6 @@ namespace API.Controllers
                 return ValidationProblem();
             }            
 
-
             // create identity user
             var newUser = new AppUser
             {

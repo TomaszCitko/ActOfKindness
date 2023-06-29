@@ -8,9 +8,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b82ed90-012b-4d75-8fa8-44e6371b2497" name="Changes" comment="axios interceptor putting authorization token&#10;use effect to autolog&#10;set token in local storage&#10;get current user&#10;setting up modal &#10;login form&#10;register form &#10;editing navbar (in future dropdown menu)&#10;displaying user name on homepage for testing purposes&#10;&#10;creating account store for storing user and token &#10;creating login logout methods &#10;adding reaction for local storage change">
-      <change afterPath="$PROJECT_DIR$/src/components/users/RegisterForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../API/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../API/Controllers/AccountController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stores/accountStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stores/accountStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/agent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/agent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/Events/myEventCreate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/Events/myEventCreate.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stores/eventStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stores/eventStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/events/form/EventForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/form/EventForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/home/Homepage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/home/Homepage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/modals/myLoginModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/modals/myGenericModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/modals/myRegisterModal.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/navbar/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/navbar/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/users/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/users/LoginForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/users/RegisterForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/users/RegisterForm.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -1,7 +1,9 @@
-import {makeAutoObservable} from "mobx";
+import {makeAutoObservable, runInAction} from "mobx";
 import {User} from "../models/Users/user";
 import {MyEvent} from "../models/Events/myEvent";
 import agent from "../api/agent";
+import {MyEventCreate} from "../models/Events/myEventCreate";
+import {v4 as uuid} from 'uuid'
 
 export default class EventStore {
     static loadEventDetails(id: any) {
@@ -16,6 +18,20 @@ export default class EventStore {
 
     get myEvents(){
         return Array.from(this.eventRegistry.values())
+    }
+
+    createEvent = async(newEvent: MyEventCreate)=>{
+        try {
+            newEvent.id = uuid()
+            console.log(newEvent)
+            const myNewEvent = await agent.Events.create(newEvent)
+            runInAction(()=>{
+                console.log(myNewEvent)
+            })
+        }
+        catch (e) {
+            console.log(e)
+        }
     }
 
     loadEvents = async ()=>{
@@ -55,7 +71,6 @@ export default class EventStore {
     }
     private getEvent = async(id:string) =>{
         return this.eventRegistry.get(id)
-
     }
 
     getUser = async(id:string, userId:string)=>

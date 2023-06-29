@@ -6,8 +6,11 @@ import * as Yup from "yup"
 import logo from "../../../images/handshake.png";
 import {v4 as uuid} from "uuid";
 import {MyEventCreate} from "../../../app/models/Events/myEventCreate";
+import {useStore} from "../../../app/stores/store";
 
 function EventForm() {
+    const {eventStore} = useStore()
+
     const [myEventCreate, setMyEvent] = useState({
         id: '',
         userId: '',
@@ -19,7 +22,7 @@ function EventForm() {
         ending_Date: '',
         latitude: '',
         longitude: '',
-        type: '',
+        type: 0,
         image: '',
     })
 
@@ -63,6 +66,7 @@ function EventForm() {
     const handleFormSubmit = (event: MyEventCreate)=>{
         if (event.id.length === 0){
             event.id = uuid()
+            eventStore.createEvent(event)
         }
         console.log(event)
     }
@@ -83,8 +87,8 @@ function EventForm() {
                         <FormField >
                             <Field as={"select"} defaultValue={'defaultValue'} name='type'>
                                 <option className={"optionPlaceholder"} value="defaultValue" disabled>Event Type</option>
-                                <option value="HelpNeeded">I need help</option>
-                                <option value="HelpOffer">I want to help someone!</option>
+                                <option value="0">I need help</option>
+                                <option value="1">I want to help someone!</option>
                             </Field>
                         </FormField>
 
@@ -119,7 +123,7 @@ function EventForm() {
                         </FormField>
 
                         <Button
-                            disabled={isSubmitting || !isValid || !dirty}
+                            // disabled={isSubmitting || !isValid || !dirty}
                             floated={"right"} color={"orange"} type={"submit"} content={'submit'}></Button>
                         <Button as={Link} to={'/events'} floated={'right'}  type={'button'} content={'Cancel'}></Button>
                     </Form>

@@ -4,7 +4,7 @@ import Navbar from "../../components/navbar/Navbar";
 import {useStore} from "../stores/store";
 import {Container} from "semantic-ui-react";
 import {observer} from "mobx-react-lite";
-import MyLoginModal from "../../components/modals/myLoginModal";
+import MyLoginModal from "../../components/modals/myGenericModal";
 function App() {
     const {accountStore}= useStore()
 

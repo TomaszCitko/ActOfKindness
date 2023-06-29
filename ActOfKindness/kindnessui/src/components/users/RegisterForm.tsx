@@ -1,7 +1,7 @@
 import React from 'react';
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {Button, Form as SemanticUIForm, FormField, Header, Label, Message} from 'semantic-ui-react';
-import {useStore} from "../../app/stores/store";
+import {store, useStore} from "../../app/stores/store";
 import * as Yup from 'yup'
 import {observer} from "mobx-react-lite";
 import {Simulate} from "react-dom/test-utils";
@@ -31,7 +31,6 @@ function RegisterForm() {
                     >
                 {({handleSubmit, isSubmitting,isValid,dirty,touched,errors})=>(
                     <Form onSubmit={handleSubmit} autoComplete={'off'} className={'ui form error'}>
-                        <Header style={{color: 'red'}} textAlign={'center'} as={'h2'} content={'Sign Up Form'}/>
                         <FormField>
                             <Field  placeholder='email' name='email' />
                             <ErrorMessage name={'email'} render={error=>
@@ -62,7 +61,7 @@ function RegisterForm() {
 
                         <Button disabled={!isValid || !dirty || isSubmitting} loading={isSubmitting} fluid type={'submit'} content={'Register'} positive></Button>
 
-                        <Button as={Link} to={'/'} loading={isSubmitting} fluid  content={'Cancel'} negative></Button>
+                        <Button onClick={store.modalStore.closeModal} fluid  content={'Cancel'} negative></Button>
                     </Form>
                 )}
             </Formik>
