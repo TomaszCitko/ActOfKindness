@@ -34,6 +34,10 @@ export default class EventStore {
         this.eventRegistry.set(newEvent.id,newEvent)
     }
 
+    deleteFromRegistry = (id: string) => {
+        this.eventRegistry.delete(id);
+    }
+
     loadEventDetails = async(id:string)=>{
         let tempDetails = this.getEvent(id)
         // if (tempDetails){
@@ -61,7 +65,7 @@ export default class EventStore {
     deleteEvent = async (id: string) => {
         try {
             await agent.Events.delete(id);
-            this.eventRegistry.delete(id);
+            this.deleteFromRegistry(id);
         } catch (error) {
             console.log(error);
         }
@@ -94,7 +98,7 @@ export default class EventStore {
     moderateEvent = async (id: string) => {
         try {
             await agent.Events.moderate(id);
-            this.eventRegistry.delete(id);
+            this.deleteFromRegistry(id);
         } catch (error) {
             console.log(error);
         }
