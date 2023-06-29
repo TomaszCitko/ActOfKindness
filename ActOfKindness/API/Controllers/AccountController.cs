@@ -14,13 +14,11 @@ namespace API.Controllers
     public class AccountController : ControllerBase
     {
         private readonly UserManager<AppUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly TokenService _tokenService;
 
-        public AccountController(UserManager<AppUser> userManager,RoleManager<IdentityRole> roleManager, TokenService tokenService)
+        public AccountController(UserManager<AppUser> userManager, TokenService tokenService)
         {
             _userManager = userManager;
-            _roleManager = roleManager;
             _tokenService = tokenService;
         }
 
@@ -35,7 +33,7 @@ namespace API.Controllers
             if (result)
             {
                 // sending to frontend our user with token for future authorization
-                return CreateUserDto(user);
+                return await CreateUserDto(user);
             }
             return Unauthorized();
         }
@@ -57,7 +55,6 @@ namespace API.Controllers
                 return ValidationProblem();
             }            
 
-
             // create identity user
             var newUser = new AppUser
             {
@@ -75,7 +72,7 @@ namespace API.Controllers
             // sending to frontend our user with token for future authorization
             if (result.Succeeded)
             {
-                return CreateUserDto(newUser);
+                return await CreateUserDto(newUser);
             }
             return BadRequest(result.Errors);
         }
@@ -87,16 +84,19 @@ namespace API.Controllers
             if (emailValue is null) return BadRequest();
 
             var user = await _userManager.FindByEmailAsync(emailValue);
-            return CreateUserDto(user);
+            return await CreateUserDto(user);
         }
 
-        private UserDto CreateUserDto(AppUser user)
+        private async Task<UserDto> CreateUserDto(AppUser user)
         {
+            var roles = await _userManager.GetRolesAsync(user);
+            var role = roles.FirstOrDefault();
+
             return new UserDto
             {
                 Location = user.Location,
                 Username = user.UserName,
-                Token = _tokenService.CreateToken(user),
+                Token = _tokenService.CreateToken(user, role),
             };
         }
     }

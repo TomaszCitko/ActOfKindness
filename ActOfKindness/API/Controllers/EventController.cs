@@ -20,30 +20,28 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<DetailsEventDto>>> GetModeratedEvents()
         {
-            return await _eventService.GetModeratedEvents();
+            return await _eventService.GetModeratedEventsAsync();
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Moderator, Admin")]
         [HttpGet("unmoderated")]
         public async Task<ActionResult<List<DetailsEventDto>>> GetUnmoderatedEvents()
         {
-            return await _eventService.GetUnmoderatedEvents();
+            return await _eventService.GetUnmoderatedEventsAsync();
         }
 
-        [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult> CreateEvent([FromBody]CreateEventDto newEvent)
         {
-            await _eventService.CreateEvent(newEvent);
+            await _eventService.CreateEventAsync(newEvent);
 
             return Ok();
         }
 
-        [AllowAnonymous]
         [HttpDelete("{id:guid}")]
         public async Task<ActionResult> DeleteEvent([FromRoute]Guid id)
         {
-            await _eventService.DeleteEvent(id);
+            await _eventService.DeleteEventAsync(id);
 
             return Ok();
         }
@@ -52,23 +50,22 @@ namespace API.Controllers
         [HttpGet("{id:guid}")]
         public async Task<ActionResult<DetailsEventDto>> GetEventById([FromRoute]Guid id)
         {
-            return await _eventService.GetEventById(id);
+            return await _eventService.GetEventByIdAsync(id);
         }
 
-        [AllowAnonymous]
         [HttpPut("{id:guid}")]
         public async Task<ActionResult> UpdateEvent([FromRoute]Guid id, [FromBody]EditEventDto eventDto)
         {
-            await _eventService.UpdateEvent(id, eventDto);
+            await _eventService.UpdateEventAsync(id, eventDto);
 
             return Ok();
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Moderator, Admin")]
         [HttpPatch("{id:guid}/moderate")]
         public async Task<ActionResult> ModerateEvent([FromRoute] Guid id)
         {
-            await _eventService.ModerateEvent(id);
+            await _eventService.ModerateEventAsync(id);
 
             return Ok();
         }
