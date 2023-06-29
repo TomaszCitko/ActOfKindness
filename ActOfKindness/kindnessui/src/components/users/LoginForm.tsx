@@ -1,7 +1,7 @@
 import React from 'react';
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {Button, Form as SemanticUIForm, FormField, Label} from 'semantic-ui-react';
-import {useStore} from "../../app/stores/store";
+import {store, useStore} from "../../app/stores/store";
 function LoginForm() {
     const {accountStore}= useStore()
     return (
@@ -17,6 +17,7 @@ function LoginForm() {
                             <Field type={'Password'}  placeholder='password' name='password' />
                         </FormField>
                         <Button fluid type={'submit'} content={'Login'} positive></Button>
+                        <Button onClick={store.modalStore.closeModal} fluid  content={'Cancel'} negative></Button>
                     </Form>
                 )}
             </Formik>

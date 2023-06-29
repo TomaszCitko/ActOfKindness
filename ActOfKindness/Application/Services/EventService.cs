@@ -41,6 +41,11 @@ namespace Application.Services
             if (await _eventRepository.GetEventByIdAsync(newEventDto.Id) is not null)
                 throw new BadRequestException($"Event with this ID ({newEventDto.Id}) exist");
 
+
+
+
+            //newEventDto.UserId
+
             var temporaryImagePlaceHolder =
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Vue_de_nuit_de_la_Place_Stanislas_%C3%A0_Nancy.jpg/1920px-Vue_de_nuit_de_la_Place_Stanislas_%C3%A0_Nancy.jpg";
 

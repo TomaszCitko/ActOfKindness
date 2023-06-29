@@ -6,6 +6,7 @@ import {store, useStore} from "../../app/stores/store";
 import LoginForm from "../users/LoginForm";
 import {observer} from "mobx-react-lite";
 import AccountStore from "../../app/stores/accountStore";
+import RegisterForm from "../users/RegisterForm";
 
 function Navbar() {
     const {accountStore} = useStore()
@@ -39,11 +40,10 @@ function Navbar() {
                     `Welcome ${accountStore.user?.username}`
                 ):"Login"} </Menu.Item>
 
-                <Menu.Item as={NavLink} to={'/register'} > {accountStore.isLoggedIn ? (
+                <Menu.Item onClick={()=>store.modalStore.openModal(<RegisterForm/>, "Register to help others")} > {accountStore.isLoggedIn ? (
                     `Welcome ${accountStore.user?.username}`
                 ):"Register"} </Menu.Item>
                </>
-
             }
         </Menu>
     );
