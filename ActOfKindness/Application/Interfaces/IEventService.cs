@@ -1,4 +1,4 @@
-﻿using Application.Dtos.Event;
+using Application.Dtos.Event;
 using Domain.Models;
 
 namespace Application.Interfaces
@@ -12,5 +12,6 @@ namespace Application.Interfaces
         Task<DetailsEventDto> GetEventByIdAsync(Guid id);
         Task UpdateEventAsync(Guid id, EditEventDto updatedEvent);
         Task ModerateEventAsync(Guid id);
+        Task<List<DetailsEventDto>> GetFilteredModeratedEventsAsync(EventFilter filter);
     }
 }

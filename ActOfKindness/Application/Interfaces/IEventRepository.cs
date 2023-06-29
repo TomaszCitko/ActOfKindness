@@ -1,4 +1,4 @@
-﻿using Application.Dtos.Event;
+using Application.Dtos.Event;
 using Domain.Models;
 
 namespace Application.Interfaces;
@@ -13,4 +13,5 @@ public interface IEventRepository
     Task UpdateEventAsync(Guid id, EditEventDto eventDto);
     Task<int> ModerateEventAsync(Guid id);
     Task SaveAsync();
+    Task<List<Event>> GetFilteredModeratedEventsAsync(EventFilter filter);
 }
