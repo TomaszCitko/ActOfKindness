@@ -13,4 +13,5 @@ public interface IEventRepository
     Task<int> UpdateEvent(Guid id, EditEventDto eventDto);
     Task<int> ModerateEvent(Guid id);
     Task Save();
+    Task<List<Event>> GetFilteredModeratedEvents(EventFilter filter);
 }

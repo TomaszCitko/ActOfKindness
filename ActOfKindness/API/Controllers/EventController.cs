@@ -72,5 +72,12 @@ namespace API.Controllers
 
             return Ok();
         }
+
+        [AllowAnonymous]
+        [HttpGet("filtered")]
+        public async Task<ActionResult<List<DetailsEventDto>>> GetFilteredModeratedEvents()
+        {
+            return await _eventService.GetFilteredModeratedEvents();
+        }
     }
 }

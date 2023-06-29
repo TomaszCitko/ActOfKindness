@@ -81,5 +81,15 @@ namespace Application.Services
 
             if (rowsChanged == 0) throw new NotFoundException("Event not found");
         }
+
+        public async Task<List<DetailsEventDto>> GetFilteredModeratedEvents()
+        {
+            var events = await _eventRepository.GetModeratedEvents();
+
+            var eventsDto = _mapper.Map<List<DetailsEventDto>>(events);
+
+            return eventsDto;
+        }
+
     }
 }

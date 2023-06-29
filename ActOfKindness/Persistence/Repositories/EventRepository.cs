@@ -67,4 +67,17 @@ public class EventRepository : IEventRepository
     {
         await _context.SaveChangesAsync();
     }
+
+    public async Task<List<Event>> GetFilteredModeratedEvents(EventFilter filter)
+    {
+        var filteredEvents = await _context.Events.Where(e => e.IsModerated).ToListAsync();
+
+        if (!string.IsNullOrEmpty(filter.Localization))
+        {
+            filteredEvents = filteredEvents.Where(e => e.Localization.Contains(filter.Localization)).ToList();
+        }
+        if (!string.IsNullOrEmpty(filter.
+
+        return filteredEvents;
+    }
 }
