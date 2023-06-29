@@ -19,7 +19,7 @@ function App() {
       <>
           <MyLoginModal/>
           <Navbar/>
-          <Container style={{marginTop: '7em'}}>
+          <Container style={{marginTop: '1.3em'}}>
                 <Outlet/>
           </Container>
       </>
