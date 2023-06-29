@@ -9,8 +9,10 @@ function EventDashboard() {
     const {eventStore} = useStore()
 
     useEffect(() => {
-        // return ()=>
         eventStore.loadEvents();
+        return () => {
+            eventStore.clearEvents();
+        }
     }, []);
 
     return (

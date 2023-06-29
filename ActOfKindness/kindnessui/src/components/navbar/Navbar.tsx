@@ -17,6 +17,7 @@ function Navbar() {
             </Menu.Item >
             <Menu.Item as={NavLink} to={"/events"}>Events</Menu.Item>
             <Menu.Item as={NavLink} to={"/createEvent"}>Create Event</Menu.Item>
+            <Menu.Item as={NavLink} to={"/unmoderatedEvents"}>Unmoderated</Menu.Item>
 
 
             {/*<Menu.Item as={NavLink} to={'/register'} position={'right'}> Register </Menu.Item>*/}

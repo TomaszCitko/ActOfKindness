@@ -17,13 +17,21 @@ namespace Application.Services
             _mapper = mapper;
         }
 
-        public async Task<List<DetailsEventDto>> GetEvents()
+        public async Task<List<DetailsEventDto>> GetModeratedEvents()
         {
-            var events = await _eventRepository.GetEvents();
+            var events = await _eventRepository.GetModeratedEvents();
 
             var eventsDto = _mapper.Map<List<DetailsEventDto>>(events);
 
             return eventsDto;
+        }
+
+        public async Task<List<DetailsEventDto>> GetUnmoderatedEvents()
+        {
+            var unmoderatedEvents = await _eventRepository.GetUnmoderatedEvents();
+            var unmoderatedEventsDto = _mapper.Map<List<DetailsEventDto>>(unmoderatedEvents);
+
+            return unmoderatedEventsDto;
         }
 
         public async Task CreateEvent(CreateEventDto newEventDto)
@@ -63,6 +71,13 @@ namespace Application.Services
         public async Task UpdateEvent(Guid id, EditEventDto updatedEventDto)
         {
             var rowsChanged = await _eventRepository.UpdateEvent(id, updatedEventDto);
+
+            if (rowsChanged == 0) throw new NotFoundException("Event not found");
+        }
+
+        public async Task ModerateEvent(Guid id)
+        {
+            var rowsChanged = await _eventRepository.ModerateEvent(id);
 
             if (rowsChanged == 0) throw new NotFoundException("Event not found");
         }

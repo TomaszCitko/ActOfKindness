@@ -1,6 +1,5 @@
 ﻿using Application.Dtos.Event;
 using Application.Interfaces;
-using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,9 +18,16 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<List<DetailsEventDto>>> GetEvents()
+        public async Task<ActionResult<List<DetailsEventDto>>> GetModeratedEvents()
         {
-            return await _eventService.GetEvents();
+            return await _eventService.GetModeratedEvents();
+        }
+
+        [AllowAnonymous]
+        [HttpGet("unmoderated")]
+        public async Task<ActionResult<List<DetailsEventDto>>> GetUnmoderatedEvents()
+        {
+            return await _eventService.GetUnmoderatedEvents();
         }
 
         [AllowAnonymous]
@@ -54,6 +60,15 @@ namespace API.Controllers
         public async Task<ActionResult> UpdateEvent([FromRoute]Guid id, [FromBody]EditEventDto eventDto)
         {
             await _eventService.UpdateEvent(id, eventDto);
+
+            return Ok();
+        }
+
+        [AllowAnonymous]
+        [HttpPatch("{id:guid}/moderate")]
+        public async Task<ActionResult> ModerateEvent([FromRoute] Guid id)
+        {
+            await _eventService.ModerateEvent(id);
 
             return Ok();
         }

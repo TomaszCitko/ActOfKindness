@@ -6,6 +6,7 @@ import EventForm from "../../components/events/form/EventForm";
 import EventDetails from "../../components/events/details/EventDetails";
 import LoginForm from "../../components/users/LoginForm";
 import RegisterForm from "../../components/users/RegisterForm";
+import UnmoderatedEventDashboard from "../../components/events/unmoderated/UnmoderatedEventDashboard";
 
 export const routes: RouteObject[] = [
     {
@@ -18,6 +19,7 @@ export const routes: RouteObject[] = [
             {path: `eventDetails/:id`, element: <EventDetails/>},
             {path: `login`, element: <LoginForm/>},
             {path: `register`, element: <RegisterForm/>},
+            {path: `unmoderatedEvents`, element: <UnmoderatedEventDashboard/>},
         ]
     }
 ]

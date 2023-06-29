@@ -14,9 +14,14 @@ public class EventRepository : IEventRepository
         _context = context;
     }
 
-    public async Task<List<Event>> GetEvents()
+    public async Task<List<Event>> GetModeratedEvents()
     { 
-        return await _context.Events.ToListAsync();
+        return await _context.Events.Where(e => e.IsModerated).ToListAsync();
+    }
+
+    public async Task<List<Event>> GetUnmoderatedEvents()
+    {
+        return await _context.Events.Where(e => !e.IsModerated).ToListAsync();
     }
 
     public async Task<Event?> GetEventById(Guid id)
@@ -49,6 +54,13 @@ public class EventRepository : IEventRepository
                 .SetProperty(e => e.Longitude, eventDto.Longitude)
                 .SetProperty(e => e.Image, eventDto.Image)
             );
+    }
+
+    public async Task<int> ModerateEvent(Guid id)
+    {
+        return await _context.Events.Where(e => e.Id == id)
+            .ExecuteUpdateAsync(prop=> 
+                prop.SetProperty(e => e.IsModerated, true));
     }
 
     public async Task Save()
