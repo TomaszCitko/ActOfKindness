@@ -26,6 +26,7 @@ const requests = {
     post: <T>(url: string, body: {}) =>axios.post<T>(url, body).then(responseBody),
     put: (url: string, body:{}) =>axios.put(url,body).then(responseBody),
     del: (url: string) =>axios.delete(url).then(responseBody),
+    patch: (url: string) => axios.patch(url).then(responseBody),
 }
 
 // creating object to store our requests
@@ -34,12 +35,14 @@ const Events = {
     list: ()=> requests.get<MyEvent[]>('/event'),
     create: (event: MyEventCreate)=> requests.post<void>('/event',event),
     details: (id:string)=> requests.get<MyEvent>(`/event/${id}`),
-    userName: (id:string, userId:string)=> requests.get<User>(`/event/${id}`)
+    userName: (id:string, userId:string)=> requests.get<User>(`/event/${id}`),
+    unmoderatedList: ()=> requests.get<MyEvent[]>('/event/unmoderated'),
+    moderate: (id: string) => requests.patch(`/event/${id}/moderate`),
 }
 
 const Account = {
     login: (user: LoginForm)=> requests.post<User>('/account/login', user),
-    register: (user: RegisterForm)=> requests.post<User>('account/register', user),
+    register: (user: RegisterForm)=> requests.post<User>('/account/register', user),
     getCurrentUser: ()=> requests.get<User>('/account'),
 }
 

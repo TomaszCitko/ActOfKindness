@@ -1,10 +1,11 @@
 import React from 'react';
-import {Header, Menu} from "semantic-ui-react";
-import {NavLink} from "react-router-dom";
+import {Dropdown, DropdownItem, DropdownMenu, Header, Menu} from "semantic-ui-react";
+import {Link, NavLink} from "react-router-dom";
 import logo from "../../images/handshake.png"
 import {store, useStore} from "../../app/stores/store";
 import LoginForm from "../users/LoginForm";
 import {observer} from "mobx-react-lite";
+import AccountStore from "../../app/stores/accountStore";
 
 function Navbar() {
     const {accountStore} = useStore()
@@ -16,14 +17,34 @@ function Navbar() {
             </Menu.Item >
             <Menu.Item as={NavLink} to={"/events"}>Events</Menu.Item>
             <Menu.Item as={NavLink} to={"/createEvent"}>Create Event</Menu.Item>
-            <Menu.Item onClick={()=>store.modalStore.openModal(<LoginForm/>, "Login to help others")} position={'right'}> {accountStore.isLoggedIn ? (
-                `Welcome ${accountStore.user?.username}`
-            ):"Login"} </Menu.Item>
+            <Menu.Item as={NavLink} to={"/unmoderatedEvents"}>Unmoderated</Menu.Item>
 
-            <Menu.Item onClick={()=>store.modalStore.openModal(<LoginForm/>, "Register")} position={'right'}> Register </Menu.Item>
 
-            <Menu.Item onClick={accountStore.logout} position={'right'}>
-                {accountStore.isLoggedIn ? "Logout" : ""}</Menu.Item>
+            {/*<Menu.Item as={NavLink} to={'/register'} position={'right'}> Register </Menu.Item>*/}
+
+            {accountStore.isLoggedIn ? (
+                <Menu.Item className={'navDropdown'} position={"right"}>
+                    <Dropdown className={'navDropdown'} pointing={'top left'}
+                              text={accountStore.user?.username}>
+                        <DropdownMenu className={'navDropdown'} >
+                            <DropdownItem  as={Link} to={`/profile/${accountStore.user?.username}`}
+                                           text={'my profile'}/>
+                            <DropdownItem onClick={accountStore.logout} text={'Logout'} icon={'power'}/>
+                        </DropdownMenu>
+                    </Dropdown>
+                </Menu.Item>
+
+            ): <>
+                <Menu.Item  onClick={()=>store.modalStore.openModal(<LoginForm/>, "Login to help others")} > {accountStore.isLoggedIn ? (
+                    `Welcome ${accountStore.user?.username}`
+                ):"Login"} </Menu.Item>
+
+                <Menu.Item as={NavLink} to={'/register'} > {accountStore.isLoggedIn ? (
+                    `Welcome ${accountStore.user?.username}`
+                ):"Register"} </Menu.Item>
+               </>
+
+            }
         </Menu>
     );
 }

@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 import { useStore } from '../../../app/stores/store';
 import { string } from 'yup';
 import eventStore from '../../../app/stores/eventStore';
-import dayjs from "dayjs";
+
 
 interface Props {
     event: MyEvent
