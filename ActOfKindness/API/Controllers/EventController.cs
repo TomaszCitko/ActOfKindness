@@ -1,5 +1,6 @@
 ﻿using Application.Dtos.Event;
 using Application.Interfaces;
+using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -74,10 +75,10 @@ namespace API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("filtered")]
-        public async Task<ActionResult<List<DetailsEventDto>>> GetFilteredModeratedEvents()
+        [HttpGet("filter")]
+        public async Task<ActionResult<List<DetailsEventDto>>> GetFilteredModeratedEvents([FromQuery] EventFilter filter)
         {
-            return await _eventService.GetFilteredModeratedEvents();
+            return await _eventService.GetFilteredModeratedEvents(filter);
         }
     }
 }

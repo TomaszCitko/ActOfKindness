@@ -2,6 +2,7 @@
 using Application.Interfaces;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Protocols;
 
 namespace Persistence.Repositories;
 
@@ -76,7 +77,30 @@ public class EventRepository : IEventRepository
         {
             filteredEvents = filteredEvents.Where(e => e.Localization.Contains(filter.Localization)).ToList();
         }
-        if (!string.IsNullOrEmpty(filter.
+        if (!string.IsNullOrEmpty(filter.Type.ToString()))
+        {
+            filteredEvents = filteredEvents.Where(e => e.Type == filter.Type).ToList();
+        }
+        if (!string.IsNullOrEmpty(filter.StartingDate.ToString()))
+        {
+            filteredEvents = filteredEvents.Where(e => e.StartingDate > filter.StartingDate).ToList();
+        }
+        if (!string.IsNullOrEmpty(filter.EndingDate.ToString()))
+        {
+            filteredEvents = filteredEvents.Where(e => e.EndingDate < filter.EndingDate).ToList();
+        }
+        if (!string.IsNullOrEmpty(filter.IsOnline.ToString()))
+        {
+            filteredEvents = filteredEvents.Where(e => e.IsOnline == filter.IsOnline).ToList();
+        }
+        if (!string.IsNullOrEmpty(filter.Title))
+        {
+            filteredEvents = filteredEvents.Where(e => e.Title.Contains(filter.Title)).ToList();
+        }
+        if (!string.IsNullOrEmpty(filter.Description))
+        {
+            filteredEvents = filteredEvents.Where(e => e.Title.Contains(filter.Description)).ToList();
+        }
 
         return filteredEvents;
     }

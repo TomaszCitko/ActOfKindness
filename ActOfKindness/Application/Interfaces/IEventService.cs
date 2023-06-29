@@ -12,6 +12,6 @@ namespace Application.Interfaces
         Task<DetailsEventDto> GetEventById(Guid id);
         Task UpdateEvent(Guid id, EditEventDto updatedEvent);
         Task ModerateEvent(Guid id);
-        Task<List<DetailsEventDto>> GetFilteredModeratedEvents();
+        Task<List<DetailsEventDto>> GetFilteredModeratedEvents(EventFilter filter);
     }
 }

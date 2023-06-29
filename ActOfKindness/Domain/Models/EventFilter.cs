@@ -14,7 +14,6 @@ namespace Domain.Models
         public string Description { get; set; }
         public DateTime StartingDate { get; set; }
         public DateTime EndingDate { get; set; }
-        public bool IsDone { get; set; }
         public EventType Type { get; set; }
 
     }
