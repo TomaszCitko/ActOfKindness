@@ -10,7 +10,7 @@ interface Props {
 
 function UnmoderatedEventListItem({event}: Props) {
     const { eventStore } = useStore();
-    const { moderateEvent } = eventStore;
+    const { moderateEvent, deleteEvent } = eventStore;
 
     return (
         <Segment.Group style={{marginBottom:40}}  >
@@ -56,7 +56,7 @@ function UnmoderatedEventListItem({event}: Props) {
                     <Grid.Column width={6}>
                         <Button as={Link}
                                 floated={"right"}
-                                to={`/eventDetails/${event.id}`}
+                                onClick={() => deleteEvent(event.id)}
                                 color={"red"}
                                 content={"Delete"}
                                 style={{marginLeft: 10}}
