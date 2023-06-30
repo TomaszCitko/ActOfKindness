@@ -36,6 +36,10 @@ function EventDetails() {
         moderated: '',
         type: '',
         image: '',
+        createdBy: {
+            username: '',
+            nickname: '',
+        },
     })
     useEffect(() => {
     const loadEventDetails = async () => {
@@ -107,7 +111,7 @@ function EventDetails() {
                                             <Grid.Column width={15}>
                                                 <span>
                                                 <Icon style={{marginBottom: 10}} name='user' size='large' color='teal'/>
-                                                Created by: {event.userId}
+                                                Created by: {event.createdBy.nickname}
                                                 </span>
                                             </Grid.Column>
                                         </Grid>

@@ -49,7 +49,7 @@ function UnmoderatedEventListItem({event}: Props) {
                     <Grid.Column width={3}>
                         <span>
                         <Icon name='user' style={{marginBottom: 10}} size='large' color='teal'/>
-                            {event.userId}
+                            {event.createdBy.nickname}
                         </span>
                     </Grid.Column>
 
