@@ -4,12 +4,11 @@ import {MyEvent} from "../models/Events/myEvent";
 import agent from "../api/agent";
 import {MyEventCreate} from "../models/Events/myEventCreate";
 import {v4 as uuid} from 'uuid'
-import {redirect} from "react-router-dom";
+import {redirect, useNavigate} from "react-router-dom";
+import {router} from "../router/Routes";
 
 export default class EventStore {
-    static loadEventDetails(id: any) {
-        throw new Error('Method not implemented.');
-    }
+
     eventRegistry =  new Map<string, MyEvent>();
     userRegistry = new Map<string, User>();
     selectedEvent : MyEvent | undefined = undefined
@@ -21,14 +20,19 @@ export default class EventStore {
         return Array.from(this.eventRegistry.values())
     }
 
+    static loadEventDetails(id: any) {
+        throw new Error('Method not implemented.');
+    }
+
+
     createEvent = async(newEvent: MyEventCreate)=>{
         newEvent.id = uuid()
         try {
             await agent.Events.create(newEvent)
             runInAction(()=>{
-                console.log()
-                redirect('/')
+                console.log(newEvent)
             })
+            // await router.navigate('/');
         }
         catch (e) {
             console.log(e)

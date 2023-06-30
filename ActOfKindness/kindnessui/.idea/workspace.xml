@@ -9,6 +9,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1b82ed90-012b-4d75-8fa8-44e6371b2497" name="Changes" comment="landing page&#10;background picture&#10;login or register form&#10;big header &#10;changing buttons if user is logged in">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/user.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stores/eventStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stores/eventStore.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
