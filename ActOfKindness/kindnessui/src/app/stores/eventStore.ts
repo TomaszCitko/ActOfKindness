@@ -2,6 +2,7 @@ import {makeAutoObservable} from "mobx";
 import {User} from "../models/Users/user";
 import {MyEvent} from "../models/Events/myEvent";
 import agent from "../api/agent";
+import { MyEventFilter } from "../models/Events/myEventFilter";
 
 export default class EventStore {
     static loadEventDetails(id: any) {
@@ -106,6 +107,18 @@ export default class EventStore {
 
     clearEvents = () => {
         this.eventRegistry.clear();
+    }
+
+    loadFilteredEvents = async (eventFilter:MyEventFilter)=>{
+        try {
+            const filteredEventsResponse = await agent.Events.filterList(eventFilter)
+            filteredEventsResponse.forEach(event=>{
+                this.saveEvent(event)
+            })
+        }
+        catch (error) {
+            console.log(error)
+        }
     }
 
 }

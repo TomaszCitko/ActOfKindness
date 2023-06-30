@@ -5,6 +5,7 @@ import {LoginForm} from "../models/Users/loginForm";
 import {User} from "../models/Users/user";
 import {RegisterForm} from "../models/Users/registerForm";
 import {store} from "../stores/store";
+import { MyEventFilter } from '../models/Events/myEventFilter';
 
 
 axios.defaults.baseURL = "http://localhost:5092/api"
@@ -39,6 +40,7 @@ const Events = {
     userName: (id:string, userId:string)=> requests.get<User>(`/event/${id}`),
     unmoderatedList: ()=> requests.get<MyEvent[]>('/event/unmoderated'),
     moderate: (id: string) => requests.patch(`/event/${id}/moderate`),
+    filterList: ()=> requests.get<MyEvent[]>('/api/event/filter')
 }
 
 const Account = {
