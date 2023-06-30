@@ -7,7 +7,7 @@ namespace Application.Dtos.Event
     {
         public Guid Id { get; set; }
         public string UserId { get; set; }
-        public UserDto CreatedBy { get; set; }
+        public UserEventDto CreatedBy { get; set; }
         public DateTime CreatedTime { get; set; }
         public string Localization { get; set; }
         public bool IsOnline { get; set; }

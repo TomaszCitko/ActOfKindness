@@ -12,7 +12,7 @@ namespace Application.Mappings
             CreateMap<Event, DetailsEventDto>()
                 .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.CreatedBy));
 
-            CreateMap<AppUser, UserDto>();
+            CreateMap<AppUser, UserEventDto>();
 
             CreateMap<CreateEventDto, Event>();
         }
