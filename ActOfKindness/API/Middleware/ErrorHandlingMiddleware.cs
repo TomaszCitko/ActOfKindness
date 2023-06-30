@@ -21,10 +21,14 @@ namespace API.Middleware
                 context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 await context.Response.WriteAsync(badRequestException.Message);
             }
+            catch (ForbidException forbidException)
+            {
+                context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+            }
             catch (Exception exception)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                await context.Response.WriteAsync("Something went wrong");
+                await context.Response.WriteAsync($"Something went wrong {exception.Message}");
             }
         }
     }

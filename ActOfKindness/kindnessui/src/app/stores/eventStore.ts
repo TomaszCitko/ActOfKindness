@@ -1,7 +1,9 @@
-import {makeAutoObservable} from "mobx";
+import {makeAutoObservable, runInAction} from "mobx";
 import {User} from "../models/Users/user";
 import {MyEvent} from "../models/Events/myEvent";
 import agent from "../api/agent";
+import {MyEventCreate} from "../models/Events/myEventCreate";
+import {v4 as uuid} from 'uuid'
 
 export default class EventStore {
     static loadEventDetails(id: any) {
@@ -18,6 +20,20 @@ export default class EventStore {
         return Array.from(this.eventRegistry.values())
     }
 
+    createEvent = async(newEvent: MyEventCreate)=>{
+        try {
+            newEvent.id = uuid()
+            console.log(newEvent)
+            const myNewEvent = await agent.Events.create(newEvent)
+            runInAction(()=>{
+                console.log(myNewEvent)
+            })
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
+
     loadEvents = async ()=>{
         try {
             const allEventsResponse = await agent.Events.list()
@@ -32,6 +48,10 @@ export default class EventStore {
 
     saveEvent = async (newEvent: MyEvent)=>{
         this.eventRegistry.set(newEvent.id,newEvent)
+    }
+
+    deleteFromRegistry = (id: string) => {
+        this.eventRegistry.delete(id);
     }
 
     loadEventDetails = async(id:string)=>{
@@ -55,7 +75,15 @@ export default class EventStore {
     }
     private getEvent = async(id:string) =>{
         return this.eventRegistry.get(id)
+    }
 
+    deleteEvent = async (id: string) => {
+        try {
+            await agent.Events.delete(id);
+            this.deleteFromRegistry(id);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     getUser = async(id:string, userId:string)=>
@@ -85,7 +113,7 @@ export default class EventStore {
     moderateEvent = async (id: string) => {
         try {
             await agent.Events.moderate(id);
-            this.eventRegistry.delete(id);
+            this.deleteFromRegistry(id);
         } catch (error) {
             console.log(error);
         }

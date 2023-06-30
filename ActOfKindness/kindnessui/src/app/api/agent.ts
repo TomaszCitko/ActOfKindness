@@ -33,8 +33,9 @@ const requests = {
 
 const Events = {
     list: ()=> requests.get<MyEvent[]>('/event'),
-    create: (event: MyEventCreate)=> requests.post<void>('/event',event),
+    create: (event: MyEventCreate)=> requests.post<MyEvent>('/event',event),
     details: (id:string)=> requests.get<MyEvent>(`/event/${id}`),
+    delete: (id: string) => requests.del(`/event/${id}`),
     userName: (id:string, userId:string)=> requests.get<User>(`/event/${id}`),
     unmoderatedList: ()=> requests.get<MyEvent[]>('/event/unmoderated'),
     moderate: (id: string) => requests.patch(`/event/${id}/moderate`),

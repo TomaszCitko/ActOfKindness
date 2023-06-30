@@ -1,4 +1,4 @@
-﻿using Application.Dtos.Event;
+using Application.Dtos.Event;
 using Application.Dtos.User;
 using Domain.Models;
 
@@ -6,14 +6,13 @@ namespace Application.Interfaces
 {
     public interface IEventService
     {
-        Task<List<DetailsEventDto>> GetModeratedEvents();
-        Task<List<DetailsEventDto>> GetUnmoderatedEvents();
-        Task CreateEvent(CreateEventDto newEvent);
-        Task DeleteEvent(Guid id);
-        Task<DetailsEventDto> GetEventById(Guid id);
-        Task UpdateEvent(Guid id, EditEventDto updatedEvent);
-        Task<UserDto> GetUserById(Guid id);
-        Task<List<DetailsEventDto>> GetFilteredEvents(string? location, string? type, string? startingDate, string? endingDate);
-        Task ModerateEvent(Guid id);
+        Task<List<DetailsEventDto>> GetModeratedEventsAsync();
+        Task<List<DetailsEventDto>> GetUnmoderatedEventsAsync();
+        Task CreateEventAsync(CreateEventDto newEvent);
+        Task DeleteEventAsync(Guid id);
+        Task<DetailsEventDto> GetEventByIdAsync(Guid id);
+        Task UpdateEventAsync(Guid id, EditEventDto updatedEvent);
+        Task ModerateEventAsync(Guid id);
+        Task<List<DetailsEventDto>> GetFilteredModeratedEventsAsync(EventFilter filter);
     }
 }

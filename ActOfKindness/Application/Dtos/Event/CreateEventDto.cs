@@ -5,7 +5,6 @@ namespace Application.Dtos.Event
     public class CreateEventDto
     {
         public Guid Id { get; set; }
-        public Guid UserId { get; set; }
         public string? Localization { get; set; }
         public bool IsOnline { get; set; }
         public string Title { get; set; }

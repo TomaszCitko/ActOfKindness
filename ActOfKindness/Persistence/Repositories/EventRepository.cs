@@ -4,6 +4,7 @@ using Application.Exceptions;
 using Application.Interfaces;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Protocols;
 
 namespace Persistence.Repositories;
 
@@ -16,35 +17,35 @@ public class EventRepository : IEventRepository
         _context = context;
     }
 
-    public async Task<List<Event>> GetModeratedEvents()
+    public async Task<List<Event>> GetModeratedEventsAsync()
     { 
         return await _context.Events.Where(e => e.IsModerated).ToListAsync();
     }
 
-    public async Task<List<Event>> GetUnmoderatedEvents()
+    public async Task<List<Event>> GetUnmoderatedEventsAsync()
     {
         return await _context.Events.Where(e => !e.IsModerated).ToListAsync();
     }
 
-    public async Task<Event?> GetEventById(Guid id)
+    public async Task<Event?> GetEventByIdAsync(Guid id)
     {
         return await _context.Events.FindAsync(id);
     }
 
-    public async Task<int> DeleteEvent(Guid id)
+    public async Task DeleteEventAsync(Guid id)
     {
-        return await _context.Events.Where(e => e.Id == id)
+        await _context.Events.Where(e => e.Id == id)
             .ExecuteDeleteAsync();
     }
 
-    public async Task CreateEvent(Event newEvent)
+    public async Task CreateEventAsync(Event newEvent)
     {
         await _context.Events.AddAsync(newEvent);
     }
 
-    public async Task<int> UpdateEvent(Guid id, EditEventDto eventDto)
+    public async Task UpdateEventAsync(Guid id, EditEventDto eventDto)
     {
-        return await _context.Events.Where(e => e.Id == id)
+        await _context.Events.Where(e => e.Id == id)
             .ExecuteUpdateAsync(prop => 
                 prop.SetProperty(e => e.Title, eventDto.Title)
                 .SetProperty(e => e.Description, eventDto.Description)
@@ -58,33 +59,51 @@ public class EventRepository : IEventRepository
             );
     }
 
-    public async Task<int> ModerateEvent(Guid id)
+    public async Task<int> ModerateEventAsync(Guid id)
     {
         return await _context.Events.Where(e => e.Id == id)
             .ExecuteUpdateAsync(prop=> 
                 prop.SetProperty(e => e.IsModerated, true));
     }
 
-    public async Task Save()
+    public async Task SaveAsync()
     {
         await _context.SaveChangesAsync();
     }
-    public async Task<AppUser?> GetUserById(Guid id)
+
+    public async Task<List<Event>> GetFilteredModeratedEventsAsync(EventFilter filter)
     {
-        return await _context.Users.FindAsync(id);
-    }
+        var filteredEvents = await _context.Events.Where(e => e.IsModerated).ToListAsync();
 
-    public async Task<List<Event>> GetFilteredEvents(string? location, string? type, string? startingDate,
-        string? endingDate)
-    {
-        string filterLocatoin = location == null ? "" : location;
+        if (!string.IsNullOrEmpty(filter.Localization))
+        {
+            filteredEvents = filteredEvents.Where(e => e.Localization.ToLower().Contains(filter.Localization.ToLower())).ToList();
+        }
+        if (!string.IsNullOrEmpty(filter.Type.ToString()))
+        {
+            filteredEvents = filteredEvents.Where(e => e.Type == filter.Type).ToList();
+        }
+        if (!string.IsNullOrEmpty(filter.StartingDate.ToString()))
+        {
+            filteredEvents = filteredEvents.Where(e => e.StartingDate > filter.StartingDate).ToList();
+        }
+        if (!string.IsNullOrEmpty(filter.EndingDate.ToString()))
+        {
+            filteredEvents = filteredEvents.Where(e => e.EndingDate < filter.EndingDate).ToList();
+        }
+        if (!string.IsNullOrEmpty(filter.IsOnline.ToString()))
+        {
+            filteredEvents = filteredEvents.Where(e => e.IsOnline == filter.IsOnline).ToList();
+        }
+        if (!string.IsNullOrEmpty(filter.Title))
+        {
+            filteredEvents = filteredEvents.Where(e => e.Title.ToLower().Contains(filter.Title.ToLower())).ToList();
+        }
+        if (!string.IsNullOrEmpty(filter.Description))
+        {
+            filteredEvents = filteredEvents.Where(e => e.Description.ToLower().Contains(filter.Description.ToLower())).ToList();
+        }
 
-
-        var offerType = type == "helpNeeded" ? EventType.HelpNeeded : EventType.HelpOffer;
-
-        var result = await _context.Events
-            .Where(e => e.Localization.Contains(filterLocatoin) && e.Type == offerType)
-            .ToListAsync();
-        return result;
+        return filteredEvents;
     }
 }

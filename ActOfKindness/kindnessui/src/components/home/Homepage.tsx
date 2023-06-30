@@ -4,6 +4,7 @@ import {store, useStore} from '../../app/stores/store';
 import { Button, Container, Grid, Header, Icon, Segment } from 'semantic-ui-react';
 import {Link} from "react-router-dom";
 import LoginForm from "../users/LoginForm";
+import RegisterForm from "../users/RegisterForm";
 
 function Homepage() {
     const { accountStore } = useStore();
@@ -55,7 +56,7 @@ function Homepage() {
                                     </Button>
                                     <Button.Or className={"custom-or"} style={{marginTop: 6,verticalAlign: 'text-top'}}/>
 
-                                    <Button as={Link} to={'/register'} size="huge" color={'teal'}  style={{ width: '180px', margin: '0 auto' }}>
+                                    <Button onClick={()=>store.modalStore.openModal(<RegisterForm/>, "Register to help others")} size="huge" color={'teal'}  style={{ width: '180px', margin: '0 auto' }}>
                                         Register
                                         <Icon style={{ paddingLeft: '10px' }} name="wpforms" />
                                     </Button>

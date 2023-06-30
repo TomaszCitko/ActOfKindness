@@ -15,7 +15,7 @@ public class TokenService
         _configuration = configuration;
     }
 
-    public string CreateToken(AppUser user)
+    public string CreateToken(AppUser user, string role)
     {
         // adding claims to get active user or do something based of those claims
         var claims = new List<Claim>
@@ -23,6 +23,7 @@ public class TokenService
             new Claim(ClaimTypes.Name, user.UserName),
             new Claim(ClaimTypes.NameIdentifier, user.Id),
             new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Role, role)
         };
 
         // creating key we gonna added to user after sucesfull login/reg

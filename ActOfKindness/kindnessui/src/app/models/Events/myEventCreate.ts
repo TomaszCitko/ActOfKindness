@@ -9,6 +9,6 @@ export interface MyEventCreate {
     ending_Date: string
     latitude: string
     longitude: string
-    type: string
+    type: number
     image: string
 }
