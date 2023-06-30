@@ -46,7 +46,6 @@ function EventDetails() {
                 const userName = await eventStore.getUser(id, event.userId)
                 if (loadedEvent){
                     setEvent(loadedEvent);
-                
             }
         }
         } catch (error) {
@@ -65,8 +64,6 @@ function EventDetails() {
 
         return (
             <>
-                <Grid>
-                    <Grid.Column width={12}>
                         <Segment.Group>
                             <Segment>
                                 <Item><Header textAlign='center' size='large'>{event.title}</Header></Item>
@@ -154,20 +151,7 @@ function EventDetails() {
                             <Segment.Group horizontal>
                             
                             </Segment.Group>
-    
                         </Segment.Group>
-    
-                    </Grid.Column>
-    
-                    <Grid.Column width={4}>
-                        <Header>PARTICIPANTS</Header>
-                        <br/> Marcin
-                        <br/> Maciej
-                        <br/> Aneta
-                        <br/> Tomek
-                    </Grid.Column>
-                </Grid>
-    
             </>
         )
     

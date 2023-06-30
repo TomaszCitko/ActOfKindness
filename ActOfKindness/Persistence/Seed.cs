@@ -41,7 +41,7 @@ public static class Seed
                     Type = EventType.HelpNeeded,
                     IsOnline = false,
                     Image =
-                        "https://news.acropolis.org/wp-content/uploads/2015/10/picture16.jpg"
+                        "https://news.acropolis.org/wp-content/uploads/2015/10/picture16.jpg",
                 });
 
             await dbContext.Events.AddAsync(

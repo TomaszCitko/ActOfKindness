@@ -33,7 +33,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateEvent([FromBody]CreateEventDto newEvent)
+        public async Task<ActionResult> CreateEvent(CreateEventDto newEvent)
         {
             await _eventService.CreateEventAsync(newEvent);
 
@@ -77,6 +77,12 @@ namespace API.Controllers
         public async Task<ActionResult<List<DetailsEventDto>>> GetFilteredModeratedEventsAsyn([FromBody] EventFilter filter)
         {
             return await _eventService.GetFilteredModeratedEventsAsync(filter);
+        }
+
+        [HttpGet("{id:guid}/participants")]
+        public async Task<ActionResult<List<ParticipantDto>> >GetParticipantsAsync(Guid id)
+        {
+            return await _eventService.ReturnParticipantsDto(id);
         }
     }
 }
