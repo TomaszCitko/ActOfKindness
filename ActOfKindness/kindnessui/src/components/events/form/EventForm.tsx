@@ -15,13 +15,13 @@ function EventForm() {
         id: '',
         userId: '',
         localization: '',
-        isOnline:'',
+        isOnline:true,
         title:	'',
         description: '',
         starting_Date: '',
         ending_Date: '',
-        latitude: '',
-        longitude: '',
+        latitude: '0',
+        longitude: '0',
         type: 0,
         image: '',
     })
@@ -63,13 +63,7 @@ function EventForm() {
         })
     })
 
-    const handleFormSubmit = (event: MyEventCreate)=>{
-        if (event.id.length === 0){
-            event.id = uuid()
-            eventStore.createEvent(event)
-        }
-        console.log(event)
-    }
+
 
     return (
         <Segment inverted  clearing raised >
@@ -81,7 +75,7 @@ function EventForm() {
                 validationSchema={formValidation}
                 initialValues={myEventCreate}
                 enableReinitialize
-                onSubmit={values=> handleFormSubmit(values)}>
+                onSubmit={values=> eventStore.createEvent(values)}>
                 {({handleSubmit, isValid, isSubmitting,dirty })=>(
                     <Form className={'ui form'} onSubmit={handleSubmit} autoComplete={'off'}>
                         <FormField >
