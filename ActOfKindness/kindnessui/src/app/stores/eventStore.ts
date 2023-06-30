@@ -12,6 +12,7 @@ export default class EventStore {
     eventRegistry =  new Map<string, MyEvent>();
     userRegistry = new Map<string, User>();
     selectedEvent : MyEvent | undefined = undefined
+    
     constructor() {
         makeAutoObservable(this)
     }
@@ -20,10 +21,9 @@ export default class EventStore {
         return Array.from(this.eventRegistry.values())
     }
 
-    static loadEventDetails(id: any) {
-        throw new Error('Method not implemented.');
-    }
-
+    // static loadEventDetails(id: any) {
+    //     throw new Error('Method not implemented.');
+    // }
 
     createEvent = async(newEvent: MyEventCreate)=>{
         newEvent.id = uuid()
@@ -32,7 +32,6 @@ export default class EventStore {
             runInAction(()=>{
                 console.log(newEvent)
             })
-            // await router.navigate('/');
         }
         catch (e) {
             console.log(e)
@@ -60,27 +59,17 @@ export default class EventStore {
     }
 
     loadEventDetails = async(id:string)=>{
-        let tempDetails = this.getEvent(id)
-        // if (tempDetails){
-        //     console.log(tempDetails)
-        //     return tempDetails
-        // }
-        // else 
-        // {
-            try{
-                const eventDetails = await agent.Events.details(id)
-                return eventDetails
-            }
-            catch (error){
-                console.log(error)
-            }
-        // }
+        try{
+            const eventDetails = await agent.Events.details(id)
+            return eventDetails
+        } catch (error){
+            console.log(error)
+        }   
+    }
 
-        
-    }
-    private getEvent = async(id:string) =>{
-        return this.eventRegistry.get(id)
-    }
+    // private getEvent = async(id:string) =>{
+    //     return this.eventRegistry.get(id)
+    // }
 
     deleteEvent = async (id: string) => {
         try {
