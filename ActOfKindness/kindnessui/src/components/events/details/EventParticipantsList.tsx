@@ -1,33 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Item, Icon, Header} from 'semantic-ui-react'
 import {useParams} from "react-router-dom";
+import {useStore} from "../../../app/stores/store";
+import agent from "../../../app/api/agent";
+import EventListItem from "../dashboard/EventListItem";
+import {Participants} from "../../../app/models/Users/participants";
+import EventParticipantsListItem from "./EventParticipantsListItem";
+import {observer} from "mobx-react-lite";
 
 function EventParticipantsList() {
     const { id } = useParams();
-
+    const {eventStore} = useStore()
 
     return (
-        <Item.Group link divided>
-            <Header style={{marginRight:130}} size={"large"} color={"teal"} textAlign={"center"} content={"Participants"}/>
-                <Item>
-                    <Item.Image size='tiny' src='https://api.multiavatar.com/stefan.png' />
-                    <Item.Content>
-                        <Item.Header>Stevie Feliciano</Item.Header>
-                        <Item.Description>Text Tutaj</Item.Description>
-                    </Item.Content>
-                </Item>
-
-                <Item>
-                    <Item.Image size='tiny' src='https://api.multiavatar.com/stefan.png' />
-                    <Item.Content>
-                        <Item.Header>Stevie Feliciano</Item.Header>
-                        <Item.Description>Text Tutaj</Item.Description>
-                    </Item.Content>
-                </Item>
-
-        </Item.Group>
-
-    );
+        <>
+            {eventStore.participantsList.map(part=>(
+            <EventParticipantsListItem key={part.userName} participant={part}/>
+         ))}
+        </>
+    )
 }
 
-export default EventParticipantsList;
+export default observer(EventParticipantsList);

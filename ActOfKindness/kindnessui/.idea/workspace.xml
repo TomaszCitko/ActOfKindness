@@ -8,9 +8,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b82ed90-012b-4d75-8fa8-44e6371b2497" name="Changes" comment="landing page&#10;background picture&#10;login or register form&#10;big header &#10;changing buttons if user is logged in">
+      <change afterPath="$PROJECT_DIR$/../Application/Dtos/Event/ParticipantDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Persistence/Migrations/20230701224252_changeToListParticipants.Designer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Persistence/Migrations/20230701224252_changeToListParticipants.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/events/details/EventParticipantsListItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../API/Controllers/EventController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../API/Controllers/EventController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../API/Services/UserContextService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../API/Services/UserContextService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Application/Dtos/Event/ParticipantsDto.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Application/Interfaces/IEventService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Application/Interfaces/IEventService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Application/Services/EventService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Application/Services/EventService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Domain/Models/Event.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Domain/Models/Event.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Persistence/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Persistence/Migrations/ApplicationDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Persistence/Repositories/EventRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Persistence/Repositories/EventRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/models/user.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/agent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/agent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/Events/myEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/Events/myEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/Users/participants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/Users/participants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stores/accountStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stores/accountStore.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/stores/eventStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stores/eventStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/events/dashboard/EventListItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/dashboard/EventListItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/events/details/EventDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/details/EventDetails.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/events/details/EventDetailsDashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/details/EventDetailsDashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/events/details/EventParticipantsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/details/EventParticipantsList.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,6 +135,8 @@
       <workItem from="1687852771026" duration="2339000" />
       <workItem from="1687879120049" duration="615000" />
       <workItem from="1687938660348" duration="2809000" />
+      <workItem from="1688120216529" duration="167000" />
+      <workItem from="1688243133481" duration="15076000" />
     </task>
     <task id="LOCAL-00001" summary="creating components&#10;installing semantic UI&#10;installing router&#10;creating routes&#10;setting up navbar&#10;creating nav bar links">
       <created>1686584876280</created>

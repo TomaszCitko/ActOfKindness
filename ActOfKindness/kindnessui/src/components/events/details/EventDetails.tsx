@@ -29,6 +29,7 @@ function EventDetails() {
         moderated: '',
         type: '',
         image: '',
+        participants:[],
         createdBy: {
             username: '',
             nickname: '',
@@ -40,12 +41,17 @@ function EventDetails() {
         try {
             if (id) {
                 const loadedEvent = await eventStore.loadEventDetails(id);
+                await eventStore.getParticipants(id)
+                const userName = await eventStore.getUser(id, event.userId)
                 if (loadedEvent){
                     setEvent(loadedEvent);
                 }
             }
         } catch (error) {
             console.error('Error loading event details:', error);
+        }
+        return ()=>{
+            eventStore.selectedEvent = undefined
         }
     };
     loadEventDetails();
@@ -69,7 +75,7 @@ function EventDetails() {
                         {event.description}
                         <Image src={event.image} size='large' />
                     </Segment>
-                                
+ 
                     <Segment>
                         <Segment>
                             <Grid verticalAlign={'middle'}>
@@ -135,6 +141,14 @@ function EventDetails() {
                                         color={"red"}
                                         content={"Delete"}
                                     ></Button>
+                                  
+                                    <Button as={Link}
+                                        floated={"right"}
+                                        color={'teal'}
+                                        onClick={()=>eventStore.joinEvent(event.id)}
+                                        content={"Join Event!"}/>
+                                    </Grid.Column>
+                                  
                                 </Grid.Column>
                             </Grid>
                         </Segment>

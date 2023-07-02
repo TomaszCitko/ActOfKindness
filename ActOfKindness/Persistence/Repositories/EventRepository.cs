@@ -1,4 +1,4 @@
-﻿using Application.Dtos.Event;
+using Application.Dtos.Event;
 using Application.Dtos.User;
 using Application.Exceptions;
 using Application.Interfaces;
@@ -16,6 +16,8 @@ public class EventRepository : IEventRepository
     {
         _context = context;
     }
+
+
 
     public async Task<List<Event>> GetModeratedEventsAsync()
     {
@@ -37,6 +39,7 @@ public class EventRepository : IEventRepository
     {
         return await _context.Events
             .Include(i => i.Participants)
+            .ThenInclude(u=>u.User)
             .Include(i => i.CreatedBy)
             .FirstOrDefaultAsync(e => e.Id == id);
     }
