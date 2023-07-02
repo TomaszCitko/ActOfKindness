@@ -41,10 +41,9 @@ export default class EventStore {
         return Array.from(this.eventRegistry.values())
     }
 
-    static loadEventDetails(id: any) {
-        throw new Error('Method not implemented.');
-    }
-
+    // static loadEventDetails(id: any) {
+    //     throw new Error('Method not implemented.');
+    // }
 
     createEvent = async(newEvent: MyEventCreate)=>{
         newEvent.id = uuid()
@@ -53,7 +52,6 @@ export default class EventStore {
             runInAction(()=>{
                 console.log(newEvent)
             })
-            // await router.navigate('/');
         }
         catch (e) {
             console.log(e)
@@ -96,7 +94,12 @@ export default class EventStore {
 
     private getEvent = async(id:string) =>{
         return this.eventRegistry.get(id)
+
     }
+
+    // private getEvent = async(id:string) =>{
+    //     return this.eventRegistry.get(id)
+    // }
 
     deleteEvent = async (id: string) => {
         try {

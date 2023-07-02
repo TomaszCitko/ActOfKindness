@@ -1,4 +1,5 @@
 ﻿using Application.Dtos.Event;
+using Application.Dtos.User;
 using Application.Interfaces;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;

@@ -1,4 +1,6 @@
-﻿using Application.Dtos.Event;
+using Application.Dtos.Event;
+using Application.Dtos.User;
+using Application.Exceptions;
 using Application.Interfaces;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
@@ -18,13 +20,19 @@ public class EventRepository : IEventRepository
 
 
     public async Task<List<Event>> GetModeratedEventsAsync()
-    { 
-        return await _context.Events.Where(e => e.IsModerated).ToListAsync();
+    {
+        return await _context.Events
+            .Where(e => e.IsModerated)
+            .Include(e => e.CreatedBy)
+            .ToListAsync();
     }
 
     public async Task<List<Event>> GetUnmoderatedEventsAsync()
     {
-        return await _context.Events.Where(e => !e.IsModerated).ToListAsync();
+        return await _context.Events
+            .Where(e => !e.IsModerated)
+            .Include(e => e.CreatedBy)
+            .ToListAsync();
     }
 
     public async Task<Event?> GetEventByIdAsync(Guid id)
@@ -32,6 +40,7 @@ public class EventRepository : IEventRepository
         return await _context.Events
             .Include(i => i.Participants)
             .ThenInclude(u=>u.User)
+            .Include(i => i.CreatedBy)
             .FirstOrDefaultAsync(e => e.Id == id);
     }
 
@@ -76,7 +85,10 @@ public class EventRepository : IEventRepository
 
     public async Task<List<Event>> GetFilteredModeratedEventsAsync(EventFilter filter)
     {
-        var filteredEvents = await _context.Events.Where(e => e.IsModerated).ToListAsync();
+        var filteredEvents = await _context.Events
+            .Where(e => e.IsModerated)
+            .Include(e => e.CreatedBy)
+            .ToListAsync();
 
         if (!string.IsNullOrEmpty(filter.Localization))
         {

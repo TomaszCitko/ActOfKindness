@@ -1,6 +1,12 @@
+export interface CreatedBy {
+    username: string
+    nickname: string
+}
+
 export interface MyEvent {
     id: string
     userId: string
+    createdBy: CreatedBy
     createdTime: string
     localization: string
     title:	string

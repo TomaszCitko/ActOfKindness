@@ -41,21 +41,21 @@ function EventListItem({event}: Props) {
                     <Grid.Column width={3}>
                         <span>
                         <Icon name='calendar' style={{marginBottom: 10}} size='large' color='teal'/>
-                            {event.startingDate.slice(0,10)}10/02/2023
+                            {event.startingDate.slice(0,10)}
                         </span>
                     </Grid.Column>
 
                     <Grid.Column width={3}>
                         <span>
                         <Icon name='location arrow' style={{marginBottom: 10}} size='large' color='teal'/>
-                            {event.localization} Paris, France
+                            {event.localization}
                         </span>
                     </Grid.Column>
 
                     <Grid.Column width={6}>
                         <span>
                         <Icon name='user' style={{marginBottom: 10}} size='large' color='teal'/>
-                            {event.userId}  userName
+                            {event.createdBy.nickname}
                         </span>
                     </Grid.Column>
 
@@ -64,7 +64,7 @@ function EventListItem({event}: Props) {
                         <Button as={Link}
                                 floated={"right"}
                                 to={`/eventDetails/${event.id}`}
-                                color={"orange"}
+                                color={"teal"}
                                 content={"View"}
                                 style={{marginLeft: 10}}
                         ></Button>
@@ -72,7 +72,7 @@ function EventListItem({event}: Props) {
                         <Button as={Link}
                                 floated={"right"}
                                 to={`/eventDetails/${event.id}`}
-                                color={"teal"}
+                                color={"orange"}
                                 content={"Edit"}
                         ></Button>
 

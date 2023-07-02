@@ -1,4 +1,5 @@
 using Application.Dtos.Event;
+using Application.Dtos.User;
 using Domain.Models;
 
 namespace Application.Interfaces

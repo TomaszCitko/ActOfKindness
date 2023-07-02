@@ -1,4 +1,5 @@
 ﻿using Application.Dtos.Event;
+using Application.Dtos.User;
 using AutoMapper;
 using Domain.Models;
 
@@ -8,7 +9,10 @@ namespace Application.Mappings
     {
         public EventMappingProfile()
         {
-            CreateMap<Event, DetailsEventDto>();
+            CreateMap<Event, DetailsEventDto>()
+                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.CreatedBy));
+
+            CreateMap<AppUser, UserEventDto>();
 
             CreateMap<CreateEventDto, Event>();
         }
