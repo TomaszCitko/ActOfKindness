@@ -149,7 +149,6 @@ function EventDetails() {
                                         content={"Join Event!"}/>
                                     </Grid.Column>
                                   
-                                </Grid.Column>
                             </Grid>
                         </Segment>
                     </Segment>

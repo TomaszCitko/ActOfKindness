@@ -12,8 +12,7 @@ interface Props {
 function EventParticipantsListItem({participant}: Props) {
 
     return (
-        <Item.Group link divided>
-            <Header style={{marginRight:130}} size={"large"} color={"teal"} textAlign={"center"} content={"Participants"}/>
+
 
                     <Item>
                         <Item.Image size='tiny' src={participant.avatar} />
@@ -23,7 +22,6 @@ function EventParticipantsListItem({participant}: Props) {
                         </Item.Content>
                     </Item>
 
-        </Item.Group>
     );
 }
 

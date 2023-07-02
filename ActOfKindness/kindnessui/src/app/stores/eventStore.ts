@@ -136,6 +136,7 @@ export default class EventStore {
     joinEvent = async(eventId : string)=>{
         try {
             await agent.Events.joinEvent(eventId)
+            await this.getParticipants(eventId)
         }
         catch (e) {
             console.log(e)

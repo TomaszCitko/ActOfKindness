@@ -14,9 +14,13 @@ function EventParticipantsList() {
 
     return (
         <>
-            {eventStore.participantsList.map(part=>(
-            <EventParticipantsListItem key={part.userName} participant={part}/>
-         ))}
+            <Header style={{marginRight:130}} size={"large"} color={"teal"} textAlign={"center"} content={"Participants"}/>
+            <Item.Group link divided>
+                {eventStore.participantsList.map(part=>(
+                <EventParticipantsListItem key={part.userName} participant={part}/>
+                    ))}
+            </Item.Group>
+
         </>
     )
 }
