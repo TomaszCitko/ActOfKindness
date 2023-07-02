@@ -1,3 +1,5 @@
+// noinspection SpellCheckingInspection
+
 import {makeAutoObservable, runInAction} from "mobx";
 import {User} from "../models/Users/user";
 import {MyEvent} from "../models/Events/myEvent";
@@ -6,14 +8,33 @@ import {MyEventCreate} from "../models/Events/myEventCreate";
 import {v4 as uuid} from 'uuid'
 import {redirect, useNavigate} from "react-router-dom";
 import {router} from "../router/Routes";
+import {Participants} from "../models/Users/participants";
+import {store} from "./store";
 
 export default class EventStore {
 
     eventRegistry =  new Map<string, MyEvent>();
     userRegistry = new Map<string, User>();
     selectedEvent : MyEvent | undefined = undefined
+    participantsList: Participants[] =[]
+
     constructor() {
         makeAutoObservable(this)
+    }
+
+    getParticipants = async (eventId: string)=>{
+        try {
+            this.participantsList = []
+            const participants = await agent.Events.getParticipants(eventId)
+                    participants.forEach(participant=>{
+                        {
+                            this.participantsList.push(participant)
+                        }
+                    })
+                }
+        catch (e) {
+            console.log(e)
+        }
     }
 
     get myEvents(){
@@ -60,24 +81,19 @@ export default class EventStore {
     }
 
     loadEventDetails = async(id:string)=>{
+        this.selectedEvent = undefined
         let tempDetails = this.getEvent(id)
-        // if (tempDetails){
-        //     console.log(tempDetails)
-        //     return tempDetails
-        // }
-        // else 
-        // {
             try{
                 const eventDetails = await agent.Events.details(id)
+                this.selectedEvent = eventDetails
                 return eventDetails
             }
             catch (error){
                 console.log(error)
             }
         // }
-
-        
     }
+
     private getEvent = async(id:string) =>{
         return this.eventRegistry.get(id)
     }
@@ -95,7 +111,6 @@ export default class EventStore {
     {
         try{
             const userData = await agent.Events.userName(id, userId)
-            console.log('user details', userData)
             return userData
         }
         catch (error){
@@ -112,6 +127,15 @@ export default class EventStore {
         }
         catch (error) {
             console.log(error)
+        }
+    }
+
+    joinEvent = async(eventId : string)=>{
+        try {
+            await agent.Events.joinEvent(eventId)
+        }
+        catch (e) {
+            console.log(e)
         }
     }
 

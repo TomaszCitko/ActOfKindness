@@ -10,7 +10,6 @@ interface Props {
 }
 
 function EventListItem({event}: Props) {
-    console.log(event)
     return (
         <>
         

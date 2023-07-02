@@ -83,5 +83,13 @@ namespace API.Controllers
         {
             return await _eventService.ReturnParticipantsDto(id);
         }
+
+        [HttpGet("{eventId:guid}/join")]
+        public async Task<ActionResult> AddUserToEventAsync(Guid eventId)
+        {
+            await _eventService.JoinEventAsync(eventId);
+            return Ok();
+        }
+
     }
 }

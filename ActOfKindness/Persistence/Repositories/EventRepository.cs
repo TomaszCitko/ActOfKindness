@@ -15,6 +15,8 @@ public class EventRepository : IEventRepository
         _context = context;
     }
 
+
+
     public async Task<List<Event>> GetModeratedEventsAsync()
     { 
         return await _context.Events.Where(e => e.IsModerated).ToListAsync();
@@ -27,7 +29,10 @@ public class EventRepository : IEventRepository
 
     public async Task<Event?> GetEventByIdAsync(Guid id)
     {
-        return await _context.Events.Include(i => i.Participants).FirstOrDefaultAsync(e => e.Id == id);
+        return await _context.Events
+            .Include(i => i.Participants)
+            .ThenInclude(u=>u.User)
+            .FirstOrDefaultAsync(e => e.Id == id);
     }
 
     public async Task DeleteEventAsync(Guid id)

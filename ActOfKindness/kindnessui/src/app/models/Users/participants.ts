@@ -1,5 +1,5 @@
 export interface Participants {
     location: string,
-    username: string,
+    userName: string,
     avatar?: string,
 }

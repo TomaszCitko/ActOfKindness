@@ -36,6 +36,7 @@ function EventDetails() {
         moderated: '',
         type: '',
         image: '',
+        participants:[],
     })
     useEffect(() => {
     const loadEventDetails = async () => {
@@ -43,13 +44,19 @@ function EventDetails() {
             if (id) 
             {
                 const loadedEvent = await eventStore.loadEventDetails(id);
+                await eventStore.getParticipants(id)
+
                 const userName = await eventStore.getUser(id, event.userId)
+
                 if (loadedEvent){
                     setEvent(loadedEvent);
             }
         }
         } catch (error) {
             console.error('Error loading event details:', error);
+        }
+        return ()=>{
+            eventStore.selectedEvent = undefined
         }
     };
     loadEventDetails();
@@ -135,21 +142,24 @@ function EventDetails() {
                                     </Segment>
                                     <Segment>
                                         <Grid verticalAlign={'middle'}>
-                                            <Grid.Column width={15}>
-                                            <Button as={Link}
-                                                floated={"right"}
-                                                onClick={handleDelete}
-                                                color={"red"}
-                                                content={"Delete"}
-                                            ></Button>
-                                            </Grid.Column>
+                                            <Grid.Column width={16}>
+                                                <Button as={Link}
+                                                    floated={"left"}
+                                                    onClick={handleDelete}
+                                                    color={"red"}
+                                                    content={"Delete"}/>
+
+                                                <Button as={Link}
+                                                    floated={"right"}
+                                                    color={'teal'}
+                                                    onClick={()=>eventStore.joinEvent(event.id)}
+                                                    content={"Join Event!"}/>
+                                             </Grid.Column>
                                         </Grid>
                                     </Segment>
                                 </Segment>
                             </Segment.Group>
-    
-                            <Segment.Group horizontal>
-                            
+                                <Segment.Group horizontal>
                             </Segment.Group>
                         </Segment.Group>
             </>

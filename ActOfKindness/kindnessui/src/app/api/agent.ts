@@ -40,13 +40,16 @@ const Events = {
     userName: (id:string, userId:string)=> requests.get<User>(`/event/${id}`),
     unmoderatedList: ()=> requests.get<MyEvent[]>('/event/unmoderated'),
     moderate: (id: string) => requests.patch(`/event/${id}/moderate`),
+    joinEvent: (eventId: string)=> requests.get<void>(`/event/${eventId}/join`),
+    getParticipants: (id:string)=> requests.get<Participants[]>(`/event/${id}/participants`),
+
+
 }
 
 const Account = {
     login: (user: LoginForm)=> requests.post<User>('/account/login', user),
     register: (user: RegisterForm)=> requests.post<User>('/account/register', user),
     getCurrentUser: ()=> requests.get<User>('/account'),
-    getParticipants: (id:string)=> requests.get<Participants[]>(`${id}/participants`)
 }
 
 const agent = {

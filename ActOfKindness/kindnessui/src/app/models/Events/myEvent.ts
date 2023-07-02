@@ -13,4 +13,5 @@ export interface MyEvent {
     moderated: string
     type: string
     image: string
+    participants: string[]
 }

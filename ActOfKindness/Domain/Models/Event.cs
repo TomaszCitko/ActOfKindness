@@ -20,7 +20,7 @@ namespace Domain.Models
         public bool IsModerated { get; set; }
         public EventType Type { get; set; }
         public string Image { get; set; }
-        public IEnumerable<EventUser> Participants { get; set; }
+        public List<EventUser> Participants { get; set; }
     }
 
     public enum EventType

@@ -3,6 +3,8 @@ using Application.Exceptions;
 using Application.Interfaces;
 using AutoMapper;
 using Domain.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 
 namespace Application.Services
 {
@@ -11,12 +13,14 @@ namespace Application.Services
         private readonly IEventRepository _eventRepository;
         private readonly IMapper _mapper;
         private readonly IUserContextService _userContextService;
+        private readonly UserManager<AppUser> _userManager;
 
-        public EventService(IEventRepository eventRepository, IMapper mapper, IUserContextService userContextService)
+        public EventService(IEventRepository eventRepository, IMapper mapper, IUserContextService userContextService, UserManager<AppUser> userManager)
         {
             _eventRepository = eventRepository;
             _mapper = mapper;
             _userContextService = userContextService;
+            _userManager = userManager;
         }
 
         public async Task<List<DetailsEventDto>> GetModeratedEventsAsync()
@@ -116,15 +120,47 @@ namespace Application.Services
 
         public async Task<List<ParticipantDto>> ReturnParticipantsDto(Guid eventId)
         {
-            var newEvent = _eventRepository.GetEventByIdAsync(eventId);
-            var participants = new ParticipantsDto();
-            foreach (var eventUser in newEvent.Result.Participants)
+            var newEvent =  await _eventRepository.GetEventByIdAsync(eventId);
+            var listOfParticipants = new List<ParticipantDto>();
+            foreach (var newEventParticipant in newEvent.Participants)
             {
-                participants.AddUser(eventUser);
+                var newParticipant = new ParticipantDto
+                {
+                    UserName = newEventParticipant.User.UserName,
+                    Location = newEventParticipant.User.Location,
+                    Avatar = "https://api.multiavatar.com/Binx Bond.png"
+                };
+                listOfParticipants.Add(newParticipant);
             }
-
-            return participants.participants;
+            return listOfParticipants;
         }
 
+        public async Task JoinEventAsync(Guid eventId)
+        {
+            var eventToJoin = await _eventRepository.GetEventByIdAsync(eventId);
+            var userId =  _userContextService.GetUserId;
+            if (userId is not null)
+            {
+                var userWhoWantsToJoin = await _userManager.FindByIdAsync(userId);
+
+
+                if (eventToJoin is not null && userWhoWantsToJoin is not null)
+                {
+                    var eventUser = new EventUser
+                    {
+                        Event = eventToJoin,
+                        EventId = eventToJoin.Id,
+                        User = userWhoWantsToJoin,
+                        UserId = userWhoWantsToJoin.Id
+
+                    };
+                    eventToJoin.Participants.Add(eventUser);
+                }
+            }
+
+            await _eventRepository.SaveAsync();
+        }
+
+  
     }
 }

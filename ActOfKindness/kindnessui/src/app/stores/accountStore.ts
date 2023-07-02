@@ -81,10 +81,11 @@ export default class AccountStore{
             runInAction(()=>{
                 this.setUser(user)
                 this.isLoggedIn = true
-                console.log(user)
             })
         } catch (e){
             console.log(e)
         }
     }
+
+
 }
