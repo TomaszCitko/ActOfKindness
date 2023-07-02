@@ -1,8 +1,10 @@
 ﻿using Application.Dtos.Event;
+using Application.Dtos.User;
 using Application.Exceptions;
 using Application.Interfaces;
 using AutoMapper;
 using Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services
 {
