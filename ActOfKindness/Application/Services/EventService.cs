@@ -1,12 +1,10 @@
 ﻿using Application.Dtos.Event;
-using Application.Dtos.User;
 using Application.Exceptions;
 using Application.Interfaces;
 using AutoMapper;
 using Domain.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace Application.Services
 {
@@ -14,14 +12,14 @@ namespace Application.Services
     {
         private readonly IEventRepository _eventRepository;
         private readonly IMapper _mapper;
-        private readonly IUserContextService _userContextService;
+        private readonly IContextService _contextService;
         private readonly UserManager<AppUser> _userManager;
 
-        public EventService(IEventRepository eventRepository, IMapper mapper, IUserContextService userContextService, UserManager<AppUser> userManager)
+        public EventService(IEventRepository eventRepository, IMapper mapper, IContextService contextService, UserManager<AppUser> userManager)
         {
             _eventRepository = eventRepository;
             _mapper = mapper;
-            _userContextService = userContextService;
+            _contextService = contextService;
             _userManager = userManager;
         }
 
@@ -30,7 +28,7 @@ namespace Application.Services
             var events = await _eventRepository.GetModeratedEventsAsync();
 
             var eventsDto = _mapper.Map<List<DetailsEventDto>>(events);
-
+            Log.Information("Get all moderated events => {eventsDto}");
             return eventsDto;
         }
 
@@ -45,12 +43,11 @@ namespace Application.Services
         public async Task CreateEventAsync(CreateEventDto newEventDto)
         {
             if (await _eventRepository.GetEventByIdAsync(newEventDto.Id) is not null)
-                throw new BadRequestException($"Event with this ID ({newEventDto.Id}) exist");
-
-
-
-
-            //newEventDto.UserId
+                throw new BadRequestException(
+                    $"Event with this ID ({newEventDto.Id}) exist",
+                    _contextService.Method,
+                    _contextService.GetUserId,
+                    _contextService.GetUserRole);
 
             var temporaryImagePlaceHolder =
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Vue_de_nuit_de_la_Place_Stanislas_%C3%A0_Nancy.jpg/1920px-Vue_de_nuit_de_la_Place_Stanislas_%C3%A0_Nancy.jpg";
@@ -59,7 +56,7 @@ namespace Application.Services
 
             var newEvent = _mapper.Map<Event>(newEventDto);
 
-            newEvent.UserId = _userContextService.GetUserId;
+            newEvent.UserId = _contextService.GetUserId;
 
             await _eventRepository.CreateEventAsync(newEvent);
             await _eventRepository.SaveAsync();
@@ -69,12 +66,20 @@ namespace Application.Services
         {
             var eventToDelete = await _eventRepository.GetEventByIdAsync(id);
 
-            if (eventToDelete is null) throw new NotFoundException("Event not found");
+            var userId = _contextService.GetUserId;
+            var role = _contextService.GetUserRole;
 
-            var userId = _userContextService.GetUserId;
-            var role = _userContextService.GetUserRole;
+            if (eventToDelete is null) throw new NotFoundException(
+                $"Event ({id}) not found",
+                _contextService.Method,
+                userId,
+                role);
 
-            if (eventToDelete.UserId != userId && role == "User") throw new ForbidException();
+            if (eventToDelete.UserId != userId && role == "User") throw new ForbidException(
+                $"You are not allowed to delete event ({id})",
+                _contextService.Method,
+                userId,
+                role);
 
             await _eventRepository.DeleteEventAsync(id);
         }
@@ -83,7 +88,11 @@ namespace Application.Services
         {
             var eventDetails = await _eventRepository.GetEventByIdAsync(id);
 
-            if (eventDetails is null) throw new NotFoundException("Event not found");
+            if (eventDetails is null) throw new NotFoundException(
+                $"Event ({id}) not found",
+                _contextService.Method,
+                _contextService.GetUserId,
+                _contextService.GetUserRole);
 
             var eventDetailsDto = _mapper.Map<DetailsEventDto>(eventDetails);
 
@@ -93,13 +102,21 @@ namespace Application.Services
         public async Task UpdateEventAsync(Guid id, EditEventDto updatedEventDto)
         {
             var eventToUpdate = await _eventRepository.GetEventByIdAsync(id);
+            
+            var userId = _contextService.GetUserId;
+            var role = _contextService.GetUserRole;
 
-            if (eventToUpdate is null) throw new NotFoundException("Event not found");
+            if (eventToUpdate is null) throw new NotFoundException(
+                $"Event ({id}) not found",
+                _contextService.Method,
+                userId,
+                role);
 
-            var userId = _userContextService.GetUserId;
-            var role = _userContextService.GetUserRole;
-
-            if (eventToUpdate.UserId != userId && role == "User") throw new ForbidException();
+            if (eventToUpdate.UserId != userId && role == "User") throw new ForbidException(
+                $"You are not allowed to update event ({id})",
+                _contextService.Method,
+                userId,
+                role);
 
             await _eventRepository.UpdateEventAsync(id, updatedEventDto);
         }
@@ -108,7 +125,11 @@ namespace Application.Services
         {
             var rowsChanged = await _eventRepository.ModerateEventAsync(id);
 
-            if (rowsChanged == 0) throw new NotFoundException("Event not found");
+            if (rowsChanged == 0) throw new NotFoundException(
+                $"Event ({id}) not found",
+                _contextService.Method,
+                _contextService.GetUserId,
+                _contextService.GetUserRole);
         }
 
         public async Task<List<DetailsEventDto>> GetFilteredModeratedEventsAsync(EventFilter filter)
@@ -140,7 +161,7 @@ namespace Application.Services
         public async Task JoinEventAsync(Guid eventId)
         {
             var eventToJoin = await _eventRepository.GetEventByIdAsync(eventId);
-            var userId =  _userContextService.GetUserId;
+            var userId =  _contextService.GetUserId;
             if (userId is not null)
             {
                 var userWhoWantsToJoin = await _userManager.FindByIdAsync(userId);

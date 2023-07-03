@@ -2,10 +2,11 @@
 
 namespace Application.Interfaces
 {
-    public interface IUserContextService
+    public interface IContextService
     {
         ClaimsPrincipal? User { get; }
         string? GetUserId { get; }
         string? GetUserRole { get; }
+        string Method { get; }
     }
 }
