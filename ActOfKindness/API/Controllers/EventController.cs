@@ -81,11 +81,11 @@ namespace API.Controllers
         [HttpGet("{id:guid}/participants")]
         public async Task<ActionResult<List<ParticipantDto>>> GetParticipants(Guid id)
         {
-            return await _eventService.ReturnParticipantsDto(id);
+            return await _eventService.ReturnParticipantsDtoAsync(id);
         }
 
         [HttpGet("{eventId:guid}/join")]
-        public async Task<ActionResult> AddUserToEventAsync(Guid eventId)
+        public async Task<ActionResult> AddUserToEvent(Guid eventId)
         {
             await _eventService.JoinEventAsync(eventId);
             return Ok();

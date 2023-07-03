@@ -38,7 +38,7 @@ namespace API.Middleware
                 Log.Fatal($"Exception {exception}");
 
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                await context.Response.WriteAsync($"Something went wrong | {exception.Message}");
+                await context.Response.WriteAsync($"Something went wrong");
             }
         }
     }

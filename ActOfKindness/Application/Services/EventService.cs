@@ -28,7 +28,6 @@ namespace Application.Services
             var events = await _eventRepository.GetModeratedEventsAsync();
 
             var eventsDto = _mapper.Map<List<DetailsEventDto>>(events);
-            Log.Information("Get all moderated events => {eventsDto}");
             return eventsDto;
         }
 
@@ -60,6 +59,8 @@ namespace Application.Services
 
             await _eventRepository.CreateEventAsync(newEvent);
             await _eventRepository.SaveAsync();
+
+            Log.Information($"Created new event ({newEvent.Id}) by {_contextService.GetUserRole} ({newEvent.UserId})");
         }
 
         public async Task DeleteEventAsync(Guid id)
@@ -69,30 +70,35 @@ namespace Application.Services
             var userId = _contextService.GetUserId;
             var role = _contextService.GetUserRole;
 
-            if (eventToDelete is null) throw new NotFoundException(
-                $"Event ({id}) not found",
-                _contextService.Method,
-                userId,
-                role);
+            if (eventToDelete is null)
+                throw new NotFoundException(
+                    $"Event ({id}) not found",
+                    _contextService.Method,
+                    userId,
+                    role);
 
-            if (eventToDelete.UserId != userId && role == "User") throw new ForbidException(
-                $"You are not allowed to delete event ({id})",
-                _contextService.Method,
-                userId,
-                role);
+            if (eventToDelete.UserId != userId && role == "User")
+                throw new ForbidException(
+                    $"You are not allowed to delete event ({id})",
+                    _contextService.Method,
+                    userId,
+                    role);
 
             await _eventRepository.DeleteEventAsync(id);
+
+            Log.Information($"Deleted event ({id}) by {role} ({userId})");
         }
 
         public async Task<DetailsEventDto> GetEventByIdAsync(Guid id)
         {
             var eventDetails = await _eventRepository.GetEventByIdAsync(id);
 
-            if (eventDetails is null) throw new NotFoundException(
-                $"Event ({id}) not found",
-                _contextService.Method,
-                _contextService.GetUserId,
-                _contextService.GetUserRole);
+            if (eventDetails is null)
+                throw new NotFoundException(
+                    $"Event ({id}) not found",
+                    _contextService.Method,
+                    _contextService.GetUserId,
+                    _contextService.GetUserRole);
 
             var eventDetailsDto = _mapper.Map<DetailsEventDto>(eventDetails);
 
@@ -106,30 +112,37 @@ namespace Application.Services
             var userId = _contextService.GetUserId;
             var role = _contextService.GetUserRole;
 
-            if (eventToUpdate is null) throw new NotFoundException(
-                $"Event ({id}) not found",
-                _contextService.Method,
-                userId,
-                role);
+            if (eventToUpdate is null)
+                throw new NotFoundException(
+                    $"Event ({id}) not found",
+                    _contextService.Method,
+                    userId,
+                    role);
 
-            if (eventToUpdate.UserId != userId && role == "User") throw new ForbidException(
-                $"You are not allowed to update event ({id})",
-                _contextService.Method,
-                userId,
-                role);
+            if (eventToUpdate.UserId != userId && role == "User")
+                throw new ForbidException(
+                    $"You are not allowed to update event ({id})",
+                    _contextService.Method,
+                    userId,
+                    role);
 
             await _eventRepository.UpdateEventAsync(id, updatedEventDto);
+
+            Log.Information($"Updated event ({id}) by {role} ({userId})");
         }
 
         public async Task ModerateEventAsync(Guid id)
         {
             var rowsChanged = await _eventRepository.ModerateEventAsync(id);
 
-            if (rowsChanged == 0) throw new NotFoundException(
-                $"Event ({id}) not found",
-                _contextService.Method,
-                _contextService.GetUserId,
-                _contextService.GetUserRole);
+            if (rowsChanged == 0)
+                throw new NotFoundException(
+                    $"Event ({id}) not found",
+                    _contextService.Method,
+                    _contextService.GetUserId,
+                    _contextService.GetUserRole);
+
+            Log.Information($"Moderated event ({id}) by {_contextService.GetUserRole} ({_contextService.GetUserId})");
         }
 
         public async Task<List<DetailsEventDto>> GetFilteredModeratedEventsAsync(EventFilter filter)
@@ -141,7 +154,7 @@ namespace Application.Services
             return eventsDto;
         }
 
-        public async Task<List<ParticipantDto>> ReturnParticipantsDto(Guid eventId)
+        public async Task<List<ParticipantDto>> ReturnParticipantsDtoAsync(Guid eventId)
         {
             var newEvent =  await _eventRepository.GetEventByIdAsync(eventId);
             var listOfParticipants = new List<ParticipantDto>();
@@ -161,11 +174,17 @@ namespace Application.Services
         public async Task JoinEventAsync(Guid eventId)
         {
             var eventToJoin = await _eventRepository.GetEventByIdAsync(eventId);
+
+            if (eventToJoin is null)
+                throw new NotFoundException($"Event ({eventId}) not found",
+                    _contextService.Method,
+                    _contextService.GetUserId,
+                    _contextService.GetUserRole);
+
             var userId =  _contextService.GetUserId;
             if (userId is not null)
             {
                 var userWhoWantsToJoin = await _userManager.FindByIdAsync(userId);
-
 
                 if (eventToJoin is not null && userWhoWantsToJoin is not null)
                 {
@@ -182,8 +201,8 @@ namespace Application.Services
             }
 
             await _eventRepository.SaveAsync();
-        }
 
-  
+            Log.Information($"{_contextService.GetUserRole} ({userId}) joined to event ({eventId})");
+        }
     }
 }
