@@ -177,8 +177,10 @@ export default class EventStore {
     loadFilteredEvents = async (filteredList:MyEventFilter)=>{
         try {
             console.log(JSON.parse(JSON.stringify(filteredList)))
-            const filteredEventsResponse = await agent.Events.filteredList(JSON.parse(JSON.stringify(filteredList)));           
+            const filteredEventsResponse = await agent.Events.filteredList(JSON.parse(JSON.stringify(filteredList)));
+            this.clearEvents();      
             filteredEventsResponse.forEach((event: MyEvent)=>{
+                console.log(event);
                 this.saveEvent(event)
             })
         }
