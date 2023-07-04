@@ -13,14 +13,29 @@ import {store} from "./store";
 import { MyEventFilter } from "../models/Events/myEventFilter";
 
 export default class EventStore {
-
     eventRegistry =  new Map<string, MyEvent>();
     userRegistry = new Map<string, User>();
     selectedEvent : MyEvent | undefined = undefined
     participantsList: Participants[] =[]
+    filteredList = {
+        localization: '',
+        title: '',
+        description: '',
+        startingDate: '',
+        endingDate: '',
+        type: ''
+    };
 
     constructor() {
         makeAutoObservable(this)
+    }
+
+    setFilteredList(property:any, value:string) {
+        this.filteredList = {
+        ...this.filteredList,
+        [property]: value,
+        };
+        console.log(this.filteredList);
     }
 
     getParticipants = async (eventId: string)=>{
@@ -157,10 +172,13 @@ export default class EventStore {
         this.eventRegistry.clear();
     }
 
+
+
     loadFilteredEvents = async (filteredList:MyEventFilter)=>{
         try {
-            const filteredEventsResponse = await agent.Events.filteredList(filteredList)
-            filteredEventsResponse.forEach(event=>{
+            console.log(JSON.parse(JSON.stringify(filteredList)))
+            const filteredEventsResponse = await agent.Events.filteredList(JSON.parse(JSON.stringify(filteredList)));           
+            filteredEventsResponse.forEach((event: MyEvent)=>{
                 this.saveEvent(event)
             })
         }

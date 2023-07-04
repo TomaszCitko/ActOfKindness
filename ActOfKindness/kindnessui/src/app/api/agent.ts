@@ -43,8 +43,7 @@ const Events = {
     moderate: (id: string) => requests.patch(`/event/${id}/moderate`),
     joinEvent: (eventId: string)=> requests.get<void>(`/event/${eventId}/join`),
     getParticipants: (id:string)=> requests.get<Participants[]>(`/event/${id}/participants`),
-    filteredList: (eventFilter:MyEventFilter)=> requests.get<MyEvent[]>('/api/event/filter')
-
+    filteredList: (eventFilter:MyEventFilter)=> axios.get('/Event/filter', {params: eventFilter}).then(responseBody)
 }
 
 const Account = {

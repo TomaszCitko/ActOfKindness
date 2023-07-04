@@ -3,18 +3,12 @@ import {Grid} from "semantic-ui-react";
 import {observer} from "mobx-react-lite";
 import {useStore} from "../../../app/stores/store";
 import FilteredEventListItem from './FilteredEventListItem';
+import { MyEventFilter } from '../../../app/models/Events/myEventFilter';
 
-function FilteredEventDashboard() {
+function FilteredEventDashboard(filteredList:MyEventFilter) {
     const { eventStore } = useStore();
     const { loadFilteredEvents, myEvents, clearEvents } = eventStore;
-    let filteredList = {
-        localization: "",
-        title: "",
-        description: "",
-        startingDate: "",
-        endingDate: "",
-        type: ""
-    }
+
     useEffect(() => {
         loadFilteredEvents(filteredList);
         return () => { clearEvents(); }
