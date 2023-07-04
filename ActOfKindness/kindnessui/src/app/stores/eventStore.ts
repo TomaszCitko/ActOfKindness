@@ -10,6 +10,7 @@ import {redirect, useNavigate} from "react-router-dom";
 import {router} from "../router/Routes";
 import {Participants} from "../models/Users/participants";
 import {store} from "./store";
+import { MyEventFilter } from "../models/Events/myEventFilter";
 
 export default class EventStore {
 
@@ -154,6 +155,18 @@ export default class EventStore {
 
     clearEvents = () => {
         this.eventRegistry.clear();
+    }
+
+    loadFilteredEvents = async (filteredList:MyEventFilter)=>{
+        try {
+            const filteredEventsResponse = await agent.Events.filteredList(filteredList)
+            filteredEventsResponse.forEach(event=>{
+                this.saveEvent(event)
+            })
+        }
+        catch (error) {
+            console.log(error)
+        }
     }
 
 }
