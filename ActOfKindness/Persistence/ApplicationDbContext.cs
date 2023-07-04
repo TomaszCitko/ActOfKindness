@@ -12,6 +12,7 @@ namespace Persistence
         }
 
         public DbSet<Event> Events { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -36,6 +37,11 @@ namespace Persistence
                 .WithMany(u => u.ParticipatedEvents)
                 .HasForeignKey(eu => eu.UserId)
                 .OnDelete(DeleteBehavior.ClientNoAction);
+
+            builder.Entity<Comment>()
+                .HasOne(e => e.Event)
+                .WithMany(c => c.Comments)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

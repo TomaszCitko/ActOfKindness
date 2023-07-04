@@ -11,6 +11,7 @@ namespace API.Extensions
             services.AddScoped<ErrorHandlingMiddleware>();
             services.AddScoped<IUserContextService, UserContextService>();
             services.AddHttpContextAccessor();
+            services.AddSignalR();
         }
     }
 }

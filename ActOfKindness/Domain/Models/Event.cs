@@ -22,6 +22,7 @@ namespace Domain.Models
         public EventType Type { get; set; }
         public string Image { get; set; }
         public List<EventUser> Participants { get; set; }
+        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
     }
 
     public enum EventType

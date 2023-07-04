@@ -15,5 +15,4 @@ public interface IEventRepository
     Task<int> ModerateEventAsync(Guid id);
     Task SaveAsync();
     Task<List<Event>> GetFilteredModeratedEventsAsync(EventFilter filter);
-
 }
