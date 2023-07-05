@@ -17,7 +17,7 @@ public class ChatHub : Hub
         var comment = await _commentRepository.CreateCommentAsync(eventId, message);
 
         await Clients.Group(eventId.ToString())
-            .SendAsync("ReceiveComment", comment);
+            .SendAsync("ReceiveCommentAfterCreatingOne", comment);
     }
 
     public override async Task OnConnectedAsync()
@@ -26,6 +26,6 @@ public class ChatHub : Hub
         var eventIdString = httpContext.Request.Query["eventId"];
         await Groups.AddToGroupAsync(Context.ConnectionId, eventIdString);
         var result = await _commentRepository.ListCommentsAsync(Guid.Parse(eventIdString));
-        await Clients.Caller.SendAsync("LoadComments", result);
+        await Clients.Caller.SendAsync("GetAllComments", result);
     }
 }

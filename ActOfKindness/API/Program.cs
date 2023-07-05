@@ -44,8 +44,10 @@ builder.Services.AddCors(options =>
     options.AddPolicy("FrontEndClient", policy =>
         policy.AllowAnyMethod()
             .AllowAnyHeader()
+            .AllowCredentials()
             .WithOrigins(builder.Configuration["AllowedOrigins"]));
 });
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 

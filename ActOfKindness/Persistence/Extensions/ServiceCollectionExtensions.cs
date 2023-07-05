@@ -13,6 +13,8 @@ namespace Persistence.Extensions
             service.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("ActOfKindness")));
             service.AddScoped<IEventRepository, EventRepository>();
+            service.AddScoped<ICommentRepository, CommentRepository>();
+
         }
     }
 }

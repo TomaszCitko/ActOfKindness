@@ -20,7 +20,6 @@ function EventParticipantsList() {
                 <EventParticipantsListItem key={part.userName} participant={part}/>
                     ))}
             </Item.Group>
-
         </>
     )
 }

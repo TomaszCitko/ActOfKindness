@@ -41,6 +41,7 @@ public class EventRepository : IEventRepository
             .Include(i => i.Participants)
             .ThenInclude(u=>u.User)
             .Include(i => i.CreatedBy)
+            .Include(i=>i.Comments)
             .FirstOrDefaultAsync(e => e.Id == id);
     }
 

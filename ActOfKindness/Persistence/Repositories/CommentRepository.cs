@@ -8,12 +8,12 @@ namespace Persistence.Repositories;
 
 public class CommentRepository : ICommentRepository
 {
-    private readonly EventRepository _eventRepository;
+    private readonly IEventRepository _eventRepository;
     private readonly IUserContextService _userContextService;
     private readonly UserManager<AppUser> _userManager;
     private readonly ApplicationDbContext _dbContext;
 
-    public CommentRepository(EventRepository eventRepository, IUserContextService userContextService, UserManager<AppUser> userManager, ApplicationDbContext dbContext)
+    public CommentRepository(IEventRepository eventRepository, IUserContextService userContextService, UserManager<AppUser> userManager, ApplicationDbContext dbContext)
     {
         _eventRepository = eventRepository;
         _userContextService = userContextService;

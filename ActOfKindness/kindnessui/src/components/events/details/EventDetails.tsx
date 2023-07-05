@@ -6,10 +6,10 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useStore } from '../../../app/stores/store';
 
 interface Props {
-    event: MyEvent
+    myEvent: MyEvent
 }
 
-function EventDetails() {
+function EventDetails({myEvent}:Props) {
     const { eventStore } = useStore();
     const { deleteEvent } = eventStore;
     const { id } = useParams();
@@ -40,11 +40,10 @@ function EventDetails() {
     const loadEventDetails = async () => {
         try {
             if (id) {
-                const loadedEvent = await eventStore.loadEventDetails(id);
                 await eventStore.getParticipants(id)
                 const userName = await eventStore.getUser(id, event.userId)
-                if (loadedEvent){
-                    setEvent(loadedEvent);
+                if (myEvent){
+                    setEvent(myEvent);
                 }
             }
         } catch (error) {
