@@ -9,13 +9,20 @@ import { values } from 'mobx';
 
 
 function EventFilters() {
-    
+    const filteredList = {
+        localization: '',
+        title: '',
+        description: '',
+        startingDate: '',
+        endingDate: '',
+        type: ''
+    };
+
     const { eventStore } = useStore();
-    const { filteredList} = eventStore;
-    const handleSearch = (property: keyof typeof eventStore.filteredList, value: string) => 
+    const handleSearch = (property: keyof typeof filteredList, value: string) => 
     {
-        eventStore.filteredList[property] = value;
-        handleFilteredEvents(eventStore.filteredList);
+        filteredList[property] = value;
+        handleFilteredEvents(filteredList);
 
     }
     const handleFilteredEvents = (filteredList:MyEventFilter) => {

@@ -17,26 +17,12 @@ export default class EventStore {
     userRegistry = new Map<string, User>();
     selectedEvent : MyEvent | undefined = undefined
     participantsList: Participants[] =[]
-    filteredList = {
-        localization: '',
-        title: '',
-        description: '',
-        startingDate: '',
-        endingDate: '',
-        type: ''
-    };
 
     constructor() {
         makeAutoObservable(this)
     }
 
-    setFilteredList(property:any, value:string) {
-        this.filteredList = {
-        ...this.filteredList,
-        [property]: value,
-        };
-        console.log(this.filteredList);
-    }
+
 
     getParticipants = async (eventId: string)=>{
         try {
