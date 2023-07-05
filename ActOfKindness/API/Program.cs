@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Persistence;
 using Persistence.Extensions;
+using Serilog;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +48,19 @@ builder.Services.AddCors(options =>
             .WithOrigins(builder.Configuration["AllowedOrigins"]));
 });
 
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Logger(lc =>
+    {
+        lc.Filter.ByIncludingOnly(le => le.Level == LogEventLevel.Information);
+        lc.WriteTo.File("Logs/Info/info_.txt", rollingInterval: RollingInterval.Day);
+    })
+    .WriteTo.Logger(lc =>
+    {
+        lc.MinimumLevel.Warning();
+        lc.WriteTo.File("Logs/Errors/error_.txt", rollingInterval: RollingInterval.Day);
+    })
+    .CreateLogger();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -57,7 +72,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors("FrontEndClient");
-
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
 
@@ -76,12 +90,10 @@ try
     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
     await Seed.SeedUsers(userManager, roleManager);
     await Seed.SeedEvents(context, userManager);
-
 }
-catch (Exception e)
+catch (Exception exception)
 {
-    var logger = services.GetRequiredService<ILogger<Program>>();
-    logger.LogError(e,"Error while creating DB");
+    Log.Fatal($"Error while creating database | {exception}");
 }
 
 app.Run();
