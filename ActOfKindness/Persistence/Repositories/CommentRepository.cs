@@ -9,21 +9,21 @@ namespace Persistence.Repositories;
 public class CommentRepository : ICommentRepository
 {
     private readonly IEventRepository _eventRepository;
-    private readonly IUserContextService _userContextService;
+    private readonly IContextService _contextService;
     private readonly UserManager<AppUser> _userManager;
     private readonly ApplicationDbContext _dbContext;
 
-    public CommentRepository(IEventRepository eventRepository, IUserContextService userContextService, UserManager<AppUser> userManager, ApplicationDbContext dbContext)
+    public CommentRepository(IEventRepository eventRepository, IContextService contextService, UserManager<AppUser> userManager, ApplicationDbContext dbContext)
     {
         _eventRepository = eventRepository;
-        _userContextService = userContextService;
+        _contextService = contextService;
         _userManager = userManager;
         _dbContext = dbContext;
     }
     public async Task<CommentDto> CreateCommentAsync(Guid eventId, string commentBody)
     {
         var eventToAddComment = await _eventRepository.GetEventByIdAsync(eventId);
-        var userId = _userContextService.GetUserId;
+        var userId = _contextService.GetUserId;
         if (userId is not null)
         {
             var user = await _userManager.FindByIdAsync(userId);
