@@ -74,7 +74,7 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [HttpGet("filter")]
-        public async Task<ActionResult<List<DetailsEventDto>>> GetFilteredModeratedEventsAsyn([FromQuery] EventFilter filter)
+        public async Task<ActionResult<List<DetailsEventDto>>> GetFilteredModeratedEventsAsync([FromQuery] EventFilter filter)
         {
             return await _eventService.GetFilteredModeratedEventsAsync(filter);
         }
