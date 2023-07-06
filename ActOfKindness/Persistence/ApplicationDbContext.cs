@@ -29,7 +29,7 @@ namespace Persistence
                 .HasOne(eu => eu.Event)
                 .WithMany(e => e.Participants)
                 .HasForeignKey(eu => eu.EventId)
-                .OnDelete(DeleteBehavior.ClientNoAction);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<EventUser>()
                 .HasOne(eu => eu.User)

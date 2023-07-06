@@ -9,7 +9,7 @@ namespace API.Extensions
         public static void AddApi(this IServiceCollection services)
         {
             services.AddScoped<ErrorHandlingMiddleware>();
-            services.AddScoped<IUserContextService, UserContextService>();
+            services.AddScoped<IContextService, ContextService>();
             services.AddHttpContextAccessor();
         }
     }
