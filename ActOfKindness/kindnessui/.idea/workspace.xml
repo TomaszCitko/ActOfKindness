@@ -8,17 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b82ed90-012b-4d75-8fa8-44e6371b2497" name="Changes" comment="landing page&#10;background picture&#10;login or register form&#10;big header &#10;changing buttons if user is logged in">
-      <change afterPath="$PROJECT_DIR$/src/app/models/Comments/comment.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/stores/commentStore.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/events/details/EventDetailsChat.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../API/SignalR/ChatHub.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../API/SignalR/ChatHub.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stores/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stores/store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/events/details/EventDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/details/EventDetails.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/events/details/EventDetailsDashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/details/EventDetailsDashboard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/events/details/EventParticipantsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/details/EventParticipantsList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/events/dashboard/EventDashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/dashboard/EventDashboard.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
