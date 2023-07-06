@@ -100,11 +100,7 @@ public class EventRepository : IEventRepository
         }
         if (!string.IsNullOrEmpty(filter.StartingDate.ToString()))
         {
-            filteredEvents = filteredEvents.Where(e => e.StartingDate > filter.StartingDate).ToList();
-        }
-        if (!string.IsNullOrEmpty(filter.EndingDate.ToString()))
-        {
-            filteredEvents = filteredEvents.Where(e => e.EndingDate < filter.EndingDate).ToList();
+            filteredEvents = filteredEvents.Where(e => e.StartingDate <= filter.StartingDate && filter.StartingDate <= e.EndingDate).ToList();
         }
         if (!string.IsNullOrEmpty(filter.IsOnline.ToString()))
         {

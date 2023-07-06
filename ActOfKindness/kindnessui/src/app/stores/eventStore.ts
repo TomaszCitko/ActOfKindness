@@ -10,9 +10,9 @@ import {redirect, useNavigate} from "react-router-dom";
 import {router} from "../router/Routes";
 import {Participants} from "../models/Users/participants";
 import {store} from "./store";
+import { MyEventFilter } from "../models/Events/myEventFilter";
 
 export default class EventStore {
-
     eventRegistry =  new Map<string, MyEvent>();
     userRegistry = new Map<string, User>();
     selectedEvent : MyEvent | undefined = undefined
@@ -21,6 +21,8 @@ export default class EventStore {
     constructor() {
         makeAutoObservable(this)
     }
+
+
 
     getParticipants = async (eventId: string)=>{
         try {
@@ -154,6 +156,21 @@ export default class EventStore {
 
     clearEvents = () => {
         this.eventRegistry.clear();
+    }
+
+
+
+    loadFilteredEvents = async (filteredList:MyEventFilter)=>{
+        try {
+            const filteredEventsResponse = await agent.Events.filteredList(JSON.parse(JSON.stringify(filteredList)));
+            this.clearEvents();      
+            filteredEventsResponse.forEach((event: MyEvent)=>{
+                this.saveEvent(event)
+            })
+        }
+        catch (error) {
+            console.log(error)
+        }
     }
 
 }

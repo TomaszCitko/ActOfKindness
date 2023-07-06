@@ -67,7 +67,7 @@ public static class Seed
                 {
                     Id = new Guid(),
                     UserId = userManager.FindByNameAsync("tomek").Result.Id,
-                    Title = "Lady Lodzia tries to survive from knitting and can use your support",
+                    Title = "Lady Krysia tries to survive from knitting and can use your support",
                     Localization = "Szczecin",
                     Description =
                         "She doesn't want anything for free, so maybe you can find a nice pair of socks or a cap for yourself",
@@ -85,7 +85,7 @@ public static class Seed
                     Id = new Guid(),
                     UserId = userManager.FindByNameAsync("romek").Result.Id,
                     Title = "Old lady needs some support",
-                    Localization = "Gliwice",
+                    Localization = "Grodzisk Mazowiecki",
                     Description =
                         "You can find her every day by the bus station and she doesn't want anything for free. If you happen to be near by, please feel free to buy her self-made bread or żurek soup in a jar.",
                     StartingDate = new DateTime(2023, 07, 4),
