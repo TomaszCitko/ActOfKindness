@@ -38,7 +38,8 @@ function EventFilters() {
     {
         const inputValue = event.target.value
         const dateToApi = `${inputValue.slice(6,10)}-${inputValue.slice(3,5)}-${inputValue.slice(0,2)}`;
-        const filterDate = inputValue == "" ? inputValue : dateToApi;
+        const filterDate = (inputValue.length == 10 && inputValue[2] == "/" && inputValue[5] == "/" && !isNaN(Number(inputValue.slice(0,2))) && !isNaN(Number(inputValue.slice(3,5))) && !isNaN(Number(inputValue.slice(6,10)))) ? dateToApi : "";
+        console.log(filterDate);
         handleSearch("startingDate",filterDate)
     }
     
