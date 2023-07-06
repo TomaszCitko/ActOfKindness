@@ -1,6 +1,7 @@
 ﻿using API.Middleware;
 using API.Services;
 using Application.Interfaces;
+using Persistence.Repositories;
 
 namespace API.Extensions
 {
@@ -11,6 +12,7 @@ namespace API.Extensions
             services.AddScoped<ErrorHandlingMiddleware>();
             services.AddScoped<IContextService, ContextService>();
             services.AddHttpContextAccessor();
+
         }
     }
 }

@@ -8,11 +8,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b82ed90-012b-4d75-8fa8-44e6371b2497" name="Changes" comment="landing page&#10;background picture&#10;login or register form&#10;big header &#10;changing buttons if user is logged in">
+      <change afterPath="$PROJECT_DIR$/src/app/models/Comments/comment.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/stores/commentStore.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/events/details/EventDetailsChat.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../API/SignalR/ChatHub.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../API/SignalR/ChatHub.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stores/eventStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stores/eventStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stores/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stores/store.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/events/details/EventDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/details/EventDetails.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/events/details/EventDetailsDashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/details/EventDetailsDashboard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/events/details/EventParticipantsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/details/EventParticipantsList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/events/details/EventParticipantsListItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/details/EventParticipantsListItem.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +45,10 @@
         <option name="url" value="git@github.com:CodecoolGlobal/el-proyecte-grande-sprint-1-csharp-Tomek-Boomer.git" />
       </UrlAndAccount>
     </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/node_modules/formik/dist/Field.d.ts" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/node_modules/yup/index.d.ts" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -77,6 +87,19 @@
       <recent name="C:\Users\macie\source\repos\el-proyecte-grande-sprint-1-csharp-Tomek-Boomer\ActOfKindness\kindnessui\src\images" />
       <recent name="C:\Users\macie\source\repos\el-proyecte-grande-sprint-1-csharp-Tomek-Boomer\ActOfKindness\kindnessui\src\app\layout" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Unnamed" type="ReactNative" factoryName="React Native" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <react-native value="" />
+      <platform value="ANDROID" />
+      <envs />
+      <only-packager />
+      <browser value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
+      <method v="2">
+        <option name="ReactNativePackager" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -119,6 +142,8 @@
       <workItem from="1687938660348" duration="2809000" />
       <workItem from="1688120216529" duration="167000" />
       <workItem from="1688243133481" duration="15076000" />
+      <workItem from="1688508030753" duration="1180000" />
+      <workItem from="1688578948080" duration="14797000" />
     </task>
     <task id="LOCAL-00001" summary="creating components&#10;installing semantic UI&#10;installing router&#10;creating routes&#10;setting up navbar&#10;creating nav bar links">
       <created>1686584876280</created>
