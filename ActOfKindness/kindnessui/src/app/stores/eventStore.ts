@@ -51,9 +51,8 @@ export default class EventStore {
         newEvent.id = uuid()
         try {
             await agent.Events.create(newEvent)
-            runInAction(()=>{
-                console.log(newEvent)
-            })
+            await router.navigate('/events')
+
         }
         catch (e) {
             console.log(e)

@@ -76,7 +76,6 @@ public class CommentRepository : ICommentRepository
         };
     }
 
-
     public async Task<bool> SaveAsync()
     {
         var result = await _dbContext.SaveChangesAsync() > 0;

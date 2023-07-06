@@ -15,7 +15,7 @@ function UnmoderatedEventDashboard() {
 
     return (
         <Grid>
-            <Grid.Column width={13}>
+            <Grid.Column width={13} style={{marginTop:60}}>
                 {myEvents.map(unmoderatedEvent => (
                     <UnmoderatedEventListItem key={unmoderatedEvent.id} event={unmoderatedEvent} /> 
                 ))}
