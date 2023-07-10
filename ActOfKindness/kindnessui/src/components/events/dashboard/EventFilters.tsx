@@ -32,7 +32,8 @@ function EventFilters() {
     {
         const propName = event.target.name == "title" ? "title" : (event.target.name == "description" ? "description" : "localization");
         const inputValue = event.target.value;
-        handleSearch(propName,inputValue)
+        const filterResults = inputValue.length > 2 ? inputValue : "";
+        handleSearch(propName,filterResults)
     }
     const handleDateSearch = (event: ChangeEvent<HTMLInputElement>) =>
     {
