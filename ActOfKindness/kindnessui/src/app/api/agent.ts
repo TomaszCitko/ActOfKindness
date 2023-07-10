@@ -41,7 +41,7 @@ const Events = {
     userName: (id:string, userId:string)=> requests.get<User>(`/event/${id}`),
     unmoderatedList: ()=> requests.get<MyEvent[]>('/event/unmoderated'),
     moderate: (id: string) => requests.patch(`/event/${id}/moderate`),
-    joinEvent: (eventId: string)=> requests.get<void>(`/event/${eventId}/join`),
+    joinEvent: (eventId: string)=> requests.post(`/event/${eventId}/join`, {}),
     getParticipants: (id:string)=> requests.get<Participants[]>(`/event/${id}/participants`),
     filteredList: (eventFilter:MyEventFilter)=> axios.get('/Event/filter', {params: eventFilter}).then(responseBody)
 }
