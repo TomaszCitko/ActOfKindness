@@ -51,7 +51,10 @@ namespace Application.Services
             var temporaryImagePlaceHolder =
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Vue_de_nuit_de_la_Place_Stanislas_%C3%A0_Nancy.jpg/1920px-Vue_de_nuit_de_la_Place_Stanislas_%C3%A0_Nancy.jpg";
 
-            newEventDto.Image ??= temporaryImagePlaceHolder;
+            if (string.IsNullOrWhiteSpace(newEventDto.Image))
+            {
+                newEventDto.Image = temporaryImagePlaceHolder;
+            }
 
             var newEvent = _mapper.Map<Event>(newEventDto);
 
@@ -182,11 +185,24 @@ namespace Application.Services
                     _contextService.GetUserRole);
 
             var userId =  _contextService.GetUserId;
+
+            if (eventToJoin.IsDone)
+                throw new BadRequestException($"Cannot join to event ({eventId}) because it has ended",
+                    _contextService.Method,
+                    userId,
+                    _contextService.GetUserRole);
+
+            if (eventToJoin.Participants.Any(eu => eu.UserId == userId))
+                throw new BadRequestException($"You already joined to event ({eventId})",
+                    _contextService.Method,
+                    userId,
+                    _contextService.GetUserRole);
+
             if (userId is not null)
             {
                 var userWhoWantsToJoin = await _userManager.FindByIdAsync(userId);
 
-                if (eventToJoin is not null && userWhoWantsToJoin is not null)
+                if (userWhoWantsToJoin is not null)
                 {
                     var eventUser = new EventUser
                     {
