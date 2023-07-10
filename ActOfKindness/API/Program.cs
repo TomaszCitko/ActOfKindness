@@ -39,7 +39,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddApplication();
 builder.Services.AddIdentityServices(builder.Configuration);
-builder.Services.AddApi();
+builder.Services.AddApi(builder.Configuration);
 
 builder.Services.AddCors(options =>
 {

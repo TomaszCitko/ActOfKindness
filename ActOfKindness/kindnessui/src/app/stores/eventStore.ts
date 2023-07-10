@@ -52,7 +52,6 @@ export default class EventStore {
         try {
             await agent.Events.create(newEvent)
             await router.navigate('/events')
-
         }
         catch (e) {
             console.log(e)
