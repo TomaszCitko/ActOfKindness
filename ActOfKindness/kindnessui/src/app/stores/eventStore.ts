@@ -1,15 +1,13 @@
 // noinspection SpellCheckingInspection
 
-import {makeAutoObservable, runInAction} from "mobx";
+import {makeAutoObservable} from "mobx";
 import {User} from "../models/Users/user";
 import {MyEvent} from "../models/Events/myEvent";
 import agent from "../api/agent";
 import {MyEventCreate} from "../models/Events/myEventCreate";
 import {v4 as uuid} from 'uuid'
-import {redirect, useNavigate} from "react-router-dom";
 import {router} from "../router/Routes";
 import {Participants} from "../models/Users/participants";
-import {store} from "./store";
 import { MyEventFilter } from "../models/Events/myEventFilter";
 
 export default class EventStore {
@@ -22,16 +20,12 @@ export default class EventStore {
         makeAutoObservable(this)
     }
 
-
-
     getParticipants = async (eventId: string)=>{
         try {
             this.participantsList = []
             const participants = await agent.Events.getParticipants(eventId)
-                    participants.forEach(participant=>{
-                        {
-                            this.participantsList.push(participant)
-                        }
+                participants.forEach(participant=>{
+                    this.participantsList.push(participant)
                     })
                 }
         catch (e) {
@@ -42,10 +36,6 @@ export default class EventStore {
     get myEvents(){
         return Array.from(this.eventRegistry.values())
     }
-
-    // static loadEventDetails(id: any) {
-    //     throw new Error('Method not implemented.');
-    // }
 
     createEvent = async(newEvent: MyEventCreate)=>{
         newEvent.id = uuid()
@@ -80,7 +70,7 @@ export default class EventStore {
 
     loadEventDetails = async(id:string)=>{
         this.selectedEvent = undefined
-        let tempDetails = this.getEvent(id)
+        // let tempDetails = this.getEvent(id)
             try{
                 const eventDetails = await agent.Events.details(id)
                 this.selectedEvent = eventDetails
@@ -96,10 +86,6 @@ export default class EventStore {
         return this.eventRegistry.get(id)
 
     }
-
-    // private getEvent = async(id:string) =>{
-    //     return this.eventRegistry.get(id)
-    // }
 
     deleteEvent = async (id: string) => {
         try {
@@ -156,8 +142,6 @@ export default class EventStore {
         this.eventRegistry.clear();
     }
 
-
-
     loadFilteredEvents = async (filteredList:MyEventFilter)=>{
         try {
             const filteredEventsResponse = await agent.Events.filteredList(JSON.parse(JSON.stringify(filteredList)));
@@ -170,5 +154,4 @@ export default class EventStore {
             console.log(error)
         }
     }
-
 }

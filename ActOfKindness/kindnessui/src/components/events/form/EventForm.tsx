@@ -4,14 +4,12 @@ import {Formik, Form, Field, ErrorMessage} from "formik";
 import {Link, NavLink} from "react-router-dom";
 import * as Yup from "yup"
 import logo from "../../../images/handshake.png";
-import {v4 as uuid} from "uuid";
-import {MyEventCreate} from "../../../app/models/Events/myEventCreate";
 import {useStore} from "../../../app/stores/store";
 
 function EventForm() {
     const {eventStore} = useStore()
 
-    const [myEventCreate, setMyEvent] = useState({
+    const [myEventCreate] = useState({
         id: '',
         userId: '',
         localization: '',
@@ -62,8 +60,6 @@ function EventForm() {
             return endDate >= startDate;
         })
     })
-
-
 
     return (
         <Segment inverted  clearing raised >
