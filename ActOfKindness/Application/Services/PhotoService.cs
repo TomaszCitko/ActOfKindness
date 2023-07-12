@@ -15,18 +15,20 @@ namespace Application.Services;
 public class PhotoService : IPhotoService
 {
     private readonly IPhotoRepository _photoRepository;
+    private readonly IEventRepository _eventRepository;
     private readonly IMapper _mapper;
     private readonly IContextService _contextService;
     private readonly UserManager<AppUser> _userManager;
 
     private readonly Cloudinary _cloudinary;
 
-    public PhotoService(IOptions<CloudinarySetup> config, UserManager<AppUser> userManager, IContextService contextService, IMapper mapper, IPhotoRepository photoRepository)
+    public PhotoService(IOptions<CloudinarySetup> config, UserManager<AppUser> userManager, IContextService contextService, IMapper mapper, IPhotoRepository photoRepository, IEventRepository eventRepository)
     {
         _userManager = userManager;
         _contextService = contextService;
         _mapper = mapper;
         _photoRepository = photoRepository;
+        _eventRepository = eventRepository;
 
         var myAccount = new Account(
             config.Value.CloudName,
@@ -89,15 +91,41 @@ public class PhotoService : IPhotoService
             Id = photoUploadResult.PublicId,
         };
 
-        if (currentUser!.Photos.Any(x=>x.IsMain))
+        if (!currentUser.Photos.Any(x=>x.IsMain))
         {
             toSavePhoto.IsMain = true;
         }
 
-        var save = await _photoRepository.SavePhoto(toSavePhoto, currentUser);
+        var save = await _photoRepository.SavePhotoToUserAsync(toSavePhoto, currentUser);
 
         return save ? toSavePhoto : null;
     }
+
+    public async Task<Photo?> SavePhotoToEventAsync(IFormFile file, Guid eventId)
+    {
+        var currentEvent = await _eventRepository.GetEventByIdAsync(eventId);
+
+        var photoUploadResult = await AddPhoto(file);
+
+        if (photoUploadResult is null) return null;
+
+
+        var toSavePhoto = new Photo
+        {
+            Url = photoUploadResult.Url,
+            Id = photoUploadResult.PublicId
+        };
+
+        if (!currentEvent.Photos.Any(x => x.IsMain))
+        {
+            toSavePhoto.IsMain = true;
+        }
+
+        var save = await _photoRepository.SavePhotoToEventAsync(toSavePhoto, currentEvent);
+
+        return save ? toSavePhoto : null;
+    }
+
 
     public async Task<string?> DeletePhotoFromUserAsync(string photoId)
     {
@@ -123,5 +151,36 @@ public class PhotoService : IPhotoService
 
         return save ? "success" : null;
 
+    }
+
+    public async Task<string?> SetMainPhotoForUser(string photoId)
+    {
+        var currentUserId = _contextService.GetUserId;
+        if (currentUserId is null) return null;
+
+        var currentUser = await _userManager.Users
+                .Include(x => x.Photos)
+                .FirstOrDefaultAsync(u => u.Id == currentUserId);
+        
+        if (currentUser is null) return null;
+
+
+        var photoToSetMain = await _photoRepository
+            .FindPhoto(photoId, currentUser);
+
+        if (photoToSetMain is null) return null;
+
+
+        var currentMainPhoto = currentUser.Photos
+            .FirstOrDefault(x => x.IsMain);
+        
+        if (currentMainPhoto is not null) currentMainPhoto.IsMain = false;
+
+
+        photoToSetMain.IsMain = true;
+
+        return await _photoRepository.SaveAsync() 
+            ? $"setting photo of id {photoId} completed!" 
+            : "something went wrong DEBUG IT!";
     }
 }

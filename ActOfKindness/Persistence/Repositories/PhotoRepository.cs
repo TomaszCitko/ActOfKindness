@@ -18,18 +18,22 @@ public class PhotoRepository : IPhotoRepository
     }
 
 
-    public async Task<bool> SavePhoto(Photo? toSavePhoto,AppUser user)
+    public async Task<bool> SavePhotoToUserAsync(Photo? toSavePhoto,AppUser user)
     {
         user.Photos.Add(toSavePhoto);
-        var result = await _context.SaveChangesAsync() > 0;
-        return result;
+        return await SaveAsync();
+    }
+
+    public async Task<bool> SavePhotoToEventAsync(Photo? toSavePhoto, Event currentEvent)
+    {
+        currentEvent.Photos.Add(toSavePhoto);
+        return await SaveAsync();
     }
 
     public async Task<bool> DeletePhoto(Photo photoToRemove, AppUser user)
     {
         user.Photos.Remove(photoToRemove);
-        var result = await _context.SaveChangesAsync() > 0;
-        return result;
+        return await SaveAsync();
     }
 
 
@@ -39,4 +43,8 @@ public class PhotoRepository : IPhotoRepository
         return photoToRemove ?? null;
     }
 
+    public async Task<bool> SaveAsync()
+    {
+        return await _context.SaveChangesAsync() > 0;
+    }
 }

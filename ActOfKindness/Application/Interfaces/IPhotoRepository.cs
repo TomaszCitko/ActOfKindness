@@ -6,7 +6,10 @@ namespace Application.Interfaces;
 
 public interface IPhotoRepository
 {
-    Task<bool> SavePhoto(Photo? toSavePhoto, AppUser user);
+    Task<bool> SavePhotoToUserAsync(Photo? toSavePhoto, AppUser user);
+    Task<bool> SavePhotoToEventAsync(Photo? toSavePhoto, Event currentEvent);
     Task<bool> DeletePhoto(Photo photoToRemove, AppUser user);
     Task<Photo?> FindPhoto(string photoId,AppUser user);
+    Task<bool> SaveAsync();
+
 }

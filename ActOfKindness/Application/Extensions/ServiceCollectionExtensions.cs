@@ -11,6 +11,7 @@ namespace Application.Extensions
         {
             services.AddScoped<IEventService, EventService>();
             services.AddScoped<IPhotoService, PhotoService>();
+            services.AddScoped<IProfileService, ProfileService>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
         }
     }

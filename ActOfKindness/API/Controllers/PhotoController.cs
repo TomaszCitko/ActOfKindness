@@ -16,18 +16,30 @@ namespace API.Controllers
             _photoService = photoService;
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Photo>> SavePhoto([FromForm] IFormFile File)
+        [HttpPost("user")]
+        public async Task<ActionResult<Photo>> SavePhotoToUser([FromForm] IFormFile File)
         {
-            var result = await _photoService.SavePhotoToUserAsync(File);
-            return result ?? throw new InvalidOperationException();
+            return await _photoService.SavePhotoToUserAsync(File) ?? throw new InvalidOperationException();
         }
 
-        [HttpPost("{id}")]
-        public async Task<ActionResult<string>> DeletePhoto(string id)
+        [HttpPost("event/{eventId:guid}")]
+        public async Task<ActionResult<Photo>> SavePhotoToEvent([FromForm] IFormFile File,Guid eventId)
         {
-            var result = await _photoService.DeletePhotoFromUserAsync(id);
-            return result ?? throw new InvalidOperationException();
+            return await _photoService.SavePhotoToEventAsync(File,eventId) ?? throw new InvalidOperationException();
         }
-    }
+
+
+
+        [HttpPost("{id}")]
+        public async Task<ActionResult<string>> DeletePhotoFromUser(string id)
+        {
+            return await _photoService.DeletePhotoFromUserAsync(id) ?? throw new InvalidOperationException();
+        }
+
+        [HttpPost("{photoId}/setMain")]
+        public async Task<ActionResult<string>> SetMainPhotoForUser(string photoId)
+        {
+            return await _photoService.SetMainPhotoForUser(photoId) ?? throw new InvalidOperationException();
+        }
+}
 }

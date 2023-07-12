@@ -1,7 +1,7 @@
 export interface User{
     id: string,
     username: string,
-    avatar?: string,
+    MainPhotoUrl?: string,
     role?: string,
     token: string,
 }

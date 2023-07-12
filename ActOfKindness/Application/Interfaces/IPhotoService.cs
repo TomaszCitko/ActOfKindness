@@ -9,5 +9,7 @@ public interface IPhotoService
     Task<PhotoUpload?> AddPhoto(IFormFile file);
     Task<string?> DeletePhoto(string photoId);
     Task<Photo?> SavePhotoToUserAsync(IFormFile file);
+    Task<Photo?> SavePhotoToEventAsync(IFormFile file, Guid eventId);
     Task<string?> DeletePhotoFromUserAsync(string photoId);
+    Task <string?> SetMainPhotoForUser(string photoId);
 }

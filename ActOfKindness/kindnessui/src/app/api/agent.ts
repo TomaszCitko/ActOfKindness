@@ -7,6 +7,7 @@ import {RegisterForm} from "../models/Users/registerForm";
 import {store} from "../stores/store";
 import {Participants} from "../models/Users/participants";
 import { MyEventFilter } from '../models/Events/myEventFilter';
+import {userProfile} from "../models/Profiles/Profile";
 
 axios.defaults.baseURL = "http://localhost:5092/api"
 
@@ -47,9 +48,14 @@ const Account = {
     getCurrentUser: ()=> requests.get<User>('/account'),
 }
 
+const Profiles = {
+    getProfile: (username: string)=>requests.get<userProfile>(`/profile/${username}`)
+}
+
 const agent = {
     Events,
-    Account
+    Account,
+    Profiles
 }
 
 export default agent

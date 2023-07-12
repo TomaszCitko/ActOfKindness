@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using API.Services;
 using Application.Dtos.User;
+using AutoMapper;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -15,11 +16,13 @@ namespace API.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly TokenService _tokenService;
+        private readonly IMapper _mapper;
 
-        public AccountController(UserManager<AppUser> userManager, TokenService tokenService)
+        public AccountController(UserManager<AppUser> userManager, TokenService tokenService,IMapper mapper)
         {
             _userManager = userManager;
             _tokenService = tokenService;
+            _mapper = mapper;
         }
 
         [AllowAnonymous]
@@ -62,7 +65,6 @@ namespace API.Controllers
                 Location = registerDto.Location,
                 Email = registerDto.Email,
                 EmailConfirmed = true,
-
             };
             // add user to db
             var result = await _userManager.CreateAsync(newUser, registerDto.Password);
@@ -83,21 +85,19 @@ namespace API.Controllers
             var emailValue = User.FindFirstValue(ClaimTypes.Email);
             if (emailValue is null) return BadRequest();
 
-            var user = await _userManager.FindByEmailAsync(emailValue);
-            return await CreateUserDto(user);
+            var user = await _userManager.Users.Include(x => x.Photos).FirstOrDefaultAsync(u => u.Email == emailValue);
+            if (user != null) return await CreateUserDto(user);
+            return BadRequest();
         }
 
         private async Task<UserDto> CreateUserDto(AppUser user)
         {
             var roles = await _userManager.GetRolesAsync(user);
             var role = roles.FirstOrDefault();
+            var mapped = _mapper.Map<UserDto>(user);
+            mapped.Token = _tokenService.CreateToken(user, role);
 
-            return new UserDto
-            {
-                Location = user.Location,
-                Username = user.UserName,
-                Token = _tokenService.CreateToken(user, role),
-            };
+            return mapped;
         }
     }
 }

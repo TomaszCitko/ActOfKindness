@@ -15,6 +15,7 @@ namespace API.Services
         public string Method => _contextAccessor.HttpContext.Request.Method;
         public ClaimsPrincipal? User => _contextAccessor.HttpContext?.User;
         public string? GetUserId => User?.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value;
-        public string? GetUserRole => User?.FindFirst(c => c.Type == ClaimTypes.Role).Value;
+        public string? GetUserRole => User?.FindFirst(c => c.Type == ClaimTypes.Role).Value;        
+
     }
 }
