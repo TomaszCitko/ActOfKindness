@@ -128,7 +128,7 @@ function EventDetails({myEvent}:Props) {
                                 <Grid.Column width={15}>
                                     <Button as={Link}
                                         floated={"right"}
-                                        to={`/eventDetails/${event.id}`}
+                                        to={`/createEvent/${event.id}`}
                                         color={"orange"}
                                         content={"Edit"}
                                         style={{marginLeft: 10}}

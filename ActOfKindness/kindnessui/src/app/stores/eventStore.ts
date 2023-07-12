@@ -9,7 +9,6 @@ import {v4 as uuid} from 'uuid'
 import {router} from "../router/Routes";
 import {Participants} from "../models/Users/participants";
 import { MyEventFilter } from "../models/Events/myEventFilter";
-import { format } from 'date-fns';
 
 export default class EventStore {
     eventRegistry =  new Map<string, MyEvent>();
@@ -44,9 +43,18 @@ export default class EventStore {
 
     createEvent = async(newEvent: MyEventCreate)=>{
         newEvent.id = uuid();
-        console.log(newEvent)
         try {
             await agent.Events.create(newEvent)
+            await router.navigate('/events')
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
+
+    updateEvent = async(updatedEvent: MyEventCreate)=>{
+        try {
+            await agent.Events.update(updatedEvent)
             await router.navigate('/events')
         }
         catch (e) {
@@ -88,7 +96,6 @@ export default class EventStore {
 
     private getEvent = async(id:string) =>{
         return this.eventRegistry.get(id)
-
     }
 
     deleteEvent = async (id: string) => {

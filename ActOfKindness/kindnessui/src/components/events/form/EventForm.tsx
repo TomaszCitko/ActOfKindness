@@ -6,11 +6,14 @@ import * as Yup from "yup"
 import logo from "../../../images/handshake.png";
 import {useStore} from "../../../app/stores/store";
 import { isAfter, isEqual, parse, isValid } from 'date-fns';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 function EventForm() {
-    const {eventStore} = useStore()
+    const {eventStore} = useStore();
+    const { id: eventId } = useParams();
 
-    const initialValues = {
+    const [initialValues, setInitialValues] = useState({
         id: '',
         userId: '',
         localization: '',
@@ -21,7 +24,32 @@ function EventForm() {
         endingDate: '',
         type: 0,
         image: '',
-    }
+    });
+
+    useEffect(() => {
+        const loadEventDetails = async () => {
+            if(eventId){
+                const eventDetails = await eventStore.loadEventDetails(eventId);
+                if (eventDetails) {
+                    setInitialValues({
+                        id: eventDetails.id,
+                        userId: eventDetails.userId,
+                        localization: eventDetails.localization,
+                        isOnline: true,
+                        title: eventDetails.title,
+                        description: eventDetails.description,
+                        startingDate: eventDetails.startingDate,
+                        endingDate: eventDetails.endingDate,
+                        type: 0,
+                        image: eventDetails.image,
+                    });
+                }
+            }
+        }
+        loadEventDetails();
+    }, [eventId, eventStore]);
+    
+    
 
     const formValidation = Yup.object({
         title: Yup.string().required('Title is required Sir'),
@@ -63,7 +91,13 @@ function EventForm() {
                 validationSchema={formValidation}
                 initialValues={initialValues}
                 enableReinitialize
-                onSubmit={values => {eventStore.createEvent(values)}}>
+                onSubmit={async (values) => {
+                    if (eventId) {
+                        await eventStore.updateEvent(values);
+                    } else {
+                        await eventStore.createEvent(values);
+                    }
+                }}>
                 {({handleSubmit, isValid, isSubmitting,dirty })=>(
                     <Form className={'ui form'} onSubmit={handleSubmit} autoComplete={'off'}>
                         <FormField >

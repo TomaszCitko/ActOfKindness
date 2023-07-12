@@ -71,7 +71,7 @@ function EventListItem({event}: Props) {
 
                         <Button as={Link}
                                 floated={"right"}
-                                to={`/eventDetails/${event.id}`}
+                                to={`/createEvent/${event.id}`}
                                 color={"orange"}
                                 content={"Edit"}
                         ></Button>
