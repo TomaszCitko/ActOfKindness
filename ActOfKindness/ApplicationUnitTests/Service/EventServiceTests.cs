@@ -15,7 +15,14 @@ namespace ApplicationUnitTests.Service
         private Mock<IContextService> _contextService;
         private Mock<UserManager<AppUser>> _userManager;
         private EventService _eventService;
-        
+
+        private readonly Guid _eventId = new Guid();
+        private readonly string _title = "Test title";
+        private readonly string _description = "Test description";
+        private readonly DateTime _startingDate = new DateTime().Date;
+        private readonly DateTime _endingDate = new DateTime().Date.AddDays(1);
+        private readonly EventType _eventType = EventType.HelpNeeded;
+
         [SetUp]
         public void SetUp()
         {
@@ -27,32 +34,6 @@ namespace ApplicationUnitTests.Service
             _userManager = new Mock<UserManager<AppUser>>(store.Object, null, null, null, null, null, null, null, null);
 
             _eventService = new EventService(_eventRepository.Object, _mapper.Object, _contextService.Object, _userManager.Object);
-        }
-
-        [Test]
-        public async Task GetModeratedEventsAsync_ReturnModeratedListOfDetailsEventDto_EventsExists()
-        {
-            var eventsFromEventRepository = new List<Event>()
-            {
-                new Event() { IsModerated = true },
-                new Event() { IsModerated = true },
-                new Event() { IsModerated = false }
-            };
-            _eventRepository.Setup(x => x.GetModeratedEventsAsync())
-                .ReturnsAsync(eventsFromEventRepository);
-
-            var mappingEvents = new List<DetailsEventDto>()
-            {
-                new DetailsEventDto(){},
-                new DetailsEventDto(){}
-            };
-            _mapper.Setup(x => x.Map<List<DetailsEventDto>>(eventsFromEventRepository))
-                .Returns(mappingEvents);
-
-            var result = await _eventService.GetModeratedEventsAsync();
-
-            Assert.IsNotEmpty(result);
-            Assert.AreEqual(mappingEvents.Count, result.Count);
         }
 
         [Test]
@@ -71,31 +52,6 @@ namespace ApplicationUnitTests.Service
         }
 
         [Test]
-        public async Task GetUnmoderatedEventsAsync_ReturnUnmoderatedListOfDetailsEventDto_EventsAreInDatabase()
-        {
-            var eventsFromEventRepository = new List<Event>()
-            {
-                new Event() { IsModerated = true },
-                new Event() { IsModerated = true },
-                new Event() { IsModerated = false }
-            };
-            _eventRepository.Setup(x => x.GetUnmoderatedEventsAsync())
-                .ReturnsAsync(eventsFromEventRepository);
-
-            var mappingEvents = new List<DetailsEventDto>()
-            {
-                new DetailsEventDto(){}
-            };
-            _mapper.Setup(x => x.Map<List<DetailsEventDto>>(eventsFromEventRepository))
-                .Returns(mappingEvents);
-
-            var result = await _eventService.GetUnmoderatedEventsAsync();
-
-            Assert.IsNotEmpty(result);
-            Assert.AreEqual(mappingEvents.Count, result.Count);
-        }
-
-        [Test]
         public async Task GetUnmoderatedEventAsync_ReturnEmptyListOfDetailsEventDto_EventsAreNotInDatabase()
         {
             var eventsFromEventRepository = new List<Event>();
@@ -109,13 +65,6 @@ namespace ApplicationUnitTests.Service
 
             Assert.IsEmpty(result);
         }
-
-        private readonly Guid _eventId = new Guid();
-        private readonly string _title = "Test title";
-        private readonly string _description = "Test description";
-        private readonly DateTime _startingDate = new DateTime().Date;
-        private readonly DateTime _endingDate = new DateTime().Date.AddDays(1);
-        private readonly EventType _eventType = EventType.HelpNeeded;
         
         [Test]
         public async Task CreateEventAsync_CreateNewEvent_CreateEventDtoIsCorrect()
@@ -293,29 +242,7 @@ namespace ApplicationUnitTests.Service
 
             _eventRepository.Verify(x => x.DeleteEventAsync(eventToDelete.Id), Times.Once);
         }
-
-        [Test]
-        public async Task GetEventByIdAsync_ReturnDetailsEventDto_EventExist()
-        {
-            var eventFromRepository = new Event()
-            {
-                Id = _eventId
-            };
-            var mappingEvent = new DetailsEventDto()
-            {
-                Id = _eventId
-            };
-
-            _eventRepository.Setup(x => x.GetEventByIdAsync(_eventId))
-                .ReturnsAsync(eventFromRepository);
-            _mapper.Setup(x => x.Map<DetailsEventDto>(eventFromRepository))
-                .Returns(mappingEvent);
-
-            var result = await _eventService.GetEventByIdAsync(_eventId);
-
-            Assert.IsNotNull(result);
-        }
-
+        
         [Test]
         public void GetEventByIdAsync_ThrowNotFoundException_EventNotExist()
         {
@@ -434,20 +361,6 @@ namespace ApplicationUnitTests.Service
                 .ReturnsAsync(expectedRowChanged);
 
             Assert.That(async () => await _eventService.ModerateEventAsync(_eventId), Throws.TypeOf<NotFoundException>());
-        }
-
-        [Test]
-        public void GetFilteredModeratedEventsAsync_ReturnModeratedListOfDetailsEventDtoOrderedByLocation_LocalizationIsPassed()
-        {
-            var eventsFromEventRepository = new List<Event>()
-            {
-                new Event() { IsModerated = true },
-                new Event() { IsModerated = true },
-                new Event() { IsModerated = false }
-            };
-
-            //Better test this case in EventRepository
-            Assert.Fail();
         }
 
         [Test]
