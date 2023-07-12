@@ -81,7 +81,7 @@ namespace API.Controllers
         [HttpGet("{id:guid}/participants")]
         public async Task<ActionResult<List<ParticipantDto>>> GetParticipants(Guid id)
         {
-            return await _eventService.ReturnParticipantsDtoAsync(id);
+            return await _eventService.GetParticipantsAsync(id);
         }
 
         [HttpPost("{eventId:guid}/join")]
