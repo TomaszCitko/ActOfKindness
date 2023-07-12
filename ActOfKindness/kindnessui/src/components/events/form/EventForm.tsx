@@ -1,87 +1,75 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Segment, Button, FormField, Label} from "semantic-ui-react";
 import {Formik, Form, Field, ErrorMessage} from "formik";
-import {Link, NavLink} from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as Yup from "yup"
 import logo from "../../../images/handshake.png";
-import {v4 as uuid} from "uuid";
-import {MyEventCreate} from "../../../app/models/Events/myEventCreate";
 import {useStore} from "../../../app/stores/store";
+import { isAfter, isEqual, parse, isValid } from 'date-fns';
 
 function EventForm() {
     const {eventStore} = useStore()
 
-    const [myEventCreate, setMyEvent] = useState({
+    const initialValues = {
         id: '',
         userId: '',
         localization: '',
         isOnline:true,
         title:	'',
         description: '',
-        starting_Date: '',
-        ending_Date: '',
-        latitude: '0',
-        longitude: '0',
+        startingDate: '',
+        endingDate: '',
         type: 0,
         image: '',
-    })
+    }
 
     const formValidation = Yup.object({
         title: Yup.string().required('Title is required Sir'),
         description: Yup.string().required('Please tell something'),
         localization: Yup.string().required('We need to know where help is needed!'),
-        starting_Date: Yup.string().matches(
-            /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
-            'Invalid date format. Use dd/mm/yyyy.'
-        ).test('is-future-date', 'Date must not be in the past', function (value) {
-            if (!value) {
-                return this.createError({
-                    message: "Date is required",
-                    path: this.path,
-                });
-            }
+        startingDate: Yup.string().required('Date is required').test('is-future-date', 'Date must not be in the past', function (value) {
+            const inputDate = parse(value, "dd/MM/yyyy", new Date());
             const currentDate = new Date();
-            const [day, month, year] = value.split('/').map(Number);
-            const inputDate = new Date(year, month - 1, day);
-            return inputDate >= currentDate;
-        }),
-        ending_Date: Yup.string().matches(
-            /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
-            'Invalid date format. Use dd/mm/yyyy.'
-        ).test('is-future-date', 'Ending date cannot be before starting date', function (value) {
-            if (!value) {
+            currentDate.setHours(0, 0, 0, 0);
+            if (!isValid(inputDate)) {
                 return this.createError({
-                    message: "Date is required",
+                    message: "Invalid date format. Use dd/MM/yyyy.",
                     path: this.path,
                 });
             }
-            const startDate = new Date(this.parent.starting_Date);
-            const [day, month, year] = value.split('/').map(Number);
-            const endDate = new Date(year, month, day);
-            console.log(endDate, startDate)
-            return endDate >= startDate;
+            return isAfter(inputDate, currentDate) || isEqual(inputDate, currentDate);
+        }),
+        endingDate: Yup.string().required('Date is required').test('is-future-date', 'Ending date cannot be before starting date', function (value) {
+            const startDate = parse(this.parent.startingDate, "dd/MM/yyyy", new Date());
+            const endDate = parse(value, "dd/MM/yyyy", new Date());
+            if (!isValid(endDate)) {
+                return this.createError({
+                    message: "Invalid date format. Use dd/MM/yyyy.",
+                    path: this.path,
+                });
+            }
+            return isAfter(endDate, startDate) || isEqual(endDate, startDate);
         })
     })
 
 
-
     return (
-        <Segment inverted  clearing raised >
+        <Segment inverted  clearing raised style={{marginTop: 100}}>
             <Label style={{marginBottom: 15}} as='a' color='orange' ribbon>
                 Thank you for trying to help
             </Label>
 
             <Formik
                 validationSchema={formValidation}
-                initialValues={myEventCreate}
+                initialValues={initialValues}
                 enableReinitialize
-                onSubmit={values=> eventStore.createEvent(values)}>
+                onSubmit={values => {eventStore.createEvent(values)}}>
                 {({handleSubmit, isValid, isSubmitting,dirty })=>(
                     <Form className={'ui form'} onSubmit={handleSubmit} autoComplete={'off'}>
                         <FormField >
                             <Field as={"select"} defaultValue={'defaultValue'} name='type'>
                                 <option className={"optionPlaceholder"} value="defaultValue" disabled>Event Type</option>
-                                <option value="0">I need help</option>
+                                <option value="0">I need help!</option>
                                 <option value="1">I want to help someone!</option>
                             </Field>
                         </FormField>
@@ -99,14 +87,14 @@ function EventForm() {
                         </FormField>
 
                         <FormField>
-                            <Field name="starting_Date" placeholder="Starting Date   dd/mm/yyyy" />
-                            <ErrorMessage name={'starting_Date'} render={error=>
+                            <Field name="startingDate" placeholder="Starting Date   dd/mm/yyyy" />
+                            <ErrorMessage name={'startingDate'} render={error=>
                                 <Label basic color={'red'} content={error}/>}/>
                         </FormField>
 
                         <FormField>
-                            <Field name="ending_Date" placeholder="Ending Date    dd/mm/yyyy" />
-                            <ErrorMessage name={'ending_Date'} render={error=>
+                            <Field name="endingDate" placeholder="Ending Date    dd/mm/yyyy" />
+                            <ErrorMessage name={'endingDate'} render={error=>
                                 <Label basic color={'red'} content={error}/>}/>
                         </FormField>
 
@@ -118,13 +106,13 @@ function EventForm() {
 
                         <Button
                             // disabled={isSubmitting || !isValid || !dirty}
-                            floated={"right"} color={"orange"} type={"submit"} content={'submit'}></Button>
+                            floated={"right"} color={"orange"} type={"submit"} content={'Submit'}></Button>
                         <Button as={Link} to={'/events'} floated={'right'}  type={'button'} content={'Cancel'}></Button>
                     </Form>
                 )}
 
             </Formik>
-            <Label as={NavLink} to={'/'} style={{background: 'Transparent'}}>
+            <Label as={Link} to={'/'} style={{background: 'Transparent'}}>
                 <img alt={"heart-handshake-logo"} src={logo} />
             </Label>
         </Segment>
