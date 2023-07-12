@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using Application.Dtos.Event;
+﻿using Application.Dtos.Event;
 using FluentValidation;
 
 namespace Application.Validators;

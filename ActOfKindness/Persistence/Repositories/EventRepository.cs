@@ -1,10 +1,7 @@
 using Application.Dtos.Event;
-using Application.Dtos.User;
-using Application.Exceptions;
 using Application.Interfaces;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Protocols;
 using System.Globalization;
 
 namespace Persistence.Repositories;
