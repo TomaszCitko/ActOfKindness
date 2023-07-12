@@ -25,7 +25,7 @@ function Navbar() {
 
             {accountStore.isLoggedIn ? (
                 <Menu.Item className={'navDropdown'} position={"right"}>
-                    <Image src={accountStore.user?.MainPhotoUrl} avatar />                    <Dropdown className={'navDropdown'} pointing={'top left'}
+                    <Image src={accountStore.user?.mainPhotoUrl} avatar />                    <Dropdown className={'navDropdown'} pointing={'top left'}
                                                                                                         text={accountStore.user?.username}>
                         <DropdownMenu className={'navDropdown'} >
                             <DropdownItem  as={Link} to={`/profile/${accountStore.user?.username}`}
