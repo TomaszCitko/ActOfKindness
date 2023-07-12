@@ -72,6 +72,7 @@ public class EventRepository : IEventRepository
                 .SetProperty(e => e.EndingDate, endingDate)
                 .SetProperty(e => e.Latitude, eventDto.Latitude)
                 .SetProperty(e => e.Longitude, eventDto.Longitude)
+                .SetProperty(e => e.Type, eventDto.Type)
                 .SetProperty(e => e.Image, eventDto.Image)
             );
     }

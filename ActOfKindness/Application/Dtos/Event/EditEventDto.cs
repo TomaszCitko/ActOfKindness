@@ -1,4 +1,6 @@
-﻿namespace Application.Dtos.Event
+﻿using Domain.Models;
+
+namespace Application.Dtos.Event
 {
     public class EditEventDto
     {
@@ -10,6 +12,7 @@
         public string EndingDate { get; set; }
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
+        public EventType Type { get; set; }
         public string Image { get; set; }
     }
 }

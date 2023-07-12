@@ -35,12 +35,12 @@ function EventForm() {
                         id: eventDetails.id,
                         userId: eventDetails.userId,
                         localization: eventDetails.localization,
-                        isOnline: true,
+                        isOnline: eventDetails.isOnline,
                         title: eventDetails.title,
                         description: eventDetails.description,
                         startingDate: eventDetails.startingDate,
                         endingDate: eventDetails.endingDate,
-                        type: 0,
+                        type: eventDetails.type,
                         image: eventDetails.image,
                     });
                 }
@@ -92,6 +92,7 @@ function EventForm() {
                 initialValues={initialValues}
                 enableReinitialize
                 onSubmit={async (values) => {
+                    values.type = Number(values.type);
                     if (eventId) {
                         await eventStore.updateEvent(values);
                     } else {
@@ -101,11 +102,11 @@ function EventForm() {
                 {({handleSubmit, isValid, isSubmitting,dirty })=>(
                     <Form className={'ui form'} onSubmit={handleSubmit} autoComplete={'off'}>
                         <FormField >
-                            <Field as={"select"} defaultValue={'defaultValue'} name='type'>
-                                <option className={"optionPlaceholder"} value="defaultValue" disabled>Event Type</option>
-                                <option value="0">I need help!</option>
-                                <option value="1">I want to help someone!</option>
-                            </Field>
+                        <Field as={"select"} defaultValue={'defaultValue'} name='type'>
+                            <option className={"optionPlaceholder"} value="defaultValue" disabled>Event Type</option>
+                            <option value="0">I need help!</option>
+                            <option value="1">I want to help someone!</option>
+                        </Field>
                         </FormField>
 
                         <FormField>

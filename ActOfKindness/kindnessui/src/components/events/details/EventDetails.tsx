@@ -19,6 +19,7 @@ function EventDetails({myEvent}:Props) {
         userId: '',
         createdTime: '',
         localization: '',
+        isOnline: false,
         title:	'Oooooops',
         description: 'Something went wrong or just loading',
         startingDate: '',
@@ -27,7 +28,7 @@ function EventDetails({myEvent}:Props) {
         latitude: '',
         longitude: '',
         moderated: '',
-        type: '',
+        type: 0,
         image: '',
         participants:[],
         createdBy: {

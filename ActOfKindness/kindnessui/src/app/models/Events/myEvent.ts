@@ -9,6 +9,7 @@ export interface MyEvent {
     createdBy: CreatedBy
     createdTime: string
     localization: string
+    isOnline:boolean
     title:	string
     description: string
     startingDate: string
@@ -17,7 +18,7 @@ export interface MyEvent {
     latitude: string
     longitude: string
     moderated: string
-    type: string
+    type: number
     image: string
     participants: string[]
 }

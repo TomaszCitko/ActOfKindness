@@ -17,7 +17,7 @@ function FilteredEventListItem({event}: Props) {
                         <Item.Image size='medium' src={event.image} />
                         <Item.Content>
                             <Label style={{margin:4,padding:6}} as='a' color='red' ribbon={"right"}>
-                                {event.type === "helpNeeded" ? "Help Ask" : "Help Offer"}
+                                {event.type === 0 ? "Help Ask" : "Help Offer"}
                             </Label>
                             <Item.Header>{event.title}</Item.Header>
                             <Item.Description>{event.description}</Item.Description>
