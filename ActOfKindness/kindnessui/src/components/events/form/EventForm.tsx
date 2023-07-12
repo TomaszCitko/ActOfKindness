@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import * as Yup from "yup"
 import logo from "../../../images/handshake.png";
 import {useStore} from "../../../app/stores/store";
-import { isAfter, isEqual, parse, isValid } from 'date-fns';
+import { isAfter, isEqual, parse, isValid, format } from 'date-fns';
 import { useEffect, useState } from 'react';
 
 function EventForm() {
@@ -30,6 +30,9 @@ function EventForm() {
             if(eventId){
                 const eventDetails = await eventStore.loadEventDetails(eventId);
                 if (eventDetails) {
+                    const formattedStartDate = format(new Date(eventDetails.startingDate), "dd/MM/yyyy");
+                    const formattedEndDate = format(new Date(eventDetails.endingDate), "dd/MM/yyyy");
+
                     setInitialValues({
                         id: eventDetails.id,
                         userId: eventDetails.userId,
@@ -37,8 +40,8 @@ function EventForm() {
                         isOnline: eventDetails.isOnline,
                         title: eventDetails.title,
                         description: eventDetails.description,
-                        startingDate: eventDetails.startingDate,
-                        endingDate: eventDetails.endingDate,
+                        startingDate: formattedStartDate,
+                        endingDate: formattedEndDate,
                         type: eventDetails.type,
                         image: eventDetails.image,
                     });
