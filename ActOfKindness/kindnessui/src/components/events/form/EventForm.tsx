@@ -1,13 +1,12 @@
 import React from 'react';
-import {Segment, Button, FormField, Label} from "semantic-ui-react";
-import {Formik, Form, Field, ErrorMessage} from "formik";
-import { Link } from "react-router-dom";
+import { Segment, Button, FormField, Label, Checkbox, CheckboxProps } from "semantic-ui-react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Link, useParams } from "react-router-dom";
 import * as Yup from "yup"
 import logo from "../../../images/handshake.png";
 import {useStore} from "../../../app/stores/store";
 import { isAfter, isEqual, parse, isValid } from 'date-fns';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 
 function EventForm() {
     const {eventStore} = useStore();
@@ -17,7 +16,7 @@ function EventForm() {
         id: '',
         userId: '',
         localization: '',
-        isOnline:true,
+        isOnline:false,
         title:	'',
         description: '',
         startingDate: '',
@@ -49,7 +48,26 @@ function EventForm() {
         loadEventDetails();
     }, [eventId, eventStore]);
     
+    const [disableLocation, setDisableLocation] = useState(initialValues.isOnline);
+
+    useEffect(() => {
+        setDisableLocation(initialValues.isOnline);
+    }, [initialValues.isOnline]);
+
+    const handleIsOnlineChange = (setFieldValue) => (event: React.FormEvent<HTMLInputElement>, data: CheckboxProps) => {
+        const { checked } = data;
+        if (checked === undefined) {
+            return;
+        }
     
+        setFieldValue('isOnline', checked);
+        setDisableLocation(checked);
+        if (checked) {
+            setFieldValue('localization', 'Online');
+        } else {
+            setFieldValue('localization', '');
+        }
+    };
 
     const formValidation = Yup.object({
         title: Yup.string().required('Title is required Sir'),
@@ -93,13 +111,14 @@ function EventForm() {
                 enableReinitialize
                 onSubmit={async (values) => {
                     values.type = Number(values.type);
+                    values.isOnline = Boolean(values.isOnline);
                     if (eventId) {
                         await eventStore.updateEvent(values);
                     } else {
                         await eventStore.createEvent(values);
                     }
                 }}>
-                {({handleSubmit, isValid, isSubmitting,dirty })=>(
+                {({handleSubmit, isValid, isSubmitting, dirty, setFieldValue })=>(
                     <Form className={'ui form'} onSubmit={handleSubmit} autoComplete={'off'}>
                         <FormField >
                         <Field as={"select"} defaultValue={'defaultValue'} name='type'>
@@ -115,8 +134,17 @@ function EventForm() {
                                 <Label basic color={'red'} content={error}/>}/>
                         </FormField>
 
+                        <FormField>
+                            <Checkbox
+                                label="Is Online"
+                                name="isOnline"
+                                checked={disableLocation}
+                                onChange={handleIsOnlineChange(setFieldValue)}
+                            />
+                        </FormField>
+
                         <FormField >
-                            <Field placeholder='City' name='localization'  />
+                        <Field placeholder='City' name='localization'  disabled={disableLocation} />
                             <ErrorMessage name={'localization'} render={error=>
                                 <Label basic color={'red'} content={error}/>}/>
                         </FormField>
