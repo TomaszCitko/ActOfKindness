@@ -220,5 +220,32 @@ namespace Application.Services
 
             Log.Information($"{_contextService.GetUserRole} ({userId}) joined to event ({eventId})");
         }
+
+        public async Task LeaveEventAsync(Guid eventId)
+        {
+            var eventToLeave = await _eventRepository.GetEventByIdAsync(eventId);
+            var userId = _contextService.GetUserId;
+
+            if (eventToLeave is null)
+                throw new NotFoundException($"Event ({eventId}) not found",
+                    _contextService.Method,
+                    _contextService.GetUserId,
+                    _contextService.GetUserRole);
+
+            if (userId is not null)
+            {
+                var userWhoWantsToLeave = await _userManager.FindByIdAsync(userId);
+
+                if (userWhoWantsToLeave is not null)
+                {
+                    var eventUser = eventToLeave.Participants.FirstOrDefault(p => p.UserId == userId);
+                    eventToLeave.Participants.Remove(eventUser);
+                }
+            }
+
+            await _eventRepository.SaveAsync();
+
+            Log.Information($"{_contextService.GetUserRole} ({userId}) joined to event ({eventId})");
+        }
     }
 }

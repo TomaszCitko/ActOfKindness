@@ -15,5 +15,6 @@ namespace Application.Interfaces
         Task<List<DetailsEventDto>> GetFilteredModeratedEventsAsync(EventFilter filter);
         Task<List<ParticipantDto>> ReturnParticipantsDtoAsync(Guid eventId);
         Task JoinEventAsync(Guid eventId);
+        Task LeaveEventAsync(Guid eventId);
     }
 }
