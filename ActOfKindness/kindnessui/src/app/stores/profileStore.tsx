@@ -1,10 +1,13 @@
-import {userProfile} from "../models/Profiles/Profile";
+import {Photo, userProfile} from "../models/Profiles/Profile";
 import {makeAutoObservable, runInAction} from "mobx";
 import agent from "../api/agent";
+import {store} from "./store";
 
 export default class ProfileStore {
     profile: userProfile | null = null;
     loadingProfile= false;
+    uploading= false;
+    loading= false;
 
     constructor() {
         makeAutoObservable(this)
@@ -28,4 +31,49 @@ export default class ProfileStore {
         }
     }
 
+    uploadPhoto = async(file:Blob)=>{
+        this.uploading = true
+        try {
+            const response = await agent.Profiles.uploadPhoto(file);
+            const photo = response.data
+            runInAction(()=>{
+                if (this.profile){
+                    this.profile.photos?.push(photo)
+                    if (photo.isMain && store.accountStore.user){
+                        store.accountStore.setMainImage(photo.url)
+                        this.profile.mainPhotoUrl = photo.url
+                    }
+                }
+                this.uploading = false
+            })
+        }
+        catch (e) {
+            console.log(e)
+            runInAction(()=>{
+                this.uploading = false
+            })
+        }
+    }
+
+    setMainPhoto = async(photo: Photo)=>{
+        this.loading = true
+        try {
+            await agent.Profiles.setMainPhoto(photo.id)
+            store.accountStore.setMainImage(photo.url)
+            runInAction(()=>{
+                if (this.profile && this.profile.photos){
+                    this.profile.photos.find(p=>p.isMain)!.isMain = false
+                    this.profile.photos.find(p=>p.id == photo.id)!.isMain = true
+                    this.profile.mainPhotoUrl = photo.url
+                    this.loading = false
+                }
+            })
+        }
+        catch (e) {
+            console.log(e)
+            runInAction(()=>{
+                this.loading = false
+            })
+        }
+    }
 }

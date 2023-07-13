@@ -7,7 +7,7 @@ import {RegisterForm} from "../models/Users/registerForm";
 import {store} from "../stores/store";
 import {Participants} from "../models/Users/participants";
 import { MyEventFilter } from '../models/Events/myEventFilter';
-import {userProfile} from "../models/Profiles/Profile";
+import {Photo, userProfile} from "../models/Profiles/Profile";
 
 axios.defaults.baseURL = "http://localhost:5092/api"
 
@@ -49,7 +49,16 @@ const Account = {
 }
 
 const Profiles = {
-    getProfile: (username: string)=>requests.get<userProfile>(`/profile/${username}`)
+    getProfile: (username: string)=>requests.get<userProfile>(`/profile/${username}`),
+    uploadPhoto: (file: Blob)=> {
+        let formData = new FormData()
+        formData.append('File',file)
+        return axios.post<Photo>('photo/user',formData,{
+            headers: {'Content-Type': 'multipart/form-data'}
+        })
+    },
+    setMainPhoto: (id:string)=> requests.post(`/photo/${id}/setMain`,{}),
+    deletePhoto: (id:string)=> requests.del(`/photo/${id}`)
 }
 
 const agent = {
