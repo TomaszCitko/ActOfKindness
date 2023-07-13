@@ -1,7 +1,11 @@
-import React from 'react';
+import React, {SyntheticEvent, useState} from 'react';
 import {observer} from "mobx-react-lite";
-import {Card, Header, Image, Tab} from 'semantic-ui-react';
-import {userProfile} from "../../app/models/Profiles/Profile";
+import {Button, Card, Header, Image, Tab} from 'semantic-ui-react';
+import {Photo, userProfile} from "../../app/models/Profiles/Profile";
+import PhotoUploadWidget from "../../app/common/PhotoUploadWidget";
+import {useStore} from "../../app/stores/store";
+import {Simulate} from "react-dom/test-utils";
+import load = Simulate.load;
 
 interface Props {
     profile: userProfile |null
@@ -9,13 +13,43 @@ interface Props {
 
 
 function ProfilePhotos({profile}: Props) {
+    const {profileStore : {
+        uploadPhoto,uploading,loading,setMainPhoto
+    }} = useStore()
+    const [target,setTarget]=useState('')
+    function handleUploadPhoto(file: Blob) {
+        uploadPhoto(file)
+    }
+    function handleSetMainPhoto(photo: Photo, e: SyntheticEvent<HTMLButtonElement>) {
+        setTarget(e.currentTarget.name)
+        setMainPhoto(photo)
+    }
     return (
         <Tab.Pane>
             <Header icon={'image'} content={'Photos'}></Header>
+            <PhotoUploadWidget uploadPhoto={handleUploadPhoto} loading={uploading} />
             <Card.Group itemsPerRow={5}>
                 {profile?.photos?.map(photo=>(
                     <Card key={photo.id}>
                         <Image src={photo.url}/>
+                        // add checking if its current user!!
+                        <Button.Group fluid widths={2}>
+                            <Button
+                                basic
+                                color={'green'}
+                                content={'Set as Main'}
+                                name={photo.id}
+                                disabled={photo.isMain}
+                                loading={target ===photo.id && loading}
+                                onClick={e=> handleSetMainPhoto(photo,e)}
+                            />
+
+                            <Button
+                                basic
+                                color={'red'}
+                                icon={'trash'}
+                            />
+                        </Button.Group>
                     </Card>
                 ))}
             </Card.Group>

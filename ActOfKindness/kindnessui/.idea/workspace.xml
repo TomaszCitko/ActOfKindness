@@ -7,8 +7,18 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b82ed90-012b-4d75-8fa8-44e6371b2497" name="Changes" comment="styling deleting unused imports/variables/methods">
+    <list default="true" id="1b82ed90-012b-4d75-8fa8-44e6371b2497" name="Changes" comment="add react dropzone &#10;add react cropper&#10;add uploading &#10;add set main photo&#10;add upload photo">
+      <change afterPath="$PROJECT_DIR$/src/app/common/PhotoCropper.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/common/PhotoDropzone.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/agent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/agent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/common/PhotoUploadWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/common/PhotoUploadWidget.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/Profiles/Profile.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/Profiles/Profile.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stores/accountStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stores/accountStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stores/profileStore.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stores/profileStore.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profiles/ProfilePhotos.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profiles/ProfilePhotos.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,11 +81,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\macie\source\repos\el-proyecte-grande-sprint-1-csharp-Tomek-Boomer\ActOfKindness\kindnessui\src\components\Profiles" />
       <recent name="C:\Users\macie\source\repos\el-proyecte-grande-sprint-1-csharp-Tomek-Boomer\ActOfKindness\kindnessui\src\components\users" />
       <recent name="C:\Users\macie\source\repos\el-proyecte-grande-sprint-1-csharp-Tomek-Boomer\ActOfKindness\kindnessui\src\app\models\Users" />
       <recent name="C:\Users\macie\source\repos\el-proyecte-grande-sprint-1-csharp-Tomek-Boomer\ActOfKindness\kindnessui\src\app\models\Events" />
       <recent name="C:\Users\macie\source\repos\el-proyecte-grande-sprint-1-csharp-Tomek-Boomer\ActOfKindness\kindnessui\src\images" />
-      <recent name="C:\Users\macie\source\repos\el-proyecte-grande-sprint-1-csharp-Tomek-Boomer\ActOfKindness\kindnessui\src\app\layout" />
     </key>
   </component>
   <component name="RunManager">
@@ -139,6 +149,8 @@
       <workItem from="1689060861489" duration="52000" />
       <workItem from="1689065424501" duration="1401000" />
       <workItem from="1689164702158" duration="1455000" />
+      <workItem from="1689189585573" duration="8416000" />
+      <workItem from="1689238888804" duration="9297000" />
     </task>
     <task id="LOCAL-00001" summary="creating components&#10;installing semantic UI&#10;installing router&#10;creating routes&#10;setting up navbar&#10;creating nav bar links">
       <created>1686584876280</created>
@@ -273,7 +285,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689066245825</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="styling deleting unused imports/variables/methods&#10;add navbar avatar image">
+      <created>1689198388014</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1689198388014</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -305,6 +324,8 @@
     <MESSAGE value="axios interceptor putting authorization token&#10;use effect to autolog&#10;set token in local storage&#10;get current user&#10;setting up modal &#10;login form&#10;register form &#10;editing navbar (in future dropdown menu)&#10;displaying user name on homepage for testing purposes&#10;&#10;creating account store for storing user and token &#10;creating login logout methods &#10;adding reaction for local storage change" />
     <MESSAGE value="hotfix margin top" />
     <MESSAGE value="styling deleting unused imports/variables/methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="styling deleting unused imports/variables/methods" />
+    <MESSAGE value="styling deleting unused imports/variables/methods&#10;add navbar avatar image" />
+    <MESSAGE value="add react dropzone &#10;add react cropper&#10;add uploading &#10;add set main photo&#10;add upload photo" />
+    <option name="LAST_COMMIT_MESSAGE" value="add react dropzone &#10;add react cropper&#10;add uploading &#10;add set main photo&#10;add upload photo" />
   </component>
 </project>

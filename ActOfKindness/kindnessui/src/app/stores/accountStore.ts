@@ -87,5 +87,9 @@ export default class AccountStore{
         }
     }
 
+    setMainImage = async(photoId: string)=>{
+        if (this.user) this.user.mainPhotoUrl = photoId
+    }
+
 
 }
