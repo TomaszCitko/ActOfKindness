@@ -4,6 +4,8 @@ import { Segment, Grid, Header, Item, Icon, Image, Button } from "semantic-ui-re
 import { observer } from 'mobx-react-lite';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useStore } from '../../../app/stores/store';
+import userEvent from '@testing-library/user-event';
+import AccountStore from '../../../app/stores/accountStore';
 
 interface Props {
     myEvent: MyEvent
@@ -12,6 +14,8 @@ interface Props {
 function EventDetails({myEvent}:Props) {
     const { eventStore } = useStore();
     const { deleteEvent } = eventStore;
+    const {accountStore} = useStore();
+    const {user} = accountStore;
     const { id } = useParams();
     const navigate = useNavigate();
     const [event, setEvent] = useState<MyEvent>({
@@ -64,6 +68,7 @@ function EventDetails({myEvent}:Props) {
         }
     };
 
+
     return (
         <>
             <Segment.Group>
@@ -75,7 +80,7 @@ function EventDetails({myEvent}:Props) {
                         {event.description}
                         <Image src={event.image} size='large' />
                     </Segment>
- 
+
                     <Segment>
                         <Segment>
                             <Grid verticalAlign={'middle'}>
@@ -140,15 +145,21 @@ function EventDetails({myEvent}:Props) {
                                         onClick={handleDelete}
                                         color={"red"}
                                         content={"Delete"}
+
                                     ></Button>
-                                  
+                                                                    <Button as={Link}
+                                        floated={"right"}
+                                        color={'red'}
+                                        onClick={()=>eventStore.leaveEvent(event.id)}
+                                        content={"Leave event"}/>
+                                    </Grid.Column>
+
                                     <Button as={Link}
                                         floated={"right"}
                                         color={'teal'}
                                         onClick={()=>eventStore.joinEvent(event.id)}
                                         content={"Join Event!"}/>
-                                    </Grid.Column>
-                                  
+                                    
                             </Grid>
                         </Segment>
                     </Segment>
