@@ -157,9 +157,17 @@ namespace Application.Services
             return eventsDto;
         }
 
-        public async Task<List<ParticipantDto>> ReturnParticipantsDtoAsync(Guid eventId)
+        public async Task<List<ParticipantDto>> GetParticipantsAsync(Guid eventId)
         {
             var newEvent =  await _eventRepository.GetEventByIdAsync(eventId);
+
+            if (newEvent is null)
+                throw new NotFoundException(
+                    $"Event ({eventId}) not found",
+                    _contextService.Method,
+                    _contextService.GetUserId,
+                    _contextService.GetUserRole);
+
             var listOfParticipants = new List<ParticipantDto>();
             foreach (var newEventParticipant in newEvent.Participants)
             {

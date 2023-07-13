@@ -13,7 +13,7 @@ namespace Application.Interfaces
         Task UpdateEventAsync(Guid id, EditEventDto updatedEvent);
         Task ModerateEventAsync(Guid id);
         Task<List<DetailsEventDto>> GetFilteredModeratedEventsAsync(EventFilter filter);
-        Task<List<ParticipantDto>> ReturnParticipantsDtoAsync(Guid eventId);
+        Task<List<ParticipantDto>> GetParticipantsAsync(Guid eventId);
         Task JoinEventAsync(Guid eventId);
     }
 }
