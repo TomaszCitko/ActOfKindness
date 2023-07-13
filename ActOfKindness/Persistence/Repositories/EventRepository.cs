@@ -1,10 +1,8 @@
 using Application.Dtos.Event;
-using Application.Dtos.User;
-using Application.Exceptions;
 using Application.Interfaces;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Protocols;
+using System.Globalization;
 
 namespace Persistence.Repositories;
 
@@ -59,16 +57,20 @@ public class EventRepository : IEventRepository
 
     public async Task UpdateEventAsync(Guid id, EditEventDto eventDto)
     {
+        var startingDate = DateTime.ParseExact(eventDto.StartingDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+        var endingDate = DateTime.ParseExact(eventDto.EndingDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
         await _context.Events.Where(e => e.Id == id)
             .ExecuteUpdateAsync(prop => 
                 prop.SetProperty(e => e.Title, eventDto.Title)
                 .SetProperty(e => e.Description, eventDto.Description)
                 .SetProperty(e => e.Localization, eventDto.Localization)
                 .SetProperty(e => e.IsOnline, eventDto.IsOnline)
-                .SetProperty(e => e.StartingDate, eventDto.StartingDate)
-                .SetProperty(e => e.EndingDate, eventDto.EndingDate)
+                .SetProperty(e => e.StartingDate, startingDate)
+                .SetProperty(e => e.EndingDate, endingDate)
                 .SetProperty(e => e.Latitude, eventDto.Latitude)
                 .SetProperty(e => e.Longitude, eventDto.Longitude)
+                .SetProperty(e => e.Type, eventDto.Type)
                 .SetProperty(e => e.Image, eventDto.Image)
             );
     }
