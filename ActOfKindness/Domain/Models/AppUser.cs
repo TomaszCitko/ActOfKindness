@@ -12,4 +12,6 @@ public class AppUser : IdentityUser
     public double? Longitude { get; set; }
     public IEnumerable<Event> CreatedEvents { get; set; }
     public IEnumerable<EventUser> ParticipatedEvents { get; set; }
+    public ICollection<Photo?> Photos { get; set; }
+
 }

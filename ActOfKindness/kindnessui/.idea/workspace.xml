@@ -7,10 +7,8 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b82ed90-012b-4d75-8fa8-44e6371b2497" name="Changes" comment="hotfix margin top">
+    <list default="true" id="1b82ed90-012b-4d75-8fa8-44e6371b2497" name="Changes" comment="styling deleting unused imports/variables/methods">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stores/eventStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stores/eventStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/events/unmoderated/UnmoderatedEventDashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/unmoderated/UnmoderatedEventDashboard.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,6 +134,11 @@
       <workItem from="1688243133481" duration="15076000" />
       <workItem from="1688508030753" duration="1180000" />
       <workItem from="1688578948080" duration="14797000" />
+      <workItem from="1688764658993" duration="1383000" />
+      <workItem from="1689021197916" duration="593000" />
+      <workItem from="1689060861489" duration="52000" />
+      <workItem from="1689065424501" duration="1401000" />
+      <workItem from="1689164702158" duration="1455000" />
     </task>
     <task id="LOCAL-00001" summary="creating components&#10;installing semantic UI&#10;installing router&#10;creating routes&#10;setting up navbar&#10;creating nav bar links">
       <created>1686584876280</created>
@@ -263,7 +266,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688643382443</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="styling deleting unused imports/variables/methods">
+      <created>1689066245825</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1689066245825</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -294,6 +304,7 @@
     <MESSAGE value="styling details page &#10;logic details page" />
     <MESSAGE value="axios interceptor putting authorization token&#10;use effect to autolog&#10;set token in local storage&#10;get current user&#10;setting up modal &#10;login form&#10;register form &#10;editing navbar (in future dropdown menu)&#10;displaying user name on homepage for testing purposes&#10;&#10;creating account store for storing user and token &#10;creating login logout methods &#10;adding reaction for local storage change" />
     <MESSAGE value="hotfix margin top" />
-    <option name="LAST_COMMIT_MESSAGE" value="hotfix margin top" />
+    <MESSAGE value="styling deleting unused imports/variables/methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="styling deleting unused imports/variables/methods" />
   </component>
 </project>

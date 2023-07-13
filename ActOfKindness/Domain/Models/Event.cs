@@ -20,6 +20,7 @@
         public string Image { get; set; }
         public List<EventUser> Participants { get; set; }
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
+        public ICollection<Photo> Photos { get; set; }
     }
 
     public enum EventType

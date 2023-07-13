@@ -3,12 +3,14 @@ import {createContext, useContext} from "react";
 import AccountStore from "./accountStore";
 import ModalStore from "./modalStore";
 import CommentStore from "./commentStore";
+import ProfileStore from "./profileStore";
 
 interface Store {
     eventStore: EventStore,
     accountStore: AccountStore,
     modalStore: ModalStore,
     commentStore: CommentStore,
+    profileStore: ProfileStore,
 
 }
 
@@ -17,6 +19,7 @@ export const store: Store = {
     accountStore: new AccountStore(),
     modalStore: new ModalStore(),
     commentStore: new CommentStore(),
+    profileStore: new ProfileStore(),
 
 }
 

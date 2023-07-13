@@ -20,4 +20,3 @@ public class CreateEventDtoValidator : AbstractValidator<CreateEventDto>
         //    .WithMessage($"'EndingDate' must be later than 'StartingDate'");
     }
 }
-

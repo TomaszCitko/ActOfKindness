@@ -13,6 +13,7 @@ function EventForm() {
     const { id: eventId } = useParams();
 
     const [initialValues, setInitialValues] = useState({
+
         id: '',
         userId: '',
         localization: '',

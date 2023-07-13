@@ -10,6 +10,8 @@ namespace Application.Extensions
         public static void AddApplication(this IServiceCollection services)
         {
             services.AddScoped<IEventService, EventService>();
+            services.AddScoped<IPhotoService, PhotoService>();
+            services.AddScoped<IProfileService, ProfileService>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
         }
     }

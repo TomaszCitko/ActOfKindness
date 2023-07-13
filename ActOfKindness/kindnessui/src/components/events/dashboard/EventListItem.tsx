@@ -1,8 +1,8 @@
 import React from 'react';
 import {MyEvent} from "../../../app/models/Events/myEvent";
-import {Button, Grid, Icon, Item, Label, Segment} from "semantic-ui-react";
+import {Button, Grid, Header, Icon, Item, Label, Segment} from "semantic-ui-react";
 import {observer} from "mobx-react-lite";
-import { Link } from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 
 
 interface Props {
@@ -53,10 +53,10 @@ function EventListItem({event}: Props) {
                     </Grid.Column>
 
                     <Grid.Column width={6}>
-                        <span>
+                        <Link to={`/profile/${event.createdBy.username}`}>
                         <Icon name='user' style={{marginBottom: 10}} size='large' color='teal'/>
                             {event.createdBy.nickname}
-                        </span>
+                        </Link>
                     </Grid.Column>
 
 

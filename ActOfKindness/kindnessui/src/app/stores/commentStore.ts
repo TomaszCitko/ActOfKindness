@@ -40,7 +40,6 @@ export default class CommentStore {
                         this.comments.push(newComment)})
             })
         }
-
         }
 
     disconect = ()=>{

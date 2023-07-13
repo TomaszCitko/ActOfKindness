@@ -8,6 +8,7 @@ import LoginForm from "../../components/users/LoginForm";
 import RegisterForm from "../../components/users/RegisterForm";
 import UnmoderatedEventDashboard from "../../components/events/unmoderated/UnmoderatedEventDashboard";
 import EventDetailsDashboard from "../../components/events/details/EventDetailsDashboard";
+import ProfilePage from "../../components/Profiles/ProfilePage";
 
 export const routes: RouteObject[] = [
     {
@@ -22,6 +23,7 @@ export const routes: RouteObject[] = [
             {path: `login`, element: <LoginForm/>},
             {path: `register`, element: <RegisterForm/>},
             {path: `unmoderatedEvents`, element: <UnmoderatedEventDashboard/>},
+            {path: `profile/:username`, element: <ProfilePage/>}
         ]
     }
 ]

@@ -40,6 +40,7 @@ public class EventRepository : IEventRepository
             .ThenInclude(u=>u.User)
             .Include(i => i.CreatedBy)
             .Include(i=>i.Comments)
+            .Include(i=>i.Photos)
             .FirstOrDefaultAsync(e => e.Id == id);
     }
 

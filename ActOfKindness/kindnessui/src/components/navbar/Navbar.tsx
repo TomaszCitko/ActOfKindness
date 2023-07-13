@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dropdown, DropdownItem, DropdownMenu, Header, Menu} from "semantic-ui-react";
+import {Dropdown, DropdownItem, DropdownMenu, Header, Image, Menu} from "semantic-ui-react";
 import {Link, NavLink} from "react-router-dom";
 import logo from "../../images/handshake.png"
 import {store, useStore} from "../../app/stores/store";
@@ -25,8 +25,8 @@ function Navbar() {
 
             {accountStore.isLoggedIn ? (
                 <Menu.Item className={'navDropdown'} position={"right"}>
-                    <Dropdown className={'navDropdown'} pointing={'top left'}
-                              text={accountStore.user?.username}>
+                    <Image src={accountStore.user?.mainPhotoUrl} avatar />                    <Dropdown className={'navDropdown'} pointing={'top left'}
+                                                                                                        text={accountStore.user?.username}>
                         <DropdownMenu className={'navDropdown'} >
                             <DropdownItem  as={Link} to={`/profile/${accountStore.user?.username}`}
                                            text={'my profile'}/>

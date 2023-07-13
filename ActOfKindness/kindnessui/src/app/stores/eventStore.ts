@@ -1,6 +1,4 @@
-// noinspection SpellCheckingInspection
-
-import {makeAutoObservable, runInAction} from "mobx";
+import {makeAutoObservable} from "mobx";
 import {User} from "../models/Users/user";
 import {MyEvent} from "../models/Events/myEvent";
 import agent from "../api/agent";
@@ -20,16 +18,12 @@ export default class EventStore {
         makeAutoObservable(this)
     }
 
-
-
     getParticipants = async (eventId: string)=>{
         try {
             this.participantsList = []
             const participants = await agent.Events.getParticipants(eventId)
-                    participants.forEach(participant=>{
-                        {
-                            this.participantsList.push(participant)
-                        }
+                participants.forEach(participant=>{
+                    this.participantsList.push(participant)
                     })
                 }
         catch (e) {
@@ -84,14 +78,17 @@ export default class EventStore {
 
     loadEventDetails = async(id:string)=>{
         this.selectedEvent = undefined
-        try{
-            const eventDetails = await agent.Events.details(id)
-            this.selectedEvent = eventDetails
-            return eventDetails
-        }
-        catch (error){
-            console.log(error)
-        }
+        // let tempDetails = this.getEvent(id)
+            try{
+                const eventDetails = await agent.Events.details(id)
+                this.selectedEvent = eventDetails
+                return eventDetails
+            }
+            catch (error){
+                console.log(error)
+            }
+        // }
+
     }
 
     private getEvent = async(id:string) =>{
@@ -153,8 +150,6 @@ export default class EventStore {
         this.eventRegistry.clear();
     }
 
-
-
     loadFilteredEvents = async (filteredList:MyEventFilter)=>{
         try {
             const filteredEventsResponse = await agent.Events.filteredList(JSON.parse(JSON.stringify(filteredList)));
@@ -167,5 +162,4 @@ export default class EventStore {
             console.log(error)
         }
     }
-
 }
