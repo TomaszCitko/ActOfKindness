@@ -1,18 +1,24 @@
 import React, {useEffect, useState} from 'react';
-import {Grid, Header,Image,Button} from "semantic-ui-react";
+import {Grid, Header, Image, Button, Message, Icon} from "semantic-ui-react";
 import PhotoDropzone from "./PhotoDropzone";
 import PhotoCropper from "./PhotoCropper";
+import {createEvent} from "@testing-library/react";
+import {observer} from "mobx-react-lite";
+import {useStore} from "../stores/store";
 
 interface Props {
     loading: boolean
     uploadPhoto: (file:Blob)=> void;
+    isCreateEvent: boolean;
 }
 
-function PhotoUploadWidget({loading,uploadPhoto}: Props) {
+function PhotoUploadWidget({loading,uploadPhoto,isCreateEvent}: Props) {
+    const {eventStore} = useStore();
     const [files,setFiles] = useState<any>([])
     const [cropper,setCropper] = useState<Cropper>()
 
-    function onCrop() {
+    function onCrop(e: React.FormEvent<HTMLButtonElement>) {
+        if (isCreateEvent) e.preventDefault()
         if (cropper){
             cropper.getCroppedCanvas().toBlob(blob => uploadPhoto(blob!))
         }
@@ -21,6 +27,7 @@ function PhotoUploadWidget({loading,uploadPhoto}: Props) {
     useEffect(() => {
         return ()=>{
             files.forEach((file:any)=> URL.revokeObjectURL(file.preview))
+            eventStore.success = false
         }
     },[files]);
 
@@ -46,11 +53,31 @@ function PhotoUploadWidget({loading,uploadPhoto}: Props) {
                 <Header sub color={"teal"} content={'step3 - Preview and Upload'}/>
                 <>
                     <div className={'img-preview'} style={{minHeight:200,overflow: 'hidden'}}/>
-                    {files && files.length > 0 && (
+                    {files && files.length > 0 && isCreateEvent && eventStore.success == false &&(
                         <Button.Group widths={2}>
-                            <Button loading={loading} onClick={onCrop} positive icon={'check'}/>
+                            <Button loading={loading} onClick={(e)=>onCrop(e)} positive content={"Upload"}/>
+                            <Button disabled={loading} onClick={()=> setFiles([])} content={'Cancel'}/>
+                        </Button.Group>
+                    )}
+                    {files && files.length > 0 && isCreateEvent ==false && (
+
+                        <Button.Group widths={2}>
+                            <Button loading={loading} onClick={(e)=>onCrop(e)} positive icon={'check'}/>
                             <Button disabled={loading} onClick={()=> setFiles([])} icon={'close'}/>
                         </Button.Group>
+                    )}
+                    {eventStore.uploading &&(
+                        <Message icon>
+                            <Icon name='circle notched' loading />
+                            <Message.Content>
+                                <Message.Header>Just one second</Message.Header>
+                                We are Uploading Photo for you
+                            </Message.Content>
+                        </Message>
+                    )
+                    }
+                    {eventStore.success && isCreateEvent &&(
+                        <Message color='green'>Success! Photo Added!</Message>
                     )}
                 </>
             </Grid.Column>
@@ -58,4 +85,4 @@ function PhotoUploadWidget({loading,uploadPhoto}: Props) {
     );
 }
 
-export default PhotoUploadWidget;
+export default observer(PhotoUploadWidget);

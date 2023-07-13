@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using Application.Dtos.Photo;
+using Application.Interfaces;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +29,11 @@ namespace API.Controllers
             return await _photoService.SavePhotoToEventAsync(File,eventId) ?? throw new InvalidOperationException();
         }
 
-
+        [HttpPost("uploadPhoto")]
+        public async Task<ActionResult<Photo?>> UploadPhoto([FromForm] IFormFile File)
+        {
+            return await _photoService.UploadPhotoAsync(File);
+        }
 
         [HttpPost("{id}")]
         public async Task<ActionResult<string>> DeletePhotoFromUser(string id)

@@ -4,6 +4,7 @@ using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Domain.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 namespace Persistence.Repositories;
@@ -37,10 +38,16 @@ public class PhotoRepository : IPhotoRepository
     }
 
 
-    public async Task<Photo> FindPhoto(string photoId, AppUser user)
+    public async Task<Photo?> FindPhoto(string photoId, AppUser user)
     {
         var photoToRemove = user.Photos.FirstOrDefault(p => p.Id == photoId);
         return photoToRemove ?? null;
+    }
+
+    public async Task<Photo?> FindPhotoWithoutUser(string photoUrl)
+    {
+        var photo = await _context.Photos.FirstOrDefaultAsync(x => x.Url == photoUrl);
+        return photo ?? null;
     }
 
     public async Task<bool> SaveAsync()

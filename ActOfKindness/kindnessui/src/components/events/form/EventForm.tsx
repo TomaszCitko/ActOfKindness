@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FormEvent} from 'react';
 import { Segment, Button, FormField, Label, Checkbox, CheckboxProps } from "semantic-ui-react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Link, useParams } from "react-router-dom";
@@ -7,11 +7,16 @@ import logo from "../../../images/handshake.png";
 import {useStore} from "../../../app/stores/store";
 import { isAfter, isEqual, parse, isValid, format } from 'date-fns';
 import { useEffect, useState } from 'react';
+import PhotoUploadWidget from "../../../app/common/PhotoUploadWidget";
+import agent from "../../../app/api/agent";
+import {observer} from "mobx-react-lite";
 
 function EventForm() {
     const {eventStore} = useStore();
     const { id: eventId } = useParams();
-
+    const {profileStore : {
+        uploadPhoto,uploading,loading,setMainPhoto
+    }} = useStore()
     const [initialValues, setInitialValues] = useState({
 
         id: '',
@@ -53,6 +58,13 @@ function EventForm() {
     }, [eventId, eventStore]);
     
     const [disableLocation, setDisableLocation] = useState(initialValues.isOnline);
+    useEffect(() => {
+        return () => {
+            eventStore.success = false
+
+        };
+    }, []);
+
 
     useEffect(() => {
         setDisableLocation(initialValues.isOnline);
@@ -72,6 +84,14 @@ function EventForm() {
             setFieldValue('localization', '');
         }
     };
+
+
+    const [photoUrl,setPhotoUrl]=useState('')
+    async function  handleUploadPhoto(file: Blob) {
+        const url = await eventStore.uploadPhotoForCreateEvent(file)
+        console.log(url)
+        if (url) setPhotoUrl(url)
+    }
 
     const formValidation = Yup.object({
         title: Yup.string().required('Title is required Sir'),
@@ -117,8 +137,10 @@ function EventForm() {
                     values.type = Number(values.type);
                     values.isOnline = Boolean(values.isOnline);
                     if (eventId) {
+                        if (photoUrl) values.image = photoUrl
                         await eventStore.updateEvent(values);
                     } else {
+                        if (photoUrl) values.image = photoUrl
                         await eventStore.createEvent(values);
                     }
                 }}>
@@ -171,6 +193,11 @@ function EventForm() {
                                 <Label basic color={'red'} content={error}/>}/>
                         </FormField>
 
+                        <FormField>
+                            <PhotoUploadWidget uploadPhoto={handleUploadPhoto} loading={eventStore.uploading} isCreateEvent={true} />
+                        </FormField>
+
+
                         <Button
                             // disabled={isSubmitting || !isValid || !dirty}
                             floated={"right"} color={"orange"} type={"submit"} content={'Submit'}></Button>
@@ -186,4 +213,4 @@ function EventForm() {
     );
 }
 
-export default EventForm;
+export default observer(EventForm)

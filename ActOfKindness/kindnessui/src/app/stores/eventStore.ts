@@ -1,4 +1,4 @@
-import {makeAutoObservable} from "mobx";
+import {makeAutoObservable, runInAction} from "mobx";
 import {User} from "../models/Users/user";
 import {MyEvent} from "../models/Events/myEvent";
 import agent from "../api/agent";
@@ -13,6 +13,8 @@ export default class EventStore {
     userRegistry = new Map<string, User>();
     selectedEvent : MyEvent | undefined = undefined
     participantsList: Participants[] =[]
+    uploading= false;
+    success= true;
 
     constructor() {
         makeAutoObservable(this)
@@ -46,6 +48,28 @@ export default class EventStore {
         }
     }
 
+    uploadPhotoForCreateEvent = async(file:Blob)=>{
+        this.uploading = true
+        try {
+            const response = await agent.Profiles.createFormUpload(file)
+            const url = response.data.url
+            runInAction(()=>{
+                this.success = true;
+                this.uploading = false
+            })
+            if (url)
+            {
+                return url;
+            }
+        }
+        catch (e) {
+            console.log(e)
+            runInAction(()=>{
+                this.uploading = false
+            })
+        }
+    }
+
     updateEvent = async(updatedEvent: MyEventCreate)=>{
         try {
             await agent.Events.update(updatedEvent)
@@ -61,6 +85,7 @@ export default class EventStore {
             const allEventsResponse = await agent.Events.list()
             allEventsResponse.forEach(event=>{
                 this.saveEvent(event)
+                console.log(event)
             })
         }
         catch (error) {
