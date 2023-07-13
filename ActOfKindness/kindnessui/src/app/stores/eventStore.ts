@@ -1,5 +1,3 @@
-// noinspection SpellCheckingInspection
-
 import {makeAutoObservable} from "mobx";
 import {User} from "../models/Users/user";
 import {MyEvent} from "../models/Events/myEvent";
@@ -38,9 +36,19 @@ export default class EventStore {
     }
 
     createEvent = async(newEvent: MyEventCreate)=>{
-        newEvent.id = uuid()
+        newEvent.id = uuid();
         try {
             await agent.Events.create(newEvent)
+            await router.navigate('/events')
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
+
+    updateEvent = async(updatedEvent: MyEventCreate)=>{
+        try {
+            await agent.Events.update(updatedEvent)
             await router.navigate('/events')
         }
         catch (e) {
@@ -80,11 +88,11 @@ export default class EventStore {
                 console.log(error)
             }
         // }
+
     }
 
     private getEvent = async(id:string) =>{
         return this.eventRegistry.get(id)
-
     }
 
     deleteEvent = async (id: string) => {
