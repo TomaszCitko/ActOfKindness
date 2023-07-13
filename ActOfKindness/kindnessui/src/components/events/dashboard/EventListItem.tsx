@@ -23,7 +23,7 @@ function EventListItem({event}: Props) {
                         <Item.Image size='medium' src={event.image} />
                         <Item.Content>
                             <Label style={{margin:4,padding:6}} as='a' color='red' ribbon={"right"}>
-                                {event.type === "helpNeeded" ? "Help Ask" : "Help Offer"}
+                                {event.type === 0 ? "Help Ask" : "Help Offer"}
                             </Label>
                             <Item.Header as={Link} to={`/eventDetails/${event.id}`}>{event.title}</Item.Header>
                             <Item.Description>
@@ -71,7 +71,7 @@ function EventListItem({event}: Props) {
 
                         <Button as={Link}
                                 floated={"right"}
-                                to={`/eventDetails/${event.id}`}
+                                to={`/createEvent/${event.id}`}
                                 color={"orange"}
                                 content={"Edit"}
                         ></Button>

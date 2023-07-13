@@ -26,7 +26,7 @@ axios.interceptors.request.use(config=>{
 const requests = {
     get: <T>(url: string) =>axios.get<T>(url).then(responseBody),
     post: <T>(url: string, body: {}) =>axios.post<T>(url, body).then(responseBody),
-    put: (url: string, body:{}) =>axios.put(url,body).then(responseBody),
+    put: <T>(url: string, body:{}) =>axios.put<T>(url,body).then(responseBody),
     del: (url: string) =>axios.delete(url).then(responseBody),
     patch: (url: string) => axios.patch(url).then(responseBody),
 }
@@ -36,6 +36,7 @@ const requests = {
 const Events = {
     list: ()=> requests.get<MyEvent[]>('/event'),
     create: (event: MyEventCreate)=> requests.post<MyEvent>('/event',event),
+    update: (event: MyEventCreate) => requests.put<MyEvent>(`/event/${event.id}`, event),
     details: (id:string)=> requests.get<MyEvent>(`/event/${id}`),
     delete: (id: string) => requests.del(`/event/${id}`),
     userName: (id:string, userId:string)=> requests.get<User>(`/event/${id}`),

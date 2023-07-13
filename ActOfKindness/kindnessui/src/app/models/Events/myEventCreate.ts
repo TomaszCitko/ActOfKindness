@@ -5,10 +5,8 @@ export interface MyEventCreate {
     isOnline:boolean
     title:	string
     description: string
-    starting_Date: string
-    ending_Date: string
-    latitude: string
-    longitude: string
+    startingDate: string
+    endingDate: string
     type: number
     image: string
 }

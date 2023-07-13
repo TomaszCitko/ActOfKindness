@@ -1,4 +1,5 @@
-﻿using Application.Dtos.Event;
+﻿using System.Globalization;
+using Application.Dtos.Event;
 using Application.Dtos.User;
 using AutoMapper;
 using Domain.Models;
@@ -14,7 +15,9 @@ namespace Application.Mappings
 
             CreateMap<AppUser, UserEventDto>();
 
-            CreateMap<CreateEventDto, Event>();
+            CreateMap<CreateEventDto, Event>()
+                .ForMember(dest => dest.StartingDate, opt => opt.MapFrom(src => DateTime.ParseExact(src.StartingDate, "dd/MM/yyyy", CultureInfo.InvariantCulture)))
+                .ForMember(dest => dest.EndingDate, opt => opt.MapFrom(src => DateTime.ParseExact(src.EndingDate, "dd/MM/yyyy", CultureInfo.InvariantCulture)));
         }
     }
 }

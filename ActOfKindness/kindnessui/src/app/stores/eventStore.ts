@@ -6,10 +6,8 @@ import {MyEvent} from "../models/Events/myEvent";
 import agent from "../api/agent";
 import {MyEventCreate} from "../models/Events/myEventCreate";
 import {v4 as uuid} from 'uuid'
-import {redirect, useNavigate} from "react-router-dom";
 import {router} from "../router/Routes";
 import {Participants} from "../models/Users/participants";
-import {store} from "./store";
 import { MyEventFilter } from "../models/Events/myEventFilter";
 
 export default class EventStore {
@@ -43,16 +41,21 @@ export default class EventStore {
         return Array.from(this.eventRegistry.values())
     }
 
-    // static loadEventDetails(id: any) {
-    //     throw new Error('Method not implemented.');
-    // }
-
     createEvent = async(newEvent: MyEventCreate)=>{
-        newEvent.id = uuid()
+        newEvent.id = uuid();
         try {
             await agent.Events.create(newEvent)
             await router.navigate('/events')
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
 
+    updateEvent = async(updatedEvent: MyEventCreate)=>{
+        try {
+            await agent.Events.update(updatedEvent)
+            await router.navigate('/events')
         }
         catch (e) {
             console.log(e)
@@ -81,26 +84,19 @@ export default class EventStore {
 
     loadEventDetails = async(id:string)=>{
         this.selectedEvent = undefined
-        let tempDetails = this.getEvent(id)
-            try{
-                const eventDetails = await agent.Events.details(id)
-                this.selectedEvent = eventDetails
-                return eventDetails
-            }
-            catch (error){
-                console.log(error)
-            }
-        // }
+        try{
+            const eventDetails = await agent.Events.details(id)
+            this.selectedEvent = eventDetails
+            return eventDetails
+        }
+        catch (error){
+            console.log(error)
+        }
     }
 
     private getEvent = async(id:string) =>{
         return this.eventRegistry.get(id)
-
     }
-
-    // private getEvent = async(id:string) =>{
-    //     return this.eventRegistry.get(id)
-    // }
 
     deleteEvent = async (id: string) => {
         try {

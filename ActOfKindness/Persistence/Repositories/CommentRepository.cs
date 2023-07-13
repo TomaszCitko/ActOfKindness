@@ -1,5 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using Application.Dtos.Event;
+﻿using Application.Dtos.Event;
 using Application.Interfaces;
 using Domain.Models;
 using Microsoft.AspNetCore.Identity;
