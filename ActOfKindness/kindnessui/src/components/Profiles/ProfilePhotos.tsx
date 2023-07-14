@@ -11,7 +11,6 @@ interface Props {
     profile: userProfile |null
 }
 
-
 function ProfilePhotos({profile}: Props) {
     const {profileStore : {
         uploadPhoto,uploading,loading,setMainPhoto
@@ -27,7 +26,7 @@ function ProfilePhotos({profile}: Props) {
     return (
         <Tab.Pane>
             <Header icon={'image'} content={'Photos'}></Header>
-            <PhotoUploadWidget uploadPhoto={handleUploadPhoto} loading={uploading} />
+            <PhotoUploadWidget isCreateEvent={false} uploadPhoto={handleUploadPhoto} loading={uploading} />
             <Card.Group itemsPerRow={5}>
                 {profile?.photos?.map(photo=>(
                     <Card key={photo.id}>

@@ -126,6 +126,23 @@ public class PhotoService : IPhotoService
         return save ? toSavePhoto : null;
     }
 
+    public async Task<Photo?> UploadPhotoAsync(IFormFile file)
+    {
+        var photoUploadResult = await AddPhoto(file);
+        
+        if (photoUploadResult is null) return null;
+        
+        
+        var toSavePhoto = new Photo
+        {
+            Url = photoUploadResult.Url,
+            Id = photoUploadResult.PublicId,
+            IsMain = true
+        };
+        
+        return toSavePhoto;
+    }
+
 
     public async Task<string?> DeletePhotoFromUserAsync(string photoId)
     {

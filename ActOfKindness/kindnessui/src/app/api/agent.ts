@@ -59,7 +59,14 @@ const Profiles = {
         })
     },
     setMainPhoto: (id:string)=> requests.post(`/photo/${id}/setMain`,{}),
-    deletePhoto: (id:string)=> requests.del(`/photo/${id}`)
+    deletePhoto: (id:string)=> requests.del(`/photo/${id}`),
+    createFormUpload:(file:Blob)=>{
+        let formData = new FormData()
+        formData.append('File',file)
+        return axios.post<Photo>('photo/uploadPhoto',formData,{
+            headers: {'Content-Type': 'multipart/form-data'}
+        })
+    }
 }
 
 const agent = {

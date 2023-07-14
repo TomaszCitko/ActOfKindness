@@ -8,6 +8,8 @@ export default class ProfileStore {
     loadingProfile= false;
     uploading= false;
     loading= false;
+    success= true;
+
 
     constructor() {
         makeAutoObservable(this)
@@ -39,7 +41,7 @@ export default class ProfileStore {
             runInAction(()=>{
                 if (this.profile){
                     this.profile.photos?.push(photo)
-                    if (photo.isMain && store.accountStore.user){
+                    if (store.accountStore.user){
                         store.accountStore.setMainImage(photo.url)
                         this.profile.mainPhotoUrl = photo.url
                     }

@@ -14,13 +14,15 @@ namespace Application.Services
         private readonly IMapper _mapper;
         private readonly IContextService _contextService;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IPhotoRepository _photoRepository;
 
-        public EventService(IEventRepository eventRepository, IMapper mapper, IContextService contextService, UserManager<AppUser> userManager)
+        public EventService(IEventRepository eventRepository, IMapper mapper, IContextService contextService, UserManager<AppUser> userManager,IPhotoRepository photoRepository)
         {
             _eventRepository = eventRepository;
             _mapper = mapper;
             _contextService = contextService;
             _userManager = userManager;
+            _photoRepository = photoRepository;
         }
 
         public async Task<List<DetailsEventDto>> GetModeratedEventsAsync()
@@ -59,7 +61,9 @@ namespace Application.Services
             var newEvent = _mapper.Map<Event>(newEventDto);
 
             newEvent.UserId = _contextService.GetUserId;
+            var findPhoto = await _photoRepository.FindPhotoWithoutUser(newEvent.Image);
 
+            if (findPhoto != null) newEvent.Photos.Add(findPhoto);
             await _eventRepository.CreateEventAsync(newEvent);
             await _eventRepository.SaveAsync();
 
