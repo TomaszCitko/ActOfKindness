@@ -152,14 +152,14 @@ function EventDetails({myEvent}:Props) {
                                         color={'red'}
                                         onClick={()=>eventStore.leaveEvent(event.id)}
                                         content={"Leave event"}/>
-                                    </Grid.Column>
+                                    
 
                                     <Button as={Link}
                                         floated={"right"}
                                         color={'teal'}
                                         onClick={()=>eventStore.joinEvent(event.id)}
                                         content={"Join Event!"}/>
-                                    
+                                    </Grid.Column>
                             </Grid>
                         </Segment>
                     </Segment>
