@@ -187,4 +187,14 @@ export default class EventStore {
             console.log(error)
         }
     }
+
+    leaveEvent = async(eventId : string)=>{
+        try {
+            await agent.Events.leaveEvent(eventId)
+            await this.getParticipants(eventId)
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
 }

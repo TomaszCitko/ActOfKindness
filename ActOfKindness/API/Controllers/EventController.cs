@@ -91,5 +91,12 @@ namespace API.Controllers
             return Ok();
         }
 
+        [HttpPost("{eventId:guid}/leave")]
+        public async Task<ActionResult> RemoveUserFromEvent(Guid eventId)
+        {
+            await _eventService.LeaveEventAsync(eventId);
+            return Ok();
+        }
+
     }
 }

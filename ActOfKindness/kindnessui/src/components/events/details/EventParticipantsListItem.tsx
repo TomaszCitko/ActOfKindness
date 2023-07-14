@@ -1,9 +1,11 @@
 import React from 'react';
-import {Header, Item} from "semantic-ui-react";
+import {Button, Header, Item} from "semantic-ui-react";
 import {MyEvent} from "../../../app/models/Events/myEvent";
 import {Participants} from "../../../app/models/Users/participants";
 import {observer} from "mobx-react-lite";
-import {NavLink} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
+import eventStore from '../../../app/stores/eventStore';
+import { useStore } from '../../../app/stores/store';
 
 interface Props {
     participant: Participants
@@ -11,7 +13,6 @@ interface Props {
 
 
 function EventParticipantsListItem({participant}: Props) {
-
     return (
 
 
