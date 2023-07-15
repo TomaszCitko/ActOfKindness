@@ -10,11 +10,15 @@ import { MyEventFilter } from "../models/Events/myEventFilter";
 
 export default class EventStore {
     eventRegistry =  new Map<string, MyEvent>();
+    unmoderatedEventRegistry = new Map<string, MyEvent>();
     userRegistry = new Map<string, User>();
     selectedEvent : MyEvent | undefined = undefined
     participantsList: Participants[] =[]
     uploading= false;
     success= true;
+    pageNumber: number = 1;
+    totalItems: number = 0;
+    totalPages: number = 0;
 
     constructor() {
         makeAutoObservable(this)
@@ -35,6 +39,10 @@ export default class EventStore {
 
     get myEvents(){
         return Array.from(this.eventRegistry.values())
+    }
+
+    get unmoderatedEvents(){
+        return Array.from(this.unmoderatedEventRegistry.values());
     }
 
     createEvent = async(newEvent: MyEventCreate)=>{
@@ -80,13 +88,16 @@ export default class EventStore {
         }
     }
 
-    loadEvents = async ()=>{
+    loadEvents = async (pageNumber: number)=>{
         try {
-            const allEventsResponse = await agent.Events.list()
-            allEventsResponse.forEach(event=>{
-                this.saveEvent(event)
-                console.log(event)
-            })
+            const allEventsResponse = await agent.Events.list(pageNumber)
+            this.pageNumber = allEventsResponse.pageNumber;
+            this.totalItems = allEventsResponse.totalItems;
+            this.totalPages = allEventsResponse.totalPages;
+            allEventsResponse.items.forEach((event) => {
+                this.saveEvent(event);
+                console.log(event);
+            });
         }
         catch (error) {
             console.log(error)
@@ -97,8 +108,16 @@ export default class EventStore {
         this.eventRegistry.set(newEvent.id,newEvent)
     }
 
+    saveUnmoderatedEvent = async (event: MyEvent) => {
+        this.unmoderatedEventRegistry.set(event.id, event);
+    }
+
     deleteFromRegistry = (id: string) => {
         this.eventRegistry.delete(id);
+    }
+
+    deleteUnmoderatedEventFromRegistry = (id: string) => {
+        this.unmoderatedEventRegistry.delete(id);
     }
 
     loadEventDetails = async(id:string)=>{
@@ -144,7 +163,7 @@ export default class EventStore {
         try {
             const unmoderatedEventsResponse = await agent.Events.unmoderatedList()
             unmoderatedEventsResponse.forEach(event=>{
-                this.saveEvent(event)
+                this.saveUnmoderatedEvent(event)
             })
         }
         catch (error) {
@@ -165,7 +184,7 @@ export default class EventStore {
     moderateEvent = async (id: string) => {
         try {
             await agent.Events.moderate(id);
-            this.deleteFromRegistry(id);
+            this.deleteUnmoderatedEventFromRegistry(id);
         } catch (error) {
             console.log(error);
         }
@@ -173,6 +192,10 @@ export default class EventStore {
 
     clearEvents = () => {
         this.eventRegistry.clear();
+    }
+
+    clearUnmoderatedEvents = () => {
+        this.unmoderatedEventRegistry.clear();
     }
 
     loadFilteredEvents = async (filteredList:MyEventFilter)=>{

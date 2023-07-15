@@ -8,6 +8,7 @@ import {store} from "../stores/store";
 import {Participants} from "../models/Users/participants";
 import { MyEventFilter } from '../models/Events/myEventFilter';
 import {Photo, userProfile} from "../models/Profiles/Profile";
+import { PaginatedEvents } from '../models/Events/paginatedEvents';
 
 axios.defaults.baseURL = "http://localhost:5092/api"
 
@@ -30,7 +31,7 @@ const requests = {
 }
 
 const Events = {
-    list: ()=> requests.get<MyEvent[]>('/event'),
+    list: (pageNumber:number)=> requests.get<PaginatedEvents>(`/event?pageNumber=${pageNumber}`),
     create: (event: MyEventCreate)=> requests.post<MyEvent>('/event',event),
     update: (event: MyEventCreate) => requests.put<MyEvent>(`/event/${event.id}`, event),
     details: (id:string)=> requests.get<MyEvent>(`/event/${id}`),

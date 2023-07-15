@@ -6,17 +6,17 @@ import UnmoderatedEventListItem from './UnmoderatedEventListItem';
 
 function UnmoderatedEventDashboard() {
     const { eventStore } = useStore();
-    const { loadUnmoderatedEvents, myEvents, clearEvents } = eventStore;
+    const { loadUnmoderatedEvents, unmoderatedEvents, clearUnmoderatedEvents } = eventStore;
     
     useEffect(() => {
         loadUnmoderatedEvents();
-        return () => { clearEvents(); }
-    }, [loadUnmoderatedEvents, clearEvents]);
+        return () => { clearUnmoderatedEvents(); }
+    }, [loadUnmoderatedEvents, clearUnmoderatedEvents]);
 
     return (
         <Grid>
             <Grid.Column width={13} style={{marginTop:60}}>
-                {myEvents.map(unmoderatedEvent => (
+                {unmoderatedEvents.map(unmoderatedEvent => (
                     <UnmoderatedEventListItem key={unmoderatedEvent.id} event={unmoderatedEvent} /> 
                 ))}
             </Grid.Column>
