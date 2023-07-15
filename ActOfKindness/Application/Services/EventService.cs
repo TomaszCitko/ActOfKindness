@@ -25,12 +25,26 @@ namespace Application.Services
             _photoRepository = photoRepository;
         }
 
-        public async Task<List<DetailsEventDto>> GetModeratedEventsAsync()
+        public async Task<PaginatedResults<List<DetailsEventDto>>> GetModeratedEventsAsync(int pageNumber)
         {
-            var events = await _eventRepository.GetModeratedEventsAsync();
+            const int pageSize = 10;
+
+            var eventsFromRepository = await _eventRepository.GetModeratedEventsAsync();
+
+            var events = eventsFromRepository
+                .Skip(pageSize * (pageNumber - 1))
+                .Take(pageSize)
+                .ToList();
 
             var eventsDto = _mapper.Map<List<DetailsEventDto>>(events);
-            return eventsDto;
+
+            return new PaginatedResults<List<DetailsEventDto>>()
+            {
+                Items = eventsDto,
+                PageNumber = pageNumber,
+                TotalItems = eventsFromRepository.Count,
+                TotalPages = (int)Math.Ceiling(eventsFromRepository.Count /(double) pageSize)
+            };
         }
 
         public async Task<List<DetailsEventDto>> GetUnmoderatedEventsAsync()

@@ -14,9 +14,7 @@ public class EventRepository : IEventRepository
     {
         _context = context;
     }
-
-
-
+    
     public async Task<List<Event>> GetModeratedEventsAsync()
     {
         return await _context.Events

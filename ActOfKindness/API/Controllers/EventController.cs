@@ -19,9 +19,9 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<List<DetailsEventDto>>> GetModeratedEvents()
+        public async Task<ActionResult<PaginatedResults<List<DetailsEventDto>>>> GetModeratedEvents([FromQuery]int pageNumber = 1)
         {
-            return await _eventService.GetModeratedEventsAsync();
+            return await _eventService.GetModeratedEventsAsync(pageNumber);
         }
 
         [Authorize(Roles = "Moderator, Admin")]
