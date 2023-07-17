@@ -17,8 +17,16 @@ export default class EventStore {
     uploading= false;
     success= true;
     pageNumber: number = 1;
-    totalItems: number = 0;
     totalPages: number = 0;
+    isFiltered = false;
+    filteredList: MyEventFilter = {
+        localization: '',
+        title: '',
+        description: '',
+        startingDate: '',
+        endingDate: '',
+        type: ''
+    };
 
     constructor() {
         makeAutoObservable(this)
@@ -92,7 +100,6 @@ export default class EventStore {
         try {
             const allEventsResponse = await agent.Events.list(pageNumber)
             this.pageNumber = allEventsResponse.pageNumber;
-            this.totalItems = allEventsResponse.totalItems;
             this.totalPages = allEventsResponse.totalPages;
             allEventsResponse.items.forEach((event) => {
                 this.saveEvent(event);
@@ -198,16 +205,35 @@ export default class EventStore {
         this.unmoderatedEventRegistry.clear();
     }
 
-    loadFilteredEvents = async (filteredList:MyEventFilter)=>{
+    loadFilteredEvents = async (filteredList:MyEventFilter, pageNumber:number)=>{
         try {
-            const filteredEventsResponse = await agent.Events.filteredList(JSON.parse(JSON.stringify(filteredList)));
+            this.filteredList = filteredList;
+            const filteredEventsResponse = await agent.Events.filteredList(JSON.parse(JSON.stringify(filteredList)), pageNumber);
+            this.pageNumber = filteredEventsResponse.pageNumber;
+            this.totalPages = filteredEventsResponse.totalPages;
             this.clearEvents();      
-            filteredEventsResponse.forEach((event: MyEvent)=>{
+            filteredEventsResponse.items.forEach((event: MyEvent)=>{
                 this.saveEvent(event)
             })
+            this.checkEnteredFilters();
         }
         catch (error) {
             console.log(error)
+        }
+    }
+
+    checkEnteredFilters = () => {
+        let counter:number = 0;
+        Object.entries(this.filteredList).forEach(([key, value]) => {
+            if (value != ''){
+                counter++;
+            }
+        })
+        if (counter === 0){
+            this.isFiltered = false;
+        }
+        else{
+            this.isFiltered = true;
         }
     }
 

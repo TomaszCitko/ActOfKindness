@@ -3,9 +3,14 @@ import EventList from "./EventList";
 import EventFilters from "./EventFilters";
 import {useStore} from "../../../app/stores/store";
 import EventPagination from './EventPagination';
+import { useEffect } from "react";
+import { observer } from "mobx-react-lite";
 
 function EventDashboard() {
     const {eventStore} = useStore()
+
+    useEffect(() => {
+    }, [eventStore.totalPages]);
 
     return (
         <Grid>
@@ -21,4 +26,4 @@ function EventDashboard() {
     );
 }
 
-export default EventDashboard;
+export default observer(EventDashboard);

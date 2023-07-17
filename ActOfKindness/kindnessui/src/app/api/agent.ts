@@ -41,7 +41,14 @@ const Events = {
     moderate: (id: string) => requests.patch(`/event/${id}/moderate`),
     joinEvent: (eventId: string)=> requests.post(`/event/${eventId}/join`, {}),
     getParticipants: (id:string)=> requests.get<Participants[]>(`/event/${id}/participants`),
-    filteredList: (eventFilter:MyEventFilter)=> axios.get('/Event/filter', {params: eventFilter}).then(responseBody),
+    filteredList: (eventFilter:MyEventFilter, pageNumber:number)=> axios.get<PaginatedEvents>('/Event/filter', 
+    {params: {localization: eventFilter.localization,
+        title: eventFilter.title,
+        description: eventFilter.description,
+        startingDate: eventFilter.startingDate,
+        endingDate: eventFilter.endingDate,
+        type: eventFilter.type,
+        pageNumber: pageNumber}}).then(responseBody),
     leaveEvent: (eventId: string)=> requests.post(`/event/${eventId}/leave`, {})
 }
 
