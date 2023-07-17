@@ -24,6 +24,8 @@ namespace ApplicationUnitTests.Service
         private readonly DateTime _startingDate = new DateTime(2023, 10,1);
         private readonly DateTime _endingDate = new DateTime(2023,10,10);
         private readonly EventType _eventType = EventType.HelpNeeded;
+        private readonly int _defaultPageNumber = 1;
+        private readonly int _pageSize = 10;
 
         [SetUp]
         public void SetUp()
@@ -43,15 +45,15 @@ namespace ApplicationUnitTests.Service
         public async Task GetModeratedEventAsync_ReturnEmptyListOfDetailsEventDto_EventsAreNotExists()
         {
             var eventsFromEventRepository = new List<Event>();
-            _eventRepository.Setup(x => x.GetModeratedEventsAsync())
+            _eventRepository.Setup(x => x.GetModeratedEventsAsync(_defaultPageNumber, _pageSize))
                 .ReturnsAsync(eventsFromEventRepository);
 
             _mapper.Setup(x => x.Map<List<DetailsEventDto>>(eventsFromEventRepository))
                 .Returns(new List<DetailsEventDto>());
 
-            var result = await _eventService.GetModeratedEventsAsync();
+            var result = await _eventService.GetModeratedEventsAsync(_defaultPageNumber);
 
-            Assert.IsEmpty(result);
+            Assert.IsEmpty(result.Items);
         }
 
         [Test]
