@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import {store, useStore} from '../../app/stores/store';
-import { Button, Container, Grid, Header, Icon, Segment } from 'semantic-ui-react';
+import {Button, Container, Divider, Grid, Header, Icon, Segment} from 'semantic-ui-react';
 import {Link} from "react-router-dom";
 import LoginForm from "../users/LoginForm";
 import RegisterForm from "../users/RegisterForm";
+import FacebookLogin from "@greatsumini/react-facebook-login";
 
 function Homepage() {
     const { accountStore } = useStore();
@@ -60,6 +61,22 @@ function Homepage() {
                                         Register
                                         <Icon style={{ paddingLeft: '10px' }} name="wpforms" />
                                     </Button>
+
+                                    <Divider horizontal inverted>Or</Divider>
+                                    <Button
+                                        as={FacebookLogin}
+                                        appId={'287828743788720'}
+                                        size={'huge'}
+                                        inverted
+                                        color={'facebook'}
+                                        content={'Login to Facebook'}
+                                        onSuccess={(response:any)=>{
+                                            console.log('Login Success', response)
+                                        }}
+                                        onFail={(response:any)=>{
+                                            console.log('Login Failed', response)
+                                        }}
+                                    />
                                 </Button.Group>
                             ):
                                     <Button as={Link} to={'/events'} size="huge" color={'teal'}  style={{ width: '280px', margin: '0 auto' }}>
