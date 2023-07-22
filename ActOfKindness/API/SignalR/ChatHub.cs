@@ -19,7 +19,7 @@ public class ChatHub : Hub
         await Clients.Group(eventId.ToString())
             .SendAsync("ReceiveCommentAfterCreatingOne", comment);
     }
-
+    
     public override async Task OnConnectedAsync()
     {
         var httpContext = Context.GetHttpContext();
