@@ -7,6 +7,7 @@ import {v4 as uuid} from 'uuid'
 import {router} from "../router/Routes";
 import {Participants} from "../models/Users/participants";
 import { MyEventFilter } from "../models/Events/myEventFilter";
+import { toast } from 'react-toastify';
 
 export default class EventStore {
     eventRegistry =  new Map<string, MyEvent>();
@@ -40,11 +41,21 @@ export default class EventStore {
     createEvent = async(newEvent: MyEventCreate)=>{
         newEvent.id = uuid();
         try {
-            await agent.Events.create(newEvent)
-            await router.navigate('/events')
+            await agent.Events.create(newEvent);
+            toast.success("Event successfully created! It's now awaiting moderation.");
+            await router.navigate('/events');
         }
         catch (e) {
-            console.log(e)
+            console.log(e);
+            if (e instanceof Error) {
+                if ((e as any).response.data !== "") {
+                    toast.error(`Event creation failed: ${(e as any).response.data}.`);
+                } else {
+                    toast.error(`Event creation failed: ${e.message}.`);
+                }
+            } else {
+                toast.error('Something went wrong while creating the event.');
+            }
         }
     }
 
@@ -55,7 +66,7 @@ export default class EventStore {
             const url = response.data.url
             runInAction(()=>{
                 this.success = true;
-                this.uploading = false
+                this.uploading = false;
             })
             if (url)
             {
@@ -72,11 +83,21 @@ export default class EventStore {
 
     updateEvent = async(updatedEvent: MyEventCreate)=>{
         try {
-            await agent.Events.update(updatedEvent)
-            await router.navigate('/events')
+            await agent.Events.update(updatedEvent);
+            toast.success("Event updated successfully! It's now awaiting moderation.");
+            await router.navigate('/events');
         }
         catch (e) {
-            console.log(e)
+            console.log(e);
+            if (e instanceof Error) {
+                if ((e as any).response.data !== "") {
+                    toast.error(`Event update failed: ${(e as any).response.data}.`);
+                } else {
+                    toast.error(`Event update failed: ${e.message}.`);
+                }
+            } else {
+                toast.error('Something went wrong while updating the event.');
+            }
         }
     }
 
