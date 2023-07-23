@@ -11,8 +11,8 @@ import { MyEventFilter } from "../models/Events/myEventFilter";
 export default class EventStore {
     eventRegistry =  new Map<string, MyEvent>();
     userRegistry = new Map<string, User>();
-    selectedEvent : MyEvent | undefined = undefined
-    participantsList: Participants[] =[]
+    selectedEvent : MyEvent | undefined = undefined;
+    participantsList: Participants[] = [];
     uploading= false;
     success= true;
 
@@ -103,7 +103,6 @@ export default class EventStore {
 
     loadEventDetails = async(id:string)=>{
         this.selectedEvent = undefined
-        // let tempDetails = this.getEvent(id)
             try{
                 const eventDetails = await agent.Events.details(id)
                 this.selectedEvent = eventDetails
@@ -112,8 +111,6 @@ export default class EventStore {
             catch (error){
                 console.log(error)
             }
-        // }
-
     }
 
     private getEvent = async(id:string) =>{

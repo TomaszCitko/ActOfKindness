@@ -1,8 +1,8 @@
 import React from 'react';
 import {MyEvent} from "../../../app/models/Events/myEvent";
-import {Button, Grid, Header, Icon, Item, Label, Segment} from "semantic-ui-react";
+import { Button, Grid, Icon, Item, Label, Segment } from "semantic-ui-react";
 import {observer} from "mobx-react-lite";
-import {Link, NavLink} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 interface Props {
@@ -71,7 +71,7 @@ function EventListItem({event}: Props) {
 
                         <Button as={Link}
                                 floated={"right"}
-                                to={`/createEvent/${event.id}`}
+                                to={`/editEvent/${event.id}`}
                                 color={"orange"}
                                 content={"Edit"}
                         ></Button>
