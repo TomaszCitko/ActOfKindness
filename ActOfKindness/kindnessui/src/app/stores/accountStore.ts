@@ -1,4 +1,5 @@
 import {makeAutoObservable, reaction, runInAction} from "mobx";
+import { toast } from 'react-toastify';
 import {User} from "../models/Users/user";
 import {LoginForm} from "../models/Users/loginForm";
 import agent from "../api/agent";
@@ -60,10 +61,10 @@ export default class AccountStore{
 
 
     logout = async ()=>{
-        console.log("logout")
         this.setToken(null)
         this.user = null
         this.isLoggedIn = false
+        toast.success('Logged out successfully!');
         await router.navigate('/')
     }
 
