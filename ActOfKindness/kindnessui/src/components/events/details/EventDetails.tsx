@@ -3,6 +3,7 @@ import { MyEvent } from "../../../app/models/Events/myEvent";
 import { Segment, Grid, Header, Item, Icon, Image, Button } from "semantic-ui-react";
 import { observer } from 'mobx-react-lite';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { useStore } from '../../../app/stores/store';
 import userEvent from '@testing-library/user-event';
 import AccountStore from '../../../app/stores/accountStore';
@@ -132,6 +133,7 @@ function EventDetails({myEvent}:Props) {
                         <Segment>
                             <Grid verticalAlign={'middle'}>
                                 <Grid.Column width={15}>
+
                                     <Button as={Link}
                                         floated={"right"}
                                         to={`/editEvent/${event.id}`}
@@ -142,23 +144,40 @@ function EventDetails({myEvent}:Props) {
 
                                     <Button as={Link}
                                         floated={"right"}
-                                        onClick={handleDelete}
+                                        onClick={async () => {
+                                            const result = await Swal.fire({
+                                                title: 'Are you sure?',
+                                                text: "You won't be able to revert this!",
+                                                icon: 'warning',
+                                                showCancelButton: true,
+                                                confirmButtonColor: 'red',
+                                                confirmButtonText: 'Yes, delete it!',
+                                                cancelButtonText: 'No, cancel!',
+                                                background: '#1b1c1d'
+                                            })
+                                            if (result.isConfirmed) {
+                                                await handleDelete();
+                                            }
+                                        }}
                                         color={"red"}
                                         content={"Delete"}
-
+                                        style={{marginLeft: 10}}
                                     ></Button>
-                                                                    <Button as={Link}
-                                        floated={"right"}
-                                        color={'red'}
-                                        onClick={()=>eventStore.leaveEvent(event.id)}
-                                        content={"Leave event"}/>
                                     
-
                                     <Button as={Link}
-                                        floated={"right"}
+                                        floated={"left"}
                                         color={'teal'}
                                         onClick={()=>eventStore.joinEvent(event.id)}
-                                        content={"Join Event!"}/>
+                                        content={"Join Event!"}
+                                        style={{marginRight: 10}}/>
+
+                                    <Button as={Link}
+                                        floated={"left"}
+                                        color={'red'}
+                                        onClick={()=>eventStore.leaveEvent(event.id)}
+                                        content={"Leave event"}
+                                        style={{marginRight: 10}}/>    
+
                                     </Grid.Column>
                             </Grid>
                         </Segment>
