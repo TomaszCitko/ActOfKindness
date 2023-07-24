@@ -5,6 +5,8 @@ import { Button, Container, Grid, Header, Icon, Segment } from 'semantic-ui-reac
 import {Link} from "react-router-dom";
 import LoginForm from "../users/LoginForm";
 import RegisterForm from "../users/RegisterForm";
+import ImageCarousel from './ImageCarousel';
+
 
 function Homepage() {
     const { accountStore } = useStore();
@@ -15,6 +17,8 @@ function Homepage() {
             document.body.style.display = 'block';
         };
     }, []);
+
+
 
     return (
         <>
@@ -71,6 +75,15 @@ function Homepage() {
                     </Grid.Row>
                 </Grid>
             </Segment>
+
+
+        <Segment style={{ width: '100vw', background: 'black' }}>
+                        <ImageCarousel />
+        </Segment>
+        <Segment style={{ width: '100vw', height: '98vh', background: 'gray' }}>
+            <center><h1>How does it work?</h1></center>
+
+        </Segment>
         </>
     );
 }
