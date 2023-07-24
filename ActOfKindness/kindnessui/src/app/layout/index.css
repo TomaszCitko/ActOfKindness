@@ -149,3 +149,11 @@ code {
 .ui.menu .ui.dropdown .menu > .item {
   color: whitesmoke !important;
 }
+
+.swal2-title {
+  color: #fff !important;
+}
+
+.swal2-html-container {
+  color: #fff !important;
+}

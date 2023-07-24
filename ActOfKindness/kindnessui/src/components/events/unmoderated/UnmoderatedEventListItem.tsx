@@ -63,8 +63,10 @@ function UnmoderatedEventListItem({event}: Props) {
                                     text: "You won't be able to revert this!",
                                     icon: 'warning',
                                     showCancelButton: true,
+                                    confirmButtonColor: 'red',
                                     confirmButtonText: 'Yes, delete it!',
-                                    cancelButtonText: 'No, cancel!'
+                                    cancelButtonText: 'No, cancel!',
+                                    background: '#1b1c1d'
                                 })
                                 if (result.isConfirmed) {
                                     deleteEvent(event.id)
@@ -91,8 +93,10 @@ function UnmoderatedEventListItem({event}: Props) {
                                     text: "You are about to moderate this event!",
                                     icon: 'warning',
                                     showCancelButton: true,
+                                    confirmButtonColor: 'teal',
                                     confirmButtonText: 'Yes, moderate it!',
-                                    cancelButtonText: 'No, cancel!'
+                                    cancelButtonText: 'No, cancel!',
+                                    background: '#1b1c1d'
                                 })
                                 if (result.isConfirmed) {
                                     moderateEvent(event.id)
