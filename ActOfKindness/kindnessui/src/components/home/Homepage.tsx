@@ -11,6 +11,7 @@ import homeImage2 from '../../images/homepage2.avif'
 import homeImage3 from '../../images/homepage3.avif'
 import homeImage4 from '../../images/homepage4.avif'
 import FacebookLogin from "@greatsumini/react-facebook-login";
+import EventCarousel from './EventCarousel';
 
 function Homepage() {
     const { accountStore } = useStore();
@@ -100,42 +101,49 @@ function Homepage() {
         <Segment style={{ width: '100vw', background: 'black' }}>
                         <ImageCarousel />
         </Segment>
-        <Segment style={{ width: '60vw', background: 'gray', margin: '0px 0px 0px 20vw' }}>
-            <center><p><h1>How does it work?<br/></h1></p></center><p></p>
-            <Grid centered verticalAlign="middle" align="center">
-                <Grid.Row>
-                    <Grid.Column width={8} textAlign="center" color="black">
+
+        <Segment className="homepagePicture" style={{ width: '110vw' }}>
+
+        <Segment className='borderRadius15px' style={{ width: '60vw', background: 'gray', margin: '0px 0px 0px 20vw'}} >
+            <center><p><h1 style={{fontSize: '4em'}}>How does it work?<br/></h1></p></center><p></p>
+            <Grid centered verticalAlign="middle" align="center" >
+                <Grid.Row style={{ margin: '20px 0px 0px 0px' }}>
+                    <Grid.Column width={8} textAlign="center" color="black" className='borderRadius15px'>
 <h2>Purpose of this site is to connect users on a meaningful level (not like any other social media). We aim to link helpers with people in need and enable real-life interactions between them.</h2>
                     </Grid.Column>
-                    <Grid.Column width={8} textAlign="right" color="black">
-                        <img src={homeImage1}/>
+                    <Grid.Column width={8} textAlign="right" color="black" className='borderRadius15px'>
+                        <img src={homeImage1} className='borderRadius15px'/>
                     </Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
-                    <Grid.Column width={8} textAlign="center" color="black">
-                    <img src={homeImage2}/>
+                    <Grid.Column width={8} textAlign="center" color="black" className='borderRadius15px'>
+                    <img src={homeImage2} className='borderRadius15px'/>
                     </Grid.Column>
-                    <Grid.Column width={8} textAlign="center" color="black">
+                    <Grid.Column width={8} textAlign="center" color="black" className='borderRadius15px' >
 <h2>Want to help?<br/>Click on the 'events' above and check if someone near you needs any support.<br/>You can join via 'Event details'.</h2>
                     </Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
-                    <Grid.Column width={8} textAlign="center" color="black">
+                    <Grid.Column width={8} textAlign="center" color="black" className='borderRadius15px' >
 <h2>Do you need help?<br/>Click on 'create event' and let people know what you need, when, where and how they could aid you.</h2>
                     </Grid.Column>
-                    <Grid.Column width={8} textAlign="right" color="black">
-                        <img src={homeImage3}/>
+                    <Grid.Column width={8} textAlign="right" color="black" className='borderRadius15px'>
+                        <img src={homeImage3} className='borderRadius15px'/>
                     </Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
-                    <Grid.Column width={8} textAlign="center" color="black">
-                    <img src={homeImage4}/>
+                    <Grid.Column width={8} textAlign="center" color="black" className='borderRadius15px'>
+                    <img src={homeImage4} className='borderRadius15px'/>
                     </Grid.Column>
-                    <Grid.Column width={8} textAlign="center" color="black">
+                    <Grid.Column width={8} textAlign="center" color="black" className='borderRadius15px' >
 <h2>Do you want to teach any skill?<br/>You can organize any lessons or webinars via 'create event'.</h2>
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
+        </Segment>
+        </Segment>
+        <Segment style={{ width: '100vw', background: 'black' }}>
+                        <EventCarousel />
         </Segment>
 
         </>

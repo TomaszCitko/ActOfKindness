@@ -207,3 +207,7 @@ code {
 .profilePhotoButtons::selection {
   background-color: greenyellow!important;
 }
+
+.borderRadius15px {
+  border-radius: 15px;
+}
