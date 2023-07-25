@@ -175,7 +175,7 @@ function EventDetails({myEvent}:Props) {
                                         floated={"left"}
                                         color={'red'}
                                         onClick={()=>eventStore.leaveEvent(event.id)}
-                                        content={"Leave event"}
+                                        content={"Leave Event"}
                                         style={{marginRight: 10}}/>    
 
                                     </Grid.Column>

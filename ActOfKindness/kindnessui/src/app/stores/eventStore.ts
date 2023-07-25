@@ -47,12 +47,8 @@ export default class EventStore {
         }
         catch (e) {
             console.log(e);
-            if (e instanceof Error) {
-                if ((e as any).response.data !== "") {
-                    toast.error(`Event creation failed: ${(e as any).response.data}.`);
-                } else {
-                    toast.error(`Event creation failed: ${e.message}.`);
-                }
+            if ((e as any).response.data !== "") {
+                toast.error(`Event creation failed: ${(e as any).response.data}.`);
             } else {
                 toast.error('Something went wrong while creating the event.');
             }
@@ -89,12 +85,8 @@ export default class EventStore {
         }
         catch (e) {
             console.log(e);
-            if (e instanceof Error) {
-                if ((e as any).response.data !== "") {
-                    toast.error(`Event update failed: ${(e as any).response.data}.`);
-                } else {
-                    toast.error(`Event update failed: ${e.message}.`);
-                }
+            if ((e as any).response.data !== "") {
+                toast.error(`Event update failed: ${(e as any).response.data}.`);
             } else {
                 toast.error('Something went wrong while updating the event.');
             }
@@ -172,11 +164,17 @@ export default class EventStore {
 
     joinEvent = async(eventId : string)=>{
         try {
-            await agent.Events.joinEvent(eventId)
-            await this.getParticipants(eventId)
+            await agent.Events.joinEvent(eventId);
+            await this.getParticipants(eventId);
+            toast.info('Successfully joined the event!');
         }
         catch (e) {
-            console.log(e)
+            console.log(e);
+            if ((e as any).response.data !== "") {
+                toast.error(`Failed to join the event: ${(e as any).response.data}.`);
+            } else {
+                toast.error('Failed to join the event.');
+            }
         }
     }
 
@@ -208,11 +206,13 @@ export default class EventStore {
 
     leaveEvent = async(eventId : string)=>{
         try {
-            await agent.Events.leaveEvent(eventId)
-            await this.getParticipants(eventId)
+            await agent.Events.leaveEvent(eventId);
+            await this.getParticipants(eventId);
+            toast.info('Successfully left the event!');
         }
         catch (e) {
-            console.log(e)
+            console.log(e);
+            toast.error('Failed to leave the event.');
         }
     }
 }
