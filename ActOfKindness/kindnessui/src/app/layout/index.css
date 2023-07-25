@@ -136,6 +136,24 @@ code {
 
 }
 
+.ui.eventDetails > *,
+.ui.eventDetails > * > *,
+.ui.segment.eventDetailsChat {
+  background-color: #474c5d;
+  border: none;
+}
+
+.ui.eventDetails > * > * > p {
+  font-size: 1.35rem;
+  text-align: justify;
+}
+
+.ui.columns.dateRange.eventDetails {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .ui.input > input {
   background-color:  #525252;
   margin-right: -1px;

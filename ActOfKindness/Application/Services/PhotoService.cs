@@ -5,7 +5,6 @@ using Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
-using System.Security.Principal;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.EntityFrameworkCore;
@@ -47,8 +46,8 @@ public class PhotoService : IPhotoService
         {
             File = new FileDescription(file.FileName, stream),
             Transformation = new Transformation()
-                .Height(1920)
-                .Width(1080)
+                .Height(640)
+                .Width(640)
                 .Crop("fill")
         };
         var result = await _cloudinary.UploadAsync(toUpload);
