@@ -32,6 +32,7 @@ function App() {
             pauseOnHover
             theme="colored"
             transition={Flip}
+            style={{ marginTop: '55px' }}
           />  
           <MyLoginModal/>
           <Navbar/>

@@ -31,7 +31,6 @@ function RegisterForm() {
                 await accountStore.register(values);
                 toast.success('Registration successful! Welcome to Act Of Kindness!');
                 setFormError(null);
-                store.modalStore.closeModal();
             } catch (error) {
                 if (isAxiosError(error)) {
                     const errorMessages = Object.values(error.response.data.errors)

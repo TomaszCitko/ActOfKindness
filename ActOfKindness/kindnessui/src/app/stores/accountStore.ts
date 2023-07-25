@@ -58,9 +58,9 @@ export default class AccountStore{
                 console.log(user)
             })
             await router.navigate('/events')
+            store.modalStore.closeModal()
         }
         catch (e) {
-            console.log(e);
             throw e;
         }
     }
