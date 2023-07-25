@@ -9,7 +9,7 @@ interface Props {
 
 function ProfileHeader({profile}: Props) {
     return (
-        <Segment>
+        <Segment className={"profilePage"}>
             <Grid>
                 <Grid.Column width={12}>
                     <Item.Group>
