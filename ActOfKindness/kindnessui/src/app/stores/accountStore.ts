@@ -11,6 +11,8 @@ export default class AccountStore{
     token: string | null = localStorage.getItem('jwt')
     user: User | null = null
     isLoggedIn: boolean = false
+    isAdmin: boolean = false
+    isModerator: boolean = false
 
     constructor() {
         makeAutoObservable(this)
@@ -32,6 +34,8 @@ export default class AccountStore{
                 this.setUser(user)
                 this.setToken(user.token)
                 this.isLoggedIn = true
+                this.isAdmin = user.role === 'Admin'
+                this.isModerator = user.role === 'Moderator'
                 console.log(user)
             })
             await router.navigate('/events')
@@ -49,6 +53,8 @@ export default class AccountStore{
                 this.setUser(user)
                 this.setToken(user.token)
                 this.isLoggedIn = true
+                this.isAdmin = user.role === 'Admin'
+                this.isModerator = user.role === 'Moderator'
                 console.log(user)
             })
             await router.navigate('/events')
@@ -65,6 +71,8 @@ export default class AccountStore{
         this.setToken(null)
         this.user = null
         this.isLoggedIn = false
+        this.isAdmin = false
+        this.isModerator = false
         toast.success('Logged out successfully!');
         await router.navigate('/')
     }
@@ -92,6 +100,5 @@ export default class AccountStore{
     setMainImage = async(photoId: string)=>{
         if (this.user) this.user.mainPhotoUrl = photoId
     }
-
 
 }
