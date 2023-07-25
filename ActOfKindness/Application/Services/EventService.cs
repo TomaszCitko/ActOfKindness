@@ -276,7 +276,7 @@ namespace Application.Services
 
             await _eventRepository.SaveAsync();
 
-            Log.Information($"{_contextService.GetUserRole} ({userId}) joined to event ({eventId})");
+            Log.Information($"{_contextService.GetUserRole} ({userId}) has left event ({eventId})");
         }
     }
 }

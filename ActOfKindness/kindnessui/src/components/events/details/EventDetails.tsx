@@ -88,91 +88,84 @@ function EventDetails({myEvent}:Props) {
                         Details
                     </Header>
                 </Divider>
-                    <Segment>
-                        <Grid columns={'equal'}>
-                                <Grid.Column width={6} floated='left'>
-                                    <span>
-                                        <Icon name='calendar alternate outline' style={{marginBottom: 10}} size='large' color='teal'/>
-                                        <b>Start date:</b> <i>{event.startingDate.slice(0,10)}</i>
-                                    </span>
-                                </Grid.Column>
-                                <Grid.Column>
-                                    <span className='ui columns dateRange eventDetails'>
-                                        <Icon name='long arrow alternate right' size='big'></Icon>
-                                    </span>
-                                </Grid.Column>
-                                <Grid.Column width={6} floated='right'>
-                                    <Icon name='calendar check outline' style={{marginBottom: 10}} size='large' color='teal'/>
-                                    <span>
-                                        <b>End date:</b> <i>{event.endingDate.slice(0,10)}</i>
-                                    </span>
-                                </Grid.Column>
-                            </Grid>
-                        </Segment>
-                        <Segment>
-                            <Grid verticalAlign={'middle'}>
-                                <Grid.Column width={15}>
-                                    <span>
-                                        <Icon name='map marker alternate' style={{marginBottom: 6}} size='large' color='teal'/>
-                                        <b>Localization:</b> <i>{event.localization}</i>
-                                    </span>
-                                </Grid.Column>
-                            </Grid>
-                        </Segment>
-                        <Segment>
-                            <Grid verticalAlign={'middle'}>
-                                <Grid.Column width={15}>
-                                    <span>
-                                        <Icon style={{marginBottom: 10}} name='user circle' size='large' color='teal'/>
-                                        <b>Created by:</b> <Link to={`/profile/${event.createdBy.nickname}`}><i>{event.createdBy.nickname}</i></Link>
-                                    </span>
-                                </Grid.Column>
-                            </Grid>
-                        </Segment>
-                        <Segment>
-                            <Grid verticalAlign={'middle'}>
-                                <Grid.Column width={15}>
-                                    <span>
-                                        <Icon name='calendar plus outline' style={{marginBottom: 10}} size='large' color='teal'/>
-                                        <b>Created on:</b> <i>{event.createdTime.slice(0,10)}</i>
-                                    </span>
-                                </Grid.Column>
-                            </Grid>
-                        </Segment>
-
-                        <Segment>
-                            <Grid verticalAlign={'middle'}>
-                                <Grid.Column width={15}>
-                                    <Button as={Link}
-                                        floated={"right"}
-                                        to={`/createEvent/${event.id}`}
-                                        color={"orange"}
-                                        content={"Edit"}
-                                        style={{marginLeft: 10}}
-                                    ></Button>
-
-                                    <Button as={Link}
-                                        floated={"right"}
-                                        onClick={handleDelete}
-                                        color={"red"}
-                                        content={"Delete"}
-
-                                    ></Button>
-                                                                    <Button as={Link}
-                                        floated={"right"}
-                                        color={'red'}
-                                        onClick={()=>eventStore.leaveEvent(event.id)}
-                                        content={"Leave event"}/>
-                                    
-
-                                    <Button as={Link}
-                                        floated={"right"}
-                                        color={'teal'}
-                                        onClick={()=>eventStore.joinEvent(event.id)}
-                                        content={"Join Event!"}/>
-                                    </Grid.Column>
-                            </Grid>
-                        </Segment>
+                <Segment>
+                    <Grid columns={'equal'}>
+                        <Grid.Column width={6} floated='left'>
+                            <span>
+                                <Icon name='calendar alternate outline' style={{marginBottom: 10}} size='large' color='teal'/>
+                                <b>Start date:</b> <i>{event.startingDate.slice(0,10)}</i>
+                            </span>
+                        </Grid.Column>
+                        <Grid.Column>
+                            <span className='ui columns dateRange eventDetails'>
+                                <Icon name='long arrow alternate right' size='big'></Icon>
+                            </span>
+                        </Grid.Column>
+                        <Grid.Column width={6} floated='right'>
+                            <Icon name='calendar check outline' style={{marginBottom: 10}} size='large' color='teal'/>
+                            <span>
+                                <b>End date:</b> <i>{event.endingDate.slice(0,10)}</i>
+                            </span>
+                        </Grid.Column>
+                    </Grid>
+                </Segment>
+                <Segment>
+                    <Grid verticalAlign={'middle'}>
+                        <Grid.Column width={15}>
+                            <span>
+                                <Icon name='map marker alternate' style={{marginBottom: 6}} size='large' color='teal'/>
+                                <b>Localization:</b> <i>{event.localization}</i>
+                            </span>
+                        </Grid.Column>
+                    </Grid>
+                </Segment>
+                <Segment>
+                    <Grid verticalAlign={'middle'}>
+                        <Grid.Column width={15}>
+                            <span>
+                                <Icon style={{marginBottom: 10}} name='user circle' size='large' color='teal'/>
+                                <b>Created by:</b> <Link to={`/profile/${event.createdBy.nickname}`}><i>{event.createdBy.nickname}</i></Link>
+                            </span>
+                        </Grid.Column>
+                    </Grid>
+                </Segment>
+                <Segment>
+                    <Grid verticalAlign={'middle'}>
+                        <Grid.Column width={15}>
+                            <span>
+                                <Icon name='calendar plus outline' style={{marginBottom: 10}} size='large' color='teal'/>
+                                <b>Created on:</b> <i>{event.createdTime.slice(0,10)}</i>
+                            </span>
+                        </Grid.Column>
+                    </Grid>
+                </Segment>
+                <Segment>
+                    <Grid verticalAlign={'middle'}>
+                        <Grid.Column width={15}>
+                            <Button as={Link}
+                                floated={"right"}
+                                to={`/createEvent/${event.id}`}
+                                color={"orange"}
+                                content={"Edit"}
+                                style={{marginLeft: 10}}/>
+                            <Button as={Link}
+                                floated={"right"}
+                                onClick={handleDelete}
+                                color={"red"}
+                                content={"Delete"}/>
+                            <Button as={Link}
+                                floated={"right"}
+                                color={'red'}
+                                onClick={()=>eventStore.leaveEvent(event.id)}
+                                content={"Leave event"}/>
+                            <Button as={Link}
+                                floated={"right"}
+                                color={'teal'}
+                                onClick={()=>eventStore.joinEvent(event.id)}
+                                content={"Join Event!"}/>
+                            </Grid.Column>
+                    </Grid>
+                </Segment>
             </Segment.Group>
         </div>
     );  
