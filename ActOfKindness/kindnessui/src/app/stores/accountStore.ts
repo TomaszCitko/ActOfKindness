@@ -54,7 +54,8 @@ export default class AccountStore{
             await router.navigate('/events')
         }
         catch (e) {
-            throw e
+            console.log(e);
+            throw e;
         }
     }
 
