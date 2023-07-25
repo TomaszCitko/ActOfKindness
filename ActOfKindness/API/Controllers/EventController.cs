@@ -78,6 +78,7 @@ namespace API.Controllers
             return await _eventService.GetFilteredModeratedEventsAsync(filter, pageNumber);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id:guid}/participants")]
         public async Task<ActionResult<List<ParticipantDto>>> GetParticipants(Guid id)
         {
