@@ -68,14 +68,6 @@ function EventListItem({event}: Props) {
                                 content={"View"}
                                 style={{marginLeft: 10}}
                         ></Button>
-
-                        <Button as={Link}
-                                floated={"right"}
-                                to={`/editEvent/${event.id}`}
-                                color={"orange"}
-                                content={"Edit"}
-                        ></Button>
-
                     </Grid.Column>
                 </Grid>
 

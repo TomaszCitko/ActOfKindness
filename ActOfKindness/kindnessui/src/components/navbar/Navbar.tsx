@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dropdown, DropdownItem, DropdownMenu, Header, Image, Menu} from "semantic-ui-react";
+import {Dropdown, DropdownItem, DropdownMenu, Image, Menu} from "semantic-ui-react";
 import {Link, NavLink} from "react-router-dom";
 import logo from "../../images/handshake.png"
 import {store, useStore} from "../../app/stores/store";

@@ -4,9 +4,8 @@ import { Segment, Grid, Header, Item, Icon, Image, Button } from "semantic-ui-re
 import { observer } from 'mobx-react-lite';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { useStore } from '../../../app/stores/store';
-import userEvent from '@testing-library/user-event';
-import AccountStore from '../../../app/stores/accountStore';
+import { useStore, store } from '../../../app/stores/store';
+import LoginForm from '../../users/LoginForm';
 
 interface Props {
     myEvent: MyEvent
@@ -15,7 +14,7 @@ interface Props {
 function EventDetails({myEvent}:Props) {
     const { eventStore } = useStore();
     const { deleteEvent } = eventStore;
-    const {accountStore} = useStore();
+    const { accountStore } = useStore();
     const {user} = accountStore;
     const { id } = useParams();
     const navigate = useNavigate();
@@ -68,6 +67,14 @@ function EventDetails({myEvent}:Props) {
             navigate('/events');
         }
     };
+
+    const isUserParticipant = () => {
+        return eventStore.participantsList.some(participant => participant.userName === user?.username);
+    }
+
+    const isUserCreator = () => {
+        return event.createdBy.username === user?.username;
+    }    
 
 
     return (
@@ -134,49 +141,62 @@ function EventDetails({myEvent}:Props) {
                             <Grid verticalAlign={'middle'}>
                                 <Grid.Column width={15}>
 
-                                    <Button as={Link}
-                                        floated={"right"}
-                                        to={`/editEvent/${event.id}`}
-                                        color={"orange"}
-                                        content={"Edit"}
-                                        style={{marginLeft: 10}}
-                                    ></Button>
+                                    {accountStore.isLoggedIn && (isUserCreator() || accountStore.isAdmin || accountStore.isModerator) && (
+                                        <>
+                                            <Button as={Link}
+                                                floated={"right"}
+                                                to={`/editEvent/${event.id}`}
+                                                color={"orange"}
+                                                content={"Edit"}
+                                                style={{marginLeft: 10}}
+                                            ></Button>
 
-                                    <Button as={Link}
-                                        floated={"right"}
-                                        onClick={async () => {
-                                            const result = await Swal.fire({
-                                                title: 'Are you sure?',
-                                                text: "You won't be able to revert this!",
-                                                icon: 'warning',
-                                                showCancelButton: true,
-                                                confirmButtonColor: 'red',
-                                                confirmButtonText: 'Yes, delete it!',
-                                                cancelButtonText: 'No, cancel!',
-                                                background: '#1b1c1d'
-                                            })
-                                            if (result.isConfirmed) {
-                                                await handleDelete();
-                                            }
-                                        }}
-                                        color={"red"}
-                                        content={"Delete"}
-                                        style={{marginLeft: 10}}
-                                    ></Button>
-                                    
-                                    <Button as={Link}
+                                            <Button as={Link}
+                                                floated={"right"}
+                                                onClick={async () => {
+                                                    const result = await Swal.fire({
+                                                        title: 'Are you sure?',
+                                                        text: "You won't be able to revert this!",
+                                                        icon: 'warning',
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: 'red',
+                                                        confirmButtonText: 'Yes, delete it!',
+                                                        cancelButtonText: 'No, cancel!',
+                                                        background: '#1b1c1d'
+                                                    })
+                                                    if (result.isConfirmed) {
+                                                        await handleDelete();
+                                                    }
+                                                }}
+                                                color={"red"}
+                                                content={"Delete"}
+                                                style={{marginLeft: 10}}
+                                            ></Button>
+                                        </>
+                                    )}
+
+                                    <Button 
                                         floated={"left"}
                                         color={'teal'}
-                                        onClick={()=>eventStore.joinEvent(event.id)}
+                                        onClick={()=>{
+                                            if(accountStore.isLoggedIn){
+                                                eventStore.joinEvent(event.id);
+                                            } else {
+                                                store.modalStore.openModal(<LoginForm/>, "Login to join event");
+                                            }
+                                        }}
                                         content={"Join Event!"}
-                                        style={{marginRight: 10}}/>
-
-                                    <Button as={Link}
-                                        floated={"left"}
-                                        color={'red'}
-                                        onClick={()=>eventStore.leaveEvent(event.id)}
-                                        content={"Leave Event"}
-                                        style={{marginRight: 10}}/>    
+                                        style={accountStore.isLoggedIn && (isUserCreator() || isUserParticipant()) ? {marginRight: 10, display: 'none'} : {marginRight: 10}}
+                                    />
+    
+                                    {accountStore.isLoggedIn && isUserParticipant() && (
+                                        <Button as={Link}
+                                            floated={"left"}
+                                            color={'red'}
+                                            onClick={()=>eventStore.leaveEvent(event.id)}
+                                            content={"Leave Event"}
+                                            style={{marginRight: 10}}/>
+                                    )}
 
                                     </Grid.Column>
                             </Grid>
