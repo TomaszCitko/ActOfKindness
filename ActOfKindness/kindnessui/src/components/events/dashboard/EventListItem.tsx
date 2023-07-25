@@ -17,10 +17,10 @@ function EventListItem({event}: Props) {
 
             <Segment className={"eventDashboard"} >
 
-                <Item.Group relaxed divided>
+                <Item.Group  divided>
 
                     <Item>
-                        <Item.Image size='medium' src={event.image} />
+                        <Item.Image size='large' src={event.image} />
                         <Item.Content>
                             <Label style={{margin:4,padding:6}} as='a' color='red' ribbon={"right"}>
                                 {event.type === 0 ? "Help Ask" : "Help Offer"}

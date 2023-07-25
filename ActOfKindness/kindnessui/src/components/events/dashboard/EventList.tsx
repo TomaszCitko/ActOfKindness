@@ -10,7 +10,7 @@ function EventList() {
     return (
         <>
             {myEvents.map(myEvent => (
-                <EventListItem key={myEvent.id} event={myEvent} />
+                <EventListItem  key={myEvent.id} event={myEvent} />
             ))}
         </>
     );

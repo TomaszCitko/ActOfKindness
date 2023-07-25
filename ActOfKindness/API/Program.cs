@@ -47,7 +47,7 @@ builder.Services.AddCors(options =>
         policy.AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials()
-            .WithOrigins(builder.Configuration["AllowedOrigins"]));
+            .WithOrigins(builder.Configuration["AllowedOrigins"]).WithOrigins("https://localhost:3000"));
 });
 builder.Services.AddSignalR();
 
