@@ -189,3 +189,21 @@ code {
   max-height: 281.25px;
   max-width: 500px;
 }
+
+/* Profile page*/
+
+.profilePage {
+  background-color:  #525252!important;
+}
+
+.profileMenu {
+  background-color:  #525252!important;
+}
+
+.profilePhotos {
+  background-color:  #525252!important;
+}
+
+.profilePhotoButtons::selection {
+  background-color: greenyellow!important;
+}

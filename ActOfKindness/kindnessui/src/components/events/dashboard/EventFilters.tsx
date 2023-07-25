@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import {ChangeEvent, useState} from 'react';
 import {Header, Input, Menu} from "semantic-ui-react";
 import { MyEventFilter } from '../../../app/models/Events/myEventFilter';
 import { useStore } from '../../../app/stores/store';
@@ -40,7 +40,7 @@ function EventFilters() {
 
         const filterResults = inputValue;
         if (inputValue.length > 2 || inputValue.length === 0){
-            handleSearch(propName,filterResults)
+            handleSearch(propName,filterResults,activeFilter)
         }
     }
     const handleDateSearch = (event: ChangeEvent<HTMLInputElement>) =>
