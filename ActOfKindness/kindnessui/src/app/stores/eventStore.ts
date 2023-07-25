@@ -257,7 +257,7 @@ export default class EventStore {
         try {
             await agent.Events.leaveEvent(eventId);
             await this.getParticipants(eventId);
-            toast.info('Successfully left the event!');
+            toast.warning('Successfully left the event!');
         }
         catch (e) {
             console.log(e);

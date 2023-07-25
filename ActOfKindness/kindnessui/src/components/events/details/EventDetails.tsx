@@ -152,16 +152,9 @@ function EventDetails({myEvent}:Props) {
                 </Segment>
                 <Segment>
                     <Grid verticalAlign={'middle'}>
-                        <Grid.Column width={15}>
+                        <Grid.Column width={16}>
                             {accountStore.isLoggedIn && (isUserCreator() || accountStore.isAdmin || accountStore.isModerator) && (
                                 <>
-                                    <Button as={Link}
-                                        floated={"right"}
-                                        to={`/editEvent/${event.id}`}
-                                        color={"orange"}
-                                        content={"Edit"}
-                                        style={{ marginLeft: 10 }} />
-
                                     <Button as={Link}
                                         floated={"right"}
                                         onClick={async () => {
@@ -181,8 +174,15 @@ function EventDetails({myEvent}:Props) {
                                         }}
                                         color={"red"}
                                         content={"Delete"}
-                                        style={{ marginLeft: 10 }}
+                                        style={{ marginRight: "2rem" }}
                                     ></Button>
+
+                                    <Button as={Link}
+                                        floated={"right"}
+                                        to={`/editEvent/${event.id}`}
+                                        color={"orange"}
+                                        content={"Edit"}
+                                        style={{ marginRight: "1.5rem" }} />
                                 </>
                             )}
 
@@ -197,7 +197,7 @@ function EventDetails({myEvent}:Props) {
                                     }
                                 }}
                                 content={"Join Event!"}
-                                style={accountStore.isLoggedIn && (isUserCreator() || isUserParticipant()) ? { marginRight: 10, display: 'none' } : { marginRight: 10 }}
+                                style={accountStore.isLoggedIn && (isUserCreator() || isUserParticipant()) ? { marginLeft: "2rem", display: 'none' } : { marginLeft: "2rem" }}
                             />
 
                             {accountStore.isLoggedIn && isUserParticipant() && (
@@ -206,7 +206,7 @@ function EventDetails({myEvent}:Props) {
                                     color={'red'}
                                     onClick={() => eventStore.leaveEvent(event.id)}
                                     content={"Leave Event"}
-                                    style={{ marginRight: 10 }} />
+                                    style={{ marginLeft: "2rem" }} />
                             )}
                             </Grid.Column>
                     </Grid>
