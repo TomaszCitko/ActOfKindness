@@ -82,7 +82,16 @@ code {
 
 }
 
+.react-calendar {
+  width: 33%;
+  border: none;
+  background-color: #ffffff !important;
+}
 
+.react-datepicker-wrapper {
+  background-color: dimgray !important;
+  width: 100%;
+}
 
 .ui.form textarea {
   font-size: 1.2rem;
@@ -212,16 +221,36 @@ code {
 
 .profilePage {
   background-color:  #525252!important;
+  border: 1px solid black!important;
 }
 
 .profileMenu {
   background-color:  #525252!important;
+  box-shadow: none;
+  border: 1px solid black!important;
 }
 
 .profilePhotos {
   background-color:  #525252!important;
+  border: 1px solid black!important;
+
 }
 
-.profilePhotoButtons::selection {
-  background-color: greenyellow!important;
+.profilePhotoButtons {
+  background-color: #1a1a1a!important;
+  color: #c0bdbd!important;
 }
+
+.profilePhotoBorders {
+  box-shadow: none!important;
+  background-color:  #525252!important;
+  border: 1px solid black!important;
+
+}
+
+.profilePhotoButtons >.disabled.button {
+  color: black!important;
+  background-color: #61dafb !important;
+  opacity: 100 !important;
+}
+
