@@ -19,9 +19,9 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<List<DetailsEventDto>>> GetModeratedEvents()
+        public async Task<ActionResult<PaginatedResults<List<DetailsEventDto>>>> GetModeratedEvents([FromQuery]int pageNumber = 1)
         {
-            return await _eventService.GetModeratedEventsAsync();
+            return await _eventService.GetModeratedEventsAsync(pageNumber);
         }
 
         [Authorize(Roles = "Moderator, Admin")]
@@ -73,11 +73,12 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [HttpGet("filter")]
-        public async Task<ActionResult<List<DetailsEventDto>>> GetFilteredModeratedEventsAsync([FromQuery] EventFilter filter)
+        public async Task<ActionResult<PaginatedResults<List<DetailsEventDto>>>> GetFilteredModeratedEventsAsync([FromQuery] EventFilter filter, [FromQuery]int pageNumber = 1)
         {
-            return await _eventService.GetFilteredModeratedEventsAsync(filter);
+            return await _eventService.GetFilteredModeratedEventsAsync(filter, pageNumber);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id:guid}/participants")]
         public async Task<ActionResult<List<ParticipantDto>>> GetParticipants(Guid id)
         {

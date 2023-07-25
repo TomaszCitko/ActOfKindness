@@ -14,15 +14,22 @@ public class EventRepository : IEventRepository
     {
         _context = context;
     }
-
-
-
-    public async Task<List<Event>> GetModeratedEventsAsync()
+    
+    public async Task<List<Event>> GetModeratedEventsAsync(int pageNumber, int pageSize)
     {
         return await _context.Events
-            .Where(e => e.IsModerated)
             .Include(e => e.CreatedBy)
+            .Where(e => e.IsModerated && !e.IsDone)
+            .OrderBy(e => e.StartingDate)
+            .Skip(pageSize * (pageNumber - 1))
+            .Take(pageSize)
             .ToListAsync();
+    }
+
+    public async Task<int> GetQuantityOfModeratedEventAsync()
+    {
+        return await _context.Events
+            .CountAsync(e => e.IsModerated && !e.IsDone);
     }
 
     public async Task<List<Event>> GetUnmoderatedEventsAsync()
@@ -30,6 +37,7 @@ public class EventRepository : IEventRepository
         return await _context.Events
             .Where(e => !e.IsModerated)
             .Include(e => e.CreatedBy)
+            .OrderBy(e => e.CreatedTime)
             .ToListAsync();
     }
 
@@ -91,8 +99,9 @@ public class EventRepository : IEventRepository
     public async Task<List<Event>> GetFilteredModeratedEventsAsync(EventFilter filter)
     {
         var filteredEvents = await _context.Events
-            .Where(e => e.IsModerated)
             .Include(e => e.CreatedBy)
+            .Where(e => e.IsModerated && !e.IsDone)
+            .OrderBy(e => e.StartingDate)
             .ToListAsync();
 
         if (!string.IsNullOrEmpty(filter.Localization))

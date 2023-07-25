@@ -1,8 +1,7 @@
-import React from 'react';
-import { Item } from "semantic-ui-react";
+import { List, Image } from "semantic-ui-react";
 import {Participants} from "../../../app/models/Users/participants";
-import {observer} from "mobx-react-lite";
 import { NavLink } from "react-router-dom";
+import {observer} from "mobx-react-lite";
 
 interface Props {
     participant: Participants
@@ -11,16 +10,13 @@ interface Props {
 
 function EventParticipantsListItem({participant}: Props) {
     return (
-
-
-                    <Item>
-                        <Item.Image size='tiny' src={participant.avatar} />
-                        <Item.Content>
-                            <Item.Header as={NavLink} to={`/profile/${participant.userName}`}>{participant.userName}</Item.Header>
-                            <Item.Description>{participant.location}</Item.Description>
-                        </Item.Content>
-                    </Item>
-
+        <List.Item>
+            <Image avatar src={participant.avatar}/>
+            <List.Content>
+                <List.Header as={NavLink} to={`/profile/${participant.userName}`}>{participant.userName}</List.Header>
+                <List.Description>{participant.location}</List.Description>
+            </List.Content>
+        </List.Item>
     );
 }
 

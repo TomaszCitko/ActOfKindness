@@ -24,18 +24,22 @@ function ProfilePhotos({profile}: Props) {
         setMainPhoto(photo)
     }
     return (
-        <Tab.Pane>
+        <Tab.Pane className={"profilePhotos"}>
             <Header icon={'image'} content={'Photos'}></Header>
             <PhotoUploadWidget isCreateEvent={false} uploadPhoto={handleUploadPhoto} loading={uploading} />
             <Card.Group itemsPerRow={5}>
                 {profile?.photos?.map(photo=>(
                     <Card key={photo.id}>
                         <Image src={photo.url}/>
-                        // add checking if its current user!!
-                        <Button.Group fluid widths={2}>
+                        <Button.Group
+                            fluid
+                            widths={2}
+                            className={"profilePhotoButtons"}
+                        >
                             <Button
-                                basic
-                                color={'green'}
+                                className={"profilePhotoButtons"}
+
+                                color={"black"}
                                 content={'Set as Main'}
                                 name={photo.id}
                                 disabled={photo.isMain}
@@ -44,7 +48,7 @@ function ProfilePhotos({profile}: Props) {
                             />
 
                             <Button
-                                basic
+
                                 color={'red'}
                                 icon={'trash'}
                             />

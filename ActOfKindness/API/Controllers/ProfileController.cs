@@ -1,6 +1,6 @@
 ﻿using Application.Dtos.Profile;
-using Application.Dtos.User;
 using Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -16,6 +16,7 @@ namespace API.Controllers
             _profileService = profileService;
         }
 
+        [AllowAnonymous]
         [HttpGet("{username}")]
         public async Task<ActionResult<ProfileDto>> GetProfileAsync(string username)
         {

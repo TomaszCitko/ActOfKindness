@@ -15,6 +15,7 @@ namespace Application.Services
         private readonly IContextService _contextService;
         private readonly UserManager<AppUser> _userManager;
         private readonly IPhotoRepository _photoRepository;
+        private const int PageSize = 10;
 
         public EventService(IEventRepository eventRepository, IMapper mapper, IContextService contextService, UserManager<AppUser> userManager,IPhotoRepository photoRepository)
         {
@@ -25,12 +26,20 @@ namespace Application.Services
             _photoRepository = photoRepository;
         }
 
-        public async Task<List<DetailsEventDto>> GetModeratedEventsAsync()
+        public async Task<PaginatedResults<List<DetailsEventDto>>> GetModeratedEventsAsync(int pageNumber)
         {
-            var events = await _eventRepository.GetModeratedEventsAsync();
+            var eventsFromRepository = await _eventRepository.GetModeratedEventsAsync(pageNumber, PageSize);
 
-            var eventsDto = _mapper.Map<List<DetailsEventDto>>(events);
-            return eventsDto;
+            var eventsQuantity = _eventRepository.GetQuantityOfModeratedEventAsync().Result;
+
+            var eventsDto = _mapper.Map<List<DetailsEventDto>>(eventsFromRepository);
+
+            return new PaginatedResults<List<DetailsEventDto>>()
+            {
+                Items = eventsDto,
+                PageNumber = pageNumber,
+                TotalPages = (int)Math.Ceiling(eventsQuantity /(double) PageSize)
+            };
         }
 
         public async Task<List<DetailsEventDto>> GetUnmoderatedEventsAsync()
@@ -152,13 +161,23 @@ namespace Application.Services
             Log.Information($"Moderated event ({id}) by {_contextService.GetUserRole} ({_contextService.GetUserId})");
         }
 
-        public async Task<List<DetailsEventDto>> GetFilteredModeratedEventsAsync(EventFilter filter)
+        public async Task<PaginatedResults<List<DetailsEventDto>>> GetFilteredModeratedEventsAsync(EventFilter filter, int pageNumber)
         {
-            var events = await _eventRepository.GetFilteredModeratedEventsAsync(filter);
+            var eventsFromRepository = await _eventRepository.GetFilteredModeratedEventsAsync(filter);
+
+            var events = eventsFromRepository
+                .Skip(PageSize * (pageNumber - 1))
+                .Take(PageSize)
+                .ToList();
 
             var eventsDto = _mapper.Map<List<DetailsEventDto>>(events);
 
-            return eventsDto;
+            return new PaginatedResults<List<DetailsEventDto>>()
+            {
+                Items = eventsDto,
+                PageNumber = pageNumber,
+                TotalPages = (int)Math.Ceiling(eventsFromRepository.Count / (double)PageSize)
+            };
         }
 
         public async Task<List<ParticipantDto>> GetParticipantsAsync(Guid eventId)
@@ -257,7 +276,7 @@ namespace Application.Services
 
             await _eventRepository.SaveAsync();
 
-            Log.Information($"{_contextService.GetUserRole} ({userId}) joined to event ({eventId})");
+            Log.Information($"{_contextService.GetUserRole} ({userId}) has left event ({eventId})");
         }
     }
 }

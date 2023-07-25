@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
-import {Button, Header, Segment, Comment, FormField, Label, Loader} from "semantic-ui-react";
+import {useEffect} from 'react';
+import {Header, Segment, Comment, Loader} from "semantic-ui-react";
 import {useStore} from "../../../app/stores/store";
 import {observer} from "mobx-react-lite";
-import {Formik, Form, Field, ErrorMessage, FieldProps} from "formik";
+import {Formik, Form, Field, FieldProps} from "formik";
 import * as Yup from "yup"
 import { formatDistanceToNow } from 'date-fns';
 
@@ -34,9 +34,7 @@ export default observer(function EventDetailsChat({eventId} : Props) {
             >
                 <Header>Chat about this event</Header>
             </Segment>
-            <Segment attached
-
-            >
+            <Segment attached className="ui segment eventDetailsChat" >
                 <Comment.Group>
                     {commentStore.comments.map(comment=>(
                         <Comment key={comment.id}>
