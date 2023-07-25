@@ -5,7 +5,8 @@ namespace Application.Interfaces;
 
 public interface IEventRepository
 {
-    Task<List<Event>> GetModeratedEventsAsync();
+    Task<List<Event>> GetModeratedEventsAsync(int pageNumber, int pageSize);
+    Task<int> GetQuantityOfModeratedEventAsync();
     Task<List<Event>> GetUnmoderatedEventsAsync();
     Task<Event?> GetEventByIdAsync(Guid id);
     Task DeleteEventAsync(Guid id);

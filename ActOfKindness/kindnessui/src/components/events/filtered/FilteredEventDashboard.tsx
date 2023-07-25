@@ -10,7 +10,7 @@ function FilteredEventDashboard(filteredList:MyEventFilter) {
     const { loadFilteredEvents, myEvents, clearEvents } = eventStore;
 
     useEffect(() => {
-        loadFilteredEvents(filteredList);
+        loadFilteredEvents(filteredList, eventStore.pageNumber);
         return () => { clearEvents(); }
     }, [loadFilteredEvents, clearEvents]);
 

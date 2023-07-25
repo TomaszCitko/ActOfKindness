@@ -1,14 +1,11 @@
-import React, { ChangeEvent, useState } from 'react';
-import {Form, Header, Icon, Input, Menu, Search, TextArea} from "semantic-ui-react";
+import { ChangeEvent } from 'react';
+import {Header, Input, Menu} from "semantic-ui-react";
 import { MyEventFilter } from '../../../app/models/Events/myEventFilter';
-import { Link } from 'react-router-dom';
-import EventStore from '../../../app/stores/eventStore';
 import { useStore } from '../../../app/stores/store';
-import { type } from 'os';
-import { values } from 'mobx';
 
 
 function EventFilters() {
+    const defaultFilteredPageNumber = 1;
     const filteredList = {
         localization: '',
         title: '',
@@ -19,16 +16,17 @@ function EventFilters() {
     };
     const [activeFilter, setActiveFilter] = useState("allEvents");
     const [isFocused, setIsFocused] = useState('');
+    
     const { eventStore } = useStore();
     const handleSearch = (property: keyof typeof filteredList, value: string,name:string) =>
     {
         setActiveFilter(name)
         filteredList[property] = value;
         handleFilteredEvents(filteredList);
-
+        eventStore.isFiltered = true;
     }
     const handleFilteredEvents = (filteredList:MyEventFilter) => {
-        eventStore.loadFilteredEvents(JSON.parse(JSON.stringify(filteredList)));
+        eventStore.loadFilteredEvents(JSON.parse(JSON.stringify(filteredList)), defaultFilteredPageNumber);
     }
     const handleTextSearch = (event: ChangeEvent<HTMLInputElement>) =>
     {
@@ -39,8 +37,11 @@ function EventFilters() {
         }
         const propName = event.target.name == "title" ? "title" : (event.target.name == "description" ? "description" : "localization");
         const inputValue = event.target.value;
-        const filterResults = inputValue.length > 2 ? inputValue : "";
-        handleSearch(propName,filterResults,activeFilter)
+
+        const filterResults = inputValue;
+        if (inputValue.length > 2 || inputValue.length === 0){
+            handleSearch(propName,filterResults)
+        }
     }
     const handleDateSearch = (event: ChangeEvent<HTMLInputElement>) =>
     {

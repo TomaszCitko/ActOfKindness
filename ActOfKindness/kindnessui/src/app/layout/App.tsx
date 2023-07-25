@@ -7,8 +7,10 @@ import {observer} from "mobx-react-lite";
 import MyLoginModal from "../../components/modals/myGenericModal";
 function App() {
     const {accountStore}= useStore()
+    const { eventStore } = useStore();
 
     useEffect(() => {
+        eventStore.loadEvents(1);
         if (accountStore.token){
             accountStore.getUser()
         }}
