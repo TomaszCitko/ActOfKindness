@@ -3,6 +3,7 @@ import { MyEvent } from "../../../app/models/Events/myEvent";
 import { Segment, Grid, Header, Icon, Image, Button, Divider } from "semantic-ui-react";
 import { observer } from 'mobx-react-lite';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { format } from 'date-fns';
 import Swal from 'sweetalert2';
 import { useStore, store } from '../../../app/stores/store';
 import LoginForm from '../../users/LoginForm';
@@ -45,8 +46,8 @@ function EventDetails({myEvent}:Props) {
     const loadEventDetails = async () => {
         try {
             if (id) {
-                await eventStore.getParticipants(id)
-                const userName = await eventStore.getUser(id, event.userId)
+                await eventStore.getParticipants(id);
+                //const userName = await eventStore.getUser(id, event.userId)
                 if (myEvent){
                     setEvent(myEvent);
                 }
@@ -103,7 +104,7 @@ function EventDetails({myEvent}:Props) {
                         <Grid.Column width={6} floated='left'>
                             <span>
                                 <Icon name='calendar alternate outline' style={{marginBottom: 10}} size='large' color='teal'/>
-                                <b>Start date:</b> <i>{event.startingDate.slice(0,10)}</i>
+                                <b>Start date:</b> <i>{event.startingDate && format(new Date(event.startingDate), "dd/MM/yyyy")}</i>
                             </span>
                         </Grid.Column>
                         <Grid.Column>
@@ -114,7 +115,7 @@ function EventDetails({myEvent}:Props) {
                         <Grid.Column width={6} floated='right'>
                             <Icon name='calendar check outline' style={{marginBottom: 10}} size='large' color='teal'/>
                             <span>
-                                <b>End date:</b> <i>{event.endingDate.slice(0,10)}</i>
+                                <b>End date:</b> <i>{event.endingDate && format(new Date(event.endingDate), "dd/MM/yyyy")}</i>
                             </span>
                         </Grid.Column>
                     </Grid>
@@ -144,7 +145,7 @@ function EventDetails({myEvent}:Props) {
                         <Grid.Column width={15}>
                             <span>
                                 <Icon name='calendar plus outline' style={{marginBottom: 10}} size='large' color='teal'/>
-                                <b>Created on:</b> <i>{event.createdTime.slice(0,10)}</i>
+                                <b>Created on:</b> <i>{event.createdTime && format(new Date(event.createdTime), "dd/MM/yyyy")}</i>
                             </span>
                         </Grid.Column>
                     </Grid>

@@ -91,6 +91,8 @@ export default class AccountStore{
             runInAction(()=>{
                 this.setUser(user)
                 this.isLoggedIn = true
+                this.isAdmin = user.role === 'Admin'
+                this.isModerator = user.role === 'Moderator'
             })
         } catch (e){
             console.log(e)
