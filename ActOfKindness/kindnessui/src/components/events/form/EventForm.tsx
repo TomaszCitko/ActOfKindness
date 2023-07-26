@@ -8,6 +8,9 @@ import {useStore} from "../../../app/stores/store";
 import { isAfter, isEqual, parse, isValid, format } from 'date-fns';
 import PhotoUploadWidget from "../../../app/common/PhotoUploadWidget";
 import {observer} from "mobx-react-lite";
+import Calendar from 'react-calendar';
+import DatePicker, {ReactDatePickerProps} from 'react-datepicker'
+import MyDateInput from "../../../app/common/MyDateInput";
 
 function EventForm() {
     const {eventStore} = useStore();
@@ -147,7 +150,7 @@ function EventForm() {
             </Label>
 
             <Formik
-                validationSchema={formValidation}
+                // validationSchema={formValidation}
                 initialValues={initialValues}
                 enableReinitialize
                 onSubmit={async (values) => {
@@ -192,17 +195,31 @@ function EventForm() {
                                 <Label basic color={'red'} content={error}/>}/>
                         </FormField>
 
-                        <FormField>
-                            <Field name="startingDate" placeholder="Starting Date   dd/mm/yyyy" />
-                            <ErrorMessage name={'startingDate'} render={error=>
-                                <Label basic color={'red'} content={error}/>}/>
-                        </FormField>
 
-                        <FormField>
-                            <Field name="endingDate" placeholder="Ending Date    dd/mm/yyyy" />
-                            <ErrorMessage name={'endingDate'} render={error=>
-                                <Label basic color={'red'} content={error}/>}/>
-                        </FormField>
+                            <MyDateInput placeholderText={'starting date'}
+                                         name="startingDate"
+                                         showTimeSelect
+                                         timeCaption={'time'}
+                                         dateFormat='dd/MM/yyyy'
+                            />
+
+
+
+                            <MyDateInput placeholderText={'Ending Date'}
+                                         name="endingDate"
+                                         showTimeSelect
+                                         timeCaption={'time'}
+                                         dateFormat='dd/MM/yyyy'
+                            />
+
+
+
+
+                        {/*<FormField>*/}
+                        {/*    <Field name="endingDate" placeholder="Ending Date    dd/mm/yyyy" />*/}
+                        {/*    <ErrorMessage name={'endingDate'} render={error=>*/}
+                        {/*        <Label basic color={'red'} content={error}/>}/>*/}
+                        {/*</FormField>*/}
 
                         <FormField>
                             <Field as={"textarea"}  placeholder='Description' name='description' />

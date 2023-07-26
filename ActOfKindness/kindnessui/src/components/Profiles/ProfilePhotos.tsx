@@ -29,13 +29,13 @@ function ProfilePhotos({profile}: Props) {
             <PhotoUploadWidget isCreateEvent={false} uploadPhoto={handleUploadPhoto} loading={uploading} />
             <Card.Group itemsPerRow={5}>
                 {profile?.photos?.map(photo=>(
-                    <Card key={photo.id}>
-                        <Image src={photo.url}/>
+                    <Card className={"profilePhotoBorders"} key={photo.id}>
+                        <Image  src={photo.url}/>
                         <Button.Group
                             fluid
                             widths={2}
-                            className={"profilePhotoButtons"}
-                        >
+                            className={"profilePhotoButtons"}>
+
                             <Button
                                 className={"profilePhotoButtons"}
 

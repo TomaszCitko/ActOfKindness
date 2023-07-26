@@ -8,6 +8,7 @@ import {router} from "../router/Routes";
 import {Participants} from "../models/Users/participants";
 import { MyEventFilter } from "../models/Events/myEventFilter";
 import { toast } from 'react-toastify';
+import {format} from "date-fns";
 
 export default class EventStore {
     eventRegistry =  new Map<string, MyEvent>();
@@ -55,7 +56,18 @@ export default class EventStore {
     }
 
     createEvent = async(newEvent: MyEventCreate)=>{
-        newEvent.id = uuid();
+        runInAction(()=>{
+            newEvent.id = uuid();
+            const start = new Date(newEvent.startingDate);
+            const formattedDate = format(start, 'dd/MM/yyyy');
+            const end = new Date(newEvent.endingDate);
+            const formattedEndDate = format(end, 'dd/MM/yyyy');
+
+            newEvent.startingDate = formattedDate;
+            newEvent.endingDate = formattedEndDate;
+            console.log(newEvent);
+        })
+
         try {
             await agent.Events.create(newEvent);
             toast.success("Event successfully created! It's now awaiting moderation.");
