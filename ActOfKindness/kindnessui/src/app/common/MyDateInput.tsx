@@ -20,6 +20,5 @@ export default function MyDateInput(props: Partial<ReactDatePickerProps>) {
                 }}
             />
         </Form.Field>
-
     );
 };

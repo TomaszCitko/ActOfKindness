@@ -7,7 +7,18 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b82ed90-012b-4d75-8fa8-44e6371b2497" name="Changes" comment="styling&#10;hotfix filters" />
+    <list default="true" id="1b82ed90-012b-4d75-8fa8-44e6371b2497" name="Changes" comment="add datepicker&#10;format dates to dd/mm/yyyy&#10;style profile page">
+      <change beforePath="$PROJECT_DIR$/../Application/Dtos/Event/CommentDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Application/Dtos/Event/CommentDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Application/Dtos/Event/DetailsEventDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Application/Dtos/Event/DetailsEventDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Domain/Models/Event.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Domain/Models/Event.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Persistence/Repositories/CommentRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Persistence/Repositories/CommentRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Persistence/Repositories/EventRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Persistence/Repositories/EventRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Persistence/Seed.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Persistence/Seed.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/Events/myEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/Events/myEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/events/details/EventDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/details/EventDetails.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,6 +47,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/node_modules/formik/dist/Field.d.ts" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/node_modules/semantic-ui-react/dist/commonjs/views/Comment/Comment.d.ts" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/node_modules/yup/index.d.ts" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -142,6 +154,7 @@
       <workItem from="1689275892207" duration="9411000" />
       <workItem from="1689985321523" duration="952000" />
       <workItem from="1689986434528" duration="7204000" />
+      <workItem from="1690313728520" duration="622000" />
     </task>
     <task id="LOCAL-00001" summary="creating components&#10;installing semantic UI&#10;installing router&#10;creating routes&#10;setting up navbar&#10;creating nav bar links">
       <created>1686584876280</created>
@@ -290,7 +303,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690287119606</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="add datepicker&#10;format dates to dd/mm/yyyy&#10;style profile page">
+      <created>1690309738948</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1690309738948</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -325,6 +345,7 @@
     <MESSAGE value="styling deleting unused imports/variables/methods&#10;add navbar avatar image" />
     <MESSAGE value="add react dropzone &#10;add react cropper&#10;add uploading &#10;add set main photo&#10;add upload photo" />
     <MESSAGE value="styling&#10;hotfix filters" />
-    <option name="LAST_COMMIT_MESSAGE" value="styling&#10;hotfix filters" />
+    <MESSAGE value="add datepicker&#10;format dates to dd/mm/yyyy&#10;style profile page" />
+    <option name="LAST_COMMIT_MESSAGE" value="add datepicker&#10;format dates to dd/mm/yyyy&#10;style profile page" />
   </component>
 </project>

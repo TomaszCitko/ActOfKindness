@@ -58,27 +58,48 @@ export default class EventStore {
     createEvent = async(newEvent: MyEventCreate)=>{
         runInAction(()=>{
             newEvent.id = uuid();
-            const start = new Date(newEvent.startingDate);
-            const formattedDate = format(start, 'dd/MM/yyyy');
-            const end = new Date(newEvent.endingDate);
-            const formattedEndDate = format(end, 'dd/MM/yyyy');
-
-            newEvent.startingDate = formattedDate;
-            newEvent.endingDate = formattedEndDate;
-            console.log(newEvent);
+            const start = new Date(newEvent.startingDate)
+            const formattedDate = format(start,'dd/MM/yyyy')
+            const end = new Date(newEvent.endingDate)
+            const formattedEndDate = format(end,'dd/MM/yyyy')
+            newEvent.startingDate = formattedDate
+            newEvent.endingDate = formattedEndDate
+            console.log(newEvent)
         })
 
         try {
-            await agent.Events.create(newEvent);
-            toast.success("Event successfully created! It's now awaiting moderation.");
-            await router.navigate('/events');
+            await agent.Events.create(newEvent)
+            await router.navigate('/events')
+            this.success = false;
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
+
+    updateEvent = async(updatedEvent: MyEventCreate)=>{
+        runInAction(()=>{
+            const start = new Date(updatedEvent.startingDate)
+            const formattedDate = format(start,'dd/MM/yyyy')
+            const end = new Date(updatedEvent.endingDate)
+            const formattedEndDate = format(end,'dd/MM/yyyy')
+            updatedEvent.startingDate = formattedDate
+            updatedEvent.endingDate = formattedEndDate
+            console.log(updatedEvent)
+        })
+        try {
+            await agent.Events.update(updatedEvent)
+            await router.navigate('/events')
+            this.success = false;
+
+
         }
         catch (e) {
             console.log(e);
             if ((e as any).response.data !== "") {
-                toast.error(`Event creation failed: ${(e as any).response.data}.`);
+                toast.error(`Event update failed: ${(e as any).response.data}.`);
             } else {
-                toast.error('Something went wrong while creating the event.');
+                toast.error('Something went wrong while updating the event.');
             }
         }
     }
@@ -102,22 +123,6 @@ export default class EventStore {
             runInAction(()=>{
                 this.uploading = false
             })
-        }
-    }
-
-    updateEvent = async(updatedEvent: MyEventCreate)=>{
-        try {
-            await agent.Events.update(updatedEvent);
-            toast.success("Event updated successfully! It's now awaiting moderation.");
-            await router.navigate('/events');
-        }
-        catch (e) {
-            console.log(e);
-            if ((e as any).response.data !== "") {
-                toast.error(`Event update failed: ${(e as any).response.data}.`);
-            } else {
-                toast.error('Something went wrong while updating the event.');
-            }
         }
     }
 
@@ -155,7 +160,9 @@ export default class EventStore {
     loadEventDetails = async(id:string)=>{
         this.selectedEvent = undefined
             try{
+                console.log("_________________________________")
                 const eventDetails = await agent.Events.details(id)
+                console.log(eventDetails)
                 this.selectedEvent = eventDetails
                 return eventDetails
             }

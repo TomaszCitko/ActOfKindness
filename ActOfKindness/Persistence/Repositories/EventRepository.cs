@@ -47,8 +47,21 @@ public class EventRepository : IEventRepository
             .Include(i => i.Participants)
             .ThenInclude(u=>u.User)
             .Include(i => i.CreatedBy)
-            .Include(i=>i.Comments)
+            //.Include(i=>i.Comments)
+            //.ThenInclude(a=>a.Author)
             .Include(i=>i.Photos)
+            .FirstOrDefaultAsync(e => e.Id == id);
+    }
+
+    public async Task<Event?> GetEventByIdForComments(Guid id)
+    {
+        return await _context.Events
+            .Include(i => i.Participants)
+            .ThenInclude(u => u.User)
+            .Include(i => i.CreatedBy)
+            .Include(i => i.Comments)
+            .ThenInclude(a => a.Author)
+            .Include(i => i.Photos)
             .FirstOrDefaultAsync(e => e.Id == id);
     }
 
