@@ -78,6 +78,7 @@ function EventForm() {
     }, [location]);
     
     useEffect(() => {
+        eventStore.success = false
         return () => {
             eventStore.success = false
 
