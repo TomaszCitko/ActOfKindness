@@ -43,7 +43,7 @@ function EventDetails({myEvent}:Props) {
     const loadEventDetails = async () => {
         try {
             if (id) {
-                await eventStore.getParticipants(id)
+               await eventStore.getParticipants(id)
                 const userName = await eventStore.getUser(id, event.userId)
                 if (myEvent){
                     setEvent(myEvent);

@@ -51,6 +51,7 @@ namespace API.Controllers
         [HttpGet("{id:guid}")]
         public async Task<ActionResult<DetailsEventDto>> GetEventById([FromRoute]Guid id)
         {
+            var test = await _eventService.GetEventByIdAsync(id);
             return await _eventService.GetEventByIdAsync(id);
         }
 

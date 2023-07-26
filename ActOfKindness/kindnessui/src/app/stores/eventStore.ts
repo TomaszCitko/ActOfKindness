@@ -61,7 +61,6 @@ export default class EventStore {
             const formattedDate = format(start,'dd/MM/yyyy')
             const end = new Date(newEvent.endingDate)
             const formattedEndDate = format(end,'dd/MM/yyyy')
-
             newEvent.startingDate = formattedDate
             newEvent.endingDate = formattedEndDate
             console.log(newEvent)
@@ -70,6 +69,28 @@ export default class EventStore {
         try {
             await agent.Events.create(newEvent)
             await router.navigate('/events')
+            this.success = false;
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
+
+    updateEvent = async(updatedEvent: MyEventCreate)=>{
+        runInAction(()=>{
+            const start = new Date(updatedEvent.startingDate)
+            const formattedDate = format(start,'dd/MM/yyyy')
+            const end = new Date(updatedEvent.endingDate)
+            const formattedEndDate = format(end,'dd/MM/yyyy')
+            updatedEvent.startingDate = formattedDate
+            updatedEvent.endingDate = formattedEndDate
+            console.log(updatedEvent)
+        })
+        try {
+            await agent.Events.update(updatedEvent)
+            await router.navigate('/events')
+            this.success = false;
+
         }
         catch (e) {
             console.log(e)
@@ -98,15 +119,7 @@ export default class EventStore {
         }
     }
 
-    updateEvent = async(updatedEvent: MyEventCreate)=>{
-        try {
-            await agent.Events.update(updatedEvent)
-            await router.navigate('/events')
-        }
-        catch (e) {
-            console.log(e)
-        }
-    }
+
 
     loadEvents = async (pageNumber: number)=>{
         try {
@@ -143,7 +156,9 @@ export default class EventStore {
         this.selectedEvent = undefined
         // let tempDetails = this.getEvent(id)
             try{
+                console.log("_________________________________")
                 const eventDetails = await agent.Events.details(id)
+                console.log(eventDetails)
                 this.selectedEvent = eventDetails
                 return eventDetails
             }

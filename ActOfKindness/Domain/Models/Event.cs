@@ -19,7 +19,7 @@
         public EventType Type { get; set; }
         public string Image { get; set; }
         public List<EventUser> Participants { get; set; }
-        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
+        public ICollection<Comment> Comments { get; set; } 
         public ICollection<Photo> Photos { get; set; }
     }
 

@@ -47,6 +47,7 @@ export default class ProfileStore {
                     }
                 }
                 this.uploading = false
+                this.success = false
             })
         }
         catch (e) {

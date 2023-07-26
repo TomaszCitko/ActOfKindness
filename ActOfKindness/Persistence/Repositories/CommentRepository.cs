@@ -21,7 +21,7 @@ public class CommentRepository : ICommentRepository
     }
     public async Task<CommentDto> CreateCommentAsync(Guid eventId, string commentBody)
     {
-        var eventToAddComment = await _eventRepository.GetEventByIdAsync(eventId);
+        var eventToAddComment = await _eventRepository.GetEventByIdForComments(eventId);
         var userId = _contextService.GetUserId;
         if (userId is not null)
         {
@@ -47,8 +47,8 @@ public class CommentRepository : ICommentRepository
 
     public async Task<List<CommentDto>> ListCommentsAsync(Guid eventId)
     {
-        var eventToGetCommentsFrom = await _eventRepository.GetEventByIdAsync(eventId);
-        
+        var eventToGetCommentsFrom = await _eventRepository.GetEventByIdForComments(eventId);
+
         var listOfCommentsDto = eventToGetCommentsFrom?.Comments
             .Select(CreateCommentDto)
             .OrderBy(c=>c.CreatedAt)
@@ -64,15 +64,17 @@ public class CommentRepository : ICommentRepository
 
     public CommentDto CreateCommentDto(Comment comment)
     {
-        return new CommentDto
-        {
-            Avatar = "https://api.multiavatar.com/Binx Bond.png",
-            Body = comment.Body,
-            CreatedAt = comment.CreatedAt,
-            DisplayName = comment.Author.Nickname,
-            Username = comment.Author.UserName,
-            Id = comment.Id,
-        };
+        if (comment != null)
+            return new CommentDto
+            {
+                Avatar = "https://api.multiavatar.com/Binx Bond.png",
+                Body = comment.Body,
+                CreatedAt = comment.CreatedAt,
+                DisplayName = comment.Author.Nickname,
+                Username = comment.Author.UserName,
+                Id = comment.Id,
+            };
+        return null;
     }
 
     public async Task<bool> SaveAsync()

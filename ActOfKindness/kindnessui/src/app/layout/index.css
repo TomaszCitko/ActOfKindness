@@ -71,6 +71,12 @@ code {
   }
 }
 
+
+
+
+
+
+
 .ui.form input,textarea,select  {
   font-size: 1.2rem;
   background-color: dimgray !important;
@@ -151,6 +157,11 @@ code {
   background-color: #474c5d;
   border: none;
 }
+.eventDetailsChat {
+  height: 30%;
+  overflow: scroll;
+}
+
 
 .ui.eventDetails > * > * > p {
   font-size: 1.35rem;
@@ -199,6 +210,16 @@ code {
   background-size: cover !important;
 }
 
+/*
+NAVBAR
+*/
+
+.ui.top.left.pointing.dropdown > .menu {
+  right: 3em;
+
+}
+
+
 .navDropdown {
   background-color: #1b1c1d !important;
   color: whitesmoke;
@@ -209,7 +230,8 @@ code {
 }
 
 .ui.menu .ui.dropdown .menu > .item {
-  color: whitesmoke !important;
+  background-color: #1a1a1a !important;
+  color:#c0bdbd !important;
 }
 
 .ui.items > .item > .image > img {
@@ -222,6 +244,11 @@ code {
 .profilePage {
   background-color:  #525252!important;
   border: 1px solid black!important;
+}
+
+.profileEventsPage{
+  background-color:  #525252!important;
+border:none!important;
 }
 
 .profileMenu {
