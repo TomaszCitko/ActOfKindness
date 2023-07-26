@@ -12,6 +12,8 @@ import homeImage3 from '../../images/homepage3.avif'
 import homeImage4 from '../../images/homepage4.avif'
 import FacebookLogin from "@greatsumini/react-facebook-login";
 import EventCarousel from './EventCarousel';
+import Footer from '../footer/Footer';
+
 
 function Homepage() {
     const { accountStore } = useStore();
@@ -70,21 +72,21 @@ function Homepage() {
                                         <Icon style={{ paddingLeft: '10px' }} name="wpforms" />
                                     </Button>
 
-                                    <Divider horizontal inverted>Or</Divider>
+                                    {/* <Divider horizontal inverted>Or</Divider>
                                     <Button
                                         as={FacebookLogin}
                                         appId={'287828743788720'}
                                         size={'huge'}
                                         inverted
                                         color={'facebook'}
-                                        content={'Login to Facebook'}
+                                        content={'Login via Facebook'}
                                         onSuccess={(response:any)=>{
                                             console.log('Login Success', response)
                                         }}
                                         onFail={(response:any)=>{
                                             console.log('Login Failed', response)
                                         }}
-                                    />
+                                    /> */}
                                 </Button.Group>
                             ):
                                     <Button as={Link} to={'/events'} size="huge" color={'teal'}  style={{ width: '280px', margin: '0 auto' }}>
@@ -145,7 +147,7 @@ function Homepage() {
         <Segment style={{ width: '100vw', background: 'black' }}>
                         <EventCarousel />
         </Segment>
-
+            <Footer />
         </>
     );
 }
