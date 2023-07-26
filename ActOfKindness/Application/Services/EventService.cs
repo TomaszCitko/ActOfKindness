@@ -224,7 +224,7 @@ namespace Application.Services
                     _contextService.GetUserRole);
 
             if (eventToJoin.Participants.Any(eu => eu.UserId == userId))
-                throw new BadRequestException($"You already joined to event ({eventId})",
+                throw new BadRequestException($"You already joined event ({eventId})",
                     _contextService.Method,
                     userId,
                     _contextService.GetUserRole);

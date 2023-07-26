@@ -54,7 +54,7 @@ function FilteredEventListItem({event}: Props) {
 
                         <Button as={Link}
                                 floated={"right"}
-                                to={`/createEvent/${event.id}`}
+                                to={`/editEvent/${event.id}`}
                                 color={"orange"}
                                 content={"Edit"}
                                 style={{marginLeft: 10}}

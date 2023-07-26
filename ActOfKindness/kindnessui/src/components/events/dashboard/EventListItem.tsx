@@ -1,8 +1,8 @@
 import {MyEvent} from "../../../app/models/Events/myEvent";
-import {Button, Grid, Icon, Item, Label, Segment} from "semantic-ui-react";
+import { Button, Grid, Icon, Item, Label, Segment } from "semantic-ui-react";
 import {observer} from "mobx-react-lite";
-import {Link} from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
+import { format } from 'date-fns';
 
 interface Props {
     event: MyEvent
@@ -40,7 +40,7 @@ function EventListItem({event}: Props) {
                     <Grid.Column width={3}>
                         <span>
                         <Icon name='calendar alternate outline' style={{marginBottom: 10}} size='large' color='teal'/>
-                            {event.startingDate.slice(0,10)}
+                            {event.endingDate && format(new Date(event.endingDate), "dd/MM/yyyy")}
                         </span>
                     </Grid.Column>
 
@@ -67,14 +67,6 @@ function EventListItem({event}: Props) {
                                 content={"View"}
                                 style={{marginLeft: 10}}
                         ></Button>
-
-                        <Button as={Link}
-                                floated={"right"}
-                                to={`/createEvent/${event.id}`}
-                                color={"orange"}
-                                content={"Edit"}
-                        ></Button>
-
                     </Grid.Column>
                 </Grid>
 
