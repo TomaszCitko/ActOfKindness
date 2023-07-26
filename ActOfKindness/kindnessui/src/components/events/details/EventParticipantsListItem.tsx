@@ -1,7 +1,7 @@
-import {List, Image} from "semantic-ui-react";
+import { List, Image } from "semantic-ui-react";
 import {Participants} from "../../../app/models/Users/participants";
+import { NavLink } from "react-router-dom";
 import {observer} from "mobx-react-lite";
-import {NavLink} from "react-router-dom";
 
 interface Props {
     participant: Participants

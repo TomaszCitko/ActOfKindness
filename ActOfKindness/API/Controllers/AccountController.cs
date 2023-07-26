@@ -96,6 +96,7 @@ namespace API.Controllers
             var role = roles.FirstOrDefault();
             var mapped = _mapper.Map<UserDto>(user);
             mapped.Token = _tokenService.CreateToken(user, role);
+            mapped.Role = role;
 
             return mapped;
         }

@@ -281,3 +281,11 @@ border:none!important;
   opacity: 100 !important;
 }
 
+
+.swal2-title {
+  color: #fff !important;
+}
+
+.swal2-html-container {
+  color: #fff !important;
+}

@@ -7,14 +7,15 @@ import {v4 as uuid} from 'uuid'
 import {router} from "../router/Routes";
 import {Participants} from "../models/Users/participants";
 import { MyEventFilter } from "../models/Events/myEventFilter";
+import { toast } from 'react-toastify';
 import {format} from "date-fns";
 
 export default class EventStore {
     eventRegistry =  new Map<string, MyEvent>();
     unmoderatedEventRegistry = new Map<string, MyEvent>();
     userRegistry = new Map<string, User>();
-    selectedEvent : MyEvent | undefined = undefined
-    participantsList: Participants[] =[]
+    selectedEvent : MyEvent | undefined = undefined;
+    participantsList: Participants[] = [];
     uploading= false;
     success= true;
     pageNumber: number = 1;
@@ -91,9 +92,15 @@ export default class EventStore {
             await router.navigate('/events')
             this.success = false;
 
+
         }
         catch (e) {
-            console.log(e)
+            console.log(e);
+            if ((e as any).response.data !== "") {
+                toast.error(`Event update failed: ${(e as any).response.data}.`);
+            } else {
+                toast.error('Something went wrong while updating the event.');
+            }
         }
     }
 
@@ -104,7 +111,7 @@ export default class EventStore {
             const url = response.data.url
             runInAction(()=>{
                 this.success = true;
-                this.uploading = false
+                this.uploading = false;
             })
             if (url)
             {
@@ -118,8 +125,6 @@ export default class EventStore {
             })
         }
     }
-
-
 
     loadEvents = async (pageNumber: number)=>{
         try {
@@ -154,7 +159,6 @@ export default class EventStore {
 
     loadEventDetails = async(id:string)=>{
         this.selectedEvent = undefined
-        // let tempDetails = this.getEvent(id)
             try{
                 console.log("_________________________________")
                 const eventDetails = await agent.Events.details(id)
@@ -165,8 +169,6 @@ export default class EventStore {
             catch (error){
                 console.log(error)
             }
-        // }
-
     }
 
     private getEvent = async(id:string) =>{
@@ -207,11 +209,17 @@ export default class EventStore {
 
     joinEvent = async(eventId : string)=>{
         try {
-            await agent.Events.joinEvent(eventId)
-            await this.getParticipants(eventId)
+            await agent.Events.joinEvent(eventId);
+            await this.getParticipants(eventId);
+            toast.info('Successfully joined the event!');
         }
         catch (e) {
-            console.log(e)
+            console.log(e);
+            if ((e as any).response.data !== "") {
+                toast.error(`Failed to join the event: ${(e as any).response.data}.`);
+            } else {
+                toast.error('Failed to join the event.');
+            }
         }
     }
 
@@ -266,11 +274,13 @@ export default class EventStore {
 
     leaveEvent = async(eventId : string)=>{
         try {
-            await agent.Events.leaveEvent(eventId)
-            await this.getParticipants(eventId)
+            await agent.Events.leaveEvent(eventId);
+            await this.getParticipants(eventId);
+            toast.warning('Successfully left the event!');
         }
         catch (e) {
-            console.log(e)
+            console.log(e);
+            toast.error('Failed to leave the event.');
         }
     }
 }
