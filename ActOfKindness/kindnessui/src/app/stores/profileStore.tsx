@@ -2,8 +2,10 @@ import {Photo, userProfile} from "../models/Profiles/Profile";
 import {makeAutoObservable, runInAction} from "mobx";
 import agent from "../api/agent";
 import {store} from "./store";
+import {MyEvent} from "../models/Events/myEvent";
 
 export default class ProfileStore {
+    userEventRegistry =  new Map<string, MyEvent>();
     profile: userProfile | null = null;
     loadingProfile= false;
     uploading= false;
@@ -13,6 +15,26 @@ export default class ProfileStore {
 
     constructor() {
         makeAutoObservable(this)
+    }
+
+    loadUserEvents = async (username:string)=>{
+        this.userEventRegistry.clear()
+        try {
+            const allEventsResponse = await agent.Events.getAllUserEvents(username)
+            allEventsResponse.forEach((event) => {
+                this.saveEvent(event);
+                console.log(event);
+            });
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+    saveEvent = async (newEvent: MyEvent)=>{
+        this.userEventRegistry.set(newEvent.id,newEvent)
+    }
+    get myEvents(){
+        return Array.from(this.userEventRegistry.values())
     }
 
     loadProfile = async(username: string)=>{

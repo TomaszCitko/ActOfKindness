@@ -10,17 +10,23 @@ interface Props {
 }
 
 function ProfileCreatedEvents({profile}: Props) {
-    const {eventStore} = useStore()
-    const {myEvents} = eventStore
+    const {eventStore,profileStore} = useStore()
+    const {myEvents} = profileStore
+    useEffect(() => {
+        try {
+            if (profile) profileStore.loadUserEvents(profile?.username)
+        }
+        catch(e) {
+            console.log(e)
+        }
+        }
+    ,[profileStore] );
 
     return (
         <>
-            {myEvents.map(myEvent => {
-                console.log(myEvent.createdBy.username)
-                console.log(profile?.username)
-             return myEvent.createdBy.username === profile?.username ?
-                 <EventListItem key={myEvent.id} event={myEvent}/> : ""
-            })}
+            {myEvents.map(myEvent => (
+                <EventListItem  key={myEvent.id} event={myEvent} />
+            ))}
         </>
     );
 }

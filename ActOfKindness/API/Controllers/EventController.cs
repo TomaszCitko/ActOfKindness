@@ -55,6 +55,15 @@ namespace API.Controllers
             return await _eventService.GetEventByIdAsync(id);
         }
 
+        [HttpGet("getUserEvents/{username}")]
+        public async Task<ActionResult<List<DetailsEventDto>>> GetEventsForUser(string username)
+        {
+            var result = await _eventService.GetUserEvents(username);
+            return Ok(result);
+        }
+
+
+
         [HttpPut("{id:guid}")]
         public async Task<ActionResult> UpdateEvent([FromRoute]Guid id, [FromBody]EditEventDto eventDto)
         {

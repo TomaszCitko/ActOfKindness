@@ -42,6 +42,14 @@ namespace Application.Services
             };
         }
 
+        public async Task<List<DetailsEventDto>> GetUserEvents(string username)
+        {
+            var events = await _eventRepository.GetUserEventsAsync(username);
+            var eventsDto = _mapper.Map<List<DetailsEventDto>>(events);
+
+            return eventsDto;
+        }
+
         public async Task<List<DetailsEventDto>> GetUnmoderatedEventsAsync()
         {
             var unmoderatedEvents = await _eventRepository.GetUnmoderatedEventsAsync();

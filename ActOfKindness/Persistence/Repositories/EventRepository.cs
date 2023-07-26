@@ -24,6 +24,16 @@ public class EventRepository : IEventRepository
             .Skip(pageSize * (pageNumber - 1))
             .Take(pageSize)
             .ToListAsync();
+    }    
+    
+    public async Task<List<Event>> GetUserEventsAsync(string username)
+    {
+        return await _context.Events
+            .Include(e => e.CreatedBy)
+            .Where(e => e.CreatedBy.UserName == username)
+            .OrderBy(e => e.StartingDate)
+            .ToListAsync();
+
     }
 
     public async Task<int> GetQuantityOfModeratedEventAsync()
