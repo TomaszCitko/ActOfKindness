@@ -13,6 +13,7 @@ interface Props {
 export default observer(function EventDetailsChat({eventId} : Props) {
     const {eventStore,commentStore} = useStore()
 
+
     useEffect(() => {
         if (eventId){
             commentStore.createHubConnection(eventId)
@@ -25,30 +26,33 @@ export default observer(function EventDetailsChat({eventId} : Props) {
 
     return (
         <>
-            <Segment
-                textAlign='center'
-                attached='top'
-                inverted
-                color='teal'
-                style={{border: 'none',width: 800}}
-            >
-                <Header>Chat about this event</Header>
-            </Segment>
-            <Segment attached className="ui segment eventDetailsChat" >
-                <Comment.Group>
-                    {commentStore.comments.map(comment=>(
-                        <Comment key={comment.id}>
-                            <Comment.Avatar src={comment.avatar}/>
-                            <Comment.Content>
-                                <Comment.Author as='a'>{comment.username}</Comment.Author>
-                                <Comment.Metadata>
-                                    <div>{formatDistanceToNow(comment.createdAt)} ago</div>
-                                </Comment.Metadata>
-                                <Comment.Text style={{whiteSpace:'pre-wrap'}}>{comment.body}</Comment.Text>
-                            </Comment.Content>
-                        </Comment>
-                    ))}
-
+            <div  className={"chatContainer"}>
+                <Segment
+                    vertical
+                    textAlign='center'
+                    attached='top'
+                    inverted
+                    color='teal'
+                    style={{border: 'none',width: 400}}
+                >
+                    <Header>Chat about this event</Header>
+                </Segment>
+                <Segment attached>
+                    <Comment.Group className={"eventDetailsChat"}>
+                        {commentStore.comments.map(comment=>(
+                            <Comment key={comment.id}>
+                                <Comment.Avatar src={comment.avatar}/>
+                                <Comment.Content>
+                                    <Comment.Author as='a'>{comment.username}</Comment.Author>
+                                    <Comment.Metadata>
+                                        <div>{formatDistanceToNow(comment.createdAt)} ago</div>
+                                    </Comment.Metadata>
+                                    <Comment.Text style={{whiteSpace:'pre-wrap'}}>{comment.body}</Comment.Text>
+                                </Comment.Content>
+                            </Comment>))}
+                    </Comment.Group>
+                </Segment>
+                <Segment  attached={"bottom"}>
                     <Formik onSubmit={(values,{resetForm})=>
                         commentStore.addComment(values).then(()=>resetForm())}
                             initialValues={{message: ''}}
@@ -57,34 +61,35 @@ export default observer(function EventDetailsChat({eventId} : Props) {
                             })}
                     >
                         {({isSubmitting,isValid,handleSubmit})=>(
-                        <Form className={'ui form'}>
-                            <Field name={'message'}>
-                                {(props: FieldProps)=>(
-                                    <div style={{position:"relative"}}>
-                                        <Loader active={isSubmitting}/>
-                                        <textarea
-                                            rows={2}
-                                            placeholder={'press enter to send / press enter+shift to create new line'}
-                                                  {...props.field}
-                                            onKeyDown={e=>{
-                                                if (e.key === "Enter" && e.shiftKey){
-                                                    return
-                                            }
-                                                if (e.key === "Enter" && !e.shiftKey) {
-                                                    e.preventDefault()
-                                                    isValid && handleSubmit()
-                                                }
-                                            }}
-                                        />
-                                    </div>
-                                )}
-                            </Field>
-                        </Form>
-                            )}
+                            <Form className={'ui form'}>
+                                <Field name={'message'}>
+                                    {(props: FieldProps)=>(
+                                        <div className={"chatSendMessage"} >
+                                            <Loader active={isSubmitting}/>
+                                            <textarea
+                                                rows={2}
+                                                placeholder={'press enter to send / press enter+shift to create new line'}
+                                                {...props.field}
+                                                onKeyDown={e=>{
+                                                    if (e.key === "Enter" && e.shiftKey){
+                                                        return
+                                                    }
+                                                    if (e.key === "Enter" && !e.shiftKey) {
+                                                        e.preventDefault()
+                                                        isValid && handleSubmit()
+                                                    }
+                                                }}
+                                            />
+                                        </div>
+                                    )}
+                                </Field>
+                            </Form>
+                        )}
                     </Formik>
-                </Comment.Group>
-            </Segment>
-        </>
+
+                </Segment>
+            </div>
+            </>
     );
 })
 

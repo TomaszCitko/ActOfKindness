@@ -24,9 +24,10 @@ function EventDetailsDashboard() {
             <Grid.Column style={{marginTop: 100}} width={10}>
                 <EventDetails myEvent={event}/>
             </Grid.Column>
-            <Grid.Column style={{ marginTop: 100}} width={6}>
-                <EventParticipantsList/>
+            <Grid.Column style={{ marginTop: 90}} width={6}>
                 <EventDetailsChat eventId={event.id} />
+                <EventParticipantsList/>
+
             </Grid.Column>
         </Grid>
     );

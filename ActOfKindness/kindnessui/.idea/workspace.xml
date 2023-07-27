@@ -7,17 +7,13 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b82ed90-012b-4d75-8fa8-44e6371b2497" name="Changes" comment="add datepicker&#10;format dates to dd/mm/yyyy&#10;style profile page">
-      <change beforePath="$PROJECT_DIR$/../Application/Dtos/Event/CommentDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Application/Dtos/Event/CommentDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Application/Dtos/Event/DetailsEventDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Application/Dtos/Event/DetailsEventDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Domain/Models/Event.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Domain/Models/Event.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Persistence/Repositories/CommentRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Persistence/Repositories/CommentRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Persistence/Repositories/EventRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Persistence/Repositories/EventRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Persistence/Seed.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Persistence/Seed.cs" afterDir="false" />
+    <list default="true" id="1b82ed90-012b-4d75-8fa8-44e6371b2497" name="Changes" comment="fix success while uploading images">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/layout/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/models/Events/myEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/Events/myEvent.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/events/details/EventDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/details/EventDetails.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/events/details/EventDetailsChat.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/details/EventDetailsChat.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/events/details/EventDetailsDashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/details/EventDetailsDashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/events/details/EventParticipantsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/details/EventParticipantsList.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +23,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/../.." value="development" />
+        <entry key="$PROJECT_DIR$/../.." value="calendarStylingProfilePage" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
@@ -155,6 +151,8 @@
       <workItem from="1689985321523" duration="952000" />
       <workItem from="1689986434528" duration="7204000" />
       <workItem from="1690313728520" duration="622000" />
+      <workItem from="1690392833453" duration="595000" />
+      <workItem from="1690455462100" duration="6016000" />
     </task>
     <task id="LOCAL-00001" summary="creating components&#10;installing semantic UI&#10;installing router&#10;creating routes&#10;setting up navbar&#10;creating nav bar links">
       <created>1686584876280</created>
@@ -310,7 +308,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690309738948</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="fix success while uploading images">
+      <created>1690376886933</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1690376886933</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -346,6 +351,7 @@
     <MESSAGE value="add react dropzone &#10;add react cropper&#10;add uploading &#10;add set main photo&#10;add upload photo" />
     <MESSAGE value="styling&#10;hotfix filters" />
     <MESSAGE value="add datepicker&#10;format dates to dd/mm/yyyy&#10;style profile page" />
-    <option name="LAST_COMMIT_MESSAGE" value="add datepicker&#10;format dates to dd/mm/yyyy&#10;style profile page" />
+    <MESSAGE value="fix success while uploading images" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix success while uploading images" />
   </component>
 </project>

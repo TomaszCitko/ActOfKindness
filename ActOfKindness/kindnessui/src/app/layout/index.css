@@ -152,16 +152,37 @@ code {
 }
 
 .ui.eventDetails > *,
-.ui.eventDetails > * > *,
-.ui.segment.eventDetailsChat {
-  background-color: #474c5d;
+.ui.eventDetails > * > *
+{
+  background-color: #525252!important;
   border: none;
 }
-.eventDetailsChat {
-  height: 30%;
-  overflow: scroll;
+
+.chatContainer .ui.segment {
+  background-color: #525252;
+  border:none;
 }
 
+.chatContainer {
+  margin-top: 10px;
+  flex-direction: column-reverse!important;
+
+}
+
+
+.eventDetailsChat {
+  background-color: #525252;
+  border: none;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  flex-direction: column-reverse!important;
+  max-height: 400px;
+}
+
+.participantsContainer {
+  background-color: #525252!important;
+  border: none!important;
+}
 
 .ui.eventDetails > * > * > p {
   font-size: 1.35rem;

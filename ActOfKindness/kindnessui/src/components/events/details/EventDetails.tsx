@@ -82,9 +82,17 @@ function EventDetails({myEvent}:Props) {
     return (
         <div className='ui eventDetails'>
             <Segment.Group>
+                <Segment
+                    vertical
+                    textAlign='center'
+                    attached='top'
+                    inverted
+                    color='teal'
+                    style={{border: 'none'}}
+                >
+                    <Header>{event.title}</Header>
+                </Segment>
                 <Segment>
-                    <Header textAlign='center' as='h1'>{event.title}</Header>
-                    <Divider horizontal />
                     <Image src={event.image} rounded />
                     <Divider horizontal>
                         <Header as='h4'>
