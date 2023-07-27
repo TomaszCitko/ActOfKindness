@@ -18,6 +18,8 @@ body {
   background-repeat: no-repeat !important;
   background-size: cover !important;
   background-attachment: fixed !important;
+  box-shadow: none!important;
+  border: none!important;
 }
 
 
@@ -234,6 +236,13 @@ code {
 
 .footer-segments {
   background-color:  #525252!important;
+  box-shadow: none!important;
+  border: none!important;
+}
+
+.ui-cards {
+  background-color:  #000000;
+  color: #ffffff!important;
   box-shadow: none!important;
   border: none!important;
 }

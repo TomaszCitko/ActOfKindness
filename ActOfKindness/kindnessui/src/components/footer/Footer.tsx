@@ -15,47 +15,47 @@ function Footer(){
     </Grid.Column>
     <Grid.Column width={13} className="footer-segments">              
             <Card.Group>
-                <Card>
+                <Card className="ui-cards">
                     <Card.Content>
                         <Card.Header content='Aneta Kuśnierz' />
                         <Card.Meta content='Full-Stack Developer' />
-                        <Card.Description content='E-mail: _________@________.__' />
-                        <Card.Description content='GitHub:______________________' />
-                        <Card.Description content='LinkedIn:____________________' />
+                        <Card.Description content='E-mail: shocked.frown@gmail.com' />
+                        <Card.Description content='GitHub: aneta-k' />
+                        <Card.Description content='LinkedIn: ____________________' />
                     </Card.Content>
                 </Card>
                 <Card>
                     <Card.Content>
                         <Card.Header content='Marcin Szkurłat' />
                         <Card.Meta content='Full-Stack Developer' />
-                        <Card.Description content='E-mail: _________@________.__' />
-                        <Card.Description content='GitHub:______________________' />
-                        <Card.Description content='LinkedIn:____________________' />
+                        <Card.Description content='E-mail: ripek33@gmail.com' />
+                        <Card.Description content='GitHub: MarcinSzkurlat' />
+                        <Card.Description content='LinkedIn: ____________________' />
                     </Card.Content>
                 </Card>
                 <Card color='black'>
                     <Card.Content>
                         <Card.Header content='Maciej Trębacz' />
                         <Card.Meta content='Full-Stack Developer' />
-                        <Card.Description content='E-mail: _________@________.__' />
-                        <Card.Description content='GitHub:______________________' />
-                        <Card.Description content='LinkedIn:____________________' />
+                        <Card.Description content='E-mail: trebaczmaciejj@gmail.com' />
+                        <Card.Description content='GitHub: MaciejTrebacz' />
+                        <Card.Description content='LinkedIn: maciejtrebacz-12345' />
                     </Card.Content>
                 </Card>
                 <Card>
                     <Card.Content>
                         <Card.Header content='Tomasz Citko' />
                         <Card.Meta content='Full-Stack Developer' />
-                        <Card.Description content='E-mail: _________@________.__' />
-                        <Card.Description content='GitHub:______________________' />
-                        <Card.Description content='LinkedIn:____________________' />
+                        <Card.Description content='E-mail: citkotomasz@gmail.com' />
+                        <Card.Description content='GitHub: Tomek-Boomer' />
+                        <Card.Description content='LinkedIn: tomasz-citko' />
                     </Card.Content>
                 </Card>
                 </Card.Group>
                 </Grid.Column>
             </Grid.Row>
         </Grid>
-            <Segment className="footer-segments">Act of kindness Web Application. All rights reserved. Thank you for visiting.</Segment>
+            <Segment className="footer-segments"><center>Act of kindness Web Application. All rights reserved. Thank you for visiting.</center></Segment>
         </div>
     );
 }
