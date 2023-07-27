@@ -62,7 +62,7 @@ function ImageCarousel() {
         easing="linear"
       >
         <div style={{ width: 1800, height: 720 }}>
-        <Grid centered verticalAlign="middle" horizontalAlign="center">
+        <Grid centered verticalAlign="middle">
                 <Grid.Row>
                     <Grid.Column width={5} textAlign="center" color="black" className='borderRadius15px'>
                             <h1 color="000000">BE KIND TO HELP</h1>
