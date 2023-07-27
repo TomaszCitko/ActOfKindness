@@ -32,6 +32,7 @@ const requests = {
 
 const Events = {
     list: (pageNumber:number)=> requests.get<PaginatedEvents>(`/event?pageNumber=${pageNumber}`),
+    getAllUserEvents: (username:string)=> requests.get<MyEvent[]>(`/event/getUserEvents/${username}`),
     create: (event: MyEventCreate)=> requests.post<MyEvent>('/event',event),
     update: (event: MyEventCreate) => requests.put<MyEvent>(`/event/${event.id}`, event),
     details: (id:string)=> requests.get<MyEvent>(`/event/${id}`),

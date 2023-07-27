@@ -1,72 +1,100 @@
-import React from 'react';
-import {ErrorMessage, Field, Form, Formik} from "formik";
-import {Button, Form as SemanticUIForm, FormField, Header, Label, Message} from 'semantic-ui-react';
+import React, { useState } from 'react';
+import { useFormik } from "formik";
+import { Button, Form as SemanticUIForm, FormField, Message, Input, Label } from 'semantic-ui-react';
+import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 import {store, useStore} from "../../app/stores/store";
-import * as Yup from 'yup'
-import {observer} from "mobx-react-lite";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
-import {Link} from "react-router-dom";
+
 function RegisterForm() {
     const {accountStore}= useStore()
 
-    const validationForm = Yup.object({
+    const validationSchema = Yup.object({
         email: Yup.string().email().required(),
-        password: Yup.string().required("Please enter stronger password").matches(
+        password: Yup.string().required().matches(
             /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,40}$/,
-            'Stronger password please'),
+            'Password must contain at least one uppercase letter, one lowercase letter, one number, and be between 7 and 40 characters long'),
         location: Yup.string().required(),
         username: Yup.string().required(),
-    })
+    });
+
+    const [formError, setFormError] = useState<string | null>(null);
+
+    function isAxiosError(error: any): error is { response: { data: { errors: Record<string, string[]> } } } {
+        return !!error.response && !!error.response.data && !!error.response.data.errors;
+    }
+
+    const formik = useFormik({
+        initialValues: {email: '', password:'', username: '', location: ''},
+        validationSchema: validationSchema,
+        onSubmit: async (values) => {
+            try {
+                await accountStore.register(values);
+                toast.success('Registration successful! Welcome to Act Of Kindness!');
+                setFormError(null);
+            } catch (error) {
+                if (isAxiosError(error)) {
+                    const errorMessages = Object.values(error.response.data.errors)
+                        .map(fieldErrors => fieldErrors.join(' '))
+                        .join('\n');
+                    setFormError(errorMessages);
+                } else {
+                    setFormError('An unexpected error occurred');
+                }
+            }
+        },
+    });
 
     return (
-        <>
-            <Formik
-                validationSchema={validationForm}
-                initialValues={{email: '', password:'', username: '', location: '',error: null}}
-                    onSubmit={(values, {setErrors}) => accountStore.register(values).catch(error=> setErrors({error}))}
-                    enableReinitialize
-                validateOnChange={false}
-                validateOnBlur={true}
-                    >
-                {({handleSubmit, isSubmitting,isValid,dirty,touched,errors})=>(
-                    <Form onSubmit={handleSubmit} autoComplete={'off'} className={'ui form error'}>
-                        <FormField>
-                            <Field  placeholder='email' name='email' />
-                            <ErrorMessage name={'email'} render={error=>
-                                <Label basic color={'red'} content={error}/>}/>
-                        </FormField>
+        <SemanticUIForm onSubmit={formik.handleSubmit} autoComplete={'off'} className={'ui form'}>
+            {formError && <Message error content={formError} style={{display: "block", textAlign: "center"}} />}
+            <FormField>
+                <Input 
+                    type='text'  
+                    placeholder='email' 
+                    name='email' 
+                    onChange={formik.handleChange} 
+                    value={formik.values.email}
+                />
+                {formik.touched.email && formik.errors.email ? <Label basic color={'red'} content={formik.errors.email}/> : null}
+            </FormField>
 
-                        <FormField>
-                            <Field type={'password'}  placeholder='password' name='password' />
-                            <ErrorMessage name={'password'} render={error=>
-                                <Label basic color={'red'} content={error}/>}/>
-                        </FormField>
+            <FormField>
+                <Input 
+                    type='password'  
+                    placeholder='password' 
+                    name='password' 
+                    onChange={formik.handleChange} 
+                    value={formik.values.password}
+                />
+                {formik.touched.password && formik.errors.password ? <Label basic color={'red'} content={formik.errors.password}/> : null}    
+            </FormField>
 
-                        <FormField>
-                            <Field  placeholder='username' name='username' />
-                            <ErrorMessage name={'username'} render={error=>
-                                <Label basic color={'red'} content={error}/>}/>
-                        </FormField>
+            <FormField>
+                <Input 
+                    type='text'  
+                    placeholder='username' 
+                    name='username' 
+                    onChange={formik.handleChange} 
+                    value={formik.values.username}
+                />
+                {formik.touched.username && formik.errors.username ? <Label basic color={'red'} content={formik.errors.username}/> : null}    
+            </FormField>
 
-                        <FormField>
-                            <Field  placeholder='location' name='location' />
-                            <ErrorMessage name={'location'} render={error=>
-                                <Label basic color={'red'} content={error}/>}/>
-                        </FormField>
+            <FormField>
+                <Input 
+                    type='text'  
+                    placeholder='location' 
+                    name='location' 
+                    onChange={formik.handleChange} 
+                    value={formik.values.location}
+                />
+                {formik.touched.location && formik.errors.location ? <Label basic color={'red'} content={formik.errors.location}/> : null}    
+            </FormField>
 
-                        {/*<ErrorMessage name={'error'} render={()=>*/}
-                        {/*    <Label>{errors.error}</Label>*/}
-                        {/*}/>*/}
-
-                        <Button disabled={!isValid || !dirty || isSubmitting} loading={isSubmitting} fluid type={'submit'} content={'Register'} positive></Button>
-
-                        <Button onClick={store.modalStore.closeModal} fluid  content={'Cancel'} negative></Button>
-                    </Form>
-                )}
-            </Formik>
-        </>
+            <Button fluid type='submit' content='Register' positive />
+            <Button onClick={store.modalStore.closeModal} fluid  content='Cancel' negative />
+        </SemanticUIForm>
     );
 }
 
-export default observer(RegisterForm)
+export default RegisterForm;

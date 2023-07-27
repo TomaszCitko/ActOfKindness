@@ -24,6 +24,16 @@ public class EventRepository : IEventRepository
             .Skip(pageSize * (pageNumber - 1))
             .Take(pageSize)
             .ToListAsync();
+    }    
+    
+    public async Task<List<Event>> GetUserEventsAsync(string username)
+    {
+        return await _context.Events
+            .Include(e => e.CreatedBy)
+            .Where(e => e.CreatedBy.UserName == username)
+            .OrderBy(e => e.StartingDate)
+            .ToListAsync();
+
     }
 
     public async Task<int> GetQuantityOfModeratedEventAsync()
@@ -47,8 +57,21 @@ public class EventRepository : IEventRepository
             .Include(i => i.Participants)
             .ThenInclude(u=>u.User)
             .Include(i => i.CreatedBy)
-            .Include(i=>i.Comments)
+            //.Include(i=>i.Comments)
+            //.ThenInclude(a=>a.Author)
             .Include(i=>i.Photos)
+            .FirstOrDefaultAsync(e => e.Id == id);
+    }
+
+    public async Task<Event?> GetEventByIdForComments(Guid id)
+    {
+        return await _context.Events
+            .Include(i => i.Participants)
+            .ThenInclude(u => u.User)
+            .Include(i => i.CreatedBy)
+            .Include(i => i.Comments)
+            .ThenInclude(a => a.Author)
+            .Include(i => i.Photos)
             .FirstOrDefaultAsync(e => e.Id == id);
     }
 
@@ -78,6 +101,7 @@ public class EventRepository : IEventRepository
                 .SetProperty(e => e.EndingDate, endingDate)
                 .SetProperty(e => e.Latitude, eventDto.Latitude)
                 .SetProperty(e => e.Longitude, eventDto.Longitude)
+                .SetProperty(e => e.IsModerated, false)
                 .SetProperty(e => e.Type, eventDto.Type)
                 .SetProperty(e => e.Image, eventDto.Image)
             );

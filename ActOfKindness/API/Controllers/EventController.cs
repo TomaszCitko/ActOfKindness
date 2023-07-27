@@ -51,8 +51,18 @@ namespace API.Controllers
         [HttpGet("{id:guid}")]
         public async Task<ActionResult<DetailsEventDto>> GetEventById([FromRoute]Guid id)
         {
+            var test = await _eventService.GetEventByIdAsync(id);
             return await _eventService.GetEventByIdAsync(id);
         }
+
+        [HttpGet("getUserEvents/{username}")]
+        public async Task<ActionResult<List<DetailsEventDto>>> GetEventsForUser(string username)
+        {
+            var result = await _eventService.GetUserEvents(username);
+            return Ok(result);
+        }
+
+
 
         [HttpPut("{id:guid}")]
         public async Task<ActionResult> UpdateEvent([FromRoute]Guid id, [FromBody]EditEventDto eventDto)
@@ -78,6 +88,7 @@ namespace API.Controllers
             return await _eventService.GetFilteredModeratedEventsAsync(filter, pageNumber);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id:guid}/participants")]
         public async Task<ActionResult<List<ParticipantDto>>> GetParticipants(Guid id)
         {

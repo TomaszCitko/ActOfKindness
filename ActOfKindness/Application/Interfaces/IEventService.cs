@@ -6,6 +6,7 @@ namespace Application.Interfaces
     public interface IEventService
     {
         Task<PaginatedResults<List<DetailsEventDto>>> GetModeratedEventsAsync(int pageNumber);
+        Task<List<DetailsEventDto>> GetUserEvents(string username);
         Task<List<DetailsEventDto>> GetUnmoderatedEventsAsync();
         Task CreateEventAsync(CreateEventDto newEvent);
         Task DeleteEventAsync(Guid id);

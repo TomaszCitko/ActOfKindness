@@ -19,6 +19,7 @@ namespace Application.Dtos.Event
         public double Longitude { get; set; }
         public string Image { get; set; }
         public ICollection<Domain.Models.Photo> Photos { get; set; }
+        public ICollection<Comment> Comments { get; set; }
         public EventType Type { get; set; }
     }
 }

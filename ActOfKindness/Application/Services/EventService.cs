@@ -42,6 +42,14 @@ namespace Application.Services
             };
         }
 
+        public async Task<List<DetailsEventDto>> GetUserEvents(string username)
+        {
+            var events = await _eventRepository.GetUserEventsAsync(username);
+            var eventsDto = _mapper.Map<List<DetailsEventDto>>(events);
+
+            return eventsDto;
+        }
+
         public async Task<List<DetailsEventDto>> GetUnmoderatedEventsAsync()
         {
             var unmoderatedEvents = await _eventRepository.GetUnmoderatedEventsAsync();
@@ -224,7 +232,7 @@ namespace Application.Services
                     _contextService.GetUserRole);
 
             if (eventToJoin.Participants.Any(eu => eu.UserId == userId))
-                throw new BadRequestException($"You already joined to event ({eventId})",
+                throw new BadRequestException($"You already joined event ({eventId})",
                     _contextService.Method,
                     userId,
                     _contextService.GetUserRole);
@@ -276,7 +284,7 @@ namespace Application.Services
 
             await _eventRepository.SaveAsync();
 
-            Log.Information($"{_contextService.GetUserRole} ({userId}) joined to event ({eventId})");
+            Log.Information($"{_contextService.GetUserRole} ({userId}) has left event ({eventId})");
         }
     }
 }

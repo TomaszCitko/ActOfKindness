@@ -1,28 +1,31 @@
-import React, {FormEvent} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Segment, Button, FormField, Label, Checkbox, CheckboxProps } from "semantic-ui-react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import * as Yup from "yup"
 import logo from "../../../images/handshake.png";
 import {useStore} from "../../../app/stores/store";
 import { isAfter, isEqual, parse, isValid, format } from 'date-fns';
-import { useEffect, useState } from 'react';
 import PhotoUploadWidget from "../../../app/common/PhotoUploadWidget";
-import agent from "../../../app/api/agent";
 import {observer} from "mobx-react-lite";
+import Calendar from 'react-calendar';
+import DatePicker, {ReactDatePickerProps} from 'react-datepicker'
+import MyDateInput from "../../../app/common/MyDateInput";
 
 function EventForm() {
     const {eventStore} = useStore();
     const { id: eventId } = useParams();
+    const location = useLocation();
     const {profileStore : {
         uploadPhoto,uploading,loading,setMainPhoto
-    }} = useStore()
+    }} = useStore();
+
     const [initialValues, setInitialValues] = useState({
 
         id: '',
         userId: '',
         localization: '',
-        isOnline:false,
+        isOnline: false,
         title:	'',
         description: '',
         startingDate: '',
@@ -56,15 +59,33 @@ function EventForm() {
         }
         loadEventDetails();
     }, [eventId, eventStore]);
-    
-    const [disableLocation, setDisableLocation] = useState(initialValues.isOnline);
+
     useEffect(() => {
+        if(location.pathname === "/createEvent") {
+          setInitialValues({
+            id: '',
+            userId: '',
+            localization: '',
+            isOnline: false,
+            title:  '',
+            description: '',
+            startingDate: '',
+            endingDate: '',
+            type: 0,
+            image: '',
+          });
+        }
+    }, [location]);
+    
+    useEffect(() => {
+        eventStore.success = false
         return () => {
             eventStore.success = false
 
         };
     }, []);
 
+    const [disableLocation, setDisableLocation] = useState(initialValues.isOnline);
 
     useEffect(() => {
         setDisableLocation(initialValues.isOnline);
@@ -130,7 +151,7 @@ function EventForm() {
             </Label>
 
             <Formik
-                validationSchema={formValidation}
+                // validationSchema={formValidation}
                 initialValues={initialValues}
                 enableReinitialize
                 onSubmit={async (values) => {
@@ -175,17 +196,31 @@ function EventForm() {
                                 <Label basic color={'red'} content={error}/>}/>
                         </FormField>
 
-                        <FormField>
-                            <Field name="startingDate" placeholder="Starting Date   dd/mm/yyyy" />
-                            <ErrorMessage name={'startingDate'} render={error=>
-                                <Label basic color={'red'} content={error}/>}/>
-                        </FormField>
 
-                        <FormField>
-                            <Field name="endingDate" placeholder="Ending Date    dd/mm/yyyy" />
-                            <ErrorMessage name={'endingDate'} render={error=>
-                                <Label basic color={'red'} content={error}/>}/>
-                        </FormField>
+                            <MyDateInput placeholderText={'starting date'}
+                                         name="startingDate"
+                                         showTimeSelect
+                                         timeCaption={'time'}
+                                         dateFormat='dd/MM/yyyy'
+                            />
+
+
+
+                            <MyDateInput placeholderText={'Ending Date'}
+                                         name="endingDate"
+                                         showTimeSelect
+                                         timeCaption={'time'}
+                                         dateFormat='dd/MM/yyyy'
+                            />
+
+
+
+
+                        {/*<FormField>*/}
+                        {/*    <Field name="endingDate" placeholder="Ending Date    dd/mm/yyyy" />*/}
+                        {/*    <ErrorMessage name={'endingDate'} render={error=>*/}
+                        {/*        <Label basic color={'red'} content={error}/>}/>*/}
+                        {/*</FormField>*/}
 
                         <FormField>
                             <Field as={"textarea"}  placeholder='Description' name='description' />

@@ -2,6 +2,7 @@ import {MyEvent} from "../../../app/models/Events/myEvent";
 import {Button, Grid, Icon, Item, Label, Segment} from "semantic-ui-react";
 import {observer} from "mobx-react-lite";
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import {useStore} from "../../../app/stores/store";
 
 interface Props {
@@ -55,26 +56,54 @@ function UnmoderatedEventListItem({event}: Props) {
 
                     <Grid.Column width={6}>
                         <Button as={Link}
-                                floated={"right"}
-                                onClick={() => deleteEvent(event.id)}
-                                color={"red"}
-                                content={"Delete"}
-                                style={{marginLeft: 10}}
+                            floated={"right"}
+                            onClick={async () => {
+                                const result = await Swal.fire({
+                                    title: 'Are you sure?',
+                                    text: "You won't be able to revert this!",
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: 'red',
+                                    confirmButtonText: 'Yes, delete it!',
+                                    cancelButtonText: 'No, cancel!',
+                                    background: '#1b1c1d'
+                                })
+                                if (result.isConfirmed) {
+                                    deleteEvent(event.id)
+                                }
+                            }}
+                            color={"red"}
+                            content={"Delete"}
+                            style={{marginLeft: 10}}
                         ></Button>
 
                         <Button as={Link}
                                 floated={"right"}
-                                to={`/createEvent/${event.id}`}
+                                to={`/editEvent/${event.id}`}
                                 color={"orange"}
                                 content={"Edit"}
                                 style={{marginLeft: 10}}
                         ></Button>
 
                         <Button as={Link}
-                                floated={"right"}
-                                onClick={() => moderateEvent(event.id)}
-                                color={"teal"}
-                                content={"Moderate"}
+                            floated={"right"}
+                            onClick={async () => {
+                                const result = await Swal.fire({
+                                    title: 'Are you sure?',
+                                    text: "You are about to moderate this event!",
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: 'teal',
+                                    confirmButtonText: 'Yes, moderate it!',
+                                    cancelButtonText: 'No, cancel!',
+                                    background: '#1b1c1d'
+                                })
+                                if (result.isConfirmed) {
+                                    moderateEvent(event.id)
+                                }
+                            }}
+                            color={"teal"}
+                            content={"Moderate"}
                         ></Button>
                     </Grid.Column>
 
