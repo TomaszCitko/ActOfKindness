@@ -5,6 +5,7 @@ import {useStore} from "../stores/store";
 import {Container} from "semantic-ui-react";
 import {observer} from "mobx-react-lite";
 import MyLoginModal from "../../components/modals/myGenericModal";
+import Footer from '../../components/footer/Footer';
 import { ToastContainer, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -41,6 +42,7 @@ function App() {
           <Container style={{marginTop: '1.3em'}}>
                 <Outlet/>
           </Container>
+          <Footer/>
       </>
   );
 }
