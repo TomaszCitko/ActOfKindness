@@ -144,7 +144,7 @@ function Homepage() {
             </Grid>
         </Segment>
         </Segment>
-        <Segment style={{ width: '100vw', background: 'black' }}>
+        <Segment style={{ width: '100vw', background: 'black', margin: "0px 0px 0px 0px" }}>
                         <EventCarousel />
         </Segment>
             <Footer />
