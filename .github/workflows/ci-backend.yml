@@ -7,7 +7,7 @@ on:
     branches: [ "development", "master" ]
 
 jobs:
-  build_and_test:
+  build:
     runs-on: ubuntu-latest
     steps:
     - name: Clone repository
