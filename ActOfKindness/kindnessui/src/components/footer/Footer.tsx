@@ -33,7 +33,7 @@ function Footer(){
                         <Card.Description content='LinkedIn: ____________________' />
                     </Card.Content>
                 </Card>
-                <Card color='black'>
+                <Card>
                     <Card.Content>
                         <Card.Header content='Maciej Trębacz' />
                         <Card.Meta content='Full-Stack Developer' />
