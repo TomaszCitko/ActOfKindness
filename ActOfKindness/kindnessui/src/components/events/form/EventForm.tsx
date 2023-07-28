@@ -35,6 +35,8 @@ function EventForm() {
     });
 
     useEffect(() => {
+        eventStore.loading = false;
+
         const loadEventDetails = async () => {
             if(eventId){
                 const eventDetails = await eventStore.loadEventDetails(eventId);

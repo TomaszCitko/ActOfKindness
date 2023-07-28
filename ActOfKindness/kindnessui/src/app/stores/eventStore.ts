@@ -1,4 +1,4 @@
-import {makeAutoObservable, runInAction} from "mobx";
+import {action, makeAutoObservable, runInAction} from "mobx";
 import {User} from "../models/Users/user";
 import {MyEvent} from "../models/Events/myEvent";
 import agent from "../api/agent";
@@ -20,6 +20,9 @@ export default class EventStore {
     success= true;
     pageNumber: number = 1;
     totalPages: number = 0;
+    loading = true;
+    loadingHomePage = true;
+    loadingEventDetails = false;
     isFiltered = false;
     filteredList: MyEventFilter = {
         localization: '',
@@ -32,6 +35,10 @@ export default class EventStore {
 
     constructor() {
         makeAutoObservable(this)
+    }
+
+    turnOffLoading() {
+        this.loading = false;
     }
 
     getParticipants = async (eventId: string)=>{
@@ -129,12 +136,15 @@ export default class EventStore {
     loadEvents = async (pageNumber: number)=>{
         try {
             const allEventsResponse = await agent.Events.list(pageNumber)
-            this.pageNumber = allEventsResponse.pageNumber;
-            this.totalPages = allEventsResponse.totalPages;
-            allEventsResponse.items.forEach((event) => {
-                this.saveEvent(event);
-                console.log(event);
-            });
+            runInAction(()=>{
+                this.pageNumber = allEventsResponse.pageNumber;
+                this.totalPages = allEventsResponse.totalPages;
+                allEventsResponse.items.forEach((event) => {
+                    this.saveEvent(event);
+                    console.log(event);
+                });
+            })
+
         }
         catch (error) {
             console.log(error)
@@ -201,6 +211,9 @@ export default class EventStore {
             unmoderatedEventsResponse.forEach(event=>{
                 this.saveUnmoderatedEvent(event)
             })
+            await agent.sleep(1000);
+            this.loadingEventDetails = false
+            this.loading = false
         }
         catch (error) {
             console.log(error)

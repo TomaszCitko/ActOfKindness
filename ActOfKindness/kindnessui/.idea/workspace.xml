@@ -8,12 +8,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b82ed90-012b-4d75-8fa8-44e6371b2497" name="Changes" comment="fix success while uploading images">
+      <change afterPath="$PROJECT_DIR$/src/app/common/LoadingComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/agent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/agent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/layout/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stores/eventStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stores/eventStore.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/events/details/EventDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/details/EventDetails.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/events/details/EventDetailsChat.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/details/EventDetailsChat.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/events/details/EventDetailsDashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/details/EventDetailsDashboard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/events/details/EventParticipantsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/details/EventParticipantsList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/events/form/EventForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/form/EventForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/events/unmoderated/UnmoderatedEventDashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/unmoderated/UnmoderatedEventDashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/footer/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer/Footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/home/EventCarousel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/home/EventCarousel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/home/Homepage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/home/Homepage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,7 +161,7 @@
       <workItem from="1689986434528" duration="7204000" />
       <workItem from="1690313728520" duration="622000" />
       <workItem from="1690392833453" duration="595000" />
-      <workItem from="1690455462100" duration="6016000" />
+      <workItem from="1690455462100" duration="21084000" />
     </task>
     <task id="LOCAL-00001" summary="creating components&#10;installing semantic UI&#10;installing router&#10;creating routes&#10;setting up navbar&#10;creating nav bar links">
       <created>1686584876280</created>

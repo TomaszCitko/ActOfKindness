@@ -1,13 +1,20 @@
 import logo from "../../images/handshake.png"
 import {Grid, Segment, Card} from 'semantic-ui-react';
 import {observer} from "mobx-react-lite";
+import LoadingComponent from "../../app/common/LoadingComponent";
+import React from "react";
+import Swal from "sweetalert2";
+import {useStore} from "../../app/stores/store";
 
 function Footer(){
 
+    const { eventStore } = useStore();
 
+    if (eventStore.loading) return <></>;
 
     return(
-        <div style={{ width: '100vw', background: '#525252', alignContent: 'center', margin: '15px 0px 0px 0px', padding: '20px 0px 0px 0px', position: "absolute"}}>
+        <div style={{marginTop:'50px', width: '100vw', background: '#525252', alignContent: 'center', margin: '0px 0px 0px 0px', padding: '20px 0px 0px 0px', position: "absolute"}}>
+
   <Grid divided='vertically'>
     <Grid.Row columns={2}>
     <Grid.Column width={3} textAlign="right">

@@ -15,9 +15,7 @@ export default observer(function EventDetailsChat({eventId} : Props) {
 
 
     useEffect(() => {
-        if (eventId){
-            commentStore.createHubConnection(eventId)
-        }
+
         return ()=>{
             commentStore.disconect()
         }
