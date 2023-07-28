@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import { observer } from 'mobx-react-lite';
 import {store, useStore} from '../../app/stores/store';
-import {Button, Container, Divider, Grid, Header, Icon, Segment} from 'semantic-ui-react';
+import {Button, Container, Dimmer, Divider, Grid, Header, Icon, Segment} from 'semantic-ui-react';
 import {Link} from "react-router-dom";
 import LoginForm from "../users/LoginForm";
 import RegisterForm from "../users/RegisterForm";
@@ -13,23 +13,38 @@ import homeImage4 from '../../images/homepage4.avif'
 import FacebookLogin from "@greatsumini/react-facebook-login";
 import EventCarousel from './EventCarousel';
 import Footer from '../footer/Footer';
+import LoadingComponent from "../../app/common/LoadingComponent";
+import agent from "../../app/api/agent";
 
 
 function Homepage() {
     const { accountStore } = useStore();
+    const { eventStore } = useStore();
 
     useEffect(() => {
+        eventStore.loadEvents(1);
         document.body.style.display = 'flex';
+        if (accountStore.token) {
+            accountStore.getUser();
+        }
+
+        const timer = setTimeout(() => {
+            eventStore.loadingHomePage=false;
+            eventStore.loading=false;
+        }, 500);
+
         return () => {
+            clearTimeout(timer);
             document.body.style.display = 'block';
         };
     }, []);
 
 
+    if (eventStore.loadingHomePage) return <LoadingComponent content={'Loading homepage'} />;
 
     return (
         <>
-            <Segment  className="homepagePicture" style={{ width: '110vw', height: '98vh' }}>
+            <Segment className="homepagePicture" style={{ width: '110vw', height: '98vh' }}>
                 <Grid  centered verticalAlign="middle">
                     <Grid.Row>
                         <Grid.Column style={{marginRight: 250}} textAlign="center">

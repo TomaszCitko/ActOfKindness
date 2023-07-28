@@ -10,6 +10,14 @@ import { MyEventFilter } from '../models/Events/myEventFilter';
 import {Photo, userProfile} from "../models/Profiles/Profile";
 import { PaginatedEvents } from '../models/Events/paginatedEvents';
 
+const sleep = (delay:number)=>{
+    return new Promise((resolve)=>{
+        setTimeout(resolve,delay)
+    })
+}
+
+
+
 axios.defaults.baseURL = "http://localhost:5092/api"
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data
@@ -82,7 +90,8 @@ const Profiles = {
 const agent = {
     Events,
     Account,
-    Profiles
+    Profiles,
+    sleep,
 }
 
 export default agent

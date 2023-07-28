@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import ReactSimplyCarousel from 'react-simply-carousel';
 import { Grid, Icon } from 'semantic-ui-react'
 import EventHomepageItem from "../events/dashboard/EventHomepageItem";
@@ -13,7 +13,6 @@ function EventCarousel() {
   const eventsToShow = myEvents.slice(0,7).map(myEvent => (
     <EventHomepageItem  key={myEvent.id} event={myEvent} />
 ));
-
 
   
   return (
