@@ -19,7 +19,7 @@ function ProfilePage() {
     if (profileStore.loadingProfile) return <Dimmer active>loading</Dimmer>
     return (
         <Grid>
-            <Grid.Column style={{marginTop: 100}} width={16}>
+            <Grid.Column style={{marginTop: 100, marginBottom:100}} width={16}>
                 {profileStore.profile &&
                     <>
                         <ProfileHeader profile={profileStore.profile}/>

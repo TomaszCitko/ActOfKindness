@@ -170,7 +170,6 @@ export default class EventStore {
     loadEventDetails = async(id:string)=>{
         this.selectedEvent = undefined
             try{
-                console.log("_________________________________")
                 const eventDetails = await agent.Events.details(id)
                 console.log(eventDetails)
                 this.selectedEvent = eventDetails

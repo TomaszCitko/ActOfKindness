@@ -147,7 +147,7 @@ function EventForm() {
 
 
     return (
-        <Segment inverted  clearing raised style={{marginTop: 100}}>
+        <Segment inverted  clearing raised style={{marginTop: 100,marginBottom:100}}>
             <Label style={{marginBottom: 15}} as='a' color='orange' ribbon>
                 Thank you for trying to help
             </Label>

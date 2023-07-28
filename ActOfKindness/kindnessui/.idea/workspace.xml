@@ -7,22 +7,8 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b82ed90-012b-4d75-8fa8-44e6371b2497" name="Changes" comment="fix success while uploading images">
-      <change afterPath="$PROJECT_DIR$/src/app/common/LoadingComponent.tsx" afterDir="false" />
+    <list default="true" id="1b82ed90-012b-4d75-8fa8-44e6371b2497" name="Changes" comment="loading indicator for whole aplication&#10;fixed showing footer before loading content of the page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/api/agent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/agent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stores/eventStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stores/eventStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/events/details/EventDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/details/EventDetails.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/events/details/EventDetailsChat.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/details/EventDetailsChat.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/events/details/EventDetailsDashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/details/EventDetailsDashboard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/events/form/EventForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/form/EventForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/events/unmoderated/UnmoderatedEventDashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/events/unmoderated/UnmoderatedEventDashboard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/footer/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer/Footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/home/EventCarousel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/home/EventCarousel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/home/Homepage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/home/Homepage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
