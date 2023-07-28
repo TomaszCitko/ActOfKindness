@@ -10,6 +10,9 @@ function EventDashboard() {
     const {eventStore} = useStore()
 
     useEffect(() => {
+        if (eventStore.eventRegistry.size === 0) {
+            eventStore.loadEvents(eventStore.pageNumber);
+        }
     }, [eventStore.totalPages]);
 
     return (
