@@ -14,6 +14,7 @@ function Footer(){
 
     return(
         <div style={{marginTop:'50px', width: '100vw', background: '#525252', alignContent: 'center', margin: '0px 0px 0px 0px', padding: '20px 0px 0px 0px', position: "absolute"}}>
+
   <Grid divided='vertically'>
     <Grid.Row columns={2}>
     <Grid.Column width={3} textAlign="right">
