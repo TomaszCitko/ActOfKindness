@@ -8,8 +8,6 @@ import {useStore} from "../../../app/stores/store";
 import { isAfter, isEqual, parse, isValid, format } from 'date-fns';
 import PhotoUploadWidget from "../../../app/common/PhotoUploadWidget";
 import {observer} from "mobx-react-lite";
-import Calendar from 'react-calendar';
-import DatePicker, {ReactDatePickerProps} from 'react-datepicker'
 import MyDateInput from "../../../app/common/MyDateInput";
 
 function EventForm() {
@@ -58,7 +56,7 @@ function EventForm() {
                     });
                 }
             }
-        }
+        };
         loadEventDetails();
     }, [eventId, eventStore]);
 
@@ -169,12 +167,12 @@ function EventForm() {
                 }}>
                 {({handleSubmit, isValid, isSubmitting, dirty, setFieldValue })=>(
                     <Form className={'ui form'} onSubmit={handleSubmit} autoComplete={'off'}>
-                        <FormField >
-                        <Field as={"select"} defaultValue={'defaultValue'} name='type'>
-                            <option className={"optionPlaceholder"} value="defaultValue" disabled>Event Type</option>
-                            <option value="0">I need help!</option>
-                            <option value="1">I want to help someone!</option>
-                        </Field>
+                        <FormField>
+                            <Field as={"select"} defaultValue={"defaultValue"} name="type" disabled={!!eventId}>
+                                <option className={"optionPlaceholder"} value="defaultValue" disabled>Event Type</option>
+                                <option value="0">I need help!</option>
+                                <option value="1">I want to help someone!</option>
+                            </Field>
                         </FormField>
 
                         <FormField>
@@ -198,25 +196,17 @@ function EventForm() {
                                 <Label basic color={'red'} content={error}/>}/>
                         </FormField>
 
-
-                            <MyDateInput placeholderText={'starting date'}
+                            <MyDateInput placeholderText={'Starting Date'}
                                          name="startingDate"
-                                         showTimeSelect
-                                         timeCaption={'time'}
-                                         dateFormat='dd/MM/yyyy'
+                                        //  showTimeSelect
+                                        //  timeCaption={'time'}
                             />
-
-
 
                             <MyDateInput placeholderText={'Ending Date'}
                                          name="endingDate"
-                                         showTimeSelect
-                                         timeCaption={'time'}
-                                         dateFormat='dd/MM/yyyy'
+                                        //  showTimeSelect
+                                        //  timeCaption={'time'}
                             />
-
-
-
 
                         {/*<FormField>*/}
                         {/*    <Field name="endingDate" placeholder="Ending Date    dd/mm/yyyy" />*/}
