@@ -16,7 +16,7 @@ namespace Application.Mappings
 
             CreateMap<AppUser, UserEventDto>();
 
-            CreateMap<CreateEventDto, Event>();
+            // CreateMap<CreateEventDto, Event>();
 
             CreateMap<AppUser, ProfileDto>()
                 .ForMember(d => d.MainPhotoUrl, o => o
