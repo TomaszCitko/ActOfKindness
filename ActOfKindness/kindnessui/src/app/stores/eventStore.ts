@@ -1,4 +1,4 @@
-import {action, makeAutoObservable, runInAction} from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import {User} from "../models/Users/user";
 import {MyEvent} from "../models/Events/myEvent";
 import agent from "../api/agent";
@@ -40,19 +40,6 @@ export default class EventStore {
         this.loading = false;
     }
 
-    getParticipants = async (eventId: string)=>{
-        try {
-            this.participantsList = []
-            const participants = await agent.Events.getParticipants(eventId)
-                participants.forEach(participant=>{
-                    this.participantsList.push(participant)
-                    })
-                }
-        catch (e) {
-            console.log(e)
-        }
-    }
-
     get myEvents(){
         return Array.from(this.eventRegistry.values())
     }
@@ -61,46 +48,85 @@ export default class EventStore {
         return Array.from(this.unmoderatedEventRegistry.values());
     }
 
-    createEvent = async(newEvent: MyEventCreate)=>{
-        runInAction(()=>{
-            newEvent.id = uuid();
-            console.log(newEvent.startingDate)
-            // const start = new Date(newEvent.startingDate)
-            // const formattedDate = format(start,'dd/MM/yyyy')
-            // const end = new Date(newEvent.endingDate)
-            // const formattedEndDate = format(end,'dd/MM/yyyy')
-            // newEvent.startingDate = formattedDate
-            // newEvent.endingDate = formattedEndDate
-            console.log(newEvent)
-        })
+    saveEvent = (newEvent: MyEvent)=>{
+        this.eventRegistry.set(newEvent.id, newEvent);
+    }
 
+    saveUnmoderatedEvent = (event: MyEvent) => {
+        this.unmoderatedEventRegistry.set(event.id, event);
+    }
+
+    deleteFromRegistry = (id: string) => {
+        this.eventRegistry.delete(id);
+    }
+
+    deleteUnmoderatedEventFromRegistry = (id: string) => {
+        this.unmoderatedEventRegistry.delete(id);
+    }
+
+    clearEvents = () => {
+        this.eventRegistry.clear();
+    }
+
+    clearUnmoderatedEvents = () => {
+        this.unmoderatedEventRegistry.clear();
+    }
+
+    loadEvents = async (pageNumber: number)=>{
         try {
-            await agent.Events.create(newEvent)
-            await router.navigate('/events')
+            const allEventsResponse = await agent.Events.list(pageNumber)
+            runInAction(()=>{
+                this.pageNumber = allEventsResponse.pageNumber;
+                this.totalPages = allEventsResponse.totalPages;
+                allEventsResponse.items.forEach(this.saveEvent);
+            })
+        }
+        catch (error) {
+            console.log(error);
+            toast.error('Failed to load events.');
+        }
+    }
+
+    loadUnmoderatedEvents = async ()=>{
+        try {
+            const unmoderatedEventsResponse = await agent.Events.unmoderatedList();
+            unmoderatedEventsResponse.forEach(event=>{
+                this.saveUnmoderatedEvent(event)
+            })
+            await agent.sleep(1000);
+            this.loadingEventDetails = false
+            this.loading = false
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+
+    createEvent = async(newEvent: MyEventCreate)=>{
+        newEvent.id = uuid();
+        try {
+            await agent.Events.create(newEvent);
+            toast.success("Event successfully created! It's now awaiting moderation.");
+            await router.navigate('/events');
             this.success = false;
         }
         catch (e) {
-            console.log(e)
+            console.log(e);
+            if ((e as any).response.data !== "") {
+                toast.error(`Event creation failed: ${(e as any).response.data}.`);
+            } else {
+                toast.error('Something went wrong while creating the event.');
+            }
         }
     }
 
     updateEvent = async(updatedEvent: MyEventCreate)=>{
-        runInAction(()=>{
-            console.log(updatedEvent.startingDate)
-            // const start = new Date(updatedEvent.startingDate)
-            // const formattedDate = format(start,'dd/MM/yyyy')
-            // const end = new Date(updatedEvent.endingDate)
-            // const formattedEndDate = format(end,'dd/MM/yyyy')
-            // updatedEvent.startingDate = formattedDate
-            // updatedEvent.endingDate = formattedEndDate
-            console.log(updatedEvent)
-        })
         try {
-            await agent.Events.update(updatedEvent)
-            await router.navigate('/events')
+            await agent.Events.update(updatedEvent);
+            toast.success("Event updated successfully! It's now awaiting moderation.");
+            await router.navigate('/events');
             this.success = false;
-
-
         }
         catch (e) {
             console.log(e);
@@ -134,39 +160,6 @@ export default class EventStore {
         }
     }
 
-    loadEvents = async (pageNumber: number)=>{
-        try {
-            const allEventsResponse = await agent.Events.list(pageNumber)
-            runInAction(()=>{
-                this.pageNumber = allEventsResponse.pageNumber;
-                this.totalPages = allEventsResponse.totalPages;
-                allEventsResponse.items.forEach((event) => {
-                    this.saveEvent(event);
-                    // console.log(event);
-                });
-            })
-
-        }
-        catch (error) {
-            console.log(error)
-        }
-    }
-
-    saveEvent = async (newEvent: MyEvent)=>{
-        this.eventRegistry.set(newEvent.id,newEvent)
-    }
-
-    saveUnmoderatedEvent = async (event: MyEvent) => {
-        this.unmoderatedEventRegistry.set(event.id, event);
-    }
-
-    deleteFromRegistry = (id: string) => {
-        this.eventRegistry.delete(id);
-    }
-
-    deleteUnmoderatedEventFromRegistry = (id: string) => {
-        this.unmoderatedEventRegistry.delete(id);
-    }
 
     loadEventDetails = async(id:string)=>{
         this.selectedEvent = undefined
@@ -177,82 +170,26 @@ export default class EventStore {
                 return eventDetails
             }
             catch (error){
-                console.log(error)
+                console.log(error);
+                toast.error('Failed to load event details.');
             }
     }
 
-    private getEvent = async(id:string) =>{
-        return this.eventRegistry.get(id)
-    }
-
-    deleteEvent = async (id: string) => {
+    getParticipants = async (eventId: string)=>{
         try {
-            await agent.Events.delete(id);
-            this.deleteFromRegistry(id);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    getUser = async(id:string, userId:string)=>
-    {
-        try{
-            const userData = await agent.Events.userName(id, userId)
-            return userData
-        }
-        catch (error){
-            console.log(error)
-        }
-    }
-
-    loadUnmoderatedEvents = async ()=>{
-        try {
-            const unmoderatedEventsResponse = await agent.Events.unmoderatedList()
-            unmoderatedEventsResponse.forEach(event=>{
-                this.saveUnmoderatedEvent(event)
-            })
-            await agent.sleep(1000);
-            this.loadingEventDetails = false
-            this.loading = false
-        }
-        catch (error) {
-            console.log(error)
-        }
-    }
-
-    joinEvent = async(eventId : string)=>{
-        try {
-            await agent.Events.joinEvent(eventId);
-            await this.getParticipants(eventId);
-            toast.info('Successfully joined the event!');
-        }
+            this.participantsList = []
+            const participants = await agent.Events.getParticipants(eventId)
+                participants.forEach(participant=>{
+                    this.participantsList.push(participant)
+                    })
+                }
         catch (e) {
             console.log(e);
-            if ((e as any).response.data !== "") {
-                toast.error(`Failed to join the event: ${(e as any).response.data}.`);
-            } else {
-                toast.error('Failed to join the event.');
-            }
+            toast.error('Failed to fetch participants.');
         }
     }
 
-    moderateEvent = async (id: string) => {
-        try {
-            await agent.Events.moderate(id);
-            this.deleteUnmoderatedEventFromRegistry(id);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    clearEvents = () => {
-        this.eventRegistry.clear();
-    }
-
-    clearUnmoderatedEvents = () => {
-        this.unmoderatedEventRegistry.clear();
-    }
-
+    
     loadFilteredEvents = async (filteredList:MyEventFilter, pageNumber:number)=>{
         try {
             this.filteredList = filteredList;
@@ -269,22 +206,64 @@ export default class EventStore {
             console.log(error)
         }
     }
-
+    
     checkEnteredFilters = () => {
-        let counter:number = 0;
-        Object.entries(this.filteredList).forEach(([key, value]) => {
-            if (value != ''){
-                counter++;
+        this.isFiltered = Object.values(this.filteredList).some(value => value !== '');
+    }
+    // checkEnteredFilters = () => {
+    //     let counter:number = 0;
+    //     Object.entries(this.filteredList).forEach(([key, value]) => {
+    //         if (value != ''){
+    //             counter++;
+    //         }
+    //     })
+    //     if (counter === 0){
+    //         this.isFiltered = false;
+    //     }
+    //     else{
+    //         this.isFiltered = true;
+    //     }
+    // }
+
+
+    deleteEvent = async (id: string) => {
+        try {
+            await agent.Events.delete(id);
+            if (this.eventRegistry.has(id)) {
+                this.deleteFromRegistry(id);
+            } else if (this.unmoderatedEventRegistry.has(id)) {
+                this.deleteUnmoderatedEventFromRegistry(id);
             }
-        })
-        if (counter === 0){
-            this.isFiltered = false;
-        }
-        else{
-            this.isFiltered = true;
+        } catch (error) {
+            console.log(error);
         }
     }
-
+    
+    moderateEvent = async (id: string) => {
+        try {
+            await agent.Events.moderate(id);
+            this.deleteUnmoderatedEventFromRegistry(id);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    
+    joinEvent = async(eventId : string)=>{
+        try {
+            await agent.Events.joinEvent(eventId);
+            await this.getParticipants(eventId);
+            toast.info('Successfully joined the event!');
+        }
+        catch (e) {
+            console.log(e);
+            if ((e as any).response.data !== "") {
+                toast.error(`Failed to join the event: ${(e as any).response.data}.`);
+            } else {
+                toast.error('Failed to join the event.');
+            }
+        }
+    }
+    
     leaveEvent = async(eventId : string)=>{
         try {
             await agent.Events.leaveEvent(eventId);
@@ -296,4 +275,19 @@ export default class EventStore {
             toast.error('Failed to leave the event.');
         }
     }
+
+    // private getEvent = async(id:string) =>{
+    //     return this.eventRegistry.get(id)
+    // }
+
+    // getUser = async(id:string, userId:string)=>
+    // {
+    //     try{
+    //         const userData = await agent.Events.userName(id, userId)
+    //         return userData
+    //     }
+    //     catch (error){
+    //         console.log(error)
+    //     }
+    // }
 }
