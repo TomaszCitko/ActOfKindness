@@ -8,7 +8,6 @@ import {router} from "../router/Routes";
 import {Participants} from "../models/Users/participants";
 import { MyEventFilter } from "../models/Events/myEventFilter";
 import { toast } from 'react-toastify';
-import {format} from "date-fns";
 
 export default class EventStore {
     eventRegistry =  new Map<string, MyEvent>();
@@ -65,12 +64,13 @@ export default class EventStore {
     createEvent = async(newEvent: MyEventCreate)=>{
         runInAction(()=>{
             newEvent.id = uuid();
-            const start = new Date(newEvent.startingDate)
-            const formattedDate = format(start,'dd/MM/yyyy')
-            const end = new Date(newEvent.endingDate)
-            const formattedEndDate = format(end,'dd/MM/yyyy')
-            newEvent.startingDate = formattedDate
-            newEvent.endingDate = formattedEndDate
+            console.log(newEvent.startingDate)
+            // const start = new Date(newEvent.startingDate)
+            // const formattedDate = format(start,'dd/MM/yyyy')
+            // const end = new Date(newEvent.endingDate)
+            // const formattedEndDate = format(end,'dd/MM/yyyy')
+            // newEvent.startingDate = formattedDate
+            // newEvent.endingDate = formattedEndDate
             console.log(newEvent)
         })
 
@@ -86,12 +86,13 @@ export default class EventStore {
 
     updateEvent = async(updatedEvent: MyEventCreate)=>{
         runInAction(()=>{
-            const start = new Date(updatedEvent.startingDate)
-            const formattedDate = format(start,'dd/MM/yyyy')
-            const end = new Date(updatedEvent.endingDate)
-            const formattedEndDate = format(end,'dd/MM/yyyy')
-            updatedEvent.startingDate = formattedDate
-            updatedEvent.endingDate = formattedEndDate
+            console.log(updatedEvent.startingDate)
+            // const start = new Date(updatedEvent.startingDate)
+            // const formattedDate = format(start,'dd/MM/yyyy')
+            // const end = new Date(updatedEvent.endingDate)
+            // const formattedEndDate = format(end,'dd/MM/yyyy')
+            // updatedEvent.startingDate = formattedDate
+            // updatedEvent.endingDate = formattedEndDate
             console.log(updatedEvent)
         })
         try {
@@ -141,7 +142,7 @@ export default class EventStore {
                 this.totalPages = allEventsResponse.totalPages;
                 allEventsResponse.items.forEach((event) => {
                     this.saveEvent(event);
-                    console.log(event);
+                    // console.log(event);
                 });
             })
 

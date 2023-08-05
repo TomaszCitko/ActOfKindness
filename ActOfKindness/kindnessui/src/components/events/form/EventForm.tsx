@@ -134,8 +134,6 @@ function EventForm() {
             const startDate = this.parent.startingDate.length === 10 ? 
                 parse(this.parent.startingDate, "dd/MM/yyyy", new Date()) : new Date(this.parent.startingDate);
             const endDate = value.length === 10 ? parse(value, "dd/MM/yyyy", new Date()) : new Date(value);
-            console.log(endDate)
-            console.log(value)
             if (!isValid(endDate)) {
                 return this.createError({
                     message: "Invalid date format. Use dd/MM/yyyy.",
@@ -160,6 +158,16 @@ function EventForm() {
                 onSubmit={async (values) => {
                     values.type = Number(values.type);
                     values.isOnline = Boolean(values.isOnline);
+
+                    if(values.startingDate.length !== 10){
+                        const start = new Date(values.startingDate);
+                        values.startingDate = format(start, "dd/MM/yyyy");
+                    }
+                    if(values.endingDate.length !== 10){
+                        const end = new Date(values.endingDate);
+                        values.endingDate = format(end, "dd/MM/yyyy");
+                    }
+                    
                     if (eventId) {
                         if (photoUrl) values.image = photoUrl
                         await eventStore.updateEvent(values);
