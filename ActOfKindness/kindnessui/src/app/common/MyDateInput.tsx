@@ -1,7 +1,7 @@
 import React from "react";
-import { useField } from "formik";
+import { useField, ErrorMessage } from "formik";
 import DatePicker, { ReactDatePickerProps } from "react-datepicker";
-import { Form } from "semantic-ui-react";
+import { Form, Label } from "semantic-ui-react";
 import { parse } from 'date-fns';
 
 export default function MyDateInput(props: Partial<ReactDatePickerProps>) {
@@ -20,8 +20,9 @@ export default function MyDateInput(props: Partial<ReactDatePickerProps>) {
                     helpers.setValue(date);
                     console.log(date);
                 }}
-                
             />
+            <ErrorMessage name={props.name!} render={error=>
+                <Label basic color={'red'} content={error}/>}/>
         </Form.Field>
     );
 }

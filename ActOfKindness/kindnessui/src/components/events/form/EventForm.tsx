@@ -115,11 +115,11 @@ function EventForm() {
     }
 
     const formValidation = Yup.object({
-        title: Yup.string().required('Title is required Sir'),
-        description: Yup.string().required('Please tell something'),
+        title: Yup.string().required('Title is a required field'),
+        description: Yup.string().required('Please describe your event!'),
         localization: Yup.string().required('We need to know where help is needed!'),
         startingDate: Yup.string().required('Date is required').test('is-future-date', 'Date must not be in the past', function (value) {
-            const inputDate = parse(value, "dd/MM/yyyy", new Date());
+            const inputDate = value.length === 10 ? parse(value, "dd/MM/yyyy", new Date()) : new Date(value);
             const currentDate = new Date();
             currentDate.setHours(0, 0, 0, 0);
             if (!isValid(inputDate)) {
@@ -131,8 +131,11 @@ function EventForm() {
             return isAfter(inputDate, currentDate) || isEqual(inputDate, currentDate);
         }),
         endingDate: Yup.string().required('Date is required').test('is-future-date', 'Ending date cannot be before starting date', function (value) {
-            const startDate = parse(this.parent.startingDate, "dd/MM/yyyy", new Date());
-            const endDate = parse(value, "dd/MM/yyyy", new Date());
+            const startDate = this.parent.startingDate.length === 10 ? 
+                parse(this.parent.startingDate, "dd/MM/yyyy", new Date()) : new Date(this.parent.startingDate);
+            const endDate = value.length === 10 ? parse(value, "dd/MM/yyyy", new Date()) : new Date(value);
+            console.log(endDate)
+            console.log(value)
             if (!isValid(endDate)) {
                 return this.createError({
                     message: "Invalid date format. Use dd/MM/yyyy.",
@@ -151,7 +154,7 @@ function EventForm() {
             </Label>
 
             <Formik
-                // validationSchema={formValidation}
+                validationSchema={formValidation}
                 initialValues={initialValues}
                 enableReinitialize
                 onSubmit={async (values) => {
@@ -196,23 +199,15 @@ function EventForm() {
                                 <Label basic color={'red'} content={error}/>}/>
                         </FormField>
 
-                            <MyDateInput placeholderText={'Starting Date'}
-                                         name="startingDate"
-                                        //  showTimeSelect
-                                        //  timeCaption={'time'}
-                            />
+                        <MyDateInput placeholderText={'Starting Date'}
+                                     name="startingDate"
+                                     //  showTimeSelect
+                                     //  timeCaption={'time'}
+                        />
 
-                            <MyDateInput placeholderText={'Ending Date'}
-                                         name="endingDate"
-                                        //  showTimeSelect
-                                        //  timeCaption={'time'}
-                            />
-
-                        {/*<FormField>*/}
-                        {/*    <Field name="endingDate" placeholder="Ending Date    dd/mm/yyyy" />*/}
-                        {/*    <ErrorMessage name={'endingDate'} render={error=>*/}
-                        {/*        <Label basic color={'red'} content={error}/>}/>*/}
-                        {/*</FormField>*/}
+                        <MyDateInput placeholderText={'Ending Date'}
+                                     name="endingDate"
+                        />
 
                         <FormField>
                             <Field as={"textarea"}  placeholder='Description' name='description' />
