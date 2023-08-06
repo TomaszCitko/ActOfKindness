@@ -44,16 +44,21 @@ function Navbar() {
                     </Dropdown>
                 </Menu.Item>
 
-            ): <>
-                <Menu.Item  onClick={()=>store.modalStore.openModal(<LoginForm/>, "Login to help others")} > {accountStore.isLoggedIn ? (
-                    `Welcome ${accountStore.user?.username}`
-                ):"Login"} </Menu.Item>
+            ): ( 
+                <Menu.Menu position='right'>
+                    <Menu.Item onClick={()=>store.modalStore.openModal(<LoginForm/>, "Login to help others")} >
+                        {accountStore.isLoggedIn ? (
+                            `Welcome ${accountStore.user?.username}`
+                        ):"Login"} 
+                    </Menu.Item>
 
-                <Menu.Item onClick={()=>store.modalStore.openModal(<RegisterForm/>, "Register to help others")} > {accountStore.isLoggedIn ? (
-                    `Welcome ${accountStore.user?.username}`
-                ):"Register"} </Menu.Item>
-               </>
-            }
+                    <Menu.Item onClick={()=>store.modalStore.openModal(<RegisterForm/>, "Register to help others")} >
+                        {accountStore.isLoggedIn ? (
+                            `Welcome ${accountStore.user?.username}`
+                        ):"Register"} 
+                    </Menu.Item>
+                </Menu.Menu>
+            )}
         </Menu>
     );
 }
