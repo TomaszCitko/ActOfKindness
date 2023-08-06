@@ -10,6 +10,15 @@ import { ToastContainer, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
+  const { accountStore } = useStore()
+  const { eventStore } = useStore();
+
+  useEffect(() => {
+      eventStore.loadEvents(1);
+      if (accountStore.token){
+          accountStore.getUser();
+      }}
+  , [accountStore]);
 
     return (
       <>

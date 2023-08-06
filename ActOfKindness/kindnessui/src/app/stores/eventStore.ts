@@ -98,7 +98,8 @@ export default class EventStore {
             this.loading = false
         }
         catch (error) {
-            console.log(error)
+            console.log(error);
+            toast.error('Failed to load events.');
         }
     }
 
