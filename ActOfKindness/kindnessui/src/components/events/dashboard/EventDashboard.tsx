@@ -5,15 +5,22 @@ import {useStore} from "../../../app/stores/store";
 import EventPagination from './EventPagination';
 import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
+import LoadingComponent from "../../../app/common/LoadingComponent";
 
 function EventDashboard() {
     const {eventStore} = useStore()
 
+    // useEffect(() => {
+    //     if (eventStore.eventRegistry.size === 0) {
+    //         eventStore.loadEvents(eventStore.pageNumber);
+    //     }
+    // }, [eventStore.totalPages]);
     useEffect(() => {
-        if (eventStore.eventRegistry.size === 0) {
-            eventStore.loadEvents(eventStore.pageNumber);
-        }
-    }, [eventStore.totalPages]);
+        eventStore.loading = true;
+        eventStore.loadEvents(eventStore.pageNumber);
+    }, []);
+
+    if (eventStore.loading) return <LoadingComponent content={'Loading events'} />;
 
     return (
         <Grid>

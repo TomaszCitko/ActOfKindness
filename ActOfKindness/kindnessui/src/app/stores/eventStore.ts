@@ -80,6 +80,9 @@ export default class EventStore {
                 this.totalPages = allEventsResponse.totalPages;
                 allEventsResponse.items.forEach(this.saveEvent);
             })
+            await agent.sleep(700);
+            this.loadingEventDetails = false;
+            this.loading = false;
         }
         catch (error) {
             console.log(error);
@@ -93,9 +96,9 @@ export default class EventStore {
             unmoderatedEventsResponse.forEach(event=>{
                 this.saveUnmoderatedEvent(event)
             })
-            await agent.sleep(1000);
-            this.loadingEventDetails = false
-            this.loading = false
+            await agent.sleep(700);
+            this.loadingEventDetails = false;
+            this.loading = false;
         }
         catch (error) {
             console.log(error);
