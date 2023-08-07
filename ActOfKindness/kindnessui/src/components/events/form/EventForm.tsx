@@ -8,8 +8,6 @@ import {useStore} from "../../../app/stores/store";
 import { isAfter, isEqual, parse, isValid, format } from 'date-fns';
 import PhotoUploadWidget from "../../../app/common/PhotoUploadWidget";
 import {observer} from "mobx-react-lite";
-import Calendar from 'react-calendar';
-import DatePicker, {ReactDatePickerProps} from 'react-datepicker'
 import MyDateInput from "../../../app/common/MyDateInput";
 
 function EventForm() {
@@ -58,7 +56,7 @@ function EventForm() {
                     });
                 }
             }
-        }
+        };
         loadEventDetails();
     }, [eventId, eventStore]);
 
@@ -117,11 +115,11 @@ function EventForm() {
     }
 
     const formValidation = Yup.object({
-        title: Yup.string().required('Title is required Sir'),
-        description: Yup.string().required('Please tell something'),
+        title: Yup.string().required('Title is a required field'),
+        description: Yup.string().required('Please describe your event!'),
         localization: Yup.string().required('We need to know where help is needed!'),
         startingDate: Yup.string().required('Date is required').test('is-future-date', 'Date must not be in the past', function (value) {
-            const inputDate = parse(value, "dd/MM/yyyy", new Date());
+            const inputDate = value.length === 10 ? parse(value, "dd/MM/yyyy", new Date()) : new Date(value);
             const currentDate = new Date();
             currentDate.setHours(0, 0, 0, 0);
             if (!isValid(inputDate)) {
@@ -133,8 +131,9 @@ function EventForm() {
             return isAfter(inputDate, currentDate) || isEqual(inputDate, currentDate);
         }),
         endingDate: Yup.string().required('Date is required').test('is-future-date', 'Ending date cannot be before starting date', function (value) {
-            const startDate = parse(this.parent.startingDate, "dd/MM/yyyy", new Date());
-            const endDate = parse(value, "dd/MM/yyyy", new Date());
+            const startDate = this.parent.startingDate.length === 10 ? 
+                parse(this.parent.startingDate, "dd/MM/yyyy", new Date()) : new Date(this.parent.startingDate);
+            const endDate = value.length === 10 ? parse(value, "dd/MM/yyyy", new Date()) : new Date(value);
             if (!isValid(endDate)) {
                 return this.createError({
                     message: "Invalid date format. Use dd/MM/yyyy.",
@@ -153,12 +152,22 @@ function EventForm() {
             </Label>
 
             <Formik
-                // validationSchema={formValidation}
+                validationSchema={formValidation}
                 initialValues={initialValues}
                 enableReinitialize
                 onSubmit={async (values) => {
                     values.type = Number(values.type);
                     values.isOnline = Boolean(values.isOnline);
+
+                    if(values.startingDate.length !== 10){
+                        const start = new Date(values.startingDate);
+                        values.startingDate = format(start, "dd/MM/yyyy");
+                    }
+                    if(values.endingDate.length !== 10){
+                        const end = new Date(values.endingDate);
+                        values.endingDate = format(end, "dd/MM/yyyy");
+                    }
+                    
                     if (eventId) {
                         if (photoUrl) values.image = photoUrl
                         await eventStore.updateEvent(values);
@@ -169,12 +178,12 @@ function EventForm() {
                 }}>
                 {({handleSubmit, isValid, isSubmitting, dirty, setFieldValue })=>(
                     <Form className={'ui form'} onSubmit={handleSubmit} autoComplete={'off'}>
-                        <FormField >
-                        <Field as={"select"} defaultValue={'defaultValue'} name='type'>
-                            <option className={"optionPlaceholder"} value="defaultValue" disabled>Event Type</option>
-                            <option value="0">I need help!</option>
-                            <option value="1">I want to help someone!</option>
-                        </Field>
+                        <FormField>
+                            <Field as={"select"} defaultValue={"defaultValue"} name="type" disabled={!!eventId}>
+                                <option className={"optionPlaceholder"} value="defaultValue" disabled>Event Type</option>
+                                <option value="0">I need help!</option>
+                                <option value="1">I want to help someone!</option>
+                            </Field>
                         </FormField>
 
                         <FormField>
@@ -198,31 +207,15 @@ function EventForm() {
                                 <Label basic color={'red'} content={error}/>}/>
                         </FormField>
 
+                        <MyDateInput placeholderText={'Starting Date'}
+                                     name="startingDate"
+                                     //  showTimeSelect
+                                     //  timeCaption={'time'}
+                        />
 
-                            <MyDateInput placeholderText={'starting date'}
-                                         name="startingDate"
-                                         showTimeSelect
-                                         timeCaption={'time'}
-                                         dateFormat='dd/MM/yyyy'
-                            />
-
-
-
-                            <MyDateInput placeholderText={'Ending Date'}
-                                         name="endingDate"
-                                         showTimeSelect
-                                         timeCaption={'time'}
-                                         dateFormat='dd/MM/yyyy'
-                            />
-
-
-
-
-                        {/*<FormField>*/}
-                        {/*    <Field name="endingDate" placeholder="Ending Date    dd/mm/yyyy" />*/}
-                        {/*    <ErrorMessage name={'endingDate'} render={error=>*/}
-                        {/*        <Label basic color={'red'} content={error}/>}/>*/}
-                        {/*</FormField>*/}
+                        <MyDateInput placeholderText={'Ending Date'}
+                                     name="endingDate"
+                        />
 
                         <FormField>
                             <Field as={"textarea"}  placeholder='Description' name='description' />

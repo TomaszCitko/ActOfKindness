@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import {store, useStore} from '../../app/stores/store';
-import {Button, Container, Dimmer, Divider, Grid, Header, Icon, Segment} from 'semantic-ui-react';
+import {Button, Grid, Header, Icon, Segment} from 'semantic-ui-react';
 import {Link} from "react-router-dom";
 import LoginForm from "../users/LoginForm";
 import RegisterForm from "../users/RegisterForm";
@@ -14,7 +14,6 @@ import FacebookLogin from "@greatsumini/react-facebook-login";
 import EventCarousel from './EventCarousel';
 import Footer from '../footer/Footer';
 import LoadingComponent from "../../app/common/LoadingComponent";
-import agent from "../../app/api/agent";
 
 
 function Homepage() {
@@ -22,11 +21,7 @@ function Homepage() {
     const { eventStore } = useStore();
 
     useEffect(() => {
-        eventStore.loadEvents(1);
         document.body.style.display = 'flex';
-        if (accountStore.token) {
-            accountStore.getUser();
-        }
 
         const timer = setTimeout(() => {
             eventStore.loadingHomePage=false;
@@ -129,12 +124,12 @@ function Homepage() {
 <h2>Purpose of this site is to connect users on a meaningful level (not like any other social media). We aim to link helpers with people in need and enable real-life interactions between them.</h2>
                     </Grid.Column>
                     <Grid.Column width={8} textAlign="right" color="black" className='borderRadius15px'>
-                        <img src={homeImage1} className='borderRadius15px'/>
+                        <img src={homeImage1} className='borderRadius15px' alt=''/>
                     </Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
                     <Grid.Column width={8} textAlign="center" color="black" className='borderRadius15px' style={{margin: '10px 0px 10px 0px'}}>
-                    <img src={homeImage2} className='borderRadius15px'/>
+                    <img src={homeImage2} className='borderRadius15px' alt=''/>
                     </Grid.Column>
                     <Grid.Column width={7} textAlign="center" color="black" className='borderRadius15px' style={{margin: '0px 10px 0px 10px'}}>
 <h2>Want to help?<br/>Click on the 'events' above and check if someone near you needs any support.<br/>You can join via 'Event details'.</h2>
@@ -145,12 +140,12 @@ function Homepage() {
 <h2>Do you need help?<br/>Click on 'create event' and let people know what you need, when, where and how they could aid you.</h2>
                     </Grid.Column>
                     <Grid.Column width={8} textAlign="right" color="black" className='borderRadius15px' style={{margin: '10px 0px 10px 0px'}}>
-                        <img src={homeImage3} className='borderRadius15px'/>
+                        <img src={homeImage3} className='borderRadius15px' alt=''/>
                     </Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
                     <Grid.Column width={8} textAlign="center" color="black" className='borderRadius15px' style={{margin: '10px 0px 10px 0px'}}>
-                    <img src={homeImage4} className='borderRadius15px'/>
+                    <img src={homeImage4} className='borderRadius15px' alt=''/>
                     </Grid.Column>
                     <Grid.Column width={7} textAlign="center" color="black" className='borderRadius15px' style={{margin: '0px 10px 0px 10px'}}>
 <h2>Do you want to teach any skill?<br/>You can organize any lessons or webinars via 'create event'.</h2>
