@@ -115,34 +115,44 @@ function EventForm() {
     }
 
     const formValidation = Yup.object({
-        title: Yup.string().required('Title is a required field'),
-        description: Yup.string().required('Please describe your event!'),
-        localization: Yup.string().required('We need to know where help is needed!'),
-        startingDate: Yup.string().required('Date is required').test('is-future-date', 'Date must not be in the past', function (value) {
-            const inputDate = value.length === 10 ? parse(value, "dd/MM/yyyy", new Date()) : new Date(value);
-            const currentDate = new Date();
-            currentDate.setHours(0, 0, 0, 0);
-            if (!isValid(inputDate)) {
-                return this.createError({
-                    message: "Invalid date format. Use dd/MM/yyyy.",
-                    path: this.path,
-                });
-            }
-            return isAfter(inputDate, currentDate) || isEqual(inputDate, currentDate);
-        }),
-        endingDate: Yup.string().required('Date is required').test('is-future-date', 'Ending date cannot be before starting date', function (value) {
-            const startDate = this.parent.startingDate.length === 10 ? 
-                parse(this.parent.startingDate, "dd/MM/yyyy", new Date()) : new Date(this.parent.startingDate);
-            const endDate = value.length === 10 ? parse(value, "dd/MM/yyyy", new Date()) : new Date(value);
-            if (!isValid(endDate)) {
-                return this.createError({
-                    message: "Invalid date format. Use dd/MM/yyyy.",
-                    path: this.path,
-                });
-            }
-            return isAfter(endDate, startDate) || isEqual(endDate, startDate);
-        })
-    })
+        title: Yup.string()
+            .required('Title is a required field')
+            .max(80, 'Title cannot be longer than 80 characters'),
+        description: Yup.string()
+            .required('Please describe your event!')
+            .max(2000, 'Description cannot be longer than 2000 characters'),
+        localization: Yup.string()
+            .required('We need to know where help is needed!')
+            .max(30, 'Localization cannot be longer than 30 characters'),
+        startingDate: Yup.string()
+            .required('Date is required')
+            .test('is-future-date', 'Date must not be in the past', function (value) {
+                const inputDate = value.length === 10 ? parse(value, "dd/MM/yyyy", new Date()) : new Date(value);
+                const currentDate = new Date();
+                currentDate.setHours(0, 0, 0, 0);
+                if (!isValid(inputDate)) {
+                    return this.createError({
+                        message: "Invalid date format. Use dd/MM/yyyy.",
+                        path: this.path,
+                    });
+                }
+                return isAfter(inputDate, currentDate) || isEqual(inputDate, currentDate);
+            }),
+        endingDate: Yup.string()
+            .required('Date is required')
+            .test('is-future-date', 'Ending date cannot be before starting date', function (value) {
+                const startDate = this.parent.startingDate.length === 10 ? 
+                    parse(this.parent.startingDate, "dd/MM/yyyy", new Date()) : new Date(this.parent.startingDate);
+                const endDate = value.length === 10 ? parse(value, "dd/MM/yyyy", new Date()) : new Date(value);
+                if (!isValid(endDate)) {
+                    return this.createError({
+                        message: "Invalid date format. Use dd/MM/yyyy.",
+                        path: this.path,
+                    });
+                }
+                return isAfter(endDate, startDate) || isEqual(endDate, startDate);
+            })
+    });
 
 
     return (
