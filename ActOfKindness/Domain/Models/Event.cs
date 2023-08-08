@@ -18,7 +18,7 @@
         public bool IsModerated { get; set; }
         public EventType Type { get; set; }
         public string Image { get; set; }
-        public List<EventUser> Participants { get; set; }
+        public List<EventUser> Participants { get; set; } = new();
         public ICollection<Comment> Comments { get; set; } 
         public ICollection<Photo> Photos { get; set; }
     }

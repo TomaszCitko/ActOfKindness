@@ -15,6 +15,7 @@ namespace Persistence.Extensions
             service.AddScoped<IEventRepository, EventRepository>();
             service.AddScoped<ICommentRepository, CommentRepository>();
             service.AddScoped<IPhotoRepository, PhotoRepository>();
+            service.AddScoped<Seeder>();
         }
     }
 }
