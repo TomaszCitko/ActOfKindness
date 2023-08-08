@@ -141,7 +141,7 @@ function EventDetails({myEvent}:Props) {
                         <Grid.Column width={15}>
                             <span>
                                 <Icon style={{marginBottom: 10}} name='user circle' size='large' color='teal'/>
-                                <b>Created by:</b> <Link to={`/profile/${event.createdBy.nickname}`}><i>{event.createdBy.nickname}</i></Link>
+                                <b>Created by:</b> <Link to={`/profile/${event.createdBy.username}`}><i>{event.createdBy.nickname}</i></Link>
                             </span>
                         </Grid.Column>
                     </Grid>

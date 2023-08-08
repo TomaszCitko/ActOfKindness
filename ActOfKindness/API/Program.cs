@@ -3,11 +3,9 @@ using API.Middleware;
 using API.SignalR;
 using Application.Extensions;
 using Application.Validators;
-using Domain.Models;
 using FluentValidation.AspNetCore;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Persistence;
 using Persistence.Extensions;
@@ -66,11 +64,21 @@ Log.Logger = new LoggerConfiguration()
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    try
+    {
+        using var scope = app.Services.CreateScope();
+        var seeder = scope.ServiceProvider.GetRequiredService<Seeder>();
+        await seeder.SeedAsync();
+    }
+    catch (Exception exception)
+    {
+        Log.Fatal($"Error while creating database | {exception}");
+    }
 }
 
 app.UseHttpsRedirection();
@@ -83,21 +91,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapHub<ChatHub>("/chat");
-
-using var scope = app.Services.CreateScope();
-var services = scope.ServiceProvider;
-
-try
-{
-    var context = services.GetRequiredService<ApplicationDbContext>();
-    var userManager = services.GetRequiredService<UserManager<AppUser>>();
-    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-    await Seed.SeedUsers(userManager, roleManager);
-    await Seed.SeedEvents(context, userManager);
-}
-catch (Exception exception)
-{
-    Log.Fatal($"Error while creating database | {exception}");
-}
 
 app.Run();
