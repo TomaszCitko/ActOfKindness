@@ -2,6 +2,7 @@ import {MyEvent} from "../../../app/models/Events/myEvent";
 import {Button, Grid, Icon, Item, Label, Segment} from "semantic-ui-react";
 import {observer} from "mobx-react-lite";
 import { Link } from 'react-router-dom';
+import { format } from 'date-fns';
 import Swal from 'sweetalert2';
 import {useStore} from "../../../app/stores/store";
 
@@ -36,7 +37,7 @@ function UnmoderatedEventListItem({event}: Props) {
                     <Grid.Column width={4}>
                         <span>
                         <Icon name='calendar' style={{marginBottom: 10}} size='large' color='teal'/>
-                            {event.startingDate.slice(0,10)} - {event.endingDate.slice(0,10)}
+                            {event.startingDate && format(new Date(event.startingDate), "dd/MM/yyyy")} - {event.endingDate && format(new Date(event.endingDate), "dd/MM/yyyy")}
                         </span>
                     </Grid.Column>
 
@@ -50,7 +51,7 @@ function UnmoderatedEventListItem({event}: Props) {
                     <Grid.Column width={3}>
                         <span>
                         <Icon name='user' style={{marginBottom: 10}} size='large' color='teal'/>
-                            {event.createdBy.nickname}
+                            <Link to={`/profile/${event.createdBy.username}`}>{event.createdBy.nickname}</Link>
                         </span>
                     </Grid.Column>
 
