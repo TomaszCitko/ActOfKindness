@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Persistence.BackgroundTasks;
 using Persistence.Repositories;
+using Quartz;
 
 namespace Persistence.Extensions
 {
@@ -16,6 +18,15 @@ namespace Persistence.Extensions
             service.AddScoped<ICommentRepository, CommentRepository>();
             service.AddScoped<IPhotoRepository, PhotoRepository>();
             service.AddScoped<Seeder>();
+            service.AddQuartz(options =>
+            {
+                options.UseMicrosoftDependencyInjectionJobFactory();
+            });
+            service.AddQuartzHostedService(options =>
+            {
+                options.WaitForJobsToComplete = true;
+            });
+            service.ConfigureOptions<ArchiveOldEventsConfigure>();
         }
     }
 }

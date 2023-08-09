@@ -154,4 +154,10 @@ public class EventRepository : IEventRepository
         return filteredEvents;
     }
 
+    public async Task ArchiveOldEventsAsync()
+    {
+        await _context.Events.Where(e => !e.IsDone && e.EndingDate < DateTime.Now)
+            .ExecuteUpdateAsync(prop =>
+                prop.SetProperty(e => e.IsDone, true));
+    }
 }
