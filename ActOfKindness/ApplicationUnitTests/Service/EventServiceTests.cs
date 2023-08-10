@@ -556,5 +556,135 @@ namespace ApplicationUnitTests.Service
 
             Assert.That(async () => await _eventService.JoinEventAsync(_eventId), Throws.TypeOf<BadRequestException>());
         }
+
+        [Test]
+        public async Task LeaveEventAsync_UserLeaveEvent_UserIsEventParticipantAndEventNotHaveOthersParticipants()
+        {
+            var userId = new Guid().ToString();
+            var user = new AppUser()
+            {
+                Id = userId
+            };
+            var eventFromRepository = new Event()
+            {
+                Id = _eventId,
+                Participants = new List<EventUser>()
+                {
+                    new EventUser()
+                    {
+                        UserId = userId,
+                        User = user
+                    }
+                }
+            };
+
+            _eventRepository.Setup(x => x.GetEventByIdAsync(_eventId))
+                .ReturnsAsync(eventFromRepository);
+            _contextService.Setup(x => x.GetUserId)
+                .Returns(userId);
+            _userManager.Setup(x => x.FindByIdAsync(userId))
+                .ReturnsAsync(user);
+
+            await _eventService.LeaveEventAsync(_eventId);
+
+            _eventRepository.Verify(x => x.SaveAsync(), Times.Once);
+        }
+
+        [Test]
+        public async Task LeaveEventAsync_UserLeaveEvent_UserIsEventParticipantAndEventHaveOthersParticipants()
+        {
+            var userId = new Guid().ToString();
+            var user = new AppUser()
+            {
+                Id = userId
+            };
+            var eventFromRepository = new Event()
+            {
+                Id = _eventId,
+                Participants = new List<EventUser>()
+                {
+                    new EventUser()
+                    {
+                        UserId = "1"
+                    },
+                    new EventUser()
+                    {
+                        UserId = userId,
+                        User = user
+                    },
+                    new EventUser()
+                    {
+                        UserId = "2"
+                    }
+                }
+            };
+
+            _eventRepository.Setup(x => x.GetEventByIdAsync(_eventId))
+                .ReturnsAsync(eventFromRepository);
+            _contextService.Setup(x => x.GetUserId)
+                .Returns(userId);
+            _userManager.Setup(x => x.FindByIdAsync(userId))
+                .ReturnsAsync(user);
+
+            await _eventService.LeaveEventAsync(_eventId);
+
+            _eventRepository.Verify(x => x.SaveAsync(), Times.Once);
+        }
+
+        [Test]
+        public void LeaveEventAsync_ThrowNotFoundException_EventNotExist()
+        {
+            _eventRepository.Setup(x => x.GetEventByIdAsync(_eventId))
+                .ReturnsAsync((Event?)null);
+
+            Assert.That(async () => await _eventService.LeaveEventAsync(_eventId), Throws.TypeOf<NotFoundException>());
+        }
+
+        [Test]
+        public void LeaveEventAsync_ThrowBadRequestException_UserIsNotEventParticipant()
+        {
+            var userId = new Guid().ToString();
+            var eventFromRepository = new Event()
+            {
+                Id = _eventId,
+                Participants = new List<EventUser>()
+                {
+                    new EventUser()
+                    {
+                        UserId = "1"
+                    },
+                    new EventUser()
+                    {
+                        UserId = "2"
+                    }
+                }
+            };
+
+            _eventRepository.Setup(x => x.GetEventByIdAsync(_eventId))
+                .ReturnsAsync(eventFromRepository);
+            _contextService.Setup(x => x.GetUserId)
+                .Returns(userId);
+
+            Assert.That(async () => await _eventService.LeaveEventAsync(_eventId), Throws.TypeOf<BadRequestException>());
+        }
+
+        [Test]
+        public void LeaveEventAsync_ThrowBadRequestException_EventHasEnded()
+        {
+            var userId = new Guid().ToString();
+            var eventFromRepository = new Event()
+            {
+                Id = _eventId,
+                IsDone = true,
+                Participants = new List<EventUser>()
+            };
+
+            _eventRepository.Setup(x => x.GetEventByIdAsync(_eventId))
+                .ReturnsAsync(eventFromRepository);
+            _contextService.Setup(x => x.GetUserId)
+                .Returns(userId);
+
+            Assert.That(async () => await _eventService.LeaveEventAsync(_eventId), Throws.TypeOf<BadRequestException>());
+        }
     }
 }
