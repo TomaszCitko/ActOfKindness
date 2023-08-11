@@ -9,6 +9,7 @@ import UnmoderatedEventDashboard from "../../components/events/unmoderated/Unmod
 import EventDetailsDashboard from "../../components/events/details/EventDetailsDashboard";
 import ProfilePage from "../../components/Profiles/ProfilePage";
 import AuthenticatedRoute from "../common/AuthenticatedRoute";
+import AdminRoute from "../common/AdminRoute";
 
 export const routes: RouteObject[] = [
     {
@@ -22,7 +23,7 @@ export const routes: RouteObject[] = [
             {path: `eventDetails/:id`, element: <EventDetailsDashboard/>},
             {path: `login`, element: <LoginForm/>},
             {path: `register`, element: <RegisterForm/>},
-            {path: `unmoderatedEvents`, element: <UnmoderatedEventDashboard/>},
+            {path: `unmoderatedEvents`, element: <AdminRoute><UnmoderatedEventDashboard/></AdminRoute>},
             {path: `profile/:username`, element: <ProfilePage/>}
         ]
     }
