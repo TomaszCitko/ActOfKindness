@@ -13,6 +13,7 @@ export default class AccountStore{
     isLoggedIn: boolean = false
     isAdmin: boolean = false
     isModerator: boolean = false
+    redirectToLoginModal: boolean = false
 
     constructor() {
         makeAutoObservable(this)
@@ -103,4 +104,7 @@ export default class AccountStore{
         if (this.user) this.user.mainPhotoUrl = photoId
     }
 
+    setRedirectToLoginModal = (value: boolean)=>{
+        this.redirectToLoginModal = value;
+    }
 }

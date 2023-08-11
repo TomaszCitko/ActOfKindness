@@ -8,6 +8,7 @@ function AuthenticatedRoute({ children, ...rest }){
     if(isLoggedIn) {
         return <Route {...rest}>{children}</Route>;
     } else {
+        accountStore.setRedirectToLoginModal(true);
         return <Navigate to="/events" />;
     }
 }

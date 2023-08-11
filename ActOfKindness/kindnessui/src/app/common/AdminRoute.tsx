@@ -10,6 +10,7 @@ function AdminRoute({ children, ...rest }){
     if(isLoggedIn && (isAdmin || isModerator)) {
         return <Route {...rest}>{children}</Route>;
     } else {
+        accountStore.setRedirectToLoginModal(true);
         return <Navigate to="/events" />;
     }
 }

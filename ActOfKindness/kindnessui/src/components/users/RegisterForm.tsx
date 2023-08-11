@@ -50,7 +50,7 @@ function RegisterForm() {
             <FormField>
                 <Input 
                     type='text'  
-                    placeholder='email' 
+                    placeholder='Email' 
                     name='email' 
                     onChange={formik.handleChange} 
                     value={formik.values.email}
@@ -61,7 +61,7 @@ function RegisterForm() {
             <FormField>
                 <Input 
                     type='password'  
-                    placeholder='password' 
+                    placeholder='Password' 
                     name='password' 
                     onChange={formik.handleChange} 
                     value={formik.values.password}
@@ -72,7 +72,7 @@ function RegisterForm() {
             <FormField>
                 <Input 
                     type='text'  
-                    placeholder='username' 
+                    placeholder='Username' 
                     name='username' 
                     onChange={formik.handleChange} 
                     value={formik.values.username}
@@ -83,7 +83,7 @@ function RegisterForm() {
             <FormField>
                 <Input 
                     type='text'  
-                    placeholder='location' 
+                    placeholder='Location' 
                     name='location' 
                     onChange={formik.handleChange} 
                     value={formik.values.location}

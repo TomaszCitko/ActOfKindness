@@ -28,7 +28,7 @@ function LoginForm() {
             <FormField>
                 <Input 
                     type='text'  
-                    placeholder='email' 
+                    placeholder='Email' 
                     name='email' 
                     onChange={formik.handleChange} 
                     value={formik.values.email}
@@ -37,7 +37,7 @@ function LoginForm() {
             <FormField>
                 <Input 
                     type='password'  
-                    placeholder='password' 
+                    placeholder='Password' 
                     name='password' 
                     onChange={formik.handleChange} 
                     value={formik.values.password}
