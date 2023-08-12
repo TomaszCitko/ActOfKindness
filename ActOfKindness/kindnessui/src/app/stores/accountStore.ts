@@ -112,4 +112,8 @@ export default class AccountStore{
     setRedirectToLoginModal = (value: boolean)=>{
         this.redirectToLoginModal = value;
     }
+
+    setLoadingUser = (value: boolean) => {
+        this.loadingUser = value;
+    }
 }
