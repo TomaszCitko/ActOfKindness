@@ -24,8 +24,12 @@ function EventDashboard() {
 
     useEffect(() => {
         if(accountStore.redirectToLoginModal){
-            modalStore.openModal(<LoginForm/>, "Login to help others");
-            accountStore.setRedirectToLoginModal(false);
+            if(accountStore.isLoggedIn){
+                toast.warn("You don't have an access to this page!");
+                accountStore.setRedirectToLoginModal(false);
+            } else {
+                modalStore.openModal(<LoginForm/>, "Login to help others");
+            }
         }
     }, [accountStore, modalStore]);
 

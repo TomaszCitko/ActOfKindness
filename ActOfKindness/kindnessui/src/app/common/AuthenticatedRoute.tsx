@@ -1,12 +1,11 @@
-import { Route, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useStore } from '../stores/store';
 
-function AuthenticatedRoute({ children, ...rest }){
+function AuthenticatedRoute({ children }) {
     const { accountStore } = useStore();
-    const isLoggedIn = accountStore.isLoggedIn;
 
-    if(isLoggedIn) {
-        return <Route {...rest}>{children}</Route>;
+    if(accountStore.isLoggedIn) {
+        return children;
     } else {
         accountStore.setRedirectToLoginModal(true);
         return <Navigate to="/events" />;

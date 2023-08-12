@@ -20,6 +20,10 @@ function App() {
       }}
   , [accountStore]);
 
+  if(accountStore.loadingUser){
+    return <div></div>;
+  }
+
     return (
       <>
           <ToastContainer
