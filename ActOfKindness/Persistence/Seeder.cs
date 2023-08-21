@@ -165,16 +165,7 @@ namespace Persistence
                     IsOnline = true,
                     Image = "",
                     IsModerated = true
-                }
-            };
-
-            return moderatedEvents;
-        }
-
-        private List<Event> GetUnmoderatedEvents()
-        {
-            var events = new List<Event>()
-            {
+                },
                 new()
                 {
                     Id = new Guid(),
@@ -187,7 +178,8 @@ namespace Persistence
                     EndingDate = new DateTime(2023, 10, 12),
                     Type = EventType.HelpNeeded,
                     IsOnline = false,
-                    Image = ""
+                    Image = "",
+                    IsModerated = true
                 },
                 new()
                 {
@@ -201,8 +193,18 @@ namespace Persistence
                     EndingDate = new DateTime(2023, 10, 21),
                     Type = EventType.HelpNeeded,
                     IsOnline = false,
-                    Image = ""
+                    Image = "",
+                    IsModerated = true
                 },
+            };
+
+            return moderatedEvents;
+        }
+
+        private List<Event> GetUnmoderatedEvents()
+        {
+            var events = new List<Event>()
+            {
                 new()
                 {
                     Id = new Guid(),

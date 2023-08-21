@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useState } from 'react';
 import ReactSimplyCarousel from 'react-simply-carousel';
 import { Grid, Icon } from 'semantic-ui-react'
 import EventHomepageItem from "../events/dashboard/EventHomepageItem";
@@ -13,6 +13,7 @@ function EventCarousel() {
   const eventsToShow = myEvents.slice(0,7).map(myEvent => (
     <EventHomepageItem  key={myEvent.id} event={myEvent} />
 ));
+
 
   
   return (
@@ -67,13 +68,11 @@ function EventCarousel() {
         speed={2000}
         easing="linear"
       >
-      <div style={{ width: 763, height: 300, padding: "0px 10px 0px 10px"}}>{eventsToShow[0]}</div>
+      <div style={{ width: 763, height: 300, padding: "0px 10px 0px 10px" }}>{eventsToShow[0]}</div>
       <div style={{ width: 763, height: 300, padding: "0px 10px 0px 10px" }}>{eventsToShow[1]}</div>
       <div style={{ width: 763, height: 300, padding: "0px 10px 0px 10px" }}>{eventsToShow[2]}</div>
       <div style={{ width: 763, height: 300, padding: "0px 10px 0px 10px" }}>{eventsToShow[3]}</div>
       <div style={{ width: 763, height: 300, padding: "0px 10px 0px 10px" }}>{eventsToShow[4]}</div>
-      <div style={{ width: 763, height: 300, padding: "0px 10px 0px 10px" }}>{eventsToShow[5]}</div>
-      <div style={{ width: 763, height: 300, padding: "0px 10px 0px 10px" }}>{eventsToShow[6]}</div>
       </ReactSimplyCarousel>
     </div>
   );

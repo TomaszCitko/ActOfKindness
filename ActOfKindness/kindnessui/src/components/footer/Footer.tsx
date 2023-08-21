@@ -20,10 +20,10 @@ function Footer(){
                         </div>
                     </Grid.Column>
                     <Grid.Column width={2}>
-                        <MemberCard name='Aneta Kuśnierz' github='aneta-k' linkedin=''/>
+                        <MemberCard name='Aneta Kuśnierz' github='aneta-k' linkedin='aneta-kusnierz-102582289'/>
                     </Grid.Column>
                     <Grid.Column width={2}>
-                        <MemberCard name='Marcin Szkurłat' github='MarcinSzkurlat' linkedin=''/>
+                        <MemberCard name='Marcin Szkurłat' github='MarcinSzkurlat' linkedin='marcin-szkurłat-6b11b5289'/>
                     </Grid.Column>
                     <Grid.Column width={2}>
                         <MemberCard name='Maciej Trębacz' github='MaciejTrebacz' linkedin='maciejtrebacz-12345'/>
