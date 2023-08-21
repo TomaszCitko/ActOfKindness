@@ -33,7 +33,6 @@ public class EventRepository : IEventRepository
             .Where(e => e.CreatedBy.UserName == username)
             .OrderBy(e => e.StartingDate)
             .ToListAsync();
-
     }
 
     public async Task<int> GetQuantityOfModeratedEventAsync()
@@ -45,8 +44,8 @@ public class EventRepository : IEventRepository
     public async Task<List<Event>> GetUnmoderatedEventsAsync()
     {
         return await _context.Events
-            .Where(e => !e.IsModerated)
             .Include(e => e.CreatedBy)
+            .Where(e => !e.IsModerated)
             .OrderBy(e => e.CreatedTime)
             .ToListAsync();
     }
@@ -57,8 +56,6 @@ public class EventRepository : IEventRepository
             .Include(i => i.Participants)
             .ThenInclude(u=>u.User)
             .Include(i => i.CreatedBy)
-            //.Include(i=>i.Comments)
-            //.ThenInclude(a=>a.Author)
             .Include(i=>i.Photos)
             .FirstOrDefaultAsync(e => e.Id == id);
     }
