@@ -8,6 +8,7 @@ import { observer } from "mobx-react-lite";
 import { toast } from 'react-toastify';
 import LoadingComponent from "../../../app/common/LoadingComponent";
 import LoginForm from "../../users/LoginForm";
+import LoginFooter from "../../users/LoginFooter";
 
 function EventDashboard() {
     const { eventStore, accountStore, modalStore } = useStore();
@@ -28,7 +29,7 @@ function EventDashboard() {
                 toast.warn("You don't have an access to this page!");
                 accountStore.setRedirectToLoginModal(false);
             } else {
-                modalStore.openModal(<LoginForm/>, "Login to help others");
+                modalStore.openModal(<LoginForm/>, "Login to help others", <LoginFooter/>);
             }
         }
     }, [accountStore, modalStore]);

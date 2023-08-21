@@ -14,6 +14,8 @@ import FacebookLogin from "@greatsumini/react-facebook-login";
 import EventCarousel from './EventCarousel';
 import Footer from '../footer/Footer';
 import LoadingComponent from "../../app/common/LoadingComponent";
+import LoginFooter from '../users/LoginFooter';
+import RegisterFooter from '../users/RegisterFooter';
 
 
 function Homepage() {
@@ -71,13 +73,13 @@ function Homepage() {
                                     <Button as={Link}
 
                                             size="huge" color={'orange'}  style={{ width: '180px', margin: '0 auto'
-                                    }} onClick={()=>store.modalStore.openModal(<LoginForm/>, "Login to help others")} >
+                                    }} onClick={()=>store.modalStore.openModal(<LoginForm/>, "Login to help others", <LoginFooter/>)} >
                                         Login
                                         <Icon style={{ paddingLeft: '10px' }} name="user" />
                                     </Button>
                                     <Button.Or className={"custom-or"} style={{marginTop: 6,verticalAlign: 'text-top'}}/>
 
-                                    <Button onClick={()=>store.modalStore.openModal(<RegisterForm/>, "Register to help others")} size="huge" color={'teal'}  style={{ width: '180px', margin: '0 auto' }}>
+                                    <Button onClick={()=>store.modalStore.openModal(<RegisterForm/>, "Register to help others", <RegisterFooter/>)} size="huge" color={'teal'}  style={{ width: '180px', margin: '0 auto' }}>
                                         Register
                                         <Icon style={{ paddingLeft: '10px' }} name="wpforms" />
                                     </Button>

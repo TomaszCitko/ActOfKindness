@@ -18,6 +18,9 @@ function MyGenericModal() {
                 <Modal.Content>
                     {modalStore.modal.body}
                 </Modal.Content>
+                <Modal.Actions>
+                        {modalStore.modal.footer}
+                </Modal.Actions>
             </Modal>
         </>
     );
