@@ -36,12 +36,8 @@ namespace Application.Services
 
             var eventsDto = _mapper.Map<List<DetailsEventDto>>(eventsFromRepository);
 
-            return new PaginatedResults<List<DetailsEventDto>>()
-            {
-                Items = eventsDto,
-                PageNumber = pageNumber,
-                TotalPages = (int)Math.Ceiling(eventsQuantity /(double) PageSize)
-            };
+            return new PaginatedResults<List<DetailsEventDto>>(eventsDto, pageNumber,
+                (int)Math.Ceiling(eventsQuantity / (double)PageSize));
         }
 
         public async Task<List<DetailsEventDto>> GetUserEvents(string username)
@@ -179,12 +175,8 @@ namespace Application.Services
 
             var eventsDto = _mapper.Map<List<DetailsEventDto>>(events);
 
-            return new PaginatedResults<List<DetailsEventDto>>()
-            {
-                Items = eventsDto,
-                PageNumber = pageNumber,
-                TotalPages = (int)Math.Ceiling(eventsFromRepository.Count / (double)PageSize)
-            };
+            return new PaginatedResults<List<DetailsEventDto>>(eventsDto, pageNumber,
+                (int)Math.Ceiling(eventsFromRepository.Count / (double)PageSize));
         }
 
         public async Task<List<ParticipantDto>> GetParticipantsAsync(Guid eventId)
