@@ -91,7 +91,7 @@ function RegisterForm() {
                 {formik.touched.location && formik.errors.location ? <Label basic color={'red'} content={formik.errors.location}/> : null}    
             </FormField>
 
-            <Button fluid type='submit' content='Register' positive />
+            <Button fluid type='submit' content='Register' color='teal' />
             <Button onClick={store.modalStore.closeModal} fluid  content='Cancel' negative />
         </SemanticUIForm>
     );

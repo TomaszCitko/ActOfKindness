@@ -255,6 +255,11 @@ code {
   font-size:smaller;
 }
 
+.ui.negative.button {
+  background: #a7a3a3 !important;
+  margin-top: 5px;
+}
+
 /*
 NAVBAR
 */
