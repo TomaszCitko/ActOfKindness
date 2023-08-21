@@ -250,6 +250,11 @@ code {
   text-align: center !important;
 }
 
+.smallFooterText {
+  margin-bottom: 10px;
+  font-size:smaller;
+}
+
 /*
 NAVBAR
 */
