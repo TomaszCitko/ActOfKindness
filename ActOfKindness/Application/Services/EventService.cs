@@ -225,14 +225,14 @@ namespace Application.Services
 
             var userId =  _contextService.GetUserId;
 
-            if (eventToJoin.IsDone)
-                throw new BadRequestException($"Cannot join to event ({eventId}) because it has ended",
+            if (eventToJoin.Participants.Any(eu => eu.UserId == userId))
+                throw new BadRequestException($"You already joined event ({eventId})",
                     _contextService.Method,
                     userId,
                     _contextService.GetUserRole);
 
-            if (eventToJoin.Participants.Any(eu => eu.UserId == userId))
-                throw new BadRequestException($"You already joined event ({eventId})",
+            if (eventToJoin.IsDone)
+                throw new BadRequestException($"Cannot join to event ({eventId}) because it has ended",
                     _contextService.Method,
                     userId,
                     _contextService.GetUserRole);
@@ -269,6 +269,18 @@ namespace Application.Services
                 throw new NotFoundException($"Event ({eventId}) not found",
                     _contextService.Method,
                     _contextService.GetUserId,
+                    _contextService.GetUserRole);
+
+            if (eventToLeave.Participants.All(eu => eu.UserId != userId))
+                throw new BadRequestException($"You are not attending the event ({eventId})",
+                    _contextService.Method,
+                    userId,
+                    _contextService.GetUserRole);
+
+            if (eventToLeave.IsDone)
+                throw new BadRequestException($"Cannot leave event ({eventId}) because it has ended",
+                    _contextService.Method,
+                    userId,
                     _contextService.GetUserRole);
 
             if (userId is not null)
