@@ -5,10 +5,12 @@ import {useStore} from "../../../app/stores/store";
 import EventPagination from './EventPagination';
 import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
+import { toast } from 'react-toastify';
 import LoadingComponent from "../../../app/common/LoadingComponent";
+import LoginForm from "../../users/LoginForm";
 
 function EventDashboard() {
-    const {eventStore} = useStore()
+    const { eventStore, accountStore, modalStore } = useStore();
 
     // useEffect(() => {
     //     if (eventStore.eventRegistry.size === 0) {
@@ -19,6 +21,17 @@ function EventDashboard() {
         eventStore.loading = true;
         eventStore.loadEvents(eventStore.pageNumber);
     }, []);
+
+    useEffect(() => {
+        if(accountStore.redirectToLoginModal){
+            if(accountStore.isLoggedIn){
+                toast.warn("You don't have an access to this page!");
+                accountStore.setRedirectToLoginModal(false);
+            } else {
+                modalStore.openModal(<LoginForm/>, "Login to help others");
+            }
+        }
+    }, [accountStore, modalStore]);
 
     if (eventStore.loading) return <LoadingComponent content={'Loading events'} />;
 

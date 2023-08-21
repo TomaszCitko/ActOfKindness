@@ -8,6 +8,8 @@ import RegisterForm from "../../components/users/RegisterForm";
 import UnmoderatedEventDashboard from "../../components/events/unmoderated/UnmoderatedEventDashboard";
 import EventDetailsDashboard from "../../components/events/details/EventDetailsDashboard";
 import ProfilePage from "../../components/Profiles/ProfilePage";
+import AuthenticatedRoute from "../common/AuthenticatedRoute";
+import AdminRoute from "../common/AdminRoute";
 
 export const routes: RouteObject[] = [
     {
@@ -16,12 +18,12 @@ export const routes: RouteObject[] = [
         children: [
             {path: '',element: <Homepage/>},
             {path: 'events',element: <EventDashboard/>},
-            {path: 'createEvent',element: <EventForm/>},
-            {path: 'editEvent/:id', element: <EventForm/>},
+            {path: 'createEvent',element: <AuthenticatedRoute><EventForm/></AuthenticatedRoute>},
+            {path: 'editEvent/:id', element: <AuthenticatedRoute><EventForm/></AuthenticatedRoute>},
             {path: `eventDetails/:id`, element: <EventDetailsDashboard/>},
             {path: `login`, element: <LoginForm/>},
             {path: `register`, element: <RegisterForm/>},
-            {path: `unmoderatedEvents`, element: <UnmoderatedEventDashboard/>},
+            {path: `unmoderatedEvents`, element: <AdminRoute><UnmoderatedEventDashboard/></AdminRoute>},
             {path: `profile/:username`, element: <ProfilePage/>}
         ]
     }

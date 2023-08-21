@@ -17,8 +17,15 @@ function App() {
       eventStore.loadEvents(1);
       if (accountStore.token){
           accountStore.getUser();
-      }}
+      } else {
+        accountStore.setLoadingUser(false);
+      }
+    }
   , [accountStore]);
+
+  if(accountStore.loadingUser){
+    return <div></div>;
+  }
 
     return (
       <>

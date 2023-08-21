@@ -13,6 +13,8 @@ export default class AccountStore{
     isLoggedIn: boolean = false
     isAdmin: boolean = false
     isModerator: boolean = false
+    redirectToLoginModal: boolean = false
+    loadingUser: boolean = true
 
     constructor() {
         makeAutoObservable(this)
@@ -87,15 +89,19 @@ export default class AccountStore{
 
     getUser = async ()=>{
         try {
-            const user = await agent.Account.getCurrentUser()
+            const user = await agent.Account.getCurrentUser();
             runInAction(()=>{
                 this.setUser(user)
                 this.isLoggedIn = true
                 this.isAdmin = user.role === 'Admin'
                 this.isModerator = user.role === 'Moderator'
-            })
+                this.loadingUser = false
+            });
         } catch (e){
-            console.log(e)
+            runInAction(()=>{
+                this.loadingUser = false;
+            });
+            console.log("Error fetching user:", e);
         }
     }
 
@@ -103,4 +109,11 @@ export default class AccountStore{
         if (this.user) this.user.mainPhotoUrl = photoId
     }
 
+    setRedirectToLoginModal = (value: boolean)=>{
+        this.redirectToLoginModal = value;
+    }
+
+    setLoadingUser = (value: boolean) => {
+        this.loadingUser = value;
+    }
 }
