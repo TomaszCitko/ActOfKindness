@@ -16,6 +16,8 @@ namespace Application.Services
         private readonly UserManager<AppUser> _userManager;
         private readonly IPhotoRepository _photoRepository;
         private const int PageSize = 10;
+        private const string EventImagePlaceHolder =
+            "https://res.cloudinary.com/do5wipffc/image/upload/v1692617053/hannah-busing-Zyx1bK9mqmA-unsplash_iinfnz.jpg";
 
         public EventService(IEventRepository eventRepository, IMapper mapper, IContextService contextService, UserManager<AppUser> userManager,IPhotoRepository photoRepository)
         {
@@ -67,15 +69,12 @@ namespace Application.Services
                     _contextService.GetUserId,
                     _contextService.GetUserRole);
 
-            var temporaryImagePlaceHolder =
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Vue_de_nuit_de_la_Place_Stanislas_%C3%A0_Nancy.jpg/1920px-Vue_de_nuit_de_la_Place_Stanislas_%C3%A0_Nancy.jpg";
-
-            if (string.IsNullOrWhiteSpace(newEventDto.Image))
-            {
-                newEventDto.Image = temporaryImagePlaceHolder;
-            }
-
             var newEvent = _mapper.Map<Event>(newEventDto);
+
+            if (string.IsNullOrWhiteSpace(newEvent.Image))
+            {
+                newEvent.Image = EventImagePlaceHolder;
+            }
 
             newEvent.UserId = _contextService.GetUserId;
             var findPhoto = await _photoRepository.FindPhotoWithoutUser(newEvent.Image);

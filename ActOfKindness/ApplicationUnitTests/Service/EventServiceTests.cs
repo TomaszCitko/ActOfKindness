@@ -75,15 +75,8 @@ namespace ApplicationUnitTests.Service
         public async Task CreateEventAsync_CreateNewEvent_CreateEventDtoIsCorrect()
         {
             var userId = new Guid().ToString();
-            var newEventDto = new CreateEventDto()
-            {
-                Id = _eventId,
-                Title = _title,
-                Description = _description,
-                StartingDate = _startingDate.ToString("dd/MM/yyyy"),
-                EndingDate = _endingDate.ToString("dd/MM/yyyy"),
-                Type = _eventType
-            };
+            var newEventDto = new CreateEventDto(_eventId, null, false, _title, _description,
+                _startingDate.ToString("dd/MM/yyyy"), _endingDate.ToString("dd/MM/yyyy"), null, null, _eventType, null);
             var newEvent = new Event()
             {
                 Id = _eventId,
@@ -112,16 +105,8 @@ namespace ApplicationUnitTests.Service
         {
             const int expectedMinimumLengthForNonEmptyImageProperty = 2;
             var userId = new Guid().ToString();
-            var newEventDto = new CreateEventDto()
-            {
-                Id = _eventId,
-                Title = _title,
-                Description = _description,
-                StartingDate = _startingDate.ToString("dd/MM/yyyy"),
-                EndingDate = _endingDate.ToString("dd/MM/yyyy"),
-                Type = _eventType,
-                Image = ""
-            };
+            var newEventDto = new CreateEventDto(_eventId, null, false, _title, _description,
+                _startingDate.ToString("dd/MM/yyyy"), _endingDate.ToString("dd/MM/yyyy"), null, null, _eventType, "");
             var newEvent = new Event()
             {
                 Id = _eventId,
@@ -141,21 +126,14 @@ namespace ApplicationUnitTests.Service
 
             await _eventService.CreateEventAsync(newEventDto);
 
-            Assert.Greater(newEventDto.Image.Length, expectedMinimumLengthForNonEmptyImageProperty);
+            Assert.Greater(newEvent.Image.Length, expectedMinimumLengthForNonEmptyImageProperty);
         }
 
         [Test]
         public void CreateEventAsync_ThrowBadRequestException_EventWithSameIdExist()
         {
-            var newEventDto = new CreateEventDto()
-            {
-                Id = _eventId,
-                Title = _title,
-                Description = _description,
-                StartingDate = _startingDate.ToString("dd/MM/yyyy"),
-                EndingDate = _endingDate.ToString("dd/MM/yyyy"),
-                Type = _eventType
-            };
+            var newEventDto = new CreateEventDto(_eventId, null, false, _title, _description,
+                _startingDate.ToString("dd/MM/yyyy"), _endingDate.ToString("dd/MM/yyyy"), null, null, _eventType, null);
 
             _eventRepository.Setup(x => x.GetEventByIdAsync(newEventDto.Id))
                 .ReturnsAsync(new Event() { Id = _eventId });

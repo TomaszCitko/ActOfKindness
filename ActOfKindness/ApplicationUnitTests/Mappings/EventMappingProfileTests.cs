@@ -85,12 +85,7 @@ namespace ApplicationUnitTests.Mappings
         [Test]
         public void CreateEventDto_To_Event_MappingIsValid()
         {
-            var source = new CreateEventDto()
-            {
-                StartingDate = "11/08/2023",
-                EndingDate = "12/08/2023"
-            };
-
+            var source = new CreateEventDto(new Guid(), null, false, null, null, "11/08/2023", "12/08/2023", null, null, EventType.HelpOffer, null);
             var destination = _mapper.Map<Event>(source);
 
             Assert.AreEqual(DateTime.ParseExact(source.StartingDate, "dd/MM/yyyy", CultureInfo.InvariantCulture), destination.StartingDate);
