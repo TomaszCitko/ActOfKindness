@@ -1,4 +1,6 @@
-﻿using Domain.Models;
+﻿
+
+using Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -67,7 +69,16 @@ namespace Persistence
                     Email = "maciekdmd90@gmail.com",
                     UserName = "Maciek",
                     EmailConfirmed = true,
-                    Location = "Katowice"
+                    Location = "Katowice",
+                    Photos = new List<Photo?>
+                    {
+                        new Photo
+                        {
+                            IsMain = true,
+                            Url = "https://res.cloudinary.com/do5wipffc/image/upload/v1692609948/770117_people_512x512_zsgurn.png",
+                            Id = "1111"
+                        }
+                    }
                 },
                 new()
                 {
@@ -75,7 +86,16 @@ namespace Persistence
                     Email = "shocked.frown@gmail.com",
                     UserName = "Aneta",
                     EmailConfirmed = true,
-                    Location = "Kraków"
+                    Location = "Kraków",
+                    Photos = new List<Photo?>
+                    {
+                        new Photo
+                        {
+                            IsMain = true,
+                            Url = "https://res.cloudinary.com/do5wipffc/image/upload/v1692609948/770117_people_512x512_zsgurn.png",
+                            Id = "1111"
+                        }
+                    }
                 },
                 new()
                 {
@@ -83,7 +103,16 @@ namespace Persistence
                     Email = "ripek33@gmail.com",
                     UserName = "Marcin",
                     EmailConfirmed = true,
-                    Location = "Lublin"
+                    Location = "Lublin",
+                    Photos = new List<Photo?>
+                    {
+                        new Photo
+                        {
+                            IsMain = true,
+                            Url = "https://res.cloudinary.com/do5wipffc/image/upload/v1692609948/770117_people_512x512_zsgurn.png",
+                            Id = "1111"
+                        }
+                    }
                 },
                 new()
                 {
@@ -91,7 +120,16 @@ namespace Persistence
                     Email = "tomek@gmail.com",
                     UserName = "Tomek",
                     EmailConfirmed = true,
-                    Location = "Białystok"
+                    Location = "Białystok",
+                    Photos = new List<Photo?>
+                    {
+                        new Photo
+                        {
+                            IsMain = true,
+                            Url = "https://res.cloudinary.com/do5wipffc/image/upload/v1692609948/770117_people_512x512_zsgurn.png",
+                            Id = "1111"
+                        }
+                    }
                 }
             };
 
@@ -110,7 +148,16 @@ namespace Persistence
                 Email = "romek@gmail.com",
                 UserName = "Roman",
                 EmailConfirmed = true,
-                Location = "Warszawa"
+                Location = "Warszawa",
+                Photos = new List<Photo?>
+                {
+                    new Photo
+                    {
+                        IsMain = true,
+                        Url = "https://res.cloudinary.com/do5wipffc/image/upload/v1692609948/770117_people_512x512_zsgurn.png",
+                        Id = "1111"
+                    }
+                }
             };
 
             await _userManager.CreateAsync(user, "ActOfKindness2023,");
@@ -133,7 +180,7 @@ namespace Persistence
                     EndingDate = new DateTime(2023, 09, 20),
                     Type = EventType.HelpNeeded,
                     IsOnline = false,
-                    Image = "",
+                    Image = "https://res.cloudinary.com/do5wipffc/image/upload/v1692607440/seedEvent01_i3c5y1.png",
                     IsModerated = true
                 },
                 new()
@@ -148,7 +195,7 @@ namespace Persistence
                     EndingDate = new DateTime(2023, 09, 28),
                     Type = EventType.HelpNeeded,
                     IsOnline = false,
-                    Image = "",
+                    Image = "https://res.cloudinary.com/do5wipffc/image/upload/v1692607505/seedEvent02_wlwgno.png",
                     IsModerated = true
                 },
                 new()
@@ -163,9 +210,18 @@ namespace Persistence
                     EndingDate = new DateTime(2023, 12, 14),
                     Type = EventType.HelpOffer,
                     IsOnline = true,
-                    Image = "",
+                    Image = "https://res.cloudinary.com/do5wipffc/image/upload/v1692607441/seedEvent03_t3qfam.png",
                     IsModerated = true
-                },
+                }
+            };
+
+            return moderatedEvents;
+        }
+
+        private List<Event> GetUnmoderatedEvents()
+        {
+            var events = new List<Event>()
+            {
                 new()
                 {
                     Id = new Guid(),
@@ -178,7 +234,7 @@ namespace Persistence
                     EndingDate = new DateTime(2023, 10, 12),
                     Type = EventType.HelpNeeded,
                     IsOnline = false,
-                    Image = "",
+                    Image = "https://res.cloudinary.com/do5wipffc/image/upload/v1692607441/seedEvent04_ctkyij.png",
                     IsModerated = true
                 },
                 new()
@@ -193,18 +249,9 @@ namespace Persistence
                     EndingDate = new DateTime(2023, 10, 21),
                     Type = EventType.HelpNeeded,
                     IsOnline = false,
-                    Image = "",
-                    IsModerated = true
+                    IsModerated = true,
+                    Image = "https://res.cloudinary.com/do5wipffc/image/upload/v1692607440/seedEvent05_dn1ygf.png"
                 },
-            };
-
-            return moderatedEvents;
-        }
-
-        private List<Event> GetUnmoderatedEvents()
-        {
-            var events = new List<Event>()
-            {
                 new()
                 {
                     Id = new Guid(),
@@ -217,7 +264,7 @@ namespace Persistence
                     EndingDate = new DateTime(2023, 09, 24),
                     Type = EventType.HelpNeeded,
                     IsOnline = false,
-                    Image = ""
+                    Image = "https://res.cloudinary.com/do5wipffc/image/upload/v1692607440/seedEvent06_wcl95w.png"
                 },
                 new()
                 {
@@ -231,7 +278,7 @@ namespace Persistence
                     EndingDate = new DateTime(2023, 11, 4),
                     Type = EventType.HelpOffer,
                     IsOnline = true,
-                    Image = ""
+                    Image = "https://res.cloudinary.com/do5wipffc/image/upload/v1692607440/seedEvent07_m89wau.png"
                 },
                 new()
                 {
@@ -245,7 +292,7 @@ namespace Persistence
                     EndingDate = new DateTime(2023, 11, 1),
                     Type = EventType.HelpNeeded,
                     IsOnline = false,
-                    Image = ""
+                    Image = "https://res.cloudinary.com/do5wipffc/image/upload/v1692607440/seedEvent08_ju7pdh.png"
                 },
                 new()
                 {
@@ -259,7 +306,7 @@ namespace Persistence
                     EndingDate = new DateTime(2023, 09, 17),
                     Type = EventType.HelpOffer,
                     IsOnline = false,
-                    Image = ""
+                    Image = "https://res.cloudinary.com/do5wipffc/image/upload/v1692607440/seedEvent09_e8pqze.png"
                 },
                 new()
                 {
@@ -273,7 +320,7 @@ namespace Persistence
                     EndingDate = new DateTime(2023, 09, 21),
                     Type = EventType.HelpNeeded,
                     IsOnline = false,
-                    Image = ""
+                    Image = "https://res.cloudinary.com/do5wipffc/image/upload/v1692607441/seedEvent10_ps44z6.png"
                 }
             };
 
