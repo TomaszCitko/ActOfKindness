@@ -240,7 +240,7 @@ namespace ApplicationUnitTests.Service
         {
             var eventCreatorId = Guid.NewGuid().ToString();
             const string userRole = "User";
-            var eventToUpdateDto = new EditEventDto() { };
+            var eventToUpdateDto = new EditEventDto(null, false, null, null, null, null, null, null, null);
             var eventToUpdate = new Event()
             {
                 Id = _eventId,
@@ -264,7 +264,7 @@ namespace ApplicationUnitTests.Service
         {
             var userId = Guid.NewGuid().ToString();
             const string userRole = "User";
-            var eventToUpdateDto = new EditEventDto() { };
+            var eventToUpdateDto = new EditEventDto(null, false, null, null, null, null, null, null, null);
 
             _eventRepository.Setup(x => x.GetEventByIdAsync(_eventId))
                 .ReturnsAsync((Event?)null);
@@ -282,7 +282,7 @@ namespace ApplicationUnitTests.Service
             var userId = Guid.NewGuid().ToString();
             var eventCreatorId = Guid.NewGuid().ToString();
             const string userRole = "User";
-            var eventToUpdateDto = new EditEventDto() { };
+            var eventToUpdateDto = new EditEventDto(null, false, null, null, null, null, null, null, null);
             var eventToUpdate = new Event()
             {
                 Id = _eventId,
@@ -305,7 +305,7 @@ namespace ApplicationUnitTests.Service
         {
             var userId = Guid.NewGuid().ToString();
             var eventCreatorId = Guid.NewGuid().ToString();
-            var eventToUpdateDto = new EditEventDto() { };
+            var eventToUpdateDto = new EditEventDto(null, false, null, null, null, null, null, null, null);
             var eventToUpdate = new Event()
             {
                 Id = _eventId,
