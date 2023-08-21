@@ -13,8 +13,8 @@ function RegisterForm() {
         password: Yup.string().required().matches(
             /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,40}$/,
             'Password must contain at least one uppercase letter, one lowercase letter, one number, and be between 7 and 40 characters long'),
-        location: Yup.string().required(),
         username: Yup.string().required(),
+        nickname: Yup.string().required(),
     });
 
     const [formError, setFormError] = useState<string | null>(null);
@@ -24,7 +24,7 @@ function RegisterForm() {
     }
 
     const formik = useFormik({
-        initialValues: {email: '', password:'', username: '', location: ''},
+        initialValues: {email: '', password:'', username: '', nickname: ''},
         validationSchema: validationSchema,
         onSubmit: async (values) => {
             try {
@@ -83,12 +83,12 @@ function RegisterForm() {
             <FormField>
                 <Input 
                     type='text'  
-                    placeholder='Location' 
-                    name='location' 
+                    placeholder='Display Name' 
+                    name='nickname' 
                     onChange={formik.handleChange} 
-                    value={formik.values.location}
+                    value={formik.values.nickname}
                 />
-                {formik.touched.location && formik.errors.location ? <Label basic color={'red'} content={formik.errors.location}/> : null}    
+                {formik.touched.nickname && formik.errors.nickname ? <Label basic color={'red'} content={formik.errors.nickname}/> : null}    
             </FormField>
 
             <Button fluid type='submit' content='Register' color='teal' />
