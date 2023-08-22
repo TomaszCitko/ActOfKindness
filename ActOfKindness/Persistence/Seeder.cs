@@ -181,7 +181,8 @@ namespace Persistence
                     Type = EventType.HelpNeeded,
                     IsOnline = false,
                     Image = "https://res.cloudinary.com/do5wipffc/image/upload/v1692607440/seedEvent01_i3c5y1.png",
-                    IsModerated = true
+                    IsModerated = true,
+                    IsFinished = true,
                 },
                 new()
                 {
@@ -235,7 +236,8 @@ namespace Persistence
                     Type = EventType.HelpNeeded,
                     IsOnline = false,
                     Image = "https://res.cloudinary.com/do5wipffc/image/upload/v1692607441/seedEvent04_ctkyij.png",
-                    IsModerated = true
+                    IsModerated = true,
+                    IsFinished = true,
                 },
                 new()
                 {
