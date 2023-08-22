@@ -50,8 +50,9 @@ function LoginForm() {
                     value={formik.values.password}
                 />
             </FormField>
-            <Button fluid type='submit' content='Login' positive />
-            <Button onClick={store.modalStore.closeModal} fluid  content='Cancel' negative />
+
+            <Button fluid type='submit' content='Login' color='orange'/>
+            <Button onClick={store.modalStore.closeModal} fluid content='Cancel' negative />
         </SemanticUIForm>
     );
 }

@@ -9,13 +9,30 @@ function RegisterForm() {
     const {accountStore}= useStore()
 
     const validationSchema = Yup.object({
-        email: Yup.string().email().required(),
-        password: Yup.string().required().matches(
-            /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,40}$/,
-            'Password must contain at least one uppercase letter, one lowercase letter, one number, and be between 7 and 40 characters long'),
-        location: Yup.string().required(),
-        username: Yup.string().required(),
-    });
+        email: Yup.string().email().required('Email is a required field'),
+        password: Yup.string()
+            .required('Password is a required field')
+            .matches(
+                /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{7,40}$/,
+                'Password must contain at least one uppercase and lowercase letter, one number, one special character, and be between 7 and 40 characters long'
+            ),
+        username: Yup.string()
+            .required('Username is a required field')
+            .min(3, 'Username cannot be shorter than 3 characters')
+            .max(30, 'Username cannot be longer than 30 characters')
+            .matches(
+                /^[A-Za-z0-9@+._-]+$/,
+                'Username can only consist of uppercase and lowercase letters, numbers, and the characters @ + . _ -'
+            ),
+        nickname: Yup.string()
+            .required('Display Name is a required field')
+            .min(3, 'Display Name cannot be shorter than 3 characters')
+            .max(30, 'Display Name cannot be longer than 30 characters')
+            .matches(
+                /\S/,
+                'Display Name cannot consist of only whitespace characters'
+            ),
+    });    
 
     const [formError, setFormError] = useState<string | null>(null);
 
@@ -24,7 +41,7 @@ function RegisterForm() {
     }
 
     const formik = useFormik({
-        initialValues: {email: '', password:'', username: '', location: ''},
+        initialValues: {email: '', password:'', username: '', nickname: ''},
         validationSchema: validationSchema,
         onSubmit: async (values) => {
             try {
@@ -83,15 +100,15 @@ function RegisterForm() {
             <FormField>
                 <Input 
                     type='text'  
-                    placeholder='Location' 
-                    name='location' 
+                    placeholder='Display Name' 
+                    name='nickname' 
                     onChange={formik.handleChange} 
-                    value={formik.values.location}
+                    value={formik.values.nickname}
                 />
-                {formik.touched.location && formik.errors.location ? <Label basic color={'red'} content={formik.errors.location}/> : null}    
+                {formik.touched.nickname && formik.errors.nickname ? <Label basic color={'red'} content={formik.errors.nickname}/> : null}    
             </FormField>
 
-            <Button fluid type='submit' content='Register' positive />
+            <Button fluid type='submit' content='Register' color='teal' />
             <Button onClick={store.modalStore.closeModal} fluid  content='Cancel' negative />
         </SemanticUIForm>
     );

@@ -6,6 +6,8 @@ import {store, useStore} from "../../app/stores/store";
 import LoginForm from "../users/LoginForm";
 import {observer} from "mobx-react-lite";
 import RegisterForm from "../users/RegisterForm";
+import LoginFooter from '../users/LoginFooter';
+import RegisterFooter from '../users/RegisterFooter';
 
 function Navbar() {
     const {accountStore} = useStore()
@@ -22,7 +24,7 @@ function Navbar() {
                     if (accountStore.isLoggedIn) {
                         window.location.href = "/createEvent";
                     } else {
-                        store.modalStore.openModal(<LoginForm/>, "Login to create event");
+                        store.modalStore.openModal(<LoginForm/>, "Login to create event", <LoginFooter/>);
                     }
                 }}
             >
@@ -46,13 +48,13 @@ function Navbar() {
 
             ): ( 
                 <Menu.Menu position='right'>
-                    <Menu.Item onClick={()=>store.modalStore.openModal(<LoginForm/>, "Login to help others")} >
+                    <Menu.Item onClick={()=>store.modalStore.openModal(<LoginForm/>, "Login to help others", <LoginFooter/>)} >
                         {accountStore.isLoggedIn ? (
                             `Welcome ${accountStore.user?.username}`
                         ):"Login"} 
                     </Menu.Item>
 
-                    <Menu.Item onClick={()=>store.modalStore.openModal(<RegisterForm/>, "Register to help others")} >
+                    <Menu.Item onClick={()=>store.modalStore.openModal(<RegisterForm/>, "Register to help others", <RegisterFooter/>)} >
                         {accountStore.isLoggedIn ? (
                             `Welcome ${accountStore.user?.username}`
                         ):"Register"} 
