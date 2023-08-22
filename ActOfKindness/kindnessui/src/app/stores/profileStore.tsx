@@ -11,6 +11,7 @@ export default class ProfileStore {
     uploading= false;
     loading= false;
     success= true;
+    numberOfPhotos = 0;
 
 
     constructor() {
