@@ -23,6 +23,7 @@ public class EventRepository : IEventRepository
             .OrderBy(e => e.StartingDate)
             .Skip(pageSize * (pageNumber - 1))
             .Take(pageSize)
+            .AsNoTracking()
             .ToListAsync();
     }    
     
@@ -32,6 +33,7 @@ public class EventRepository : IEventRepository
             .Include(e => e.CreatedBy)
             .Where(e => e.CreatedBy.UserName == username)
             .OrderBy(e => e.StartingDate)
+            .AsNoTracking()
             .ToListAsync();
     }
 
@@ -47,6 +49,7 @@ public class EventRepository : IEventRepository
             .Include(e => e.CreatedBy)
             .Where(e => !e.IsModerated)
             .OrderBy(e => e.CreatedTime)
+            .AsNoTracking()
             .ToListAsync();
     }
 
