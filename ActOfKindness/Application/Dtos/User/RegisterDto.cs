@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Security.AccessControl;
 
 namespace Application.Dtos.User;
 
@@ -14,5 +13,5 @@ public class RegisterDto
     [EmailAddress] 
     public string Email { get; set; }
     [Required]
-    public string Location { get; set; }
+    public string Nickname { get; set; }
 }

@@ -1,17 +1,30 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Button, Divider, Grid, Header, Image, Item, Reveal, Segment, Statistic} from "semantic-ui-react";
 import {userProfile} from "../../app/models/Profiles/Profile";
 import {observer} from "mobx-react-lite";
+import { useStore } from '../../app/stores/store';
 
 interface Props {
     profile: userProfile
 }
 
 function ProfileHeader({profile}: Props) {
+    const {profileStore} = useStore()
+    const {myEvents} = profileStore
+    useEffect(() => {
+            try {
+                if (profile) profileStore.loadUserEvents(profile?.username)
+            }
+            catch(e) {
+                console.log(e)
+            }
+        }
+        ,[profileStore] );
+
     return (
         <Segment className={"profilePage"}>
             <Grid>
-                <Grid.Column width={12}>
+                <Grid.Column width={10}>
                     <Item.Group>
                         <Item>
                             <Item.Image avatar size={'tiny'} src={profile.mainPhotoUrl}/>
@@ -21,10 +34,10 @@ function ProfileHeader({profile}: Props) {
                         </Item>
                     </Item.Group>
                 </Grid.Column>
-                <Grid.Column width={4}>
+                <Grid.Column width={6}>
                     <Statistic.Group widths={2}>
-                        <Statistic label={'Helped'} value={5}/>
-                        <Statistic label={'Offered'} value={5}/>
+                        <Statistic label={'Created Events'} value={myEvents.length }/>
+                        <Statistic label={'Number of Photos'} value={profile.photos ? profile.photos.length : "0"}/>
                     </Statistic.Group>
                     <Divider/>
                     <Reveal animated={'move'}>

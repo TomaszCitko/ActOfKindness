@@ -233,6 +233,33 @@ code {
   background-size: cover !important;
 }
 
+.ui.modal {
+  background: #dcdcdc !important;
+}
+
+.ui.modal > .content {
+  background: #dcdcdc !important;
+}
+
+.ui.modal > .header {
+  background: #dcdcdc !important;
+}
+
+.ui.modal > .actions {
+  background: #dcdcdc !important;
+  text-align: center !important;
+}
+
+.smallFooterText {
+  margin-bottom: 10px;
+  font-size:smaller;
+}
+
+.ui.negative.button {
+  background: #a7a3a3 !important;
+  margin-top: 5px;
+}
+
 /*
 NAVBAR
 */

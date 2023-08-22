@@ -7,6 +7,7 @@ import { format } from 'date-fns';
 import Swal from 'sweetalert2';
 import { useStore, store } from '../../../app/stores/store';
 import LoginForm from '../../users/LoginForm';
+import LoginFooter from '../../users/LoginFooter';
 
 interface Props {
     myEvent: MyEvent
@@ -199,7 +200,7 @@ function EventDetails({myEvent}:Props) {
                                     if (accountStore.isLoggedIn) {
                                         eventStore.joinEvent(event.id);
                                     } else {
-                                        store.modalStore.openModal(<LoginForm />, "Login to join event");
+                                        store.modalStore.openModal(<LoginForm />, "Login to join event", <LoginFooter/>);
                                     }
                                 }}
                                 content={"Join Event!"}

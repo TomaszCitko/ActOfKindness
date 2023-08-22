@@ -6,6 +6,7 @@ import PhotoUploadWidget from "../../app/common/PhotoUploadWidget";
 import {useStore} from "../../app/stores/store";
 import {Simulate} from "react-dom/test-utils";
 import load = Simulate.load;
+import AccountStore from "../../app/stores/accountStore";
 
 interface Props {
     profile: userProfile |null
@@ -15,6 +16,7 @@ function ProfilePhotos({profile}: Props) {
     const {profileStore : {
         uploadPhoto,uploading,loading,setMainPhoto
     }} = useStore()
+    const {accountStore } = useStore()
     const [target,setTarget]=useState('')
     function handleUploadPhoto(file: Blob) {
         uploadPhoto(file)
@@ -26,7 +28,8 @@ function ProfilePhotos({profile}: Props) {
     return (
         <Tab.Pane className={"profilePhotos"}>
             <Header icon={'image'} content={'Photos'}></Header>
-            <PhotoUploadWidget isCreateEvent={false} uploadPhoto={handleUploadPhoto} loading={uploading} />
+            {profile?.username === accountStore.user?.username ? <PhotoUploadWidget isCreateEvent={false} uploadPhoto={handleUploadPhoto} loading={uploading} /> : "" }
+            
             <Card.Group itemsPerRow={5}>
                 {profile?.photos?.map(photo=>(
                     <Card className={"profilePhotoBorders"} key={photo.id}>

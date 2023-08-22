@@ -12,19 +12,11 @@ interface Props {
 function ProfileCreatedEvents({profile}: Props) {
     const {eventStore,profileStore} = useStore()
     const {myEvents} = profileStore
-    useEffect(() => {
-        try {
-            if (profile) profileStore.loadUserEvents(profile?.username)
-        }
-        catch(e) {
-            console.log(e)
-        }
-        }
-    ,[profileStore] );
+
 
     return (
         <>
-            {myEvents.map(myEvent => (
+            {myEvents.filter(x=>x.done === "true").map(myEvent => (
                 <EventListItem  key={myEvent.id} event={myEvent} />
             ))}
         </>
