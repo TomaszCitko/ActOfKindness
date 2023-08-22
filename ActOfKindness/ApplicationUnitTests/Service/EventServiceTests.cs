@@ -494,7 +494,7 @@ namespace ApplicationUnitTests.Service
             var eventFromRepository = new Event()
             {
                 Id = _eventId,
-                IsDone = true,
+                IsFinished = true,
                 Participants = new List<EventUser>()
             };
 
@@ -653,7 +653,7 @@ namespace ApplicationUnitTests.Service
             var eventFromRepository = new Event()
             {
                 Id = _eventId,
-                IsDone = true,
+                IsFinished = true,
                 Participants = new List<EventUser>()
             };
 

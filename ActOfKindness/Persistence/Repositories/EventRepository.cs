@@ -19,7 +19,7 @@ public class EventRepository : IEventRepository
     {
         return await _context.Events
             .Include(e => e.CreatedBy)
-            .Where(e => e.IsModerated && !e.IsDone)
+            .Where(e => e.IsModerated && !e.IsFinished)
             .OrderBy(e => e.StartingDate)
             .Skip(pageSize * (pageNumber - 1))
             .Take(pageSize)
@@ -38,7 +38,7 @@ public class EventRepository : IEventRepository
     public async Task<int> GetQuantityOfModeratedEventAsync()
     {
         return await _context.Events
-            .CountAsync(e => e.IsModerated && !e.IsDone);
+            .CountAsync(e => e.IsModerated && !e.IsFinished);
     }
 
     public async Task<List<Event>> GetUnmoderatedEventsAsync()
@@ -119,7 +119,7 @@ public class EventRepository : IEventRepository
     {
         var filteredEvents = await _context.Events
             .Include(e => e.CreatedBy)
-            .Where(e => e.IsModerated && !e.IsDone)
+            .Where(e => e.IsModerated && !e.IsFinished)
             .OrderBy(e => e.StartingDate)
             .ToListAsync();
 
@@ -153,8 +153,8 @@ public class EventRepository : IEventRepository
 
     public async Task ArchiveOldEventsAsync()
     {
-        await _context.Events.Where(e => !e.IsDone && e.EndingDate < DateTime.Now)
+        await _context.Events.Where(e => !e.IsFinished && e.EndingDate < DateTime.Now)
             .ExecuteUpdateAsync(prop =>
-                prop.SetProperty(e => e.IsDone, true));
+                prop.SetProperty(e => e.IsFinished, true));
     }
 }

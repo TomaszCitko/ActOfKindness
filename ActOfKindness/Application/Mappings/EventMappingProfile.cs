@@ -33,7 +33,7 @@ namespace Application.Mappings
                 .ForMember(dest => dest.EndingDate, opt => opt.MapFrom(src => DateTime.ParseExact(src.EndingDate, "dd/MM/yyyy", CultureInfo.InvariantCulture)))
                 .ForMember(dest => dest.UserId, opt => opt.Ignore())
                 .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
-                .ForMember(dest => dest.IsDone, opt => opt.Ignore())
+                .ForMember(dest => dest.IsFinished, opt => opt.Ignore())
                 .ForMember(dest => dest.CreatedTime, opt => opt.Ignore())
                 .ForMember(dest => dest.IsModerated, opt => opt.Ignore())
                 .ForMember(dest => dest.Participants, opt => opt.Ignore())

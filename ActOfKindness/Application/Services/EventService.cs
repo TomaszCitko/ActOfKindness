@@ -217,7 +217,7 @@ namespace Application.Services
                     userId,
                     _contextService.GetUserRole);
 
-            if (eventToJoin.IsDone)
+            if (eventToJoin.IsFinished)
                 throw new BadRequestException($"Cannot join to event ({eventId}) because it has ended",
                     _contextService.Method,
                     userId,
@@ -263,7 +263,7 @@ namespace Application.Services
                     userId,
                     _contextService.GetUserRole);
 
-            if (eventToLeave.IsDone)
+            if (eventToLeave.IsFinished)
                 throw new BadRequestException($"Cannot leave event ({eventId}) because it has ended",
                     _contextService.Method,
                     userId,

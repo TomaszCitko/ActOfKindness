@@ -5,5 +5,5 @@ namespace Application.Dtos.Event
 {
     public record DetailsEventDto(Guid Id, string UserId, UserEventDto CreatedBy, DateTime CreatedTime,
         string Localization, bool IsOnline, string Title, string Description, DateTime StartingDate,
-        DateTime EndingDate, double Latitude, double Longitude, EventType Type, string Image);
+        DateTime EndingDate, bool IsFinished, double Latitude, double Longitude, EventType Type, string Image);
 }
