@@ -9,13 +9,28 @@ function RegisterForm() {
     const {accountStore}= useStore()
 
     const validationSchema = Yup.object({
-        email: Yup.string().email().required(),
-        password: Yup.string().required().matches(
-            /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,40}$/,
-            'Password must contain at least one uppercase letter, one lowercase letter, one number, and be between 7 and 40 characters long'),
-        username: Yup.string().required(),
-        nickname: Yup.string().required(),
-    });
+        email: Yup.string().email().required('Email is a required field'),
+        password: Yup.string()
+            .required('Password is a required field')
+            .matches(
+                /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{7,40}$/,
+                'Password must contain at least one uppercase and lowercase letter, one number, one special character, and be between 7 and 40 characters long'
+            ),
+        username: Yup.string()
+            .required('Username is a required field')
+            .max(30, 'Username cannot be longer than 30 characters')
+            .matches(
+                /^[A-Za-z0-9@+._-]+$/,
+                'Username can only consist of uppercase and lowercase letters, numbers, and the characters @ + . _ -'
+            ),
+        nickname: Yup.string()
+            .required('Display Name is a required field')
+            .max(30, 'Display Name cannot be longer than 30 characters')
+            .matches(
+                /\S/,
+                'Display Name cannot consist of only whitespace characters'
+            ),
+    });    
 
     const [formError, setFormError] = useState<string | null>(null);
 
