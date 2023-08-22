@@ -18,6 +18,7 @@ function RegisterForm() {
             ),
         username: Yup.string()
             .required('Username is a required field')
+            .min(3, 'Username cannot be shorter than 3 characters')
             .max(30, 'Username cannot be longer than 30 characters')
             .matches(
                 /^[A-Za-z0-9@+._-]+$/,
@@ -25,6 +26,7 @@ function RegisterForm() {
             ),
         nickname: Yup.string()
             .required('Display Name is a required field')
+            .min(3, 'Display Name cannot be shorter than 3 characters')
             .max(30, 'Display Name cannot be longer than 30 characters')
             .matches(
                 /\S/,
