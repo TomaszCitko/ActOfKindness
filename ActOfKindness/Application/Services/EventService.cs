@@ -193,12 +193,7 @@ namespace Application.Services
             var listOfParticipants = new List<ParticipantDto>();
             foreach (var newEventParticipant in newEvent.Participants)
             {
-                var newParticipant = new ParticipantDto
-                {
-                    UserName = newEventParticipant.User.UserName,
-                    Location = newEventParticipant.User.Location,
-                    Avatar = "https://api.multiavatar.com/Binx Bond.png"
-                };
+                var newParticipant = new ParticipantDto(newEventParticipant.User.UserName, newEventParticipant.User.Location, "https://api.multiavatar.com/Binx Bond.png");
                 listOfParticipants.Add(newParticipant);
             }
             return listOfParticipants;
