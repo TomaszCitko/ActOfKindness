@@ -65,15 +65,9 @@ public class CommentRepository : ICommentRepository
     public CommentDto CreateCommentDto(Comment comment)
     {
         if (comment != null)
-            return new CommentDto
-            {
-                Avatar = "https://api.multiavatar.com/Binx Bond.png",
-                Body = comment.Body,
-                CreatedAt = comment.CreatedAt,
-                DisplayName = comment.Author.Nickname,
-                Username = comment.Author.UserName,
-                Id = comment.Id,
-            };
+            return new CommentDto(comment.Id, comment.CreatedAt, comment.Body, comment.Author.UserName,
+                comment.Author.Nickname, "https://api.multiavatar.com/Binx Bond.png");
+
         return null;
     }
 

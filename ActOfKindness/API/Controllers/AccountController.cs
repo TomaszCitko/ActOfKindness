@@ -29,10 +29,10 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto login)
         {
-            var user = await _userManager.FindByEmailAsync(login.email);
+            var user = await _userManager.FindByEmailAsync(login.Email);
             if (user == null) return Unauthorized();
 
-            var result = await _userManager.CheckPasswordAsync(user, login.password);
+            var result = await _userManager.CheckPasswordAsync(user, login.Password);
             if (result)
             {
                 // sending to frontend our user with token for future authorization

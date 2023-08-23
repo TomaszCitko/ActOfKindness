@@ -47,7 +47,7 @@ namespace PersistenceUnitTests.Repositories
                 .RuleFor(e => e.Description, f => f.Lorem.Sentences(5))
                 .RuleFor(e => e.StartingDate, f => f.Date.Recent())
                 .RuleFor(e => e.EndingDate, f => f.Date.Soon())
-                .RuleFor(e => e.IsDone, f => f.Random.Bool())
+                .RuleFor(e => e.IsFinished, f => f.Random.Bool())
                 .RuleFor(e => e.IsModerated, f => f.Random.Bool())
                 .RuleFor(e => e.Type, f => f.PickRandom<EventType>())
                 .RuleFor(e => e.Image, f => f.Image.PlaceImgUrl())
@@ -65,7 +65,7 @@ namespace PersistenceUnitTests.Repositories
         {
             var result = await _eventRepository.GetModeratedEventsAsync(PageNumber, PageSize);
 
-            Assert.IsTrue(result.All(e => e.IsModerated && !e.IsDone));
+            Assert.IsTrue(result.All(e => e.IsModerated && !e.IsFinished));
             Assert.LessOrEqual(result.Count, PageSize);
         }
 

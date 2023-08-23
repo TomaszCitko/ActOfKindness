@@ -12,7 +12,7 @@
         public string Description { get; set; }
         public DateTime StartingDate { get; set; }
         public DateTime EndingDate { get; set; }
-        public bool IsDone { get; set; }
+        public bool IsFinished { get; set; }
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
         public bool IsModerated { get; set; }

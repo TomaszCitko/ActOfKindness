@@ -1,11 +1,3 @@
 ﻿namespace Application.Dtos.Event;
 
-public class CommentDto
-{
-    public int Id { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public string Body { get; set; }
-    public string? Username { get; set; }
-    public string? DisplayName { get; set; }
-    public string Avatar { get; set; }
-}
+public record CommentDto(int Id, DateTime CreatedAt, string Body, string? Username, string? DisplayName, string Avatar);
