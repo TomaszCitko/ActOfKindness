@@ -12,12 +12,14 @@ interface Props {
 }
 
 function ProfileContent({profile}: Props) {
+    const {accountStore } = useStore()
+
     const details = [
-        // {menuItem: 'About',render: ()=> <Tab.Pane className={"profilePage"}>About Content </Tab.Pane>},
         {menuItem: 'Photos',render: ()=> <ProfilePhotos profile={profile}/>},
         {menuItem: 'Current Events',render: ()=> <Tab.Pane className={"profileEventsPage"}><ProfileCurrentEvents profile={profile}/> </Tab.Pane>},
         {menuItem: 'Finished Events',render: ()=> <Tab.Pane className={"profileEventsPage"}><ProfileFinishedEvents profile={profile}/> </Tab.Pane>},
-        {menuItem: 'Profile Details',render: ()=> <Tab.Pane className={"profilePage"}><ProfileBio/>  </Tab.Pane>},
+        profile && profile.username === accountStore.user?.username ?
+            {menuItem: 'Update Profile',render: ()=> <Tab.Pane className={"profilePage"}><ProfileBio/></Tab.Pane>} : {},
         // {menuItem: 'Received Help',render: ()=> <Tab.Pane className={"profilePage"}>Received Help  </Tab.Pane>},
     ]
     return (
