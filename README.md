@@ -12,7 +12,7 @@
 <li>Integrated databases (for users and events)</li>
 <li>Easy picture upload.</li>
 </ul>
-<br><br><br>
+<br><br>
 <img align="right" src="https://github.com/CodecoolGlobal/el-proyecte-grande-sprint-1-csharp-Tomek-Boomer/blob/development/ActOfKindness/kindnessui/src/images/readme/READMEpage1.png" />
 <h3> Used technologies </h3>
 <ul>
@@ -25,7 +25,8 @@
 <li>Semantic UI</li>
 <li>Microsoft SQL</li>
 <li>Git/GitHub</li>
-</ul><br><br><br>
+</ul>
+<br><br>
 <img align="left" src="https://github.com/CodecoolGlobal/el-proyecte-grande-sprint-1-csharp-Tomek-Boomer/blob/development/ActOfKindness/kindnessui/src/images/readme/READMEpage2.png" />
 <h3> Project team </h3>
 <ul>
