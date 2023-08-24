@@ -1,4 +1,4 @@
-import {Photo, userProfile} from "../models/Profiles/Profile";
+import {Photo, updateProfile, userProfile} from "../models/Profiles/Profile";
 import {makeAutoObservable, runInAction} from "mobx";
 import agent from "../api/agent";
 import {store} from "./store";
@@ -24,7 +24,6 @@ export default class ProfileStore {
             const allEventsResponse = await agent.Events.getAllUserEvents(username)
             allEventsResponse.forEach((event) => {
                 this.saveEvent(event);
-                console.log(event);
             });
         }
         catch (error) {
@@ -43,10 +42,29 @@ export default class ProfileStore {
         try {
             const profile = await agent.Profiles.getProfile(username);
             runInAction(()=>{
-                console.log(profile)
                 this.profile = profile
                 this.loadingProfile = false
             })
+        }
+        catch (e) {
+            console.log(e)
+            runInAction(()=>{
+                this.loadingProfile = false
+            })
+        }
+    }
+    
+    updateProfile = async(profileToUpdate:updateProfile)=>{
+        this.loadingProfile = true;
+        try {
+            if (this.profile)  {
+                const updateresult = await agent.Profiles.updateProfile(this.profile.username,profileToUpdate)
+                runInAction(()=>{
+                    this.profile = updateresult
+                    this.loadingProfile = false
+
+                })
+            }
         }
         catch (e) {
             console.log(e)

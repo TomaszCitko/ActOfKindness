@@ -40,6 +40,7 @@ export default class AccountStore{
                 this.isModerator = user.role === 'Moderator'
                 console.log(user)
             })
+            await router.navigate(0)
             await router.navigate('/events')
             store.modalStore.closeModal()
         }

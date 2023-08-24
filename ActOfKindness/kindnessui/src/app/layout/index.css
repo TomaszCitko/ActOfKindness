@@ -284,6 +284,11 @@ NAVBAR
   color:#c0bdbd !important;
 }
 
+.ui.menu .ui.dropdown .menu > .item:hover {
+  background-color: #1a1a1a;
+  color:#61dafb !important;
+}
+
 .ui.items > .item > .image > img {
   max-height: 281.25px;
   max-width: 500px;
