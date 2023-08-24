@@ -30,7 +30,7 @@ function EventDetails({myEvent}:Props) {
         description: 'Something went wrong or just loading',
         startingDate: '',
         endingDate: '',
-        done: '',
+        isFinished: false,
         latitude: '',
         longitude: '',
         moderated: '',

@@ -14,7 +14,7 @@ export interface MyEvent {
     description: string
     startingDate: string
     endingDate: string
-    done: string
+    isFinished: boolean
     latitude: string
     longitude: string
     moderated: string

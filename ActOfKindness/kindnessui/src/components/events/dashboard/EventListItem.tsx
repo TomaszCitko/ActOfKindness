@@ -40,11 +40,7 @@ function EventListItem({event}: Props) {
             <Segment clearing className={"eventDashboard"} >
                 <Grid>
                     <Grid.Column width={5}>
-                        {/*<span>*/}
-                        {/*<Icon name='calendar alternate outline' style={{marginBottom: 10}} size='large' color='teal'/>*/}
-                        {/*    {event.startingDate && format(new Date(event.startingDate), "dd/MM/yyyy")} - {event.endingDate && format(new Date(event.endingDate), "dd/MM/yyyy")}*/}
-                        {/*</span>*/}
-                        <CountdownTimer finished={event.done} auctionEnd={event.endingDate}/>
+                        <CountdownTimer finished={event.isFinished} auctionEnd={event.endingDate}/>
                     </Grid.Column>
 
                     <Grid.Column width={3}>

@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react';
-import {Button, Divider, Grid, Header, Image, Item, Reveal, Segment, Statistic} from "semantic-ui-react";
+import {Button, Divider, Grid, Header, Icon, Image, Item, Label, Reveal, Segment, Statistic} from "semantic-ui-react";
 import {userProfile} from "../../app/models/Profiles/Profile";
 import {observer} from "mobx-react-lite";
 import { useStore } from '../../app/stores/store';
+import {NavLink} from "react-router-dom";
 
 interface Props {
     profile: userProfile
@@ -19,19 +20,23 @@ function ProfileHeader({profile}: Props) {
                 console.log(e)
             }
         }
-        ,[profileStore] );
+        ,[profileStore,profile] );
 
     return (
         <Segment className={"profilePage"}>
             <Grid>
                 <Grid.Column width={10}>
                     <Item.Group>
-                        <Item>
-                            <Item.Image avatar size={'tiny'} src={profile.mainPhotoUrl}/>
-                            <Item.Content verticalAlign={'middle'}>
-                                <Header as={'h1'} content={profile.username}/>
-                            </Item.Content>
-                        </Item>
+                    <Item>
+                        <Item.Image avatar size={'tiny'} src={profile.mainPhotoUrl}/>
+                        <Item.Content>
+                            <Header as={'h1'} content={profile.nickname}/>
+                            <Item.Meta>
+                                <p style={{fontSize: 15}}>      <Icon name={'location arrow'}/> {profile.location}</p>
+                            </Item.Meta>
+                            <Item.Description><p style={{fontSize: 20}}>Bio: {profile.bio}</p></Item.Description>
+                        </Item.Content>
+                    </Item>
                     </Item.Group>
                 </Grid.Column>
                 <Grid.Column width={6}>
@@ -44,15 +49,14 @@ function ProfileHeader({profile}: Props) {
                         <Reveal.Content visible style={{width:'100%'}}>
                             <Button color={'teal'}
                                     fluid
-                                    content={'Help'}></Button>
+                                    content={'Profile Details'}></Button>
                         </Reveal.Content>
-
                         <Reveal.Content hidden style={{width:'100%'}}>
                             <Button
-                                color={true? 'red' : 'green'}
+                                color={true? 'green' : 'green'}
                                 fluid
-                                content={'Help'}>
-
+                                content={'Click to update your profile details '}
+                                as={NavLink}>
                             </Button>
                         </Reveal.Content>
                     </Reveal>

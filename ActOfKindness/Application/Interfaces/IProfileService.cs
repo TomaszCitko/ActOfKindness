@@ -6,4 +6,5 @@ namespace Application.Interfaces;
 public interface IProfileService
 {
     Task<ProfileDto?> GetProfileDtoAsync(string username);
+    Task<ProfileDto?> UpdateProfileDtoAsync(string username,ProfileUpdateDto updateDto);
 }
