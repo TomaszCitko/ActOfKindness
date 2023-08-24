@@ -369,3 +369,20 @@ border:none!important;
   box-shadow: none!important;
   border: none!important;
 }
+
+.ui.card {
+  background-color: #1b1c1d;
+  box-shadow: none !important;
+}
+
+.ui.card > .content > .header {
+  color: #c0bdbd;
+}
+
+.ui.card > .content > .meta {
+  color: #c0bdbd;
+}
+
+.ui.card > .content > .description {
+  color: #c0bdbd;
+}
