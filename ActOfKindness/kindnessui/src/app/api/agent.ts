@@ -7,7 +7,7 @@ import {RegisterForm} from "../models/Users/registerForm";
 import {store} from "../stores/store";
 import {Participants} from "../models/Users/participants";
 import { MyEventFilter } from '../models/Events/myEventFilter';
-import {Photo, userProfile} from "../models/Profiles/Profile";
+import {Photo, updateProfile, userProfile} from "../models/Profiles/Profile";
 import { PaginatedEvents } from '../models/Events/paginatedEvents';
 
 const sleep = (delay:number)=>{
@@ -76,6 +76,7 @@ const Profiles = {
             headers: {'Content-Type': 'multipart/form-data'}
         })
     },
+    updateProfile: (username:string,profileToUpdate: updateProfile)=> requests.put<userProfile>(`profile/${username}`,profileToUpdate),
     setMainPhoto: (id:string)=> requests.post(`/photo/${id}/setMain`,{}),
     deletePhoto: (id:string)=> requests.del(`/photo/${id}`),
     createFormUpload:(file:Blob)=>{

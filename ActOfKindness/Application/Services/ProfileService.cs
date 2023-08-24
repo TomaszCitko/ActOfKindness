@@ -29,4 +29,20 @@ public class ProfileService : IProfileService
         return user is not null ? _mapper.Map<ProfileDto>(user) : null;
 
     }
+
+    public async Task<ProfileDto?> UpdateProfileDtoAsync(string username, ProfileUpdateDto updateDto)
+    {
+        var user = await _userManager.Users
+            .Include(x=>x.Photos)
+            .FirstOrDefaultAsync(u=>u.UserName == username);
+        if (user == null) return null;
+        
+        if (updateDto.Bio.Length >3) user.Bio = updateDto.Bio;
+        if (updateDto.Location.Length >3) user.Location = updateDto.Location;
+        if (updateDto.Nickname.Length >3) user.Nickname = updateDto.Nickname;
+        
+        IdentityResult result = await _userManager.UpdateAsync(user);
+
+        return  _mapper.Map<ProfileDto>(user);
+    }
 }
