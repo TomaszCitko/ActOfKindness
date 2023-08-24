@@ -19,8 +19,8 @@
 <li>C#</li>
 <li>.NET</li>
 <li>React</li>
-<li>TypeScript/</li>
-<li>MOBX//</li>
+<li>TypeScript</li>
+<li>MOBX</li>
 <li>Axios</li>
 <li>Semantic UI</li>
 <li>Microsoft SQL</li>
@@ -28,6 +28,8 @@
 </ul>
 <br><br>
 <img align="left" src="https://github.com/CodecoolGlobal/el-proyecte-grande-sprint-1-csharp-Tomek-Boomer/blob/development/ActOfKindness/kindnessui/src/images/readme/READMEpage2.png" />
+<br>
+<br>
 <h3> Project team </h3>
 <ul>
 <li><a href="https://github.com/aneta-k">Aneta Kuśnierz</a></li>
@@ -35,6 +37,6 @@
 <li><a href="https://github.com/MaciejTrebacz">Maciej Trębacz</a></li>
 <li><a href="https://github.com/TomaszCitko">Tomasz Citko</a></li>
 </ul>
-<br><br><br><br>
+<br><br>
 <h3>How to run?</h3>
 Feel free to download docker image file and run it with Docker. If you need more details, please check out <a href="https://docs.docker.com/language/nodejs/run-containers/"> Docker official page</a>
