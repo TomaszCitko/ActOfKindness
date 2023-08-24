@@ -8,9 +8,18 @@ public class EditEventDtoValidator : AbstractValidator<EditEventDto>
 {
     public EditEventDtoValidator()
     {
-        RuleFor(x => x.Localization).Length(0, 30);
-        RuleFor(x => x.Title).Length(0, 80);
-        RuleFor(x => x.Description).Length(0, 2000);
+        RuleFor(x => x.Localization)
+            .NotEmpty().WithMessage("Localization is a required field")
+            .Length(1, 30).WithMessage("Localization must be between 1 and 30 characters long");
+
+        RuleFor(x => x.Title)
+            .NotEmpty().WithMessage("Title is a required field")
+            .Length(1, 80).WithMessage("Title must be between 1 and 80 characters long");
+
+        RuleFor(x => x.Description)
+            .NotEmpty().WithMessage("Description is a required field")
+            .Length(1, 2000).WithMessage("Description must be between 1 and 2000 characters long");
+
         RuleFor(x => x.StartingDate)
             .Must(DateHelper.BeAValidDate)
             .WithMessage("Invalid 'StartingDate' format. Should be 'dd/MM/yyyy'");
