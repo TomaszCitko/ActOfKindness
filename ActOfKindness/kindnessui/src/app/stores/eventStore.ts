@@ -117,8 +117,21 @@ export default class EventStore {
         }
         catch (e) {
             console.log(e);
+            
             if ((e as any).response.data !== "") {
-                toast.error(`Event creation failed: ${(e as any).response.data}.`);
+                const responseData = (e as any).response.data;
+
+                if (typeof responseData === "string") {
+                    toast.error(`Event creation failed: ${responseData}.`);
+                } else if (responseData.errors) {
+                    const errorMessages = Object.values(responseData.errors)
+                    .flat()
+                    .join(', ');
+
+                    toast.error(`Event creation failed: ${errorMessages}.`);
+                } else {
+                    toast.error('Something went wrong while creating the event.');
+                }
             } else {
                 toast.error('Something went wrong while creating the event.');
             }
@@ -134,8 +147,21 @@ export default class EventStore {
         }
         catch (e) {
             console.log(e);
+            
             if ((e as any).response.data !== "") {
-                toast.error(`Event update failed: ${(e as any).response.data}.`);
+                const responseData = (e as any).response.data;
+
+                if (typeof responseData === "string") {
+                    toast.error(`Event update failed: ${responseData}.`);
+                } else if (responseData.errors) {
+                    const errorMessages = Object.values(responseData.errors)
+                    .flat()
+                    .join(', ');
+
+                    toast.error(`Event update failed: ${errorMessages}.`);
+                } else {
+                    toast.error('Something went wrong while updating the event.');
+                }
             } else {
                 toast.error('Something went wrong while updating the event.');
             }
@@ -214,20 +240,6 @@ export default class EventStore {
     checkEnteredFilters = () => {
         this.isFiltered = Object.values(this.filteredList).some(value => value !== '');
     }
-    // checkEnteredFilters = () => {
-    //     let counter:number = 0;
-    //     Object.entries(this.filteredList).forEach(([key, value]) => {
-    //         if (value != ''){
-    //             counter++;
-    //         }
-    //     })
-    //     if (counter === 0){
-    //         this.isFiltered = false;
-    //     }
-    //     else{
-    //         this.isFiltered = true;
-    //     }
-    // }
 
 
     deleteEvent = async (id: string) => {
@@ -279,19 +291,4 @@ export default class EventStore {
             toast.error('Failed to leave the event.');
         }
     }
-
-    // private getEvent = async(id:string) =>{
-    //     return this.eventRegistry.get(id)
-    // }
-
-    // getUser = async(id:string, userId:string)=>
-    // {
-    //     try{
-    //         const userData = await agent.Events.userName(id, userId)
-    //         return userData
-    //     }
-    //     catch (error){
-    //         console.log(error)
-    //     }
-    // }
 }
