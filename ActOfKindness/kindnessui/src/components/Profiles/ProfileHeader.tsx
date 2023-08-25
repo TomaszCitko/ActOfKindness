@@ -34,7 +34,10 @@ function ProfileHeader({profile}: Props) {
                             <Item.Meta>
                                 <p style={{fontSize: 15}}>      <Icon name={'location arrow'}/> {profile.location}</p>
                             </Item.Meta>
-                            <Item.Description><p style={{fontSize: 20}}>Bio: {profile.bio}</p></Item.Description>
+                            <Item.Description><p style={{fontSize: 20}}>
+                                {profile.bio && profile.bio.length > 3 ? "Bio: " + profile.bio : "" } 
+                            </p>
+                                </Item.Description>
                         </Item.Content>
                     </Item>
                     </Item.Group>
@@ -49,14 +52,16 @@ function ProfileHeader({profile}: Props) {
                         <Reveal.Content visible style={{width:'100%'}}>
                             <Button color={'teal'}
                                     fluid
-                                    content={'Profile Details'}></Button>
+                                    content={'Go back'}></Button>
                         </Reveal.Content>
                         <Reveal.Content hidden style={{width:'100%'}}>
                             <Button
                                 color={true? 'green' : 'green'}
                                 fluid
-                                content={'Click to update your profile details '}
-                                as={NavLink}>
+                                content={'Click here to go back to events '}
+                                as={NavLink}
+                                to={'/events'}
+                            >
                             </Button>
                         </Reveal.Content>
                     </Reveal>
