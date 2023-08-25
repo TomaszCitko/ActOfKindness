@@ -182,7 +182,6 @@ namespace Persistence
                     IsOnline = false,
                     Image = "https://res.cloudinary.com/do5wipffc/image/upload/v1692607440/seedEvent01_i3c5y1.png",
                     IsModerated = true,
-                    IsFinished = true,
                 },
                 new()
                 {
@@ -213,16 +212,7 @@ namespace Persistence
                     IsOnline = true,
                     Image = "https://res.cloudinary.com/do5wipffc/image/upload/v1692607441/seedEvent03_t3qfam.png",
                     IsModerated = true
-                }
-            };
-
-            return moderatedEvents;
-        }
-
-        private List<Event> GetUnmoderatedEvents()
-        {
-            var events = new List<Event>()
-            {
+                },
                 new()
                 {
                     Id = new Guid(),
@@ -237,7 +227,6 @@ namespace Persistence
                     IsOnline = false,
                     Image = "https://res.cloudinary.com/do5wipffc/image/upload/v1692607441/seedEvent04_ctkyij.png",
                     IsModerated = true,
-                    IsFinished = true,
                 },
                 new()
                 {
@@ -254,6 +243,15 @@ namespace Persistence
                     IsModerated = true,
                     Image = "https://res.cloudinary.com/do5wipffc/image/upload/v1692607440/seedEvent05_dn1ygf.png"
                 },
+            };
+
+            return moderatedEvents;
+        }
+
+        private List<Event> GetUnmoderatedEvents()
+        {
+            var events = new List<Event>()
+            {
                 new()
                 {
                     Id = new Guid(),
