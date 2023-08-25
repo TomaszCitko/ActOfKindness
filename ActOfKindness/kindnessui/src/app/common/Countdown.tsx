@@ -1,30 +1,38 @@
-﻿import Countdown, {zeroPad} from "react-countdown";
+﻿import Countdown from "react-countdown";
 import { Button } from "semantic-ui-react";
-import { finished } from "stream";
 
 type Props = {
-    auctionEnd: string
-    finished: boolean
+    auctionEnd: string;
+    finished: boolean;
 }
 
-const renderer = ({ days, hours, minutes, seconds, completed }:
-                      {days:number,hours:number, minutes:number,seconds:number,completed:boolean}) => {
+const renderer = ({ days, hours, completed }:
+                      {days: number, hours: number, completed: boolean}) => {
+
+    let message = "";
+    if (completed) {
+        message = "Event finished";
+    } else if (days === 0 && hours < 24) {
+        message = "Ending today";
+    } else if (days === 1) {
+        message = "Ending tomorrow";
+    } else {
+        message = "Ending in " + days + " days";
+    }
+
+    const color = days < 30 ? "red" : "blue";
+
     return (
-        <Button inverted color={`${days < 30 ? "red" : "blue"}`}>
-               <span suppressHydrationWarning={true}>
-                   {completed ? "Event finished" : ""} 
-                   {days > 1 ? "Ending in " + zeroPad(days) + " days" : ""}
+        <Button inverted color={color}>
+            <span suppressHydrationWarning={true}>
+                {message}
             </span>
         </Button>
-        
-    )
+    );
 };
 
-
-export function CountdownTimer({auctionEnd, finished}: Props) {
+export function CountdownTimer({auctionEnd}: Props) {
     return (
-        <>
-            <Countdown  date={auctionEnd} renderer={renderer}/>
-        </>
+        <Countdown date={auctionEnd} renderer={renderer} />
     );
 }

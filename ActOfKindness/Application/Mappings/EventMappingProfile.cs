@@ -30,7 +30,7 @@ namespace Application.Mappings
 
             CreateMap<CreateEventDto, Event>()
                 .ForMember(dest => dest.StartingDate, opt => opt.MapFrom(src => DateTime.ParseExact(src.StartingDate, "dd/MM/yyyy", CultureInfo.InvariantCulture)))
-                .ForMember(dest => dest.EndingDate, opt => opt.MapFrom(src => DateTime.ParseExact(src.EndingDate, "dd/MM/yyyy", CultureInfo.InvariantCulture)))
+                .ForMember(dest => dest.EndingDate, opt => opt.MapFrom(src => DateTime.ParseExact(src.EndingDate, "dd/MM/yyyy", CultureInfo.InvariantCulture).Add(new TimeSpan(23, 59, 59))))
                 .ForMember(dest => dest.UserId, opt => opt.Ignore())
                 .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
                 .ForMember(dest => dest.IsFinished, opt => opt.Ignore())

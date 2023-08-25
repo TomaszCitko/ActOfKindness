@@ -89,7 +89,7 @@ public class EventRepository : IEventRepository
     public async Task UpdateEventAsync(Guid id, EditEventDto eventDto)
     {
         var startingDate = DateTime.ParseExact(eventDto.StartingDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-        var endingDate = DateTime.ParseExact(eventDto.EndingDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+        var endingDate = DateTime.ParseExact(eventDto.EndingDate, "dd/MM/yyyy", CultureInfo.InvariantCulture).Add(new TimeSpan(23, 59, 59));
 
         await _context.Events.Where(e => e.Id == id)
             .ExecuteUpdateAsync(prop => 
