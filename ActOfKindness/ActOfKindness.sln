@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{49E3C508-AD03-454A-B897-8388A6E2C19B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{6B878CD9-11D9-4C8E-8491-32ABEAF3DE77}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{D8201ED4-FDFC-4AE1-92B1-A4E465DA0D5D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Persistence\Persistence.csproj", "{F8EB4EE3-5936-43A7-9751-8C2D4F35A057}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A0700BFB-61E4-4C75-B69C-94C42BCD3016}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{14C45C00-2D2F-42BB-BAFC-4FE47D1B97EE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationUnitTests", "ApplicationUnitTests\ApplicationUnitTests.csproj", "{91BBCB5E-8403-4573-8B17-A12A5A55E363}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersistenceUnitTests", "PersistenceUnitTests\PersistenceUnitTests.csproj", "{182A7FCC-B4FF-4D04-8752-839940FA8C89}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{49E3C508-AD03-454A-B897-8388A6E2C19B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49E3C508-AD03-454A-B897-8388A6E2C19B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49E3C508-AD03-454A-B897-8388A6E2C19B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49E3C508-AD03-454A-B897-8388A6E2C19B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B878CD9-11D9-4C8E-8491-32ABEAF3DE77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B878CD9-11D9-4C8E-8491-32ABEAF3DE77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B878CD9-11D9-4C8E-8491-32ABEAF3DE77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B878CD9-11D9-4C8E-8491-32ABEAF3DE77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8201ED4-FDFC-4AE1-92B1-A4E465DA0D5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8201ED4-FDFC-4AE1-92B1-A4E465DA0D5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8201ED4-FDFC-4AE1-92B1-A4E465DA0D5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8201ED4-FDFC-4AE1-92B1-A4E465DA0D5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8EB4EE3-5936-43A7-9751-8C2D4F35A057}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8EB4EE3-5936-43A7-9751-8C2D4F35A057}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8EB4EE3-5936-43A7-9751-8C2D4F35A057}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8EB4EE3-5936-43A7-9751-8C2D4F35A057}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91BBCB5E-8403-4573-8B17-A12A5A55E363}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91BBCB5E-8403-4573-8B17-A12A5A55E363}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91BBCB5E-8403-4573-8B17-A12A5A55E363}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91BBCB5E-8403-4573-8B17-A12A5A55E363}.Release|Any CPU.Build.0 = Release|Any CPU
+		{182A7FCC-B4FF-4D04-8752-839940FA8C89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{182A7FCC-B4FF-4D04-8752-839940FA8C89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{182A7FCC-B4FF-4D04-8752-839940FA8C89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{182A7FCC-B4FF-4D04-8752-839940FA8C89}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{14C45C00-2D2F-42BB-BAFC-4FE47D1B97EE} = {A0700BFB-61E4-4C75-B69C-94C42BCD3016}
+		{91BBCB5E-8403-4573-8B17-A12A5A55E363} = {14C45C00-2D2F-42BB-BAFC-4FE47D1B97EE}
+		{182A7FCC-B4FF-4D04-8752-839940FA8C89} = {14C45C00-2D2F-42BB-BAFC-4FE47D1B97EE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CE60DE6D-39EC-4444-948D-A4AD076B71FB}
+	EndGlobalSection
+EndGlobal
