@@ -38,4 +38,28 @@
 </ul>
 <br><br><br>
 <h3>How to run?</h3>
-Feel free to download docker image file and run it with Docker.<br> If you need more details, please check out <a href="https://docs.docker.com/language/nodejs/run-containers/"> Docker official page</a>
+Clone this repository.
+```
+git clone https://github.com/MarcinSzkurlat/ActOfKindness.git
+```
+
+Make sure you have installed Docker on your computer. After that, you can run the below command from the `/ActOfKindness/` directory and get started with the `Act Of Kindness` immediately.
+```gitbash
+docker compose up
+```
+
+You should be able to browse the application by using the below URL:
+```
+http://localhost:3000
+```
+
+You can test the application as `admin`.
+
+Login:
+```
+admin@test.com
+```
+Password:
+```
+ActOfKindness2023,
+```
