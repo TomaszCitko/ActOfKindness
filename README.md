@@ -1,6 +1,6 @@
-<img align="center" src="https://github.com/CodecoolGlobal/el-proyecte-grande-sprint-1-csharp-Tomek-Boomer/blob/development/ActOfKindness/kindnessui/src/images/readme/READMElogo.png" />
+<img align="center" src="https://raw.githubusercontent.com/TomaszCitko/ActOfKindness/development/ActOfKindness/kindnessui/src/images/readme/READMElogo.png" />
 <h2 align="center"> Act of Kindness web app connects users on a meaningful level (not like any other social media). We aim to link helpers with people in need and enable real-life interactions between them. </h2></br>
-<img align="left" src="https://github.com/CodecoolGlobal/el-proyecte-grande-sprint-1-csharp-Tomek-Boomer/blob/development/ActOfKindness/kindnessui/src/images/readme/READMEpage3.png" />
+<img align="left" src="https://raw.githubusercontent.com/TomaszCitko/ActOfKindness/development/ActOfKindness/kindnessui/src/images/readme/READMEpage3.png" />
 <h3> Web app features </h3>
 <ul>
 <li>Users can perform CRUD operations on Events</li>
@@ -13,7 +13,7 @@
 <li>Easy picture upload.</li>
 </ul>
 <br><br>
-<img align="right" src="https://github.com/CodecoolGlobal/el-proyecte-grande-sprint-1-csharp-Tomek-Boomer/blob/development/ActOfKindness/kindnessui/src/images/readme/READMEpage1.png" />
+<img align="right" src="https://raw.githubusercontent.com/TomaszCitko/ActOfKindness/development/ActOfKindness/kindnessui/src/images/readme/READMEpage1.png" />
 <h3> Used technologies </h3>
 <ul>
 <li>C#</li>
@@ -27,7 +27,7 @@
 <li>Git/GitHub</li>
 </ul>
 <br><br>
-<img align="left" src="https://github.com/CodecoolGlobal/el-proyecte-grande-sprint-1-csharp-Tomek-Boomer/blob/development/ActOfKindness/kindnessui/src/images/readme/READMEpage2.png" />
+<img align="left" src="https://raw.githubusercontent.com/TomaszCitko/ActOfKindness/development/ActOfKindness/kindnessui/src/images/readme/READMEpage2.png" />
 <br>
 <h3> Project team </h3>
 <ul>
